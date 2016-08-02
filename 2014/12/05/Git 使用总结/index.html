@@ -84,8 +84,7 @@
 
 
 
-<meta name="description" content="##版本回退:
-
+<meta name="description" content="版本回退:
 回退到上num版本
 git reset --hard HEAD~num
 
@@ -97,13 +96,12 @@ num的值表示要往上回退num个版本
 
 回退到特定的版本
 git reset --hard commitId
-commitId可以通过git log来得到，可以写">
+commitId可以通过git log来得到，可以写版本号">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git 使用总结">
 <meta property="og:url" content="http://zhengjt.com/2014/12/05/Git 使用总结/index.html">
 <meta property="og:site_name" content="Ryanst">
-<meta property="og:description" content="##版本回退:
-
+<meta property="og:description" content="版本回退:
 回退到上num版本
 git reset --hard HEAD~num
 
@@ -115,12 +113,11 @@ num的值表示要往上回退num个版本
 
 回退到特定的版本
 git reset --hard commitId
-commitId可以通过git log来得到，可以写">
-<meta property="og:updated_time" content="2016-08-02T11:25:28.000Z">
+commitId可以通过git log来得到，可以写版本号">
+<meta property="og:updated_time" content="2016-08-02T12:27:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git 使用总结">
-<meta name="twitter:description" content="##版本回退:
-
+<meta name="twitter:description" content="版本回退:
 回退到上num版本
 git reset --hard HEAD~num
 
@@ -132,7 +129,7 @@ num的值表示要往上回退num个版本
 
 回退到特定的版本
 git reset --hard commitId
-commitId可以通过git log来得到，可以写">
+commitId可以通过git log来得到，可以写版本号">
 
 
 
@@ -351,8 +348,7 @@ commitId可以通过git log来得到，可以写">
       
 
       
-        <p>##版本回退:</p>
-<ul>
+        <h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退:"></a>版本回退:</h2><ul>
 <li><p>回退到上num版本</p>
 <pre><code>git reset --hard HEAD~num
 </code></pre></li>
@@ -371,8 +367,7 @@ commitId可以通过git log来得到，可以写">
 </li>
 </ul>
 <p>这个命令记录了你的每一次命令</p>
-<p>##操作回退：</p>
-<ul>
+<h2 id="操作回退："><a href="#操作回退：" class="headerlink" title="操作回退："></a>操作回退：</h2><ul>
 <li><p>放弃当前修改，回到上一次git 命令后的初始状态(这里—符号后一定要有一个空格)</p>
 <p>   git checkout — filename</p>
 </li>
@@ -380,12 +375,10 @@ commitId可以通过git log来得到，可以写">
 <p>   git reset HEAD filename</p>
 </li>
 </ul>
-<p>##远程操作:</p>
-<pre><code>git remote add origin git@github.com:Ryanst/test.git
+<h2 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作:"></a>远程操作:</h2><pre><code>git remote add origin git@github.com:Ryanst/test.git
 </code></pre><p>在本地目录下键入这个命令，将远程库与本地该目录关联</p>
 <p>关联后，使用命令git push -u origin master第一次推送master分支的所有内容</p>
-<p>##分支管理</p>
-<ul>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><ul>
 <li>常用命令</li>
 </ul>
 <p>查看分支：git branch</p>
@@ -401,8 +394,7 @@ commitId可以通过git log来得到，可以写">
 </ul>
 <p>使用用git log –graph命令可以看到分支合并图可以看到分支合并图</p>
 <p>储存为commit的当前工作区现场：<br>当手头工作没有完成时，先把工作现场git stash一下，然后去修复bug，修复后，再git stash pop，回到工作现场。</p>
-<p>##多人协作</p>
-<ul>
+<h2 id="多人协作"><a href="#多人协作" class="headerlink" title="多人协作"></a>多人协作</h2><ul>
 <li><p>查看远程库信息</p>
 <p>   git remote -v；</p>
 </li>
@@ -563,7 +555,7 @@ commitId可以通过git log来得到，可以写">
               
             
             
-              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本回退"><span class="nav-number">1.</span> <span class="nav-text">版本回退:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作回退："><span class="nav-number">2.</span> <span class="nav-text">操作回退：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程操作"><span class="nav-number">3.</span> <span class="nav-text">远程操作:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支管理"><span class="nav-number">4.</span> <span class="nav-text">分支管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多人协作"><span class="nav-number">5.</span> <span class="nav-text">多人协作</span></a></li></ol></div>
             
           </div>
         </section>

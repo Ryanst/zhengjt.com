@@ -267,8 +267,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/02/test/" itemprop="url">
-                  test
+                <a class="post-title-link" href="/2015/09/14/synchronized关键字总结/" itemprop="url">
+                  synchronized关键字总结
                 </a>
               
             
@@ -281,8 +281,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-08-02T19:16:24+08:00" content="2016-08-02">
-              2016-08-02
+            <time itemprop="dateCreated" datetime="2015-09-14T08:23:09+08:00" content="2015-09-14">
+              2015-09-14
             </time>
           </span>
 
@@ -292,8 +292,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/02/test/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/02/test/" itemprop="commentsCount"></span>
+                <a href="/2015/09/14/synchronized关键字总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/14/synchronized关键字总结/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -318,7 +318,249 @@
       
         
           
-            <p>这是一个测试文章</p>
+            <p>无论synchronized关键字加在方法上还是对象上()代码块，它取得的锁都是对象，而不是把一段代码或函数当作锁<br>实际锁的对象一般有两种，一种是testSynchronized.class这种class对象，一种是new出来的对象</p>
+<p>synchronized修饰方法时获得的是方法对象的锁，若方法是static则得到的是class的锁，synchronized容易造成程序效率低下，导致同一时间只有一个线程可以调用该方法</p>
+<p>synchronized(){}修饰代码块时锁住的是()中的对象</p>
+<p>当synchronized锁住对象时，这个对象的其他非synchronized模块可以被线程调用，这个对象的其他synchronized也被同步，不能被其他线程同时调用</p>
+<pre><code>public class testSynchronized extends Thread {
+    private final int threadNo;
+    public testSynchronized(int threadNo) {
+        this.threadNo = threadNo;
+    }
+    @Override
+    public void run() {
+        synchronized (this) {
+            for (int i = 1; i &lt; 10; i++) {
+                System.out.println(&quot;No.&quot; + threadNo + &quot;:&quot; + i);
+            }
+        }
+    }
+    private static class Thread1 extends Thread {
+        private final int threadNo;
+        public Thread1(int threadNo) {
+            this.threadNo = threadNo;
+        }
+        @Override
+        public synchronized void run() {
+            for (int i = 1; i &lt; 10; i++) {
+                System.out.println(&quot;No.&quot; + threadNo + &quot;:&quot; + i);
+            }
+        }
+    }
+    private static class Thread2 extends Thread {
+        private final int threadNo;
+        public Thread2(int threadNo) {
+            this.threadNo = threadNo;
+        }
+        @Override
+        public void run() {
+            //若()中为this则无法线程同步
+            synchronized (testSynchronized.class) {
+                for (int i = 1; i &lt; 10; i++) {
+                    System.out.println(&quot;No.&quot; + threadNo + &quot;:&quot; + i);
+                }
+            }
+        }
+    }
+    private static class Thread3 extends Thread {
+        private final int threadNo;
+        public Thread3(int threadNo) {
+            this.threadNo = threadNo;
+        }
+        @Override
+        public void run() {
+            runPlus();
+        }
+        public static synchronized void runPlus() {
+            for (int i = 1; i &lt; 10; i++) {
+                System.out.println(&quot;No.&quot; + Thread.currentThread().getId() + &quot;:&quot; + i);
+            }
+        }
+    }
+    public static void main(String[] args) throws Exception {
+        // 结果是3、4可以实现线程同步，而1、2不行
+
+/*        for (int i = 1; i &lt; 10; i++) {
+            new testSynchronized(i).start();
+        }*/
+/*        for (int i = 1; i &lt; 10; i++) {
+            new Thread1(i).start();
+        }*/
+/*        for (int i = 1; i &lt; 10; i++) {
+            new Thread2(i).start();
+        }*/
+/*        for (int i = 1; i &lt; 10; i++) {
+            new Thread3(i).start();
+        }*/
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/13/Java的WeakReference相关/" itemprop="url">
+                  Java的WeakReference相关
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-09-13T15:28:12+08:00" content="2015-09-13">
+              2015-09-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/13/Java的WeakReference相关/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/13/Java的WeakReference相关/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>强引用： Car car = new Car(22000);</p>
+<p>弱引用： WeakReference<car> weakCar = new WeakReference<car>(car);</car></car></p>
+<p>一段测试代码：</p>
+<pre><code>//设置-Xmx1M,即JVM堆内存最大为1M的环境运行
+import java.lang.ref.WeakReference;
+import java.util.WeakHashMap;
+
+public class Car {
+    private double price;
+
+    public Car(double price) {
+        this.price = price;
+    }
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    public static void main(String[] args) {
+
+        Car car = new Car(22000);
+        WeakReference&lt;Car&gt; weakCar = new WeakReference&lt;Car&gt;(car);
+
+        int i = 0;
+        // 运行62332次weakCar被回收
+        while (true) {
+            // 加了这句引用强引用的car对象后weakCar就不会被回收，无限循环
+            // System.out.println(&quot;here is the strong reference &apos;car&apos; &quot; + car);
+            if (weakCar.get() != null) {
+                // 使用weakCar.get()取得强引用,即使上一句if判断了也可能在这句之前被回收返回null，因此加try语句
+                try {
+                    System.out.println(&quot;Object is alive for &quot; + i + &quot; loops - &quot;
+                            + weakCar.get().getPrice());
+                    i++;
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println(&quot;Object has been collected.&quot;);
+                break;
+            }
+            // 如果把car置为null，那么weakCar16次循环后被回收
+            //car = null;
+        }
+        System.out.println(&quot;out of weakCar while&quot;);
+
+        // 这里用HashMap，就会产生堆内存溢出的异常，而WeakHashMap不会
+        WeakHashMap weakMap = new WeakHashMap&lt;Integer, byte[]&gt;();
+        for (int index = 0; index &lt; 10000; index++) {
+            Integer ii = new Integer(index);
+            weakMap.put(ii, new byte[index]);
+            System.out.println(&quot;WeakHashMap for running&quot; + ii + &quot;times&quot;);
+        }
+    }
+}
+</code></pre><p>总结：一旦系统内存回收，无论内存是否紧张，弱引用指向的对象都会被回收<br>soft reference和weak reference一样, 但被GC回收的时候需要多一个条件: 当系统内存不足时(Heap 内存是否临近阈值)，因此soft reference适合做cache object</p>
+<p>WeakHashMap：hashmap的weak版，不保证map中的键值对的存在时间，在没有调用任何赋值方法(set相关)的情况下，在一段时间后 size 方法也可能返回较小的值，对于 isEmpty 方法，返回 false，然后返回 true，对于给定的键，containsKey 方法返回 true 然后返回 false，对于给定的键，get 方法返回一个值，但接着返回 null，对于以前出现在映射中的键，put 方法返回 null，而 remove 方法返回 false，对于键集、值集、项集进行的检查，生成的元素数量越来越少。总的来说就是map中的键值对会在GC回收的时候被回收</p>
+<p>在WeakHashMap的get(),put()函数中的getTable()方法会调用expungeStateEntries方法，以清理持有弱引用的key的表项</p>
+<p>###JVM虚拟机运行配置</p>
+<p>-Xms128m JVM初始分配的堆内存</p>
+<p>-Xmx512m JVM最大允许分配的堆内存，按需分配</p>
+<p>-XX:PermSize=64M JVM初始分配的非堆内存</p>
+<p>-XX:MaxPermSize=128M JVM最大允许分配的非堆内存，按需分配</p>
+<p>eclipse设置自定内存运行</p>
+<pre><code>Run &gt; Run Configurations&gt; Java Application &gt; (project name)&gt; Arguments Sheet&gt; VM Arguments 
+</code></pre><p>比如设置堆内存为1M，可以在 VM Arguments 中填写-Xmx1M</p>
 
           
         
@@ -368,8 +610,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/02/hello-world/" itemprop="url">
-                  Hello World
+                <a class="post-title-link" href="/2015/08/30/Volley的用法简单总结/" itemprop="url">
+                  Volley的用法简单总结
                 </a>
               
             
@@ -382,8 +624,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-08-02T14:32:47+08:00" content="2016-08-02">
-              2016-08-02
+            <time itemprop="dateCreated" datetime="2015-08-30T04:43:54+08:00" content="2015-08-30">
+              2015-08-30
             </time>
           </span>
 
@@ -393,8 +635,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/02/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/02/hello-world/" itemprop="commentsCount"></span>
+                <a href="/2015/08/30/Volley的用法简单总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/30/Volley的用法简单总结/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -419,15 +661,1259 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+            <p>##基本用法</p>
+<pre><code>RequestQueue mQueue = Volley.newRequestQueue(context);
+//默认GET方式，是json的话可以用JsonObjectRequest，返回jsonString
+StringRequest stringRequest = new StringRequest(Method.POST,&quot;http://www.baidu.com&quot;,
+                    new Response.Listener&lt;String&gt;() {
+                        @Override
+                        public void onResponse(String response) {
+                            Log.d(&quot;TAG&quot;, response);
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e(&quot;TAG&quot;, error.getMessage(), error);
+                        }
+                    }){  
+     //重写 getParams()方法设置POST参数，如果是GET方法无需重写
+    @Override
+    protected Map&lt;String, String&gt; getParams() throws AuthFailureError {
+    Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
+    map.put(&quot;params1&quot;, &quot;value1&quot;);
+    map.put(&quot;params2&quot;, &quot;value2&quot;);
+    return map;
+}};
+mQueue.add(stringRequest);
+
+//在AndroidManifest.xml中加入网络请求权限
+&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+</code></pre><p>##加载图片</p>
+<ol>
+<li><p>ImageRequest的用法</p>
+<p>  RequestQueue mQueue = Volley.newRequestQueue(context);<br>  ImageRequest imageRequest = new ImageRequest(<br>  “<a href="http://developer.android.com/images/home/aw_dac.png" target="_blank" rel="external">http://developer.android.com/images/home/aw_dac.png</a>“,<br>  new Response.Listener<bitmap>() {</bitmap></p>
+<pre><code>@Override
+public void onResponse(Bitmap response) {
+    imageView.setImageBitmap(response);
+}
+</code></pre><p>  }, 0, 0, Config.RGB_565, new Response.ErrorListener() {//第三第四个参数分别用于指定允许图片最大的宽度和高度</p>
+<pre><code>@Override
+public void onErrorResponse(VolleyError error) {
+    imageView.setImageResource(R.drawable.default_image);
+}
+</code></pre><p>  });<br>  mQueue.add(imageRequest);</p>
+</li>
+<li><p>ImageLoader方法</p>
+<p>  RequestQueue mQueue = Volley.newRequestQueue(context);<br>  ImageLoader imageLoader = new ImageLoader(new BitmapCache());</p>
+<p>  //使用LruCache<br>  public class BitmapCache implements ImageCache {</p>
+<pre><code>private LruCache&lt;String, Bitmap&gt; mCache;
+public BitmapCache() {
+int maxSize = 10 * 1024 * 1024;
+mCache = new LruCache&lt;String, Bitmap&gt;(maxSize) {
+    @Override
+    protected int sizeOf(String key, Bitmap bitmap) {
+        return bitmap.getRowBytes() * bitmap.getHeight();
+    }
+};
+</code></pre><p>  }</p>
+<pre><code>@Override
+public Bitmap getBitmap(String url) {
+    return mCache.get(url);
+}
+@Override
+public void putBitmap(String url, Bitmap bitmap) {
+    mCache.put(url, bitmap);
+}
+</code></pre><p>  }</p>
+<p>  //第一个参数指定用于显示图片的ImageView控件，第二个参数指定加载图片的过程中显示的图片，第三个参数指定加载图片失败的情况下显示的图片<br>  ImageListener listener = ImageLoader.getImageListener(imageView,R.drawable.default_image, R.drawable.failed_image);</p>
+<p>  //图片大小限制<br>  imageLoader.get(“<a href="http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,listener" target="_blank" rel="external">http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,listener</a>, 200, 200);</p>
+</li>
+<li><p>NetworkImageView的用法</p>
+<p>  //限定图片的尺寸</p>
+<pre><code>&lt;com.android.volley.toolbox.NetworkImageView 
+    android:id=&quot;@+id/network_image_view&quot;
+    android:layout_width=&quot;200dp&quot;
+    android:layout_height=&quot;200dp&quot;
+    android:layout_gravity=&quot;center_horizontal&quot;
+    /&gt;
+</code></pre><p>  networkImageView = (NetworkImageView) findViewById(R.id.network_image_view);<br>  networkImageView.setDefaultImageResId(R.drawable.default_image);<br>  networkImageView.setErrorImageResId(R.drawable.failed_image);<br>  networkImageView.setImageUrl(“<a href="http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,imageLoader" target="_blank" rel="external">http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,imageLoader</a>);</p>
+</li>
+</ol>
+<p>##自定义Request<br><a href="http://blog.csdn.net/guolin_blog/article/details/17612763" target="_blank" rel="external">http://blog.csdn.net/guolin_blog/article/details/17612763</a></p>
+<p>##Volley内部解析<br><a href="http://blog.csdn.net/guolin_blog/article/details/17656437" target="_blank" rel="external">http://blog.csdn.net/guolin_blog/article/details/17656437</a></p>
+<p>判断如果手机系统版本号是大于9的，则创建一个HurlStack的实例，否则就创建一个HttpClientStack的实例。实际上HurlStack的内部就是使用HttpURLConnection进行网络通讯的，而HttpClientStack的内部则是使用HttpClient进行网络通讯的</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/28/Java垃圾回收器工作机制/" itemprop="url">
+                  Java垃圾回收器工作机制
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-08-28T04:17:31+08:00" content="2015-08-28">
+              2015-08-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/28/Java垃圾回收器工作机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/28/Java垃圾回收器工作机制/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##垃圾回收机制中的算法</p>
+<ol>
+<li>引用计数法<br>无法解决循环引用，已被gc放弃</li>
+<li><p>标记-清除法</p>
+<p>由gc root往下寻找引用，将无引用的内存回收。java中可作为GC Root的对象有</p>
+<ol>
+<li>虚拟机栈中引用的对象（本地变量表）</li>
+<li>方法区中静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>本地方法栈中引用的对象（Native对象）</li>
+</ol>
+</li>
+<li><p>标记-整理(压缩)</p>
+<p>在标记清除后整理内存</p>
+</li>
+<li><p>复制</p>
+<p>将活动对象复制到另一块内存中，清空这块内存</p>
+<p>eden-&gt;Survivor0-&gt;Survivor1</p>
+</li>
+<li><p>分代</p>
+<p>年轻代-年老代-持久代</p>
+<p><img src="/images/java_gc_generation.png" alt="java_gc"><br><img src="/images/java_gc.png" alt="java_gc"></p>
+<ul>
+<li><p>年轻代：</p>
+<ul>
+<li><p>Serial收集器（复制算法)</p>
+<p>新生代单线程收集器，标记和清理都是单线程，优点是简单高效。</p>
+</li>
+<li><p>ParNew收集器(停止-复制算法) </p>
+<p>新生代收集器，可以认为是Serial收集器的多线程版本,在多核CPU环境下有着比Serial更好的表现。</p>
+</li>
+<li><p>Parallel Scavenge收集器(停止-复制算法)</p>
+<p>并行收集器，追求高吞吐量，高效利用CPU。吞吐量一般为99%， 吞吐量= 用户线程时间/(用户线程时间+GC线程时间)。适合后台应用等对交互相应要求不高的场景。</p>
+</li>
+</ul>
+</li>
+<li><p>年老代：</p>
+<ul>
+<li><p>Serial Old收集器(标记-整理算法)</p>
+<p>单线程收集器，Serial收集器的老年代版本。</p>
+</li>
+<li><p>Parallel Old收集器(停止-复制算法)</p>
+<p>Parallel Scavenge收集器的老年代版本，并行收集器，吞吐量优先</p>
+</li>
+<li><p>CMS(Concurrent Mark Sweep)收集器（标记-清理算法）</p>
+<p>高并发、低停顿，追求最短GC回收停顿时间，cpu占用比较高，响应时间快，停顿时间短，多核cpu 追求高响应时间的选择</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>##GC的执行机制<br>  由于对象进行了分代处理，因此垃圾回收区域、时间也不一样。GC有两种类型：Scavenge GC和Full GC。</p>
+<ul>
+<li><p>Scavenge GC</p>
+<p>一般情况下，当新对象生成，并且在Eden申请空间失败时，就会触发Scavenge GC，对Eden区域进行GC，清除非存活对象，并且把尚且存活的对象移动到Survivor区。然后整理Survivor的两个区。这种方式的GC是对年轻代的Eden区进行，不会影响到年老代。因为大部分对象都是从Eden区开始的，同时Eden区不会分配的很大，所以Eden区的GC会频繁进行。因而，一般在这里需要使用速度快、效率高的算法，使Eden去能尽快空闲出来。</p>
+</li>
+<li><p>Full GC</p>
+<p>对整个堆进行整理，包括Young、Tenured和Perm。Full GC因为需要对整个堆进行回收，所以比Scavenge GC要慢，因此应该尽可能减少Full GC的次数。在对JVM调优的过程中，很大一部分工作就是对于FullGC的调节。</p>
+<p>有如下原因可能导致Full GC：</p>
+<ol>
+<li>年老代（Tenured）被写满</li>
+<li>持久代（Perm）被写满 </li>
+<li>System.gc()被显示调用 </li>
+<li>上一次GC之后Heap的各域分配策略动态变化</li>
+</ol>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/27/Java内存泄漏发生的情况/" itemprop="url">
+                  Java内存泄漏发生的情况
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-08-27T10:11:41+08:00" content="2015-08-27">
+              2015-08-27
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/27/Java内存泄漏发生的情况/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/27/Java内存泄漏发生的情况/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在Java 语言中，内存在以下情况下被回收：</p>
+<p>1、没有任何引用指向它。</p>
+<p>2、GC被运行。</p>
+<p>而判断一块内存空间是否符合垃圾收集器收集标准，即没有任何引用指向它的情况有三种：</p>
+<p>1、new了对象但是从未引用过，那么这个对象马上就会被回收。</p>
+<p>2、给对象赋予了空值null，以下再没有调用过。</p>
+<p>3、给对象赋予了新值，即重新分配了内存空间。</p>
+<p>如果一块没有用的内存没有把它赋予上面2、3两种状态，那么就会造成内存泄露(无用的应该被回收的内存没有被回收)。实际编程中造成内存泄露的情况主要有以下几种：</p>
+<p>###静态集合类<br>在使用Set、Vector、HashMap等集合类的时候需要特别注意，有可能会发生内存泄漏。当这些集合被定义成静态的时候，由于它们的生命周期跟应用程序一样长，这时候，就有可能会发生内存泄漏</p>
+<pre><code>class StaticTest
+{
+    private static Vector v = new Vector(10);
+
+    public void init()
+    {
+        for (int i = 1; i &lt; 100; i++)
+        {
+            Object object = new Object();
+            v.add(object);
+            object = null;
+        }
+    }
+}
+</code></pre><p>在上面的代码中，循环申请了Object对象，并添加到Vector中，然后将对象设置为null，可是这些对象因为被Vector引用着，因此并不能被GC回收，因此造成了内存泄漏。因此，要释放这些对象，还需要被它们从Vector删除，最简单的方法就是将Vector设置为null。</p>
+<p>###集合里的对象属性值被改变</p>
+<pre><code>public static void main(String[] args)
+{
+    Set&lt;Student&gt; set = new HashSet&lt;Student&gt;();
+    Student s1 = new Student(&quot;Jack&quot;);
+    Student s2 = new Student(&quot;Mary&quot;);
+    Student s3 = new Student(&quot;Eason&quot;);
+
+    set.add(s1);
+    set.add(s2);
+    set.add(s3);
+
+    System.out.println(set.size());//3
+    s2.setName(&quot;Jackson&quot;); //修改属性，此时s2元素对应的hashcode值发生改变
+    set.remove(s2);        // remove不掉，造成内存泄漏
+    set.add(s2);           // 添加成功
+
+    System.out.println(set.size());//4
+}
+</code></pre><p>由于对象s2的属性值被改变了，因此不能从set中删除，所以set中会一直保持着s2的引用，不能被回收，造成了内存泄漏。</p>
+<p>###监听器<br>在Java中，我们经常会使用到监听器，如对某个控件添加单击监听器addOnClickListener()，但往往释放对象的时候会忘记删除监听器，这就有可能造成内存泄漏。好的方法就是，在释放对象的时候，应该记住释放所有监听器，这就能避免了因为监听器而导致的内存泄漏。<br>在Android中使用setOnClickListener(null);来实现内存回收。</p>
+<p>###各种连接<br>Java中的连接包括数据库连接、网络连接和io连接，如果没有显式调用其close()方法，是不会自动关闭的，这些连接就不能被GC回收而导致内存泄漏。一般情况下，在try代码块里创建连接，在finally里释放连接，就能够避免此类内存泄漏。</p>
+<p>###外部模块的引用<br>调用外部模块的时候，也应该注意防止内存泄漏。如模块A调用了外部模块B的一个方法，如：<br>public void register(Object o)<br>这个方法有可能就使得A模块持有传入对象的引用，这时候需要查看B模块是否提供了去除引用的方法，如unregister()。这种情况容易忽略，而且发生了内存泄漏的话，比较难察觉，应该在编写代码过程中就应该注意此类问题。</p>
+<p>###单例模式<br>使用单例模式的时候也有可能导致内存泄漏。因为单例对象初始化后将在JVM的整个生命周期内存在，如果它持有一个外部对象（生命周期比较短）的引用，那么这个外部对象就不能被回收，而导致内存泄漏。如果这个外部对象还持有其它对象的引用，那么内存泄漏会更严重，因此需要特别注意此类情况。这种情况就需要考虑下单例模式的设计会不会有问题，应该怎样保证不会产生内存泄漏问题。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/07/30/Android使用UrlConnection异步网络编程/" itemprop="url">
+                  Android使用UrlConnection异步网络编程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-07-30T10:37:50+08:00" content="2015-07-30">
+              2015-07-30
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/30/Android使用UrlConnection异步网络编程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/30/Android使用UrlConnection异步网络编程/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Android实现Http请求的方式一般分为</p>
+<ol>
+<li>Java接口(java.net)–HttpURLConnection，可以实现简单的基于URL请求、响应功能；</li>
+<li>Apache接口(org.appache.http)–HttpClient，使用起来更方面更强大。</li>
+</ol>
+<p>QWSDK使用较为原始的HttpURLConnection，以下介绍HttpURLConnection实现异步网络请求的两种方式，整体的流程都是在子线程中处理网络操作(必须)，得到返回结果后交由主线程处理</p>
+<p>一、使用线程+Android消息管理机制</p>
+<p>二、使用AsyncTask</p>
+<p>JAVA代码如下：</p>
+<pre><code>public class MainActivity extends Activity {
+    Button visitWebBtn = null;
+    Button downImgBtn = null;
+    TextView showTextView = null;
+    ImageView showImageView = null;
+    String resultStr = &quot;&quot;;
+
+    private Handler handle = new Handler(){
+        public void handleMessage(Message msg){
+            resultStr = msg.getData().getString(&quot;data&quot;);
+            showTextView.setText(resultStr);
+        }
+    };
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        Log.d(&quot;ThreadID&quot;, &quot;onCreate: &quot; + Thread.currentThread().getId());
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        initUI();
+        visitWebBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Log.d(&quot;ThreadID&quot;, &quot;visitWebBtn onClick: &quot; + Thread.currentThread().getId());
+                showImageView.setVisibility(View.GONE);
+                showTextView.setVisibility(View.VISIBLE);
+                Thread visitBaiduThread = new Thread(new VisitWebRunnable());
+                visitBaiduThread.start();
+                /*以下为通过等待子线程结束后获取网络请求返回的值，若用这种方式则需要在VisitWebRunnable的run中将resultStr赋值
+                  不推荐用这种方式，因为这样主线程需要等待子线程结果，结果出来之前会卡住
+                try {
+                    Log.d(&quot;ThreadID&quot;,&quot;brfore join: &quot;+Thread.currentThread().getId());
+                    visitBaiduThread.join();//等待更新resultStr参数
+                    Log.d(&quot;ThreadID&quot;, &quot;after join: &quot; + Thread.currentThread().getId());
+                    if(!resultStr.equals(&quot;&quot;)){
+                        showTextView.setText(resultStr);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                */
+            }
+        });
+        downImgBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Log.d(&quot;ThreadID&quot;, &quot;downImgBtn onClick: &quot; + Thread.currentThread().getId());
+                showImageView.setVisibility(View.VISIBLE);
+                showTextView.setVisibility(View.GONE);
+                String imgUrl = &quot;http://hiphotos.baidu.com/%CD%ED%C9%CF%B3%AA%B8%E8%CF%C2%D3%EA/pic/item/e3afd71367a912155baf5330.jpg&quot;;
+                new DownImgAsyncTask().execute(imgUrl);
+            }
+        });
+    }
+
+    public void initUI(){
+        showTextView = (TextView)findViewById(R.id.textview_show);
+        showImageView = (ImageView)findViewById(R.id.imagview_show);
+        downImgBtn = (Button)findViewById(R.id.btn_download_img);
+        visitWebBtn = (Button)findViewById(R.id.btn_visit_web);
+    }
+
+    private String getURLResponse(String urlString){
+        HttpURLConnection conn = null;
+        InputStream is = null;
+        String resultData = &quot;&quot;;
+        try {
+            Log.d(&quot;ThreadID&quot;, &quot;getURLResponse : &quot; + Thread.currentThread().getId());
+            URL url = new URL(urlString); //URL对象
+            conn = (HttpURLConnection)url.openConnection(); //使用URL打开一个链接
+            conn.setDoInput(true); //允许输入流，即允许下载
+            conn.setDoOutput(true); //允许输出流，即允许上传
+            conn.setUseCaches(false); //不使用缓冲
+            conn.setRequestMethod(&quot;GET&quot;); //使用get请求
+            is = conn.getInputStream();   //获取输入流，此时才真正建立链接
+            Log.d(&quot;ThreadID&quot;, &quot;getURLResponse getInputStream: &quot; + Thread.currentThread().getId());
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader bufferReader = new BufferedReader(isr);
+            String inputLine  = &quot;&quot;;
+            while((inputLine = bufferReader.readLine()) != null) {
+                resultData += inputLine + &quot;\n&quot;;
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }finally{
+            if(is != null){
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(conn != null){
+                conn.disconnect();
+            }
+        }
+
+        return resultData;
+    }
+
+    private Bitmap getImageBitmap(String url){
+        URL imgUrl;
+        Bitmap bitmap = null;
+        try {
+            imgUrl = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection)imgUrl.openConnection();
+            conn.setDoInput(true);
+            conn.connect();
+            InputStream is = conn.getInputStream();
+            Log.d(&quot;ThreadID&quot;, &quot;doInbackground getInputStream: &quot; + Thread.currentThread().getId());
+            bitmap = BitmapFactory.decodeStream(is);
+            is.close();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+    class VisitWebRunnable implements Runnable{
+
+        @Override
+        public void run() {
+            Log.d(&quot;ThreadID&quot;,&quot; VisitWebRunnable run: &quot;+Thread.currentThread().getId());
+            String data = getURLResponse(&quot;http://www.baidu.com/&quot;);
+            Message message = new Message();
+            Bundle bundle = new Bundle();
+            bundle.putString(&quot;data&quot;,data);
+            message.setData(bundle);
+            handle.sendMessage(message);
+            //resultStr = data;
+        }
+
+    }
+
+    class DownImgAsyncTask extends AsyncTask&lt;String, Void, Bitmap&gt;{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showImageView.setImageBitmap(null);
+            Log.d(&quot;ThreadID&quot;, &quot;onPreExecute: &quot; + Thread.currentThread().getId());
+
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            Bitmap b = getImageBitmap(params[0]);
+            Log.d(&quot;ThreadID&quot;,&quot;doInBackground: &quot;+Thread.currentThread().getId());
+            return b;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            Log.d(&quot;ThreadID&quot;,&quot;onPostExecute: &quot;+Thread.currentThread().getId());
+            super.onPostExecute(result);
+            if(result!=null){
+                showImageView.setImageBitmap(result);
+            }
+        }
+    }
+}
+</code></pre><p>源代码下载地址：<a href="https://github.com/Ryanst/HttpUrlConnection" target="_blank" rel="external">https://github.com/Ryanst/HttpUrlConnection</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/07/21/QWSDK整理-Android存储方案/" itemprop="url">
+                  QWSDK整理-Android存储方案
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-07-21T14:39:04+08:00" content="2015-07-21">
+              2015-07-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/21/QWSDK整理-Android存储方案/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/21/QWSDK整理-Android存储方案/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>文件存储，使用JAVA接口，适合存储简单的文本数据或者二进制数据</p>
+<p>  FileInputStream in = null;<br>  BufferedReader reader;<br>  StringBuffer content = new StringBuffer();<br>  try{</p>
+<pre><code>in = openFileInput(“filename”);
+reader = new BufferReader(new InputStreamReader(in);
+String line = &quot;&quot;;
+while(line = (reader.ReadLIne() != null){
+    content.append(line);
+}
+</code></pre><p>  }<br>  catch(IOException e){</p>
+<pre><code>e.printStackTrace();
+</code></pre><p>  }<br>  finally{</p>
+<pre><code>if(reader != null){
+    try{
+        reader.close();
+    }
+    catch(IOException e){
+        e.printStackTrace();
+    }
+}
+</code></pre><p>  }</p>
+</li>
+<li><p>SharePreferences存储(key/value存储，key是String，value可以是各种类型）</p>
+<p>  SharePreference.Editor editor = getSharepreferences(“data”,MODE_PRIVATE).edit();<br>  editor.putInt(“age”,25);<br>  editor.commit();<br>  SharePreference pref = getSharepreferences(“data”,MODE_PRIVATE);<br>  int age = pref.getInt(“age”);</p>
+</li>
+</ol>
+<p>3、SQLite</p>
+<p>以下是QWSDK数据库操作的最简形式</p>
+<pre><code>//需要一个DBHelper类
+public class MyDBHelper extends SQLiteOpenHelper{
+    SQLiteDatabase mDataBase = null;
+    public MyDBHelper(Context context,String databaseName,int version)
+    {
+        super(context.getApplicationContext(), databaseName, null, version);
+        try {
+            mDataBase = getWritableDatabase();
+        } catch (Exception e) {
+            mDataBase=getReadableDatabase();
+        }
+        mContext = context.getApplicationContext();
+    }
+    @Override
+    public void onCreate(SQLiteDatabase db) {}
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+    //当MyDBHelper构造时传入的version大于原来的版本号时onUpgrade会调用
+}
+//自定义一个数据库类，然后自定义add/query/delete等函数来操作数据库，提供友好接口
+public class MyDBManagerAccount
+{
+  public MyDBManagerAccount(MyDBHelper helper)
+  {
+      SQLiteDatabase db = helper.mDataBase;
+  }
+}
+
+//至于具体的数据库操作，可以调用SQLiteDatabase的CURD函数，也可以自己手写sql然后execSQL(QWSDK中采用的方式)，使用MyDBManagerAccount类的意义在于封装接口，只提供给用户我们想让他进行的操作
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/07/19/QWSDK整理-Android浏览器控件WebView/" itemprop="url">
+                  QWSDK整理-Android浏览器控件WebView
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-07-19T13:42:14+08:00" content="2015-07-19">
+              2015-07-19
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/19/QWSDK整理-Android浏览器控件WebView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/19/QWSDK整理-Android浏览器控件WebView/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>QWSDK本身通过加载本地html来实现SDK界面显示，SDK内部加载html代码比较复杂，是前上司王辉所写，这里总结一下webview的基本的要点</p>
+<p>##WebView基本实现</p>
+<p>//需要为webview设置 WebViewClient</p>
+<p>//setWebChromeClient,设置Chrome处理</p>
+<pre><code>WebView myWebView = (WebView) findViewById(R.id.webview); 
+webview.setWebViewClient(new WebViewClient(){
+//一般WebViewClient需要重载的方法，使得打开新网页时在webview中打开而不是在系统浏览器中打开
+@Override
+public boolean shouldOverrideUrlLoading(WebView view, String url) {
+       view.loadUrl(url);//webview打开网页的方法
+       //QWSDK中使用loadDataWithBaseURL方法加载本地html内容
+       //view.loadDataWithBaseURL(&quot;&quot;, htmlString, &quot;text/html&quot;, &quot;utf-8&quot;, &quot;&quot;);
+        return true;
+ }
+ //可根据需要重载onPageStarted、 onPageFinished等方法
+});
+</code></pre><p>##Android方法与js的互相调用<br>首先设置webview为允许js</p>
+<pre><code>webview.getSettings().setJavaScriptEnabled(true);
+</code></pre><ul>
+<li><p>js调用Android方法：</p>
+<p>   webview.addJavascriptInterface(new MyJavaScriptInterface(param..),”js2java”);<br>   //Android方法写在QWJavaScriptInterface类中，如:<br>   public void myClose(String colseString){…}<br>这样在js中，可以使用windows.js2java.myClose(“colseString”);来调用myClose方法</p>
+</li>
+<li><p>Android方法调用js</p>
+<p>   view.loadUrl(url);//载入html</p>
+</li>
+</ul>
+<p>然后可通过点击html控件调用js，或者可以使用以下方式直接调用html中的js:</p>
+<pre><code>webview.loadUrl(&quot;javascript:js_fun()&quot;);
+</code></pre><p>若程序采用proguard混淆，还需要注意在混淆配置文件中加入<br>-keep public class com.example.zhengjt.MyJavaScriptInterface{<br>    public <methods>;<br>}<br>来防止java的js接口类被混淆，避免js找不到java方法</methods></p>
+<p>另外SDK中更新html界面的方式是使用runOnUiThread，如果当前线程是UI线程,那么行动是立即执行。如果当前线程不是UI线程,操作是发布到事件队列的UI线程。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/07/09/QWSDK整理-Android网络优化/" itemprop="url">
+                  QWSDK整理-Android网络优化
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-07-09T11:03:24+08:00" content="2015-07-09">
+              2015-07-09
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/09/QWSDK整理-Android网络优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/09/QWSDK整理-Android网络优化/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>QWSDK采取的网络优化策略：</p>
+<ol>
+<li><p>在网络请求操作前检查是否有网络连接：</p>
+<p>  private boolean isConnected(){</p>
+<pre><code>   ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+   NetworkInfo info = connectivityManager.getActiveNetworkInfo(); 
+   if(info != null &amp;&amp; info.isAvailable()) {
+return true;
+    /*        
+    也可判断网络连接类型进行特定操作，以下分别为wifi或3G网络
+       int netType = info.getType();
+       int netSubtype = info.getSubtype();
+       if (netType == ConnectivityManager.TYPE_WIFI) {
+           return info.isConnected();//wifi网络
+       } else if (netType == ConnectivityManager.TYPE_MOBILE
+               &amp;&amp; netSubtype == TelephonyManager.NETWORK_TYPE_UMTS) {
+           return info.isConnected();//
+       } 
+    */
+    }else {
+         return false;
+    }
+</code></pre><p>  }</p>
+</li>
+<li>使用轻量级数据格式json而不是xml</li>
+<li>在单次请求数据量并不大的前提下，考虑合并网络请求，减少网络请求次数</li>
+<li><p>节省连接建立时间，开启 keep-alive</p>
+<p>   conn.setRequestProperty(“Connection”, “Keep-Alive”);</p>
+</li>
+<li><p>增量更新，服务端在单一功能接口外层设置针对用户功能性接口，考虑在特定条件下无需返回所有信息，仅返回当前没有而且需要的信息</p>
+</li>
+</ol>
+<p>其他可采用但未采用方式：</p>
+<ol>
+<li>使用IP而非域名，这么做可以省去DNS首次域名解析的时间，但是考虑到IP可能改变，需要一个IP列表，而可行的方式是将DNS和IP的映射写死在SDK中，形成一个本地的域名-IP映射，但是这样做当IP更新时SDK版本也需更新</li>
+<li>图片以及其他缓存，SDK仅设计为json数据传输</li>
+<li>对于不同的设备不同网络返回不同的内容 ，同2</li>
+</ol>
+<p>另外QWSDK使用json格式传输文件，Android有两种方式处理：java的org.json、Android开源库GSON，我们使用前者，基本的处理方式如下:</p>
+<pre><code>import org.json.*;
+
+JSONTokener jsonParser = new JSONTokener(jsonstring);
+jsonObject = (JSONObject) jsonParser.nextValue();
+//得到jsonObject后可通过接口来获取json中相应的值
+JSONArray  jr= jobject.getJSONArray(key);
+double d = jobject.getDouble(key);
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/06/03/Andorid Fragment总结/" itemprop="url">
+                  Andorid Fragment总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-06-03T10:23:14+08:00" content="2015-06-03">
+              2015-06-03
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/06/03/Andorid Fragment总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/03/Andorid Fragment总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###Fragment一般用于大屏设备</p>
+<ul>
+<li>问：如何写一份代码多个设备使用且根据设备尺寸来展示不同的界面？</li>
+<li><p>答：新建layout-large或者layout-sw600dp文件夹表示在大屏设备或者在dp大于600的设备的时候会使用这个文件夹中的.xml布局</p>
+</li>
+<li><p>问：一个fragemnt需要什么？</p>
+</li>
+<li><p>答：一个fragment.xml+一个fragment.java extends Fragment<br>(通过View view =inflater.inflate(R.layout.fragment,container,false)；来实现与.xml文件的关联)</p>
+</li>
+<li><p>问：在activity中如何使用？</p>
+</li>
+<li><p>答：在.xml中代码，例如以下：</p>
+<pre><code>&lt;fragment
+    android:id=&quot;@+id/news_title_fragment&quot;
+    android:name=&quot;com.example.fragmentbestpractice.NewsTitleFragment&quot;
+    android:layout_width=&quot;0dp&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_weight=&quot;1&quot; /&gt;
+</code></pre></li>
+<li><p>问：如何动态改变fragment？</p>
+</li>
+<li>答：运用fragmentManager</li>
+</ul>
+<pre><code>FragmentManager fragmentManager = getFragmentManager();
+FragmentTransaction transaction = fragmentManager.beginTransaction();
+transaction.replace(R.id.right_layout, fragment);
+transaction.addToBackStack(null);//将事务添加到返回栈中
+transaction.commit();
+</code></pre><ul>
+<li>问：activity和fragment间如何通信</li>
+<li><p>答：</p>
+<p>1、在activity的.java文件中可以通过findFragmentById来获得特定fragment类的当前对象</p>
+<p>   MyFragment frag = (MyFragment);<br>   getFragmentManager().findFragmentById(R.id.my_fragment);</p>
+<p>2、在fragment的.java文件中可以通过getActivity()来获取当前活动</p>
+<p>   MyActivity myActivity = (MyActivity) getActivity();//Activity继承自Context</p>
+</li>
+<li><p>问：碎片的生命周期</p>
+</li>
+<li>答：Fragment必须是依存与Activity而存在的，因此Activity的生命周期会直接影响到Fragment的生命周期。</li>
+</ul>
+<p><img src="/images/fragment-life-circle.jpg" alt="Fragment生命周期"></p>
+<p><em>需要注意的是</em>：</p>
+<ol>
+<li>是否有调用addToBackStack()决定fragment是否在返回栈中</li>
+<li>由停止状态返回运行状态时，不会调用onCreate()和onCreateView，而是从onActivityCreate()调用起</li>
+<li>为了避免运行时配置发生变化，最常见的就是屏幕发生旋转后重复绘制fragment，可以在绘制fragment的代码外面加上条件if(savedInstanceState == null) </li>
+</ol>
+<p>补充fragment知识:</p>
+<p><a href="http://blog.csdn.net/lmj623565791/article/details/37970961" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/37970961</a></p>
+<p><a href="http://blog.csdn.net/lmj623565791/article/details/37992017" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/37992017</a></p>
+<p><a href="http://blog.csdn.net/lmj623565791/article/details/42628537" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/42628537</a></p>
 
           
         
@@ -459,6 +1945,10 @@
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -497,7 +1987,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

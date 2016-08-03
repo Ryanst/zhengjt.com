@@ -1207,12 +1207,9 @@ String toUpperCase(String str);
         
           
             <h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退:"></a>版本回退:</h2><ul>
-<li>回退到上num版本</li>
-</ul>
-<p><code>bash
-git reset --hard HEAD~num</code><br>num的值表示要往上回退num个版本</p>
-<ul>
-<li>回退到上一个版本，zsh中^需要转义，需要使用git reset –hard HEAD\^<br><code>bash
+<li>回退到上num版本<br><code>bash
+git reset --hard HEAD~num</code></li>
+<li>回退到上一个版本，zsh中^需要转义，需要使用<br><code>bash
 git reset --hard HEAD^</code></li>
 <li><p>回退到特定的版本<br><code>bash
 git reset --hard commitId</code><br>commitId可以通过git log来得到，可以写版本号前几个字符</p>

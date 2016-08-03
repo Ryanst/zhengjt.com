@@ -85,24 +85,24 @@
 
 
 <meta name="description" content="强引用： Car car = new Car(22000);
-弱引用： WeakReference weakCar = new WeakReference(car);
+弱引用： WeakReference&amp;lt;Car&amp;gt; weakCar = new WeakReference&amp;lt;Car&amp;gt;(car);
 一段测试代码：
-```    //设置-Xmx1M,即JVM堆内存最大为1M的环境运行    import java.lang.ref.WeakReference;    import java.util.WeakHashMap;">
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java的WeakReference相关">
 <meta property="og:url" content="http://zhengjt.com/2015/09/13/Java的WeakReference相关/index.html">
 <meta property="og:site_name" content="Ryanst">
 <meta property="og:description" content="强引用： Car car = new Car(22000);
-弱引用： WeakReference weakCar = new WeakReference(car);
+弱引用： WeakReference&amp;lt;Car&amp;gt; weakCar = new WeakReference&amp;lt;Car&amp;gt;(car);
 一段测试代码：
-```    //设置-Xmx1M,即JVM堆内存最大为1M的环境运行    import java.lang.ref.WeakReference;    import java.util.WeakHashMap;">
-<meta property="og:updated_time" content="2016-08-03T01:56:22.000Z">
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474">
+<meta property="og:updated_time" content="2016-08-03T02:25:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的WeakReference相关">
 <meta name="twitter:description" content="强引用： Car car = new Car(22000);
-弱引用： WeakReference weakCar = new WeakReference(car);
+弱引用： WeakReference&amp;lt;Car&amp;gt; weakCar = new WeakReference&amp;lt;Car&amp;gt;(car);
 一段测试代码：
-```    //设置-Xmx1M,即JVM堆内存最大为1M的环境运行    import java.lang.ref.WeakReference;    import java.util.WeakHashMap;">
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474">
 
 
 
@@ -321,70 +321,17 @@
       
 
       
-        <p>强引用： Car car = new Car(22000);</p>
-<p>弱引用： WeakReference<car> weakCar = new WeakReference<car>(car);</car></car></p>
+        <p>强引用： <code>Car car = new Car(22000);</code></p>
+<p>弱引用： <code>WeakReference&lt;Car&gt; weakCar = new WeakReference&lt;Car&gt;(car);</code></p>
 <p>一段测试代码：</p>
-<p>```<br>    //设置-Xmx1M,即JVM堆内存最大为1M的环境运行<br>    import java.lang.ref.WeakReference;<br>    import java.util.WeakHashMap;</p>
-<pre><code>public class Car {
-    private double price;
-
-    public Car(double price) {
-        this.price = price;
-    }
-    public double getPrice() {
-        return price;
-    }
-    public void setPrice(double price) {
-        this.price = price;
-    }
-    public static void main(String[] args) {
-
-        Car car = new Car(22000);
-        WeakReference&lt;Car&gt; weakCar = new WeakReference&lt;Car&gt;(car);
-
-        int i = 0;
-        // 运行62332次weakCar被回收
-        while (true) {
-            // 加了这句引用强引用的car对象后weakCar就不会被回收，无限循环
-            // System.out.println(&quot;here is the strong reference &apos;car&apos; &quot; + car);
-            if (weakCar.get() != null) {
-                // 使用weakCar.get()取得强引用,即使上一句if判断了也可能在这句之前被回收返回null，因此加try语句
-                try {
-                    System.out.println(&quot;Object is alive for &quot; + i + &quot; loops - &quot;
-                            + weakCar.get().getPrice());
-                    i++;
-                } catch (NullPointerException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                System.out.println(&quot;Object has been collected.&quot;);
-                break;
-            }
-            // 如果把car置为null，那么weakCar16次循环后被回收
-            //car = null;
-        }
-        System.out.println(&quot;out of weakCar while&quot;);
-
-        // 这里用HashMap，就会产生堆内存溢出的异常，而WeakHashMap不会
-        WeakHashMap weakMap = new WeakHashMap&lt;Integer, byte[]&gt;();
-        for (int index = 0; index &lt; 10000; index++) {
-            Integer ii = new Integer(index);
-            weakMap.put(ii, new byte[index]);
-            System.out.println(&quot;WeakHashMap for running&quot; + ii + &quot;times&quot;);
-        }
-    }
-}
-</code></pre><p>```</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置-Xmx1M,即JVM堆内存最大为1M的环境运行</span></div><div class="line"><span class="keyword">import</span> java.lang.ref.WeakReference;</div><div class="line"><span class="keyword">import</span> java.util.WeakHashMap;</div><div class="line">	</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">double</span> price;</div><div class="line">	</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Car</span><span class="params">(<span class="keyword">double</span> price)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.price = price;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">getPrice</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> price;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPrice</span><span class="params">(<span class="keyword">double</span> price)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.price = price;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	</div><div class="line">        Car car = <span class="keyword">new</span> Car(<span class="number">22000</span>);</div><div class="line">        WeakReference&lt;Car&gt; weakCar = <span class="keyword">new</span> WeakReference&lt;Car&gt;(car);</div><div class="line">	</div><div class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">        <span class="comment">// 运行62332次weakCar被回收</span></div><div class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">            <span class="comment">// 加了这句引用强引用的car对象后weakCar就不会被回收，无限循环</span></div><div class="line">            <span class="comment">// System.out.println("here is the strong reference 'car' " + car);</span></div><div class="line">            <span class="keyword">if</span> (weakCar.get() != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="comment">// 使用weakCar.get()取得强引用,即使上一句if判断了也可能在这句之前被回收返回null，因此加try语句</span></div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    System.out.println(<span class="string">"Object is alive for "</span> + i + <span class="string">" loops - "</span></div><div class="line">                            + weakCar.get().getPrice());</div><div class="line">                    i++;</div><div class="line">                &#125; <span class="keyword">catch</span> (NullPointerException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                System.out.println(<span class="string">"Object has been collected."</span>);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 如果把car置为null，那么weakCar16次循环后被回收</span></div><div class="line">            <span class="comment">//car = null;</span></div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="string">"out of weakCar while"</span>);</div><div class="line">	</div><div class="line">        <span class="comment">// 这里用HashMap，就会产生堆内存溢出的异常，而WeakHashMap不会</span></div><div class="line">        WeakHashMap weakMap = <span class="keyword">new</span> WeakHashMap&lt;Integer, <span class="keyword">byte</span>[]&gt;();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> index = <span class="number">0</span>; index &lt; <span class="number">10000</span>; index++) &#123;</div><div class="line">            Integer ii = <span class="keyword">new</span> Integer(index);</div><div class="line">            weakMap.put(ii, <span class="keyword">new</span> <span class="keyword">byte</span>[index]);</div><div class="line">            System.out.println(<span class="string">"WeakHashMap for running"</span> + ii + <span class="string">"times"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>总结：一旦系统内存回收，无论内存是否紧张，弱引用指向的对象都会被回收<br>soft reference和weak reference一样, 但被GC回收的时候需要多一个条件: 当系统内存不足时(Heap 内存是否临近阈值)，因此soft reference适合做cache object</p>
 <p>WeakHashMap：hashmap的weak版，不保证map中的键值对的存在时间，在没有调用任何赋值方法(set相关)的情况下，在一段时间后 size 方法也可能返回较小的值，对于 isEmpty 方法，返回 false，然后返回 true，对于给定的键，containsKey 方法返回 true 然后返回 false，对于给定的键，get 方法返回一个值，但接着返回 null，对于以前出现在映射中的键，put 方法返回 null，而 remove 方法返回 false，对于键集、值集、项集进行的检查，生成的元素数量越来越少。总的来说就是map中的键值对会在GC回收的时候被回收</p>
 <p>在WeakHashMap的get(),put()函数中的getTable()方法会调用expungeStateEntries方法，以清理持有弱引用的key的表项</p>
-<h3 id="JVM虚拟机运行配置"><a href="#JVM虚拟机运行配置" class="headerlink" title="JVM虚拟机运行配置"></a>JVM虚拟机运行配置</h3><p>-Xms128m JVM初始分配的堆内存</p>
-<p>-Xmx512m JVM最大允许分配的堆内存，按需分配</p>
-<p>-XX:PermSize=64M JVM初始分配的非堆内存</p>
-<p>-XX:MaxPermSize=128M JVM最大允许分配的非堆内存，按需分配</p>
-<p>eclipse设置自定内存运行</p>
-<p>```<br>    Run &gt; Run Configurations&gt; Java Application &gt; (project name)&gt; Arguments Sheet&gt; VM Arguments<br> ```</p>
-<p>比如设置堆内存为1M，可以在 VM Arguments 中填写-Xmx1M</p>
+<h3 id="JVM虚拟机运行配置"><a href="#JVM虚拟机运行配置" class="headerlink" title="JVM虚拟机运行配置"></a>JVM虚拟机运行配置</h3><p><code>-Xms128m</code> JVM初始分配的堆内存</p>
+<p><code>-Xmx512m</code> JVM最大允许分配的堆内存，按需分配</p>
+<p><code>-XX:PermSize=64M</code> JVM初始分配的非堆内存</p>
+<p><code>-XX:MaxPermSize=128M</code> JVM最大允许分配的非堆内存，按需分配</p>
 
       
     </div>

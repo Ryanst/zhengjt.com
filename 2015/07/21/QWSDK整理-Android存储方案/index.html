@@ -85,24 +85,21 @@
 
 
 <meta name="description" content="文件存储，使用JAVA接口，适合存储简单的文本数据或者二进制数据
-  FileInputStream in = null;  BufferedReader reader;  StringBuffer content = new StringBuffer();  try{
-in = openFileInput(“filename”);
-reader = new BufferReader(new I">
+
+123456789101112131415161718192021222324FileInputStream in = null;BufferedReader reader;StringBuffer content = new StringBuffer();try&amp;#123;  in = openFileInput(“filen">
 <meta property="og:type" content="article">
 <meta property="og:title" content="QWSDK整理-Android存储方案">
 <meta property="og:url" content="http://zhengjt.com/2015/07/21/QWSDK整理-Android存储方案/index.html">
 <meta property="og:site_name" content="Ryanst">
 <meta property="og:description" content="文件存储，使用JAVA接口，适合存储简单的文本数据或者二进制数据
-  FileInputStream in = null;  BufferedReader reader;  StringBuffer content = new StringBuffer();  try{
-in = openFileInput(“filename”);
-reader = new BufferReader(new I">
-<meta property="og:updated_time" content="2016-08-02T11:25:28.000Z">
+
+123456789101112131415161718192021222324FileInputStream in = null;BufferedReader reader;StringBuffer content = new StringBuffer();try&amp;#123;  in = openFileInput(“filen">
+<meta property="og:updated_time" content="2016-08-03T02:31:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="QWSDK整理-Android存储方案">
 <meta name="twitter:description" content="文件存储，使用JAVA接口，适合存储简单的文本数据或者二进制数据
-  FileInputStream in = null;  BufferedReader reader;  StringBuffer content = new StringBuffer();  try{
-in = openFileInput(“filename”);
-reader = new BufferReader(new I">
+
+123456789101112131415161718192021222324FileInputStream in = null;BufferedReader reader;StringBuffer content = new StringBuffer();try&amp;#123;  in = openFileInput(“filen">
 
 
 
@@ -322,63 +319,18 @@ reader = new BufferReader(new I">
 
       
         <ol>
-<li><p>文件存储，使用JAVA接口，适合存储简单的文本数据或者二进制数据</p>
-<p>  FileInputStream in = null;<br>  BufferedReader reader;<br>  StringBuffer content = new StringBuffer();<br>  try{</p>
-<pre><code>in = openFileInput(“filename”);
-reader = new BufferReader(new InputStreamReader(in);
-String line = &quot;&quot;;
-while(line = (reader.ReadLIne() != null){
-    content.append(line);
-}
-</code></pre><p>  }<br>  catch(IOException e){</p>
-<pre><code>e.printStackTrace();
-</code></pre><p>  }<br>  finally{</p>
-<pre><code>if(reader != null){
-    try{
-        reader.close();
-    }
-    catch(IOException e){
-        e.printStackTrace();
-    }
-}
-</code></pre><p>  }</p>
-</li>
-<li><p>SharePreferences存储(key/value存储，key是String，value可以是各种类型）</p>
-<p>  SharePreference.Editor editor = getSharepreferences(“data”,MODE_PRIVATE).edit();<br>  editor.putInt(“age”,25);<br>  editor.commit();<br>  SharePreference pref = getSharepreferences(“data”,MODE_PRIVATE);<br>  int age = pref.getInt(“age”);</p>
-</li>
+<li>文件存储，使用JAVA接口，适合存储简单的文本数据或者二进制数据</li>
 </ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">FileInputStream in = <span class="keyword">null</span>;</div><div class="line">BufferedReader reader;</div><div class="line">StringBuffer content = <span class="keyword">new</span> StringBuffer();</div><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">  in = openFileInput(“filename”);</div><div class="line">  reader = <span class="keyword">new</span> BufferReader(<span class="keyword">new</span> InputStreamReader(in);</div><div class="line">  String line = <span class="string">""</span>;</div><div class="line">  <span class="keyword">while</span>(line = (reader.ReadLIne() != <span class="keyword">null</span>)&#123;</div><div class="line">      content.append(line);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">catch</span>(IOException e)&#123;</div><div class="line">  e.printStackTrace();</div><div class="line">&#125;</div><div class="line"><span class="keyword">finally</span>&#123;</div><div class="line">  <span class="keyword">if</span>(reader != <span class="keyword">null</span>)&#123;</div><div class="line">      <span class="keyword">try</span>&#123;</div><div class="line">          reader.close();</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">catch</span>(IOException e)&#123;</div><div class="line">          e.printStackTrace();</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>SharePreferences存储(key/value存储，key是String，value可以是各种类型）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SharePreference.Editor editor = getSharepreferences(“data”,MODE_PRIVATE).edit();</div><div class="line">editor.putInt(“age”,<span class="number">25</span>);</div><div class="line">editor.commit();</div><div class="line">SharePreference pref = getSharepreferences(“data”,MODE_PRIVATE);</div><div class="line"><span class="keyword">int</span> age = pref.getInt(“age”);</div></pre></td></tr></table></figure>
 <p>3、SQLite</p>
 <p>以下是QWSDK数据库操作的最简形式</p>
-<pre><code>//需要一个DBHelper类
-public class MyDBHelper extends SQLiteOpenHelper{
-    SQLiteDatabase mDataBase = null;
-    public MyDBHelper(Context context,String databaseName,int version)
-    {
-        super(context.getApplicationContext(), databaseName, null, version);
-        try {
-            mDataBase = getWritableDatabase();
-        } catch (Exception e) {
-            mDataBase=getReadableDatabase();
-        }
-        mContext = context.getApplicationContext();
-    }
-    @Override
-    public void onCreate(SQLiteDatabase db) {}
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
-    //当MyDBHelper构造时传入的version大于原来的版本号时onUpgrade会调用
-}
-//自定义一个数据库类，然后自定义add/query/delete等函数来操作数据库，提供友好接口
-public class MyDBManagerAccount
-{
-  public MyDBManagerAccount(MyDBHelper helper)
-  {
-      SQLiteDatabase db = helper.mDataBase;
-  }
-}
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//需要一个DBHelper类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDBHelper</span> <span class="keyword">extends</span> <span class="title">SQLiteOpenHelper</span> </span>&#123;</div><div class="line">    SQLiteDatabase mDataBase = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyDBHelper</span><span class="params">(Context context, String databaseName, <span class="keyword">int</span> version)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context.getApplicationContext(), databaseName, <span class="keyword">null</span>, version);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            mDataBase = getWritableDatabase();</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            mDataBase = getReadableDatabase();</div><div class="line">        &#125;</div><div class="line">        mContext = context.getApplicationContext();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(SQLiteDatabase db)</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase db, <span class="keyword">int</span> oldVersion, <span class="keyword">int</span> newVersion)</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//当MyDBHelper构造时传入的version大于原来的版本号时onUpgrade会调用</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//自定义一个数据库类，然后自定义add/query/delete等函数来操作数据库，提供友好接口</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDBManagerAccount</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyDBManagerAccount</span><span class="params">(MyDBHelper helper)</span> </span>&#123;</div><div class="line">        SQLiteDatabase db = helper.mDataBase;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>至于具体的数据库操作，可以调用SQLiteDatabase的CURD函数，也可以自己手写sql然后execSQL(QWSDK中采用的方式)，使用MyDBManagerAccount类的意义在于封装接口，只提供给用户我们想让他进行的操作</p>
 
-//至于具体的数据库操作，可以调用SQLiteDatabase的CURD函数，也可以自己手写sql然后execSQL(QWSDK中采用的方式)，使用MyDBManagerAccount类的意义在于封装接口，只提供给用户我们想让他进行的操作
-</code></pre>
       
     </div>
 

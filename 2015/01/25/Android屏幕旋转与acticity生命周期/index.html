@@ -84,25 +84,19 @@
 
 
 
-<meta name="description" content="设置 android:configChanges=”orientation” 和不设置这个属性，生命周期表现为重新创建activity
-
-设置 android:configChanges=”orientation|keyboardHidden”，在2.3上表现为不重新创建activity，5.1如下
-android:targetSdkVersion&amp;lt;=“12”//生命周期表现为不重新创建a">
+<meta name="description" content="设置 和不设置这个属性，生命周期表现为重新创建activity122.	设置 ```android:configChanges=&amp;quot;orientation|keyboardHidden&amp;quot;```，在2.3上表现为不重新创建activity，5.1如下
+android:targetSdkVersion&amp;lt;=“12”//生命周期表现为不重新创建activityandroid:ta">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android屏幕旋转与acticity生命周期">
 <meta property="og:url" content="http://zhengjt.com/2015/01/25/Android屏幕旋转与acticity生命周期/index.html">
 <meta property="og:site_name" content="Ryanst">
-<meta property="og:description" content="设置 android:configChanges=”orientation” 和不设置这个属性，生命周期表现为重新创建activity
-
-设置 android:configChanges=”orientation|keyboardHidden”，在2.3上表现为不重新创建activity，5.1如下
-android:targetSdkVersion&amp;lt;=“12”//生命周期表现为不重新创建a">
-<meta property="og:updated_time" content="2016-08-02T11:25:28.000Z">
+<meta property="og:description" content="设置 和不设置这个属性，生命周期表现为重新创建activity122.	设置 ```android:configChanges=&amp;quot;orientation|keyboardHidden&amp;quot;```，在2.3上表现为不重新创建activity，5.1如下
+android:targetSdkVersion&amp;lt;=“12”//生命周期表现为不重新创建activityandroid:ta">
+<meta property="og:updated_time" content="2016-08-03T02:17:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android屏幕旋转与acticity生命周期">
-<meta name="twitter:description" content="设置 android:configChanges=”orientation” 和不设置这个属性，生命周期表现为重新创建activity
-
-设置 android:configChanges=”orientation|keyboardHidden”，在2.3上表现为不重新创建activity，5.1如下
-android:targetSdkVersion&amp;lt;=“12”//生命周期表现为不重新创建a">
+<meta name="twitter:description" content="设置 和不设置这个属性，生命周期表现为重新创建activity122.	设置 ```android:configChanges=&amp;quot;orientation|keyboardHidden&amp;quot;```，在2.3上表现为不重新创建activity，5.1如下
+android:targetSdkVersion&amp;lt;=“12”//生命周期表现为不重新创建activityandroid:ta">
 
 
 
@@ -322,79 +316,11 @@ android:targetSdkVersion&amp;lt;=“12”//生命周期表现为不重新创建a
 
       
         <ol>
-<li><p>设置 android:configChanges=”orientation” 和不设置这个属性，生命周期表现为重新创建activity</p>
-</li>
-<li><p>设置 android:configChanges=”orientation|keyboardHidden”，在2.3上表现为不重新创建activity，5.1如下</p>
+<li><p>设置 <figure class="highlight plain"><figcaption><span>和不设置这个属性，生命周期表现为重新创建activity</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">2.	设置 ```android:configChanges=&quot;orientation|keyboardHidden&quot;```，在2.3上表现为不重新创建activity，5.1如下</div></pre></td></tr></table></figure></p>
 <p>android:targetSdkVersion&lt;=“12”//生命周期表现为不重新创建activity<br>android:targetSdkVersion&gt;”12”//表现为重新创建activity</p>
-</li>
-<li><p>设置 android:configChanges=”orientation|keyboardHidden|screenSize”，在2.3和5.1上都表现为不重新创建，在屏幕旋转时，只会调用onConfigurationChanged方法</p>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">3.	设置 ```android:configChanges=&quot;orientation|keyboardHidden|screenSize&quot;```，在2.3和5.1上都表现为不重新创建，在屏幕旋转时，只会调用```onConfigurationChanged```方法</div><div class="line"></div><div class="line"></div><div class="line">测试代码：</div><div class="line"></div><div class="line">``` java</div><div class="line">public class MainActivity extends Activity &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.relative_center_2);</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onCreate方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onStart() &#123;</div><div class="line">        super.onStart();</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onStart方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onResume() &#123;</div><div class="line">        super.onResume();</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onResume方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onPause() &#123;</div><div class="line">        super.onPause();</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onPause方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onStop() &#123;</div><div class="line">        super.onStop();</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onStop方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onDestroy() &#123;</div><div class="line">        super.onDestroy();</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onDestroy方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onConfigurationChanged(Configuration newConfig) &#123;</div><div class="line">        super.onConfigurationChanged(newConfig);</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onConfigurationChanged方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onRestart() &#123;</div><div class="line">        super.onRestart();</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onRestart方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onSaveInstanceState(Bundle outState) &#123;</div><div class="line">        super.onSaveInstanceState(outState);</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onSaveInstanceState方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onRestoreInstanceState(Bundle savedInstanceState) &#123;</div><div class="line">        super.onRestoreInstanceState(savedInstanceState);</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onRestoreInstanceState方法&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></li>
 </ol>
-<p>测试代码：</p>
-<pre><code>public class MainActivity extends Activity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.relative_center_2);
-        Log.i(&quot;MainActivity&quot;, &quot;执行onCreate方法&quot;);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(&quot;MainActivity&quot;, &quot;执行onStart方法&quot;);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i(&quot;MainActivity&quot;, &quot;执行onResume方法&quot;);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i(&quot;MainActivity&quot;, &quot;执行onPause方法&quot;);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i(&quot;MainActivity&quot;, &quot;执行onStop方法&quot;);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i(&quot;MainActivity&quot;, &quot;执行onDestroy方法&quot;);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        Log.i(&quot;MainActivity&quot;, &quot;执行onConfigurationChanged方法&quot;);
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.i(&quot;MainActivity&quot;, &quot;执行onRestart方法&quot;);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Log.i(&quot;MainActivity&quot;, &quot;执行onSaveInstanceState方法&quot;);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        Log.i(&quot;MainActivity&quot;, &quot;执行onRestoreInstanceState方法&quot;);
-    }
-}
-</code></pre>
       
     </div>
 

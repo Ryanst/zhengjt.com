@@ -90,7 +90,7 @@
 
 homebrew，安装位置：/usr/local/Cellar
 brew linkapps macvim——将macvim.app加入到Application下
-alias vim=”/Applications/MacVim.app/Contents/MacOS/Vim”——设置别名，默认在终端中使用macvim的命令行版（关闭终端后会失效，">
+alias vim=&amp;quot;/Applications/MacVim.app/Contents/MacOS/Vim&amp;quot;——设置别名，默认在终端中使用macvim的命令行版">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vim学习笔记(2)——vim配置">
 <meta property="og:url" content="http://zhengjt.com/2015/04/03/vim学习笔记(2)——vim配置/index.html">
@@ -101,8 +101,8 @@ alias vim=”/Applications/MacVim.app/Contents/MacOS/Vim”——设置别名，
 
 homebrew，安装位置：/usr/local/Cellar
 brew linkapps macvim——将macvim.app加入到Application下
-alias vim=”/Applications/MacVim.app/Contents/MacOS/Vim”——设置别名，默认在终端中使用macvim的命令行版（关闭终端后会失效，">
-<meta property="og:updated_time" content="2016-08-02T11:25:28.000Z">
+alias vim=&amp;quot;/Applications/MacVim.app/Contents/MacOS/Vim&amp;quot;——设置别名，默认在终端中使用macvim的命令行版">
+<meta property="og:updated_time" content="2016-08-03T02:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vim学习笔记(2)——vim配置">
 <meta name="twitter:description" content="记录vim的配置，随时更新
@@ -111,7 +111,7 @@ alias vim=”/Applications/MacVim.app/Contents/MacOS/Vim”——设置别名，
 
 homebrew，安装位置：/usr/local/Cellar
 brew linkapps macvim——将macvim.app加入到Application下
-alias vim=”/Applications/MacVim.app/Contents/MacOS/Vim”——设置别名，默认在终端中使用macvim的命令行版（关闭终端后会失效，">
+alias vim=&amp;quot;/Applications/MacVim.app/Contents/MacOS/Vim&amp;quot;——设置别名，默认在终端中使用macvim的命令行版">
 
 
 
@@ -334,15 +334,15 @@ alias vim=”/Applications/MacVim.app/Contents/MacOS/Vim”——设置别名，
 <p>##MacVim</p>
 <p>安装：</p>
 <ol>
-<li>homebrew，安装位置：/usr/local/Cellar</li>
-<li>brew linkapps macvim——将macvim.app加入到Application下</li>
-<li>alias vim=”/Applications/MacVim.app/Contents/MacOS/Vim”——设置别名，默认在终端中使用macvim的命令行版（关闭终端后会失效，在~/.zshrc中设置才行）</li>
+<li><code>homebrew</code>，安装位置：<code>/usr/local/Cellar</code></li>
+<li><code>brew linkapps macvim</code>——将<code>macvim.app</code>加入到Application下</li>
+<li><code>alias vim=&quot;/Applications/MacVim.app/Contents/MacOS/Vim&quot;</code>——设置别名，默认在终端中使用<code>macvim</code>的命令行版（关闭终端后会失效，在<code>~/.zshrc</code>中设置才行）</li>
 </ol>
 <p>##插件</p>
 <p>###vundle</p>
 <ul>
 <li>说明：vim下安装其他插件的插件</li>
-<li>安装：git clone <a href="https://github.com/gmarik/vundle.git" target="_blank" rel="external">https://github.com/gmarik/vundle.git</a> ~/.vim/bundle/vundle,在./vimrc中添加配置：Bundle ‘gmarik/vundle’。(/.vim/bunle为vim的插件目录)</li>
+<li>安装：<code>git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle</code><br>在./vimrc中添加配置：<code>Bundle &#39;gmarik/vundle&#39;</code>。(<code>/.vim/bunle</code>为vim的插件目录)</li>
 <li>使用：<ul>
 <li>Bundleinstall:安装插件，BundleIstall ‘author/projectname’</li>
 <li>BundleList:列出当前安装的插件</li>
@@ -369,46 +369,8 @@ alias vim=”/Applications/MacVim.app/Contents/MacOS/Vim”——设置别名，
 <li>安装：使用vundle安装</li>
 </ul>
 <p>##.vimrc配置</p>
-<pre><code>filetype off                    &quot; required!
-filetype plugin indent on
-colorscheme molokai
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">filetype off                    <span class="string">" required!</span></div><div class="line">filetype plugin indent on</div><div class="line">colorscheme molokai</div><div class="line"></div><div class="line">"Vundle<span class="string">"</span></div><div class="line">call vundle#rc()</div><div class="line">" <span class="built_in">let</span> Vundle manage Vundle</div><div class="line">Bundle <span class="string">'gmarik/vundle'</span></div><div class="line">Bundle <span class="string">'scrooloose/nerdtree'</span></div><div class="line">nmap &lt;F2&gt; :NERDTreeToggle &lt;CR&gt;</div><div class="line">Bundle <span class="string">'Valloric/YouCompleteMe'</span></div><div class="line">Bundle <span class="string">'ervandew/supertab'</span></div><div class="line"></div><div class="line"><span class="built_in">set</span> nocompatible                <span class="string">" be iMproved</span></div><div class="line">set rtp+=~/.vim/bundle/vundle/</div><div class="line">set fencs=utf-8,chinese</div><div class="line">syntax on "打开语法高亮 </div><div class="line"><span class="built_in">set</span> showmatch</div><div class="line"><span class="built_in">set</span> autoindent</div><div class="line"><span class="built_in">set</span> smartindent</div><div class="line"><span class="built_in">set</span> tabstop=4</div><div class="line"><span class="built_in">set</span> shiftwidth=4</div><div class="line"><span class="built_in">set</span> nu <span class="string">"显示行号</span></div><div class="line">set mouse=a "设置鼠标定位光标<span class="string">"</span></div><div class="line">set pastetoggle=&lt;F10&gt; "设置粘贴模式快捷键<span class="string">"</span></div><div class="line">set clipboard=unnamed "vim剪贴板与系统剪贴板适配<span class="string">"</span></div><div class="line"></div><div class="line">"括号自动补全<span class="string">"</span></div><div class="line">inoremap ( ()&lt;ESC&gt;i</div><div class="line">inoremap [ []&lt;ESC&gt;i</div><div class="line">inoremap &#123; &#123;&#125;&lt;ESC&gt;i</div><div class="line">inoremap " <span class="string">""</span>&lt;ESC&gt;i</div><div class="line">inoremap <span class="string">' '</span><span class="string">'&lt;ESC&gt;i</span></div><div class="line"></div><div class="line">"Youcompleteme config"</div><div class="line">let g:ycm_global_ycm_extra_conf = '/Users/zhengjt/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py<span class="string">'</span></div><div class="line"></div><div class="line">"python F5 to run"</div><div class="line">au BufRead *.py map &lt;buffer&gt; &lt;F5&gt; :w&lt;CR&gt;:!/usr/bin/env python % &lt;CR&gt;</div></pre></td></tr></table></figure>
 
-&quot;Vundle&quot;
-call vundle#rc()
-&quot; let Vundle manage Vundle
-Bundle &apos;gmarik/vundle&apos;
-Bundle &apos;scrooloose/nerdtree&apos;
-nmap &lt;F2&gt; :NERDTreeToggle &lt;CR&gt;
-Bundle &apos;Valloric/YouCompleteMe&apos;
-Bundle &apos;ervandew/supertab&apos;
-
-set nocompatible                &quot; be iMproved
-set rtp+=~/.vim/bundle/vundle/
-set fencs=utf-8,chinese
-syntax on &quot;打开语法高亮 
-set showmatch
-set autoindent
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set nu &quot;显示行号
-set mouse=a &quot;设置鼠标定位光标&quot;
-set pastetoggle=&lt;F10&gt; &quot;设置粘贴模式快捷键&quot;
-set clipboard=unnamed &quot;vim剪贴板与系统剪贴板适配&quot;
-
-&quot;括号自动补全&quot;
-inoremap ( ()&lt;ESC&gt;i
-inoremap [ []&lt;ESC&gt;i
-inoremap { {}&lt;ESC&gt;i
-inoremap &quot; &quot;&quot;&lt;ESC&gt;i
-inoremap &apos; &apos;&apos;&lt;ESC&gt;i
-
-&quot;Youcompleteme config&quot;
-let g:ycm_global_ycm_extra_conf = &apos;/Users/zhengjt/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py&apos;
-
-&quot;python F5 to run&quot;
-au BufRead *.py map &lt;buffer&gt; &lt;F5&gt; :w&lt;CR&gt;:!/usr/bin/env python % &lt;CR&gt;
-</code></pre>
       
     </div>
 

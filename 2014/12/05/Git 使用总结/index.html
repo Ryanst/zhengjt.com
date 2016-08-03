@@ -86,16 +86,15 @@
 
 <meta name="description" content="版本回退:
 回退到上num版本
-git reset --hard HEAD~num
 
-
+1git reset --hard HEAD~num
 num的值表示要往上回退num个版本
 
 回退到上一个版本，zsh中^需要转义，需要使用git reset –hard HEAD\^
-   git reset –hard HEAD^
+1git reset --hard HEAD^
 
 回退到特定的版本
-git reset --hard commitId
+1git reset --hard commitId
 commitId可以通过git log来得到，可以写版本号">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git 使用总结">
@@ -103,32 +102,30 @@ commitId可以通过git log来得到，可以写版本号">
 <meta property="og:site_name" content="Ryanst">
 <meta property="og:description" content="版本回退:
 回退到上num版本
-git reset --hard HEAD~num
 
-
+1git reset --hard HEAD~num
 num的值表示要往上回退num个版本
 
 回退到上一个版本，zsh中^需要转义，需要使用git reset –hard HEAD\^
-   git reset –hard HEAD^
+1git reset --hard HEAD^
 
 回退到特定的版本
-git reset --hard commitId
+1git reset --hard commitId
 commitId可以通过git log来得到，可以写版本号">
-<meta property="og:updated_time" content="2016-08-02T12:27:28.000Z">
+<meta property="og:updated_time" content="2016-08-03T02:15:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git 使用总结">
 <meta name="twitter:description" content="版本回退:
 回退到上num版本
-git reset --hard HEAD~num
 
-
+1git reset --hard HEAD~num
 num的值表示要往上回退num个版本
 
 回退到上一个版本，zsh中^需要转义，需要使用git reset –hard HEAD\^
-   git reset –hard HEAD^
+1git reset --hard HEAD^
 
 回退到特定的版本
-git reset --hard commitId
+1git reset --hard commitId
 commitId可以通过git log来得到，可以写版本号">
 
 
@@ -349,34 +346,33 @@ commitId可以通过git log来得到，可以写版本号">
 
       
         <h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退:"></a>版本回退:</h2><ul>
-<li><p>回退到上num版本</p>
-<pre><code>git reset --hard HEAD~num
-</code></pre></li>
+<li>回退到上num版本</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard HEAD~num</div></pre></td></tr></table></figure>
 <p>num的值表示要往上回退num个版本</p>
 <ul>
 <li><p>回退到上一个版本，zsh中^需要转义，需要使用git reset –hard HEAD\^</p>
-<p>   git reset –hard HEAD^</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard HEAD^</div></pre></td></tr></table></figure>
 </li>
 <li><p>回退到特定的版本</p>
-<pre><code>git reset --hard commitId
-</code></pre><p>commitId可以通过git log来得到，可以写版本号前几个字符</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard commitId</div></pre></td></tr></table></figure>
+<p>commitId可以通过git log来得到，可以写版本号前几个字符</p>
 </li>
 <li><p>如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版本的版本号，可以</p>
-<p>   git reflog</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reflog</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>这个命令记录了你的每一次命令</p>
 <h2 id="操作回退："><a href="#操作回退：" class="headerlink" title="操作回退："></a>操作回退：</h2><ul>
 <li><p>放弃当前修改，回到上一次git 命令后的初始状态(这里—符号后一定要有一个空格)</p>
-<p>   git checkout — filename</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout — filename</div></pre></td></tr></table></figure>
 </li>
 <li><p>把当前add到暂存区的file回退到工作区(相当于取消add这个file的操作)</p>
-<p>   git reset HEAD filename</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset HEAD filename</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作:"></a>远程操作:</h2><pre><code>git remote add origin git@github.com:Ryanst/test.git
-</code></pre><p>在本地目录下键入这个命令，将远程库与本地该目录关联</p>
+<h2 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作:"></a>远程操作:</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin git@github.com:Ryanst/test.git</div></pre></td></tr></table></figure>
+<p>在本地目录下键入这个命令，将远程库与本地该目录关联</p>
 <p>关联后，使用命令git push -u origin master第一次推送master分支的所有内容</p>
 <h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><ul>
 <li>常用命令</li>
@@ -388,30 +384,27 @@ commitId可以通过git log来得到，可以写版本号">
 <p>合并某分支到当前分支：git merge <name></name></p>
 <p>删除分支：git branch -d <name></name></p>
 <ul>
-<li><p>git解决冲突的一般方法：</p>
-<p>   git merge mybranch<br>   //然后修改冲突文件<br>   git add filename<br>   git commit -m “解决冲突”<br>   git branch -d mybranch</p>
-</li>
+<li>git解决冲突的一般方法：</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git merge mybranch</div><div class="line">//然后修改冲突文件</div><div class="line">git add filename</div><div class="line">git commit -m “解决冲突<span class="string">"</span></div><div class="line">git branch -d mybranch</div></pre></td></tr></table></figure>
 <p>使用用git log –graph命令可以看到分支合并图可以看到分支合并图</p>
 <p>储存为commit的当前工作区现场：<br>当手头工作没有完成时，先把工作现场git stash一下，然后去修复bug，修复后，再git stash pop，回到工作现场。</p>
 <h2 id="多人协作"><a href="#多人协作" class="headerlink" title="多人协作"></a>多人协作</h2><ul>
-<li><p>查看远程库信息</p>
-<p>   git remote -v；</p>
+<li>查看远程库信息<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote -v；</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>本地新建的分支如果不推送到远程，对其他人就是不可见的；</p>
 <ul>
-<li><p>从本地推送分支</p>
-<p>   git push origin branch-name</p>
+<li>从本地推送分支<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin branch-name</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>如果推送失败，先用git pull抓取远程的新提交；</p>
 <ul>
 <li><p>在本地创建和远程分支对应的分支</p>
-<p>   git checkout -b branch-name origin/branch-name</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout -b branch-name origin/branch-name</div></pre></td></tr></table></figure>
 </li>
 <li><p>建立本地分支和远程分支的关联</p>
-<p>   git branch –set-upstream branch-name origin/branch-name；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch --set-upstream branch-name origin/branch-name；</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>从远程抓取分支，使用git pull，如果有冲突，要先处理冲突</p>

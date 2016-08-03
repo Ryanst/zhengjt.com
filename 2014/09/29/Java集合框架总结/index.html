@@ -96,15 +96,15 @@ Collection接口的类实现了单元素存储、Map接口实现了键/值的映
 
 Collection接口的类实现了单元素存储、Map接口实现了键/值的映射表(键唯一)Collection添加用add,设置值用set(index),获取值需要有序用get(index)Map添加用put(key,value),设置值依然用put(key,value)覆盖原值,获取值用get(key)
 队列：LinkedList实现了Queue接口，因此要使用队列的">
-<meta property="og:image" content="http://zhengjt.com/images/java-collection-tree.png">
-<meta property="og:updated_time" content="2016-08-02T11:25:28.000Z">
+<meta property="og:image" content="http://zhengjt.com/../images/java-collection-tree.png">
+<meta property="og:updated_time" content="2016-08-03T02:13:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合框架总结">
 <meta name="twitter:description" content="JAVA集合的接口和实现分离
 
 Collection接口的类实现了单元素存储、Map接口实现了键/值的映射表(键唯一)Collection添加用add,设置值用set(index),获取值需要有序用get(index)Map添加用put(key,value),设置值依然用put(key,value)覆盖原值,获取值用get(key)
 队列：LinkedList实现了Queue接口，因此要使用队列的">
-<meta name="twitter:image" content="http://zhengjt.com/images/java-collection-tree.png">
+<meta name="twitter:image" content="http://zhengjt.com/../images/java-collection-tree.png">
 
 
 
@@ -324,11 +324,11 @@ Collection接口的类实现了单元素存储、Map接口实现了键/值的映
 
       
         <p>JAVA集合的接口和实现分离</p>
-<p><img src="/images/java-collection-tree.png" alt="java-collection-tree"></p>
+<p><img src="../images/java-collection-tree.png" alt="java-collection-tree"></p>
 <p>Collection接口的类实现了单元素存储、Map接口实现了键/值的映射表(键唯一)<br>Collection添加用add,设置值用set(index),获取值需要有序用get(index)<br>Map添加用put(key,value),设置值依然用put(key,value)覆盖原值,获取值用get(key)</p>
 <p>队列：LinkedList实现了Queue<e>接口，因此要使用队列的时候使用LinkedList即可</e></p>
-<pre><code>Queue&lt;Integer&gt; queue = new LinkedList&lt;Integer&gt;();
-</code></pre><p>Queue接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Queue&lt;Integer&gt; queue = <span class="keyword">new</span> LinkedList&lt;Integer&gt;();</div></pre></td></tr></table></figure>
+<p>Queue接口：</p>
 <table>
 <thead>
 <tr>
@@ -377,9 +377,8 @@ Collection接口的类实现了单元素存储、Map接口实现了键/值的映
 <li>TreeMap：有序key/value集合</li>
 </ul>
 <p>数组转换成集合比较方便,使用Array.asList的包装器即可</p>
-<pre><code>String []values = ...
-HashSet &lt;String&gt; hashSet = new HashSet&lt;&gt;(Array.asList(values));
-</code></pre><p>集合转换成数组——手动转</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">String []values;</div><div class="line">HashSet &lt;String&gt; hashSet = <span class="keyword">new</span> HashSet&lt;&gt;(Array.asList(values));</div></pre></td></tr></table></figure>
+<p>集合转换成数组——手动转</p>
 <p>Vector、Stack、HashTable都是JAVA集合的基础版本，目前已经被上述集合框架代替</p>
 <p>队列还有一个实现是ArrayDeque，可以实现双向队列</p>
 

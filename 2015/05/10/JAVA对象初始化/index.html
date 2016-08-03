@@ -85,45 +85,18 @@
 
 
 <meta name="description" content="本文讨论JAVA中对象初始化时父类子类的static构造域，常量构造域以及构造函数的调用顺序问题，通过如下实例来说明：
-public class MyConstructorTest
-{
-   public static void main(String[] args)
-   {
-      Employee e = new Teacher();
-   }
-}
-
-class Employee  
-{">
+12345678910111213141516171819202122232425262728293031323334public class MyConstructorTest &amp;#123;    public static void main(String[] args) &amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JAVA对象初始化时构造器的调用顺序">
 <meta property="og:url" content="http://zhengjt.com/2015/05/10/JAVA对象初始化/index.html">
 <meta property="og:site_name" content="Ryanst">
 <meta property="og:description" content="本文讨论JAVA中对象初始化时父类子类的static构造域，常量构造域以及构造函数的调用顺序问题，通过如下实例来说明：
-public class MyConstructorTest
-{
-   public static void main(String[] args)
-   {
-      Employee e = new Teacher();
-   }
-}
-
-class Employee  
-{">
-<meta property="og:updated_time" content="2016-08-02T11:25:28.000Z">
+12345678910111213141516171819202122232425262728293031323334public class MyConstructorTest &amp;#123;    public static void main(String[] args) &amp;">
+<meta property="og:updated_time" content="2016-08-03T02:29:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JAVA对象初始化时构造器的调用顺序">
 <meta name="twitter:description" content="本文讨论JAVA中对象初始化时父类子类的static构造域，常量构造域以及构造函数的调用顺序问题，通过如下实例来说明：
-public class MyConstructorTest
-{
-   public static void main(String[] args)
-   {
-      Employee e = new Teacher();
-   }
-}
-
-class Employee  
-{">
+12345678910111213141516171819202122232425262728293031323334public class MyConstructorTest &amp;#123;    public static void main(String[] args) &amp;">
 
 
 
@@ -343,51 +316,10 @@ class Employee
 
       
         <p>本文讨论JAVA中对象初始化时父类子类的static构造域，常量构造域以及构造函数的调用顺序问题，通过如下实例来说明：</p>
-<pre><code>public class MyConstructorTest
-{
-   public static void main(String[] args)
-   {
-      Employee e = new Teacher();
-   }
-}
-
-class Employee  
-{
-   public Employee()
-   {
-      System.out.println(&quot;Employee construction&quot;);
-   }
-   {
-      System.out.println(&quot;Employee initail&quot;);
-   }
-   static
-   {
-      System.out.println(&quot;Employee static initail&quot;);
-   }
-}
-
-class Teacher extends Employee
-{
-   public Teacher()
-   {
-      System.out.println(&quot;Teacher construction&quot;);
-   }
-   {
-      System.out.println(&quot;Teacher initail&quot;);
-   }
-   static
-   {
-      System.out.println(&quot;Teacher static initail&quot;);
-   }
-}
-</code></pre><p>输出如下：</p>
-<pre><code>Employee static initial
-Teacher static initial
-Employee initial
-Employee construction
-Teacher initial
-Teacher construction
-</code></pre><p>上面的例子说明，在初始化类的对象的时候，构造器的调用顺序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConstructorTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Employee e = <span class="keyword">new</span> Teacher();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Employee</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Employee construction"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"Employee initail"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.out.println(<span class="string">"Employee static initail"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">extends</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Teacher</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Teacher construction"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"Teacher initail"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.out.println(<span class="string">"Teacher static initail"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Employee <span class="keyword">static</span> initial</div><div class="line">Teacher <span class="keyword">static</span> initial</div><div class="line">Employee initial</div><div class="line">Employee construction</div><div class="line">Teacher initial</div><div class="line">Teacher construction</div></pre></td></tr></table></figure>
+<p>上面的例子说明，在初始化类的对象的时候，构造器的调用顺序：</p>
 <p>父类的static构造域-&gt;类的static域-&gt;父类的常量域-&gt;父类的构造函数-&gt;类的常量域-&gt;类的构造函数</p>
 
       

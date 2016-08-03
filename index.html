@@ -423,70 +423,17 @@
       
         
           
-            <p>强引用： Car car = new Car(22000);</p>
-<p>弱引用： WeakReference<car> weakCar = new WeakReference<car>(car);</car></car></p>
+            <p>强引用： <code>Car car = new Car(22000);</code></p>
+<p>弱引用： <code>WeakReference&lt;Car&gt; weakCar = new WeakReference&lt;Car&gt;(car);</code></p>
 <p>一段测试代码：</p>
-<p>```<br>    //设置-Xmx1M,即JVM堆内存最大为1M的环境运行<br>    import java.lang.ref.WeakReference;<br>    import java.util.WeakHashMap;</p>
-<pre><code>public class Car {
-    private double price;
-
-    public Car(double price) {
-        this.price = price;
-    }
-    public double getPrice() {
-        return price;
-    }
-    public void setPrice(double price) {
-        this.price = price;
-    }
-    public static void main(String[] args) {
-
-        Car car = new Car(22000);
-        WeakReference&lt;Car&gt; weakCar = new WeakReference&lt;Car&gt;(car);
-
-        int i = 0;
-        // 运行62332次weakCar被回收
-        while (true) {
-            // 加了这句引用强引用的car对象后weakCar就不会被回收，无限循环
-            // System.out.println(&quot;here is the strong reference &apos;car&apos; &quot; + car);
-            if (weakCar.get() != null) {
-                // 使用weakCar.get()取得强引用,即使上一句if判断了也可能在这句之前被回收返回null，因此加try语句
-                try {
-                    System.out.println(&quot;Object is alive for &quot; + i + &quot; loops - &quot;
-                            + weakCar.get().getPrice());
-                    i++;
-                } catch (NullPointerException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                System.out.println(&quot;Object has been collected.&quot;);
-                break;
-            }
-            // 如果把car置为null，那么weakCar16次循环后被回收
-            //car = null;
-        }
-        System.out.println(&quot;out of weakCar while&quot;);
-
-        // 这里用HashMap，就会产生堆内存溢出的异常，而WeakHashMap不会
-        WeakHashMap weakMap = new WeakHashMap&lt;Integer, byte[]&gt;();
-        for (int index = 0; index &lt; 10000; index++) {
-            Integer ii = new Integer(index);
-            weakMap.put(ii, new byte[index]);
-            System.out.println(&quot;WeakHashMap for running&quot; + ii + &quot;times&quot;);
-        }
-    }
-}
-</code></pre><p>```</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置-Xmx1M,即JVM堆内存最大为1M的环境运行</span></div><div class="line"><span class="keyword">import</span> java.lang.ref.WeakReference;</div><div class="line"><span class="keyword">import</span> java.util.WeakHashMap;</div><div class="line">	</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">double</span> price;</div><div class="line">	</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Car</span><span class="params">(<span class="keyword">double</span> price)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.price = price;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">getPrice</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> price;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPrice</span><span class="params">(<span class="keyword">double</span> price)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.price = price;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	</div><div class="line">        Car car = <span class="keyword">new</span> Car(<span class="number">22000</span>);</div><div class="line">        WeakReference&lt;Car&gt; weakCar = <span class="keyword">new</span> WeakReference&lt;Car&gt;(car);</div><div class="line">	</div><div class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">        <span class="comment">// 运行62332次weakCar被回收</span></div><div class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">            <span class="comment">// 加了这句引用强引用的car对象后weakCar就不会被回收，无限循环</span></div><div class="line">            <span class="comment">// System.out.println("here is the strong reference 'car' " + car);</span></div><div class="line">            <span class="keyword">if</span> (weakCar.get() != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="comment">// 使用weakCar.get()取得强引用,即使上一句if判断了也可能在这句之前被回收返回null，因此加try语句</span></div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    System.out.println(<span class="string">"Object is alive for "</span> + i + <span class="string">" loops - "</span></div><div class="line">                            + weakCar.get().getPrice());</div><div class="line">                    i++;</div><div class="line">                &#125; <span class="keyword">catch</span> (NullPointerException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                System.out.println(<span class="string">"Object has been collected."</span>);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 如果把car置为null，那么weakCar16次循环后被回收</span></div><div class="line">            <span class="comment">//car = null;</span></div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="string">"out of weakCar while"</span>);</div><div class="line">	</div><div class="line">        <span class="comment">// 这里用HashMap，就会产生堆内存溢出的异常，而WeakHashMap不会</span></div><div class="line">        WeakHashMap weakMap = <span class="keyword">new</span> WeakHashMap&lt;Integer, <span class="keyword">byte</span>[]&gt;();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> index = <span class="number">0</span>; index &lt; <span class="number">10000</span>; index++) &#123;</div><div class="line">            Integer ii = <span class="keyword">new</span> Integer(index);</div><div class="line">            weakMap.put(ii, <span class="keyword">new</span> <span class="keyword">byte</span>[index]);</div><div class="line">            System.out.println(<span class="string">"WeakHashMap for running"</span> + ii + <span class="string">"times"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>总结：一旦系统内存回收，无论内存是否紧张，弱引用指向的对象都会被回收<br>soft reference和weak reference一样, 但被GC回收的时候需要多一个条件: 当系统内存不足时(Heap 内存是否临近阈值)，因此soft reference适合做cache object</p>
 <p>WeakHashMap：hashmap的weak版，不保证map中的键值对的存在时间，在没有调用任何赋值方法(set相关)的情况下，在一段时间后 size 方法也可能返回较小的值，对于 isEmpty 方法，返回 false，然后返回 true，对于给定的键，containsKey 方法返回 true 然后返回 false，对于给定的键，get 方法返回一个值，但接着返回 null，对于以前出现在映射中的键，put 方法返回 null，而 remove 方法返回 false，对于键集、值集、项集进行的检查，生成的元素数量越来越少。总的来说就是map中的键值对会在GC回收的时候被回收</p>
 <p>在WeakHashMap的get(),put()函数中的getTable()方法会调用expungeStateEntries方法，以清理持有弱引用的key的表项</p>
-<h3 id="JVM虚拟机运行配置"><a href="#JVM虚拟机运行配置" class="headerlink" title="JVM虚拟机运行配置"></a>JVM虚拟机运行配置</h3><p>-Xms128m JVM初始分配的堆内存</p>
-<p>-Xmx512m JVM最大允许分配的堆内存，按需分配</p>
-<p>-XX:PermSize=64M JVM初始分配的非堆内存</p>
-<p>-XX:MaxPermSize=128M JVM最大允许分配的非堆内存，按需分配</p>
-<p>eclipse设置自定内存运行</p>
-<p>```<br>    Run &gt; Run Configurations&gt; Java Application &gt; (project name)&gt; Arguments Sheet&gt; VM Arguments<br> ```</p>
-<p>比如设置堆内存为1M，可以在 VM Arguments 中填写-Xmx1M</p>
+<h3 id="JVM虚拟机运行配置"><a href="#JVM虚拟机运行配置" class="headerlink" title="JVM虚拟机运行配置"></a>JVM虚拟机运行配置</h3><p><code>-Xms128m</code> JVM初始分配的堆内存</p>
+<p><code>-Xmx512m</code> JVM最大允许分配的堆内存，按需分配</p>
+<p><code>-XX:PermSize=64M</code> JVM初始分配的非堆内存</p>
+<p><code>-XX:MaxPermSize=128M</code> JVM最大允许分配的非堆内存，按需分配</p>
 
           
         
@@ -759,7 +706,7 @@ imageLoader.get(&quot;http://img.my.csdn.net/uploads/201404/13/1397393290_5765.j
 </li>
 <li><p>分代</p>
 <p>年轻代-年老代-持久代</p>
-<p><img src="/images/java_gc_generation.png" alt="java_gc"><br><img src="/images/java_gc.png" alt="java_gc"></p>
+<p><img src="../images/java_gc_generation.png" alt="java_gc"><br><img src="../images/java_gc.png" alt="java_gc"></p>
 <ul>
 <li><p>年轻代：</p>
 <ul>
@@ -915,44 +862,14 @@ imageLoader.get(&quot;http://img.my.csdn.net/uploads/201404/13/1397393290_5765.j
 <p>3、给对象赋予了新值，即重新分配了内存空间。</p>
 <p>如果一块没有用的内存没有把它赋予上面2、3两种状态，那么就会造成内存泄露(无用的应该被回收的内存没有被回收)。实际编程中造成内存泄露的情况主要有以下几种：</p>
 <p>###静态集合类<br>在使用Set、Vector、HashMap等集合类的时候需要特别注意，有可能会发生内存泄漏。当这些集合被定义成静态的时候，由于它们的生命周期跟应用程序一样长，这时候，就有可能会发生内存泄漏</p>
-<pre><code>class StaticTest
-{
-    private static Vector v = new Vector(10);
-
-    public void init()
-    {
-        for (int i = 1; i &lt; 100; i++)
-        {
-            Object object = new Object();
-            v.add(object);
-            object = null;
-        }
-    }
-}
-</code></pre><p>在上面的代码中，循环申请了Object对象，并添加到Vector中，然后将对象设置为null，可是这些对象因为被Vector引用着，因此并不能被GC回收，因此造成了内存泄漏。因此，要释放这些对象，还需要被它们从Vector删除，最简单的方法就是将Vector设置为null。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticTest</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Vector v = <span class="keyword">new</span> Vector(<span class="number">10</span>);</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">100</span>; i++)&#123;</div><div class="line">            Object object = <span class="keyword">new</span> Object();</div><div class="line">            v.add(object);</div><div class="line">            object = <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在上面的代码中，循环申请了Object对象，并添加到Vector中，然后将对象设置为null，可是这些对象因为被Vector引用着，因此并不能被GC回收，因此造成了内存泄漏。因此，要释放这些对象，还需要被它们从Vector删除，最简单的方法就是将Vector设置为null。</p>
 <p>###集合里的对象属性值被改变</p>
-<pre><code>public static void main(String[] args)
-{
-    Set&lt;Student&gt; set = new HashSet&lt;Student&gt;();
-    Student s1 = new Student(&quot;Jack&quot;);
-    Student s2 = new Student(&quot;Mary&quot;);
-    Student s3 = new Student(&quot;Eason&quot;);
-
-    set.add(s1);
-    set.add(s2);
-    set.add(s3);
-
-    System.out.println(set.size());//3
-    s2.setName(&quot;Jackson&quot;); //修改属性，此时s2元素对应的hashcode值发生改变
-    set.remove(s2);        // remove不掉，造成内存泄漏
-    set.add(s2);           // 添加成功
-
-    System.out.println(set.size());//4
-}
-</code></pre><p>由于对象s2的属性值被改变了，因此不能从set中删除，所以set中会一直保持着s2的引用，不能被回收，造成了内存泄漏。</p>
-<p>###监听器<br>在Java中，我们经常会使用到监听器，如对某个控件添加单击监听器addOnClickListener()，但往往释放对象的时候会忘记删除监听器，这就有可能造成内存泄漏。好的方法就是，在释放对象的时候，应该记住释放所有监听器，这就能避免了因为监听器而导致的内存泄漏。<br>在Android中使用setOnClickListener(null);来实现内存回收。</p>
-<p>###各种连接<br>Java中的连接包括数据库连接、网络连接和io连接，如果没有显式调用其close()方法，是不会自动关闭的，这些连接就不能被GC回收而导致内存泄漏。一般情况下，在try代码块里创建连接，在finally里释放连接，就能够避免此类内存泄漏。</p>
-<p>###外部模块的引用<br>调用外部模块的时候，也应该注意防止内存泄漏。如模块A调用了外部模块B的一个方法，如：<br>public void register(Object o)<br>这个方法有可能就使得A模块持有传入对象的引用，这时候需要查看B模块是否提供了去除引用的方法，如unregister()。这种情况容易忽略，而且发生了内存泄漏的话，比较难察觉，应该在编写代码过程中就应该注意此类问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">    Set&lt;Student&gt; set = <span class="keyword">new</span> HashSet&lt;Student&gt;();</div><div class="line">    Student s1 = <span class="keyword">new</span> Student(<span class="string">"Jack"</span>);</div><div class="line">    Student s2 = <span class="keyword">new</span> Student(<span class="string">"Mary"</span>);</div><div class="line">    Student s3 = <span class="keyword">new</span> Student(<span class="string">"Eason"</span>);</div><div class="line"></div><div class="line">    set.add(s1);</div><div class="line">    set.add(s2);</div><div class="line">    set.add(s3);</div><div class="line"></div><div class="line">    System.out.println(set.size());<span class="comment">//3</span></div><div class="line">    s2.setName(<span class="string">"Jackson"</span>); <span class="comment">//修改属性，此时s2元素对应的hashcode值发生改变</span></div><div class="line">    set.remove(s2);        <span class="comment">// remove不掉，造成内存泄漏</span></div><div class="line">    set.add(s2);           <span class="comment">// 添加成功</span></div><div class="line"></div><div class="line">    System.out.println(set.size());<span class="comment">//4</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由于对象s2的属性值被改变了，因此不能从set中删除，所以set中会一直保持着s2的引用，不能被回收，造成了内存泄漏。</p>
+<p>###监听器<br>在Java中，我们经常会使用到监听器，如对某个控件添加单击监听器<code>addOnClickListener()</code>，但往往释放对象的时候会忘记删除监听器，这就有可能造成内存泄漏。好的方法就是，在释放对象的时候，应该记住释放所有监听器，这就能避免了因为监听器而导致的内存泄漏。<br>在Android中使用<code>setOnClickListener(null)</code>来实现内存回收。</p>
+<p>###各种连接<br>Java中的连接包括数据库连接、网络连接和io连接，如果没有显式调用其<code>close()</code>方法，是不会自动关闭的，这些连接就不能被GC回收而导致内存泄漏。一般情况下，在try代码块里创建连接，在finally里释放连接，就能够避免此类内存泄漏。</p>
+<p>###外部模块的引用<br>调用外部模块的时候，也应该注意防止内存泄漏。如模块A调用了外部模块B的一个方法，如：<br><code>public void register(Object o)</code><br>这个方法有可能就使得A模块持有传入对象的引用，这时候需要查看B模块是否提供了去除引用的方法，如<code>unregister()</code>。这种情况容易忽略，而且发生了内存泄漏的话，比较难察觉，应该在编写代码过程中就应该注意此类问题。</p>
 <p>###单例模式<br>使用单例模式的时候也有可能导致内存泄漏。因为单例对象初始化后将在JVM的整个生命周期内存在，如果它持有一个外部对象（生命周期比较短）的引用，那么这个外部对象就不能被回收，而导致内存泄漏。如果这个外部对象还持有其它对象的引用，那么内存泄漏会更严重，因此需要特别注意此类情况。这种情况就需要考虑下单例模式的设计会不会有问题，应该怎样保证不会产生内存泄漏问题。</p>
 
           
@@ -1327,63 +1244,18 @@ imageLoader.get(&quot;http://img.my.csdn.net/uploads/201404/13/1397393290_5765.j
         
           
             <ol>
-<li><p>文件存储，使用JAVA接口，适合存储简单的文本数据或者二进制数据</p>
-<p>  FileInputStream in = null;<br>  BufferedReader reader;<br>  StringBuffer content = new StringBuffer();<br>  try{</p>
-<pre><code>in = openFileInput(“filename”);
-reader = new BufferReader(new InputStreamReader(in);
-String line = &quot;&quot;;
-while(line = (reader.ReadLIne() != null){
-    content.append(line);
-}
-</code></pre><p>  }<br>  catch(IOException e){</p>
-<pre><code>e.printStackTrace();
-</code></pre><p>  }<br>  finally{</p>
-<pre><code>if(reader != null){
-    try{
-        reader.close();
-    }
-    catch(IOException e){
-        e.printStackTrace();
-    }
-}
-</code></pre><p>  }</p>
-</li>
-<li><p>SharePreferences存储(key/value存储，key是String，value可以是各种类型）</p>
-<p>  SharePreference.Editor editor = getSharepreferences(“data”,MODE_PRIVATE).edit();<br>  editor.putInt(“age”,25);<br>  editor.commit();<br>  SharePreference pref = getSharepreferences(“data”,MODE_PRIVATE);<br>  int age = pref.getInt(“age”);</p>
-</li>
+<li>文件存储，使用JAVA接口，适合存储简单的文本数据或者二进制数据</li>
 </ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">FileInputStream in = <span class="keyword">null</span>;</div><div class="line">BufferedReader reader;</div><div class="line">StringBuffer content = <span class="keyword">new</span> StringBuffer();</div><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">  in = openFileInput(“filename”);</div><div class="line">  reader = <span class="keyword">new</span> BufferReader(<span class="keyword">new</span> InputStreamReader(in);</div><div class="line">  String line = <span class="string">""</span>;</div><div class="line">  <span class="keyword">while</span>(line = (reader.ReadLIne() != <span class="keyword">null</span>)&#123;</div><div class="line">      content.append(line);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">catch</span>(IOException e)&#123;</div><div class="line">  e.printStackTrace();</div><div class="line">&#125;</div><div class="line"><span class="keyword">finally</span>&#123;</div><div class="line">  <span class="keyword">if</span>(reader != <span class="keyword">null</span>)&#123;</div><div class="line">      <span class="keyword">try</span>&#123;</div><div class="line">          reader.close();</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">catch</span>(IOException e)&#123;</div><div class="line">          e.printStackTrace();</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>SharePreferences存储(key/value存储，key是String，value可以是各种类型）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SharePreference.Editor editor = getSharepreferences(“data”,MODE_PRIVATE).edit();</div><div class="line">editor.putInt(“age”,<span class="number">25</span>);</div><div class="line">editor.commit();</div><div class="line">SharePreference pref = getSharepreferences(“data”,MODE_PRIVATE);</div><div class="line"><span class="keyword">int</span> age = pref.getInt(“age”);</div></pre></td></tr></table></figure>
 <p>3、SQLite</p>
 <p>以下是QWSDK数据库操作的最简形式</p>
-<pre><code>//需要一个DBHelper类
-public class MyDBHelper extends SQLiteOpenHelper{
-    SQLiteDatabase mDataBase = null;
-    public MyDBHelper(Context context,String databaseName,int version)
-    {
-        super(context.getApplicationContext(), databaseName, null, version);
-        try {
-            mDataBase = getWritableDatabase();
-        } catch (Exception e) {
-            mDataBase=getReadableDatabase();
-        }
-        mContext = context.getApplicationContext();
-    }
-    @Override
-    public void onCreate(SQLiteDatabase db) {}
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
-    //当MyDBHelper构造时传入的version大于原来的版本号时onUpgrade会调用
-}
-//自定义一个数据库类，然后自定义add/query/delete等函数来操作数据库，提供友好接口
-public class MyDBManagerAccount
-{
-  public MyDBManagerAccount(MyDBHelper helper)
-  {
-      SQLiteDatabase db = helper.mDataBase;
-  }
-}
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//需要一个DBHelper类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDBHelper</span> <span class="keyword">extends</span> <span class="title">SQLiteOpenHelper</span> </span>&#123;</div><div class="line">    SQLiteDatabase mDataBase = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyDBHelper</span><span class="params">(Context context, String databaseName, <span class="keyword">int</span> version)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context.getApplicationContext(), databaseName, <span class="keyword">null</span>, version);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            mDataBase = getWritableDatabase();</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            mDataBase = getReadableDatabase();</div><div class="line">        &#125;</div><div class="line">        mContext = context.getApplicationContext();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(SQLiteDatabase db)</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase db, <span class="keyword">int</span> oldVersion, <span class="keyword">int</span> newVersion)</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//当MyDBHelper构造时传入的version大于原来的版本号时onUpgrade会调用</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//自定义一个数据库类，然后自定义add/query/delete等函数来操作数据库，提供友好接口</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDBManagerAccount</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyDBManagerAccount</span><span class="params">(MyDBHelper helper)</span> </span>&#123;</div><div class="line">        SQLiteDatabase db = helper.mDataBase;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>至于具体的数据库操作，可以调用SQLiteDatabase的CURD函数，也可以自己手写sql然后execSQL(QWSDK中采用的方式)，使用MyDBManagerAccount类的意义在于封装接口，只提供给用户我们想让他进行的操作</p>
 
-//至于具体的数据库操作，可以调用SQLiteDatabase的CURD函数，也可以自己手写sql然后execSQL(QWSDK中采用的方式)，使用MyDBManagerAccount类的意义在于封装接口，只提供给用户我们想让他进行的操作
-</code></pre>
           
         
       

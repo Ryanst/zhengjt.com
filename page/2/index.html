@@ -319,51 +319,10 @@
         
           
             <p>本文讨论JAVA中对象初始化时父类子类的static构造域，常量构造域以及构造函数的调用顺序问题，通过如下实例来说明：</p>
-<pre><code>public class MyConstructorTest
-{
-   public static void main(String[] args)
-   {
-      Employee e = new Teacher();
-   }
-}
-
-class Employee  
-{
-   public Employee()
-   {
-      System.out.println(&quot;Employee construction&quot;);
-   }
-   {
-      System.out.println(&quot;Employee initail&quot;);
-   }
-   static
-   {
-      System.out.println(&quot;Employee static initail&quot;);
-   }
-}
-
-class Teacher extends Employee
-{
-   public Teacher()
-   {
-      System.out.println(&quot;Teacher construction&quot;);
-   }
-   {
-      System.out.println(&quot;Teacher initail&quot;);
-   }
-   static
-   {
-      System.out.println(&quot;Teacher static initail&quot;);
-   }
-}
-</code></pre><p>输出如下：</p>
-<pre><code>Employee static initial
-Teacher static initial
-Employee initial
-Employee construction
-Teacher initial
-Teacher construction
-</code></pre><p>上面的例子说明，在初始化类的对象的时候，构造器的调用顺序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConstructorTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Employee e = <span class="keyword">new</span> Teacher();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Employee</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Employee construction"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"Employee initail"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.out.println(<span class="string">"Employee static initail"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">extends</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Teacher</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Teacher construction"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"Teacher initail"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.out.println(<span class="string">"Teacher static initail"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Employee <span class="keyword">static</span> initial</div><div class="line">Teacher <span class="keyword">static</span> initial</div><div class="line">Employee initial</div><div class="line">Employee construction</div><div class="line">Teacher initial</div><div class="line">Teacher construction</div></pre></td></tr></table></figure>
+<p>上面的例子说明，在初始化类的对象的时候，构造器的调用顺序：</p>
 <p>父类的static构造域-&gt;类的static域-&gt;父类的常量域-&gt;父类的构造函数-&gt;类的常量域-&gt;类的构造函数</p>
 
           
@@ -469,15 +428,15 @@ Teacher construction
 <p>##MacVim</p>
 <p>安装：</p>
 <ol>
-<li>homebrew，安装位置：/usr/local/Cellar</li>
-<li>brew linkapps macvim——将macvim.app加入到Application下</li>
-<li>alias vim=”/Applications/MacVim.app/Contents/MacOS/Vim”——设置别名，默认在终端中使用macvim的命令行版（关闭终端后会失效，在~/.zshrc中设置才行）</li>
+<li><code>homebrew</code>，安装位置：<code>/usr/local/Cellar</code></li>
+<li><code>brew linkapps macvim</code>——将<code>macvim.app</code>加入到Application下</li>
+<li><code>alias vim=&quot;/Applications/MacVim.app/Contents/MacOS/Vim&quot;</code>——设置别名，默认在终端中使用<code>macvim</code>的命令行版（关闭终端后会失效，在<code>~/.zshrc</code>中设置才行）</li>
 </ol>
 <p>##插件</p>
 <p>###vundle</p>
 <ul>
 <li>说明：vim下安装其他插件的插件</li>
-<li>安装：git clone <a href="https://github.com/gmarik/vundle.git" target="_blank" rel="external">https://github.com/gmarik/vundle.git</a> ~/.vim/bundle/vundle,在./vimrc中添加配置：Bundle ‘gmarik/vundle’。(/.vim/bunle为vim的插件目录)</li>
+<li>安装：<code>git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle</code><br>在./vimrc中添加配置：<code>Bundle &#39;gmarik/vundle&#39;</code>。(<code>/.vim/bunle</code>为vim的插件目录)</li>
 <li>使用：<ul>
 <li>Bundleinstall:安装插件，BundleIstall ‘author/projectname’</li>
 <li>BundleList:列出当前安装的插件</li>
@@ -504,46 +463,8 @@ Teacher construction
 <li>安装：使用vundle安装</li>
 </ul>
 <p>##.vimrc配置</p>
-<pre><code>filetype off                    &quot; required!
-filetype plugin indent on
-colorscheme molokai
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">filetype off                    <span class="string">" required!</span></div><div class="line">filetype plugin indent on</div><div class="line">colorscheme molokai</div><div class="line"></div><div class="line">"Vundle<span class="string">"</span></div><div class="line">call vundle#rc()</div><div class="line">" <span class="built_in">let</span> Vundle manage Vundle</div><div class="line">Bundle <span class="string">'gmarik/vundle'</span></div><div class="line">Bundle <span class="string">'scrooloose/nerdtree'</span></div><div class="line">nmap &lt;F2&gt; :NERDTreeToggle &lt;CR&gt;</div><div class="line">Bundle <span class="string">'Valloric/YouCompleteMe'</span></div><div class="line">Bundle <span class="string">'ervandew/supertab'</span></div><div class="line"></div><div class="line"><span class="built_in">set</span> nocompatible                <span class="string">" be iMproved</span></div><div class="line">set rtp+=~/.vim/bundle/vundle/</div><div class="line">set fencs=utf-8,chinese</div><div class="line">syntax on "打开语法高亮 </div><div class="line"><span class="built_in">set</span> showmatch</div><div class="line"><span class="built_in">set</span> autoindent</div><div class="line"><span class="built_in">set</span> smartindent</div><div class="line"><span class="built_in">set</span> tabstop=4</div><div class="line"><span class="built_in">set</span> shiftwidth=4</div><div class="line"><span class="built_in">set</span> nu <span class="string">"显示行号</span></div><div class="line">set mouse=a "设置鼠标定位光标<span class="string">"</span></div><div class="line">set pastetoggle=&lt;F10&gt; "设置粘贴模式快捷键<span class="string">"</span></div><div class="line">set clipboard=unnamed "vim剪贴板与系统剪贴板适配<span class="string">"</span></div><div class="line"></div><div class="line">"括号自动补全<span class="string">"</span></div><div class="line">inoremap ( ()&lt;ESC&gt;i</div><div class="line">inoremap [ []&lt;ESC&gt;i</div><div class="line">inoremap &#123; &#123;&#125;&lt;ESC&gt;i</div><div class="line">inoremap " <span class="string">""</span>&lt;ESC&gt;i</div><div class="line">inoremap <span class="string">' '</span><span class="string">'&lt;ESC&gt;i</span></div><div class="line"></div><div class="line">"Youcompleteme config"</div><div class="line">let g:ycm_global_ycm_extra_conf = '/Users/zhengjt/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py<span class="string">'</span></div><div class="line"></div><div class="line">"python F5 to run"</div><div class="line">au BufRead *.py map &lt;buffer&gt; &lt;F5&gt; :w&lt;CR&gt;:!/usr/bin/env python % &lt;CR&gt;</div></pre></td></tr></table></figure>
 
-&quot;Vundle&quot;
-call vundle#rc()
-&quot; let Vundle manage Vundle
-Bundle &apos;gmarik/vundle&apos;
-Bundle &apos;scrooloose/nerdtree&apos;
-nmap &lt;F2&gt; :NERDTreeToggle &lt;CR&gt;
-Bundle &apos;Valloric/YouCompleteMe&apos;
-Bundle &apos;ervandew/supertab&apos;
-
-set nocompatible                &quot; be iMproved
-set rtp+=~/.vim/bundle/vundle/
-set fencs=utf-8,chinese
-syntax on &quot;打开语法高亮 
-set showmatch
-set autoindent
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set nu &quot;显示行号
-set mouse=a &quot;设置鼠标定位光标&quot;
-set pastetoggle=&lt;F10&gt; &quot;设置粘贴模式快捷键&quot;
-set clipboard=unnamed &quot;vim剪贴板与系统剪贴板适配&quot;
-
-&quot;括号自动补全&quot;
-inoremap ( ()&lt;ESC&gt;i
-inoremap [ []&lt;ESC&gt;i
-inoremap { {}&lt;ESC&gt;i
-inoremap &quot; &quot;&quot;&lt;ESC&gt;i
-inoremap &apos; &apos;&apos;&lt;ESC&gt;i
-
-&quot;Youcompleteme config&quot;
-let g:ycm_global_ycm_extra_conf = &apos;/Users/zhengjt/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py&apos;
-
-&quot;python F5 to run&quot;
-au BufRead *.py map &lt;buffer&gt; &lt;F5&gt; :w&lt;CR&gt;:!/usr/bin/env python % &lt;CR&gt;
-</code></pre>
           
         
       
@@ -1176,79 +1097,11 @@ String toUpperCase(String str);
         
           
             <ol>
-<li><p>设置 android:configChanges=”orientation” 和不设置这个属性，生命周期表现为重新创建activity</p>
-</li>
-<li><p>设置 android:configChanges=”orientation|keyboardHidden”，在2.3上表现为不重新创建activity，5.1如下</p>
+<li><p>设置 <figure class="highlight plain"><figcaption><span>和不设置这个属性，生命周期表现为重新创建activity</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">2.	设置 ```android:configChanges=&quot;orientation|keyboardHidden&quot;```，在2.3上表现为不重新创建activity，5.1如下</div></pre></td></tr></table></figure></p>
 <p>android:targetSdkVersion&lt;=“12”//生命周期表现为不重新创建activity<br>android:targetSdkVersion&gt;”12”//表现为重新创建activity</p>
-</li>
-<li><p>设置 android:configChanges=”orientation|keyboardHidden|screenSize”，在2.3和5.1上都表现为不重新创建，在屏幕旋转时，只会调用onConfigurationChanged方法</p>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">3.	设置 ```android:configChanges=&quot;orientation|keyboardHidden|screenSize&quot;```，在2.3和5.1上都表现为不重新创建，在屏幕旋转时，只会调用```onConfigurationChanged```方法</div><div class="line"></div><div class="line"></div><div class="line">测试代码：</div><div class="line"></div><div class="line">``` java</div><div class="line">public class MainActivity extends Activity &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.relative_center_2);</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onCreate方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onStart() &#123;</div><div class="line">        super.onStart();</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onStart方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onResume() &#123;</div><div class="line">        super.onResume();</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onResume方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onPause() &#123;</div><div class="line">        super.onPause();</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onPause方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onStop() &#123;</div><div class="line">        super.onStop();</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onStop方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onDestroy() &#123;</div><div class="line">        super.onDestroy();</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onDestroy方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onConfigurationChanged(Configuration newConfig) &#123;</div><div class="line">        super.onConfigurationChanged(newConfig);</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onConfigurationChanged方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onRestart() &#123;</div><div class="line">        super.onRestart();</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onRestart方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onSaveInstanceState(Bundle outState) &#123;</div><div class="line">        super.onSaveInstanceState(outState);</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onSaveInstanceState方法&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onRestoreInstanceState(Bundle savedInstanceState) &#123;</div><div class="line">        super.onRestoreInstanceState(savedInstanceState);</div><div class="line">        Log.i(&quot;MainActivity&quot;, &quot;执行onRestoreInstanceState方法&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></li>
 </ol>
-<p>测试代码：</p>
-<pre><code>public class MainActivity extends Activity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.relative_center_2);
-        Log.i(&quot;MainActivity&quot;, &quot;执行onCreate方法&quot;);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(&quot;MainActivity&quot;, &quot;执行onStart方法&quot;);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i(&quot;MainActivity&quot;, &quot;执行onResume方法&quot;);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i(&quot;MainActivity&quot;, &quot;执行onPause方法&quot;);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i(&quot;MainActivity&quot;, &quot;执行onStop方法&quot;);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i(&quot;MainActivity&quot;, &quot;执行onDestroy方法&quot;);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        Log.i(&quot;MainActivity&quot;, &quot;执行onConfigurationChanged方法&quot;);
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.i(&quot;MainActivity&quot;, &quot;执行onRestart方法&quot;);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Log.i(&quot;MainActivity&quot;, &quot;执行onSaveInstanceState方法&quot;);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        Log.i(&quot;MainActivity&quot;, &quot;执行onRestoreInstanceState方法&quot;);
-    }
-}
-</code></pre>
           
         
       
@@ -1349,34 +1202,33 @@ String toUpperCase(String str);
         
           
             <h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退:"></a>版本回退:</h2><ul>
-<li><p>回退到上num版本</p>
-<pre><code>git reset --hard HEAD~num
-</code></pre></li>
+<li>回退到上num版本</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard HEAD~num</div></pre></td></tr></table></figure>
 <p>num的值表示要往上回退num个版本</p>
 <ul>
 <li><p>回退到上一个版本，zsh中^需要转义，需要使用git reset –hard HEAD\^</p>
-<p>   git reset –hard HEAD^</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard HEAD^</div></pre></td></tr></table></figure>
 </li>
 <li><p>回退到特定的版本</p>
-<pre><code>git reset --hard commitId
-</code></pre><p>commitId可以通过git log来得到，可以写版本号前几个字符</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard commitId</div></pre></td></tr></table></figure>
+<p>commitId可以通过git log来得到，可以写版本号前几个字符</p>
 </li>
 <li><p>如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版本的版本号，可以</p>
-<p>   git reflog</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reflog</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>这个命令记录了你的每一次命令</p>
 <h2 id="操作回退："><a href="#操作回退：" class="headerlink" title="操作回退："></a>操作回退：</h2><ul>
 <li><p>放弃当前修改，回到上一次git 命令后的初始状态(这里—符号后一定要有一个空格)</p>
-<p>   git checkout — filename</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout — filename</div></pre></td></tr></table></figure>
 </li>
 <li><p>把当前add到暂存区的file回退到工作区(相当于取消add这个file的操作)</p>
-<p>   git reset HEAD filename</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset HEAD filename</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作:"></a>远程操作:</h2><pre><code>git remote add origin git@github.com:Ryanst/test.git
-</code></pre><p>在本地目录下键入这个命令，将远程库与本地该目录关联</p>
+<h2 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作:"></a>远程操作:</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin git@github.com:Ryanst/test.git</div></pre></td></tr></table></figure>
+<p>在本地目录下键入这个命令，将远程库与本地该目录关联</p>
 <p>关联后，使用命令git push -u origin master第一次推送master分支的所有内容</p>
 <h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><ul>
 <li>常用命令</li>
@@ -1388,30 +1240,27 @@ String toUpperCase(String str);
 <p>合并某分支到当前分支：git merge <name></name></p>
 <p>删除分支：git branch -d <name></name></p>
 <ul>
-<li><p>git解决冲突的一般方法：</p>
-<p>   git merge mybranch<br>   //然后修改冲突文件<br>   git add filename<br>   git commit -m “解决冲突”<br>   git branch -d mybranch</p>
-</li>
+<li>git解决冲突的一般方法：</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git merge mybranch</div><div class="line">//然后修改冲突文件</div><div class="line">git add filename</div><div class="line">git commit -m “解决冲突<span class="string">"</span></div><div class="line">git branch -d mybranch</div></pre></td></tr></table></figure>
 <p>使用用git log –graph命令可以看到分支合并图可以看到分支合并图</p>
 <p>储存为commit的当前工作区现场：<br>当手头工作没有完成时，先把工作现场git stash一下，然后去修复bug，修复后，再git stash pop，回到工作现场。</p>
 <h2 id="多人协作"><a href="#多人协作" class="headerlink" title="多人协作"></a>多人协作</h2><ul>
-<li><p>查看远程库信息</p>
-<p>   git remote -v；</p>
+<li>查看远程库信息<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote -v；</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>本地新建的分支如果不推送到远程，对其他人就是不可见的；</p>
 <ul>
-<li><p>从本地推送分支</p>
-<p>   git push origin branch-name</p>
+<li>从本地推送分支<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin branch-name</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>如果推送失败，先用git pull抓取远程的新提交；</p>
 <ul>
 <li><p>在本地创建和远程分支对应的分支</p>
-<p>   git checkout -b branch-name origin/branch-name</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout -b branch-name origin/branch-name</div></pre></td></tr></table></figure>
 </li>
 <li><p>建立本地分支和远程分支的关联</p>
-<p>   git branch –set-upstream branch-name origin/branch-name；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch --set-upstream branch-name origin/branch-name；</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>从远程抓取分支，使用git pull，如果有冲突，要先处理冲突</p>
@@ -1517,11 +1366,11 @@ String toUpperCase(String str);
         
           
             <p>JAVA集合的接口和实现分离</p>
-<p><img src="/images/java-collection-tree.png" alt="java-collection-tree"></p>
+<p><img src="../images/java-collection-tree.png" alt="java-collection-tree"></p>
 <p>Collection接口的类实现了单元素存储、Map接口实现了键/值的映射表(键唯一)<br>Collection添加用add,设置值用set(index),获取值需要有序用get(index)<br>Map添加用put(key,value),设置值依然用put(key,value)覆盖原值,获取值用get(key)</p>
 <p>队列：LinkedList实现了Queue<e>接口，因此要使用队列的时候使用LinkedList即可</e></p>
-<pre><code>Queue&lt;Integer&gt; queue = new LinkedList&lt;Integer&gt;();
-</code></pre><p>Queue接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Queue&lt;Integer&gt; queue = <span class="keyword">new</span> LinkedList&lt;Integer&gt;();</div></pre></td></tr></table></figure>
+<p>Queue接口：</p>
 <table>
 <thead>
 <tr>
@@ -1570,9 +1419,8 @@ String toUpperCase(String str);
 <li>TreeMap：有序key/value集合</li>
 </ul>
 <p>数组转换成集合比较方便,使用Array.asList的包装器即可</p>
-<pre><code>String []values = ...
-HashSet &lt;String&gt; hashSet = new HashSet&lt;&gt;(Array.asList(values));
-</code></pre><p>集合转换成数组——手动转</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">String []values;</div><div class="line">HashSet &lt;String&gt; hashSet = <span class="keyword">new</span> HashSet&lt;&gt;(Array.asList(values));</div></pre></td></tr></table></figure>
+<p>集合转换成数组——手动转</p>
 <p>Vector、Stack、HashTable都是JAVA集合的基础版本，目前已经被上述集合框架代替</p>
 <p>队列还有一个实现是ArrayDeque，可以实现双向队列</p>
 

@@ -84,8 +84,7 @@
 
 
 
-<meta name="description" content="##垃圾回收机制中的算法
-
+<meta name="description" content="垃圾回收机制中的算法
 引用计数法无法解决循环引用，已被gc放弃
 标记-清除法
 由gc root往下寻找引用，将无引用的内存回收。java中可作为GC Root的对象有
@@ -100,13 +99,12 @@
 在标记清除后整理内存
 
 复制
-将活动对象复制到另一块内存中，清空这块">
+将活动对象复制到另一块内存中，清空这块内存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java垃圾回收器工作机制">
 <meta property="og:url" content="http://zhengjt.com/2015/08/28/Java垃圾回收器工作机制/index.html">
 <meta property="og:site_name" content="Ryanst">
-<meta property="og:description" content="##垃圾回收机制中的算法
-
+<meta property="og:description" content="垃圾回收机制中的算法
 引用计数法无法解决循环引用，已被gc放弃
 标记-清除法
 由gc root往下寻找引用，将无引用的内存回收。java中可作为GC Root的对象有
@@ -121,14 +119,13 @@
 在标记清除后整理内存
 
 复制
-将活动对象复制到另一块内存中，清空这块">
+将活动对象复制到另一块内存中，清空这块内存">
 <meta property="og:image" content="http://zhengjt.com/../images/java_gc_generation.png">
 <meta property="og:image" content="http://zhengjt.com/../images/java_gc.png">
-<meta property="og:updated_time" content="2016-08-03T02:26:06.000Z">
+<meta property="og:updated_time" content="2016-08-03T02:34:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java垃圾回收器工作机制">
-<meta name="twitter:description" content="##垃圾回收机制中的算法
-
+<meta name="twitter:description" content="垃圾回收机制中的算法
 引用计数法无法解决循环引用，已被gc放弃
 标记-清除法
 由gc root往下寻找引用，将无引用的内存回收。java中可作为GC Root的对象有
@@ -143,7 +140,7 @@
 在标记清除后整理内存
 
 复制
-将活动对象复制到另一块内存中，清空这块">
+将活动对象复制到另一块内存中，清空这块内存">
 <meta name="twitter:image" content="http://zhengjt.com/../images/java_gc_generation.png">
 
 
@@ -363,8 +360,7 @@
       
 
       
-        <p>##垃圾回收机制中的算法</p>
-<ol>
+        <h2 id="垃圾回收机制中的算法"><a href="#垃圾回收机制中的算法" class="headerlink" title="垃圾回收机制中的算法"></a>垃圾回收机制中的算法</h2><ol>
 <li>引用计数法<br>无法解决循环引用，已被gc放弃</li>
 <li><p>标记-清除法</p>
 <p>由gc root往下寻找引用，将无引用的内存回收。java中可作为GC Root的对象有</p>
@@ -415,7 +411,7 @@
 </ul>
 </li>
 </ol>
-<p>##GC的执行机制<br>  由于对象进行了分代处理，因此垃圾回收区域、时间也不一样。GC有两种类型：Scavenge GC和Full GC。</p>
+<h2 id="GC的执行机制"><a href="#GC的执行机制" class="headerlink" title="GC的执行机制"></a>GC的执行机制</h2><p>  由于对象进行了分代处理，因此垃圾回收区域、时间也不一样。GC有两种类型：Scavenge GC和Full GC。</p>
 <ul>
 <li><p>Scavenge GC</p>
 <p>一般情况下，当新对象生成，并且在Eden申请空间失败时，就会触发Scavenge GC，对Eden区域进行GC，清除非存活对象，并且把尚且存活的对象移动到Survivor区。然后整理Survivor的两个区。这种方式的GC是对年轻代的Eden区进行，不会影响到年老代。因为大部分对象都是从Eden区开始的，同时Eden区不会分配的很大，所以Eden区的GC会频繁进行。因而，一般在这里需要使用速度快、效率高的算法，使Eden去能尽快空闲出来。</p>
@@ -570,7 +566,7 @@
               
             
             
-              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾回收机制中的算法"><span class="nav-number">1.</span> <span class="nav-text">垃圾回收机制中的算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GC的执行机制"><span class="nav-number">2.</span> <span class="nav-text">GC的执行机制</span></a></li></ol></div>
             
           </div>
         </section>

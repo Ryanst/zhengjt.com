@@ -650,8 +650,7 @@
       
         
           
-            <p>##垃圾回收机制中的算法</p>
-<ol>
+            <h2 id="垃圾回收机制中的算法"><a href="#垃圾回收机制中的算法" class="headerlink" title="垃圾回收机制中的算法"></a>垃圾回收机制中的算法</h2><ol>
 <li>引用计数法<br>无法解决循环引用，已被gc放弃</li>
 <li><p>标记-清除法</p>
 <p>由gc root往下寻找引用，将无引用的内存回收。java中可作为GC Root的对象有</p>
@@ -702,7 +701,7 @@
 </ul>
 </li>
 </ol>
-<p>##GC的执行机制<br>  由于对象进行了分代处理，因此垃圾回收区域、时间也不一样。GC有两种类型：Scavenge GC和Full GC。</p>
+<h2 id="GC的执行机制"><a href="#GC的执行机制" class="headerlink" title="GC的执行机制"></a>GC的执行机制</h2><p>  由于对象进行了分代处理，因此垃圾回收区域、时间也不一样。GC有两种类型：Scavenge GC和Full GC。</p>
 <ul>
 <li><p>Scavenge GC</p>
 <p>一般情况下，当新对象生成，并且在Eden申请空间失败时，就会触发Scavenge GC，对Eden区域进行GC，清除非存活对象，并且把尚且存活的对象移动到Survivor区。然后整理Survivor的两个区。这种方式的GC是对年轻代的Eden区进行，不会影响到年老代。因为大部分对象都是从Eden区开始的，同时Eden区不会分配的很大，所以Eden区的GC会频繁进行。因而，一般在这里需要使用速度快、效率高的算法，使Eden去能尽快空闲出来。</p>
@@ -826,16 +825,15 @@
 <p>2、给对象赋予了空值null，以下再没有调用过。</p>
 <p>3、给对象赋予了新值，即重新分配了内存空间。</p>
 <p>如果一块没有用的内存没有把它赋予上面2、3两种状态，那么就会造成内存泄露(无用的应该被回收的内存没有被回收)。实际编程中造成内存泄露的情况主要有以下几种：</p>
-<p>###静态集合类<br>在使用Set、Vector、HashMap等集合类的时候需要特别注意，有可能会发生内存泄漏。当这些集合被定义成静态的时候，由于它们的生命周期跟应用程序一样长，这时候，就有可能会发生内存泄漏</p>
+<h3 id="静态集合类"><a href="#静态集合类" class="headerlink" title="静态集合类"></a>静态集合类</h3><p>在使用Set、Vector、HashMap等集合类的时候需要特别注意，有可能会发生内存泄漏。当这些集合被定义成静态的时候，由于它们的生命周期跟应用程序一样长，这时候，就有可能会发生内存泄漏</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticTest</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Vector v = <span class="keyword">new</span> Vector(<span class="number">10</span>);</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">100</span>; i++)&#123;</div><div class="line">            Object object = <span class="keyword">new</span> Object();</div><div class="line">            v.add(object);</div><div class="line">            object = <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在上面的代码中，循环申请了Object对象，并添加到Vector中，然后将对象设置为null，可是这些对象因为被Vector引用着，因此并不能被GC回收，因此造成了内存泄漏。因此，要释放这些对象，还需要被它们从Vector删除，最简单的方法就是将Vector设置为null。</p>
-<p>###集合里的对象属性值被改变</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">    Set&lt;Student&gt; set = <span class="keyword">new</span> HashSet&lt;Student&gt;();</div><div class="line">    Student s1 = <span class="keyword">new</span> Student(<span class="string">"Jack"</span>);</div><div class="line">    Student s2 = <span class="keyword">new</span> Student(<span class="string">"Mary"</span>);</div><div class="line">    Student s3 = <span class="keyword">new</span> Student(<span class="string">"Eason"</span>);</div><div class="line"></div><div class="line">    set.add(s1);</div><div class="line">    set.add(s2);</div><div class="line">    set.add(s3);</div><div class="line"></div><div class="line">    System.out.println(set.size());<span class="comment">//3</span></div><div class="line">    s2.setName(<span class="string">"Jackson"</span>); <span class="comment">//修改属性，此时s2元素对应的hashcode值发生改变</span></div><div class="line">    set.remove(s2);        <span class="comment">// remove不掉，造成内存泄漏</span></div><div class="line">    set.add(s2);           <span class="comment">// 添加成功</span></div><div class="line"></div><div class="line">    System.out.println(set.size());<span class="comment">//4</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="集合里的对象属性值被改变"><a href="#集合里的对象属性值被改变" class="headerlink" title="集合里的对象属性值被改变"></a>集合里的对象属性值被改变</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">    Set&lt;Student&gt; set = <span class="keyword">new</span> HashSet&lt;Student&gt;();</div><div class="line">    Student s1 = <span class="keyword">new</span> Student(<span class="string">"Jack"</span>);</div><div class="line">    Student s2 = <span class="keyword">new</span> Student(<span class="string">"Mary"</span>);</div><div class="line">    Student s3 = <span class="keyword">new</span> Student(<span class="string">"Eason"</span>);</div><div class="line"></div><div class="line">    set.add(s1);</div><div class="line">    set.add(s2);</div><div class="line">    set.add(s3);</div><div class="line"></div><div class="line">    System.out.println(set.size());<span class="comment">//3</span></div><div class="line">    s2.setName(<span class="string">"Jackson"</span>); <span class="comment">//修改属性，此时s2元素对应的hashcode值发生改变</span></div><div class="line">    set.remove(s2);        <span class="comment">// remove不掉，造成内存泄漏</span></div><div class="line">    set.add(s2);           <span class="comment">// 添加成功</span></div><div class="line"></div><div class="line">    System.out.println(set.size());<span class="comment">//4</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>由于对象s2的属性值被改变了，因此不能从set中删除，所以set中会一直保持着s2的引用，不能被回收，造成了内存泄漏。</p>
-<p>###监听器<br>在Java中，我们经常会使用到监听器，如对某个控件添加单击监听器<code>addOnClickListener()</code>，但往往释放对象的时候会忘记删除监听器，这就有可能造成内存泄漏。好的方法就是，在释放对象的时候，应该记住释放所有监听器，这就能避免了因为监听器而导致的内存泄漏。<br>在Android中使用<code>setOnClickListener(null)</code>来实现内存回收。</p>
-<p>###各种连接<br>Java中的连接包括数据库连接、网络连接和io连接，如果没有显式调用其<code>close()</code>方法，是不会自动关闭的，这些连接就不能被GC回收而导致内存泄漏。一般情况下，在try代码块里创建连接，在finally里释放连接，就能够避免此类内存泄漏。</p>
-<p>###外部模块的引用<br>调用外部模块的时候，也应该注意防止内存泄漏。如模块A调用了外部模块B的一个方法，如：<br><code>public void register(Object o)</code><br>这个方法有可能就使得A模块持有传入对象的引用，这时候需要查看B模块是否提供了去除引用的方法，如<code>unregister()</code>。这种情况容易忽略，而且发生了内存泄漏的话，比较难察觉，应该在编写代码过程中就应该注意此类问题。</p>
-<p>###单例模式<br>使用单例模式的时候也有可能导致内存泄漏。因为单例对象初始化后将在JVM的整个生命周期内存在，如果它持有一个外部对象（生命周期比较短）的引用，那么这个外部对象就不能被回收，而导致内存泄漏。如果这个外部对象还持有其它对象的引用，那么内存泄漏会更严重，因此需要特别注意此类情况。这种情况就需要考虑下单例模式的设计会不会有问题，应该怎样保证不会产生内存泄漏问题。</p>
+<h3 id="监听器"><a href="#监听器" class="headerlink" title="监听器"></a>监听器</h3><p>在Java中，我们经常会使用到监听器，如对某个控件添加单击监听器<code>addOnClickListener()</code>，但往往释放对象的时候会忘记删除监听器，这就有可能造成内存泄漏。好的方法就是，在释放对象的时候，应该记住释放所有监听器，这就能避免了因为监听器而导致的内存泄漏。<br>在Android中使用<code>setOnClickListener(null)</code>来实现内存回收。</p>
+<h3 id="各种连接"><a href="#各种连接" class="headerlink" title="各种连接"></a>各种连接</h3><p>Java中的连接包括数据库连接、网络连接和io连接，如果没有显式调用其<code>close()</code>方法，是不会自动关闭的，这些连接就不能被GC回收而导致内存泄漏。一般情况下，在try代码块里创建连接，在finally里释放连接，就能够避免此类内存泄漏。</p>
+<h3 id="外部模块的引用"><a href="#外部模块的引用" class="headerlink" title="外部模块的引用"></a>外部模块的引用</h3><p>调用外部模块的时候，也应该注意防止内存泄漏。如模块A调用了外部模块B的一个方法，如：<br><code>public void register(Object o)</code><br>这个方法有可能就使得A模块持有传入对象的引用，这时候需要查看B模块是否提供了去除引用的方法，如<code>unregister()</code>。这种情况容易忽略，而且发生了内存泄漏的话，比较难察觉，应该在编写代码过程中就应该注意此类问题。</p>
+<h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p>使用单例模式的时候也有可能导致内存泄漏。因为单例对象初始化后将在JVM的整个生命周期内存在，如果它持有一个外部对象（生命周期比较短）的引用，那么这个外部对象就不能被回收，而导致内存泄漏。如果这个外部对象还持有其它对象的引用，那么内存泄漏会更严重，因此需要特别注意此类情况。这种情况就需要考虑下单例模式的设计会不会有问题，应该怎样保证不会产生内存泄漏问题。</p>
 
           
         
@@ -945,169 +943,8 @@
 <p>一、使用线程+Android消息管理机制</p>
 <p>二、使用AsyncTask</p>
 <p>JAVA代码如下：</p>
-<pre><code>public class MainActivity extends Activity {
-    Button visitWebBtn = null;
-    Button downImgBtn = null;
-    TextView showTextView = null;
-    ImageView showImageView = null;
-    String resultStr = &quot;&quot;;
-
-    private Handler handle = new Handler(){
-        public void handleMessage(Message msg){
-            resultStr = msg.getData().getString(&quot;data&quot;);
-            showTextView.setText(resultStr);
-        }
-    };
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        Log.d(&quot;ThreadID&quot;, &quot;onCreate: &quot; + Thread.currentThread().getId());
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initUI();
-        visitWebBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Log.d(&quot;ThreadID&quot;, &quot;visitWebBtn onClick: &quot; + Thread.currentThread().getId());
-                showImageView.setVisibility(View.GONE);
-                showTextView.setVisibility(View.VISIBLE);
-                Thread visitBaiduThread = new Thread(new VisitWebRunnable());
-                visitBaiduThread.start();
-                /*以下为通过等待子线程结束后获取网络请求返回的值，若用这种方式则需要在VisitWebRunnable的run中将resultStr赋值
-                  不推荐用这种方式，因为这样主线程需要等待子线程结果，结果出来之前会卡住
-                try {
-                    Log.d(&quot;ThreadID&quot;,&quot;brfore join: &quot;+Thread.currentThread().getId());
-                    visitBaiduThread.join();//等待更新resultStr参数
-                    Log.d(&quot;ThreadID&quot;, &quot;after join: &quot; + Thread.currentThread().getId());
-                    if(!resultStr.equals(&quot;&quot;)){
-                        showTextView.setText(resultStr);
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                */
-            }
-        });
-        downImgBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Log.d(&quot;ThreadID&quot;, &quot;downImgBtn onClick: &quot; + Thread.currentThread().getId());
-                showImageView.setVisibility(View.VISIBLE);
-                showTextView.setVisibility(View.GONE);
-                String imgUrl = &quot;http://hiphotos.baidu.com/%CD%ED%C9%CF%B3%AA%B8%E8%CF%C2%D3%EA/pic/item/e3afd71367a912155baf5330.jpg&quot;;
-                new DownImgAsyncTask().execute(imgUrl);
-            }
-        });
-    }
-
-    public void initUI(){
-        showTextView = (TextView)findViewById(R.id.textview_show);
-        showImageView = (ImageView)findViewById(R.id.imagview_show);
-        downImgBtn = (Button)findViewById(R.id.btn_download_img);
-        visitWebBtn = (Button)findViewById(R.id.btn_visit_web);
-    }
-
-    private String getURLResponse(String urlString){
-        HttpURLConnection conn = null;
-        InputStream is = null;
-        String resultData = &quot;&quot;;
-        try {
-            Log.d(&quot;ThreadID&quot;, &quot;getURLResponse : &quot; + Thread.currentThread().getId());
-            URL url = new URL(urlString); //URL对象
-            conn = (HttpURLConnection)url.openConnection(); //使用URL打开一个链接
-            conn.setDoInput(true); //允许输入流，即允许下载
-            conn.setDoOutput(true); //允许输出流，即允许上传
-            conn.setUseCaches(false); //不使用缓冲
-            conn.setRequestMethod(&quot;GET&quot;); //使用get请求
-            is = conn.getInputStream();   //获取输入流，此时才真正建立链接
-            Log.d(&quot;ThreadID&quot;, &quot;getURLResponse getInputStream: &quot; + Thread.currentThread().getId());
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader bufferReader = new BufferedReader(isr);
-            String inputLine  = &quot;&quot;;
-            while((inputLine = bufferReader.readLine()) != null) {
-                resultData += inputLine + &quot;\n&quot;;
-            }
-        }catch (IOException e) {
-            e.printStackTrace();
-        }finally{
-            if(is != null){
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if(conn != null){
-                conn.disconnect();
-            }
-        }
-
-        return resultData;
-    }
-
-    private Bitmap getImageBitmap(String url){
-        URL imgUrl;
-        Bitmap bitmap = null;
-        try {
-            imgUrl = new URL(url);
-            HttpURLConnection conn = (HttpURLConnection)imgUrl.openConnection();
-            conn.setDoInput(true);
-            conn.connect();
-            InputStream is = conn.getInputStream();
-            Log.d(&quot;ThreadID&quot;, &quot;doInbackground getInputStream: &quot; + Thread.currentThread().getId());
-            bitmap = BitmapFactory.decodeStream(is);
-            is.close();
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        return bitmap;
-    }
-
-    class VisitWebRunnable implements Runnable{
-
-        @Override
-        public void run() {
-            Log.d(&quot;ThreadID&quot;,&quot; VisitWebRunnable run: &quot;+Thread.currentThread().getId());
-            String data = getURLResponse(&quot;http://www.baidu.com/&quot;);
-            Message message = new Message();
-            Bundle bundle = new Bundle();
-            bundle.putString(&quot;data&quot;,data);
-            message.setData(bundle);
-            handle.sendMessage(message);
-            //resultStr = data;
-        }
-
-    }
-
-    class DownImgAsyncTask extends AsyncTask&lt;String, Void, Bitmap&gt;{
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            showImageView.setImageBitmap(null);
-            Log.d(&quot;ThreadID&quot;, &quot;onPreExecute: &quot; + Thread.currentThread().getId());
-
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            Bitmap b = getImageBitmap(params[0]);
-            Log.d(&quot;ThreadID&quot;,&quot;doInBackground: &quot;+Thread.currentThread().getId());
-            return b;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap result) {
-            Log.d(&quot;ThreadID&quot;,&quot;onPostExecute: &quot;+Thread.currentThread().getId());
-            super.onPostExecute(result);
-            if(result!=null){
-                showImageView.setImageBitmap(result);
-            }
-        }
-    }
-}
-</code></pre><p>源代码下载地址：<a href="https://github.com/Ryanst/HttpUrlConnection" target="_blank" rel="external">https://github.com/Ryanst/HttpUrlConnection</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line">    Button visitWebBtn = <span class="keyword">null</span>;</div><div class="line">    Button downImgBtn = <span class="keyword">null</span>;</div><div class="line">    TextView showTextView = <span class="keyword">null</span>;</div><div class="line">    ImageView showImageView = <span class="keyword">null</span>;</div><div class="line">    String resultStr = <span class="string">""</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Handler handle = <span class="keyword">new</span> Handler()&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span></span>&#123;</div><div class="line">            resultStr = msg.getData().getString(<span class="string">"data"</span>);</div><div class="line">            showTextView.setText(resultStr);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        Log.d(<span class="string">"ThreadID"</span>, <span class="string">"onCreate: "</span> + Thread.currentThread().getId());</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        initUI();</div><div class="line">        visitWebBtn.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">                Log.d(<span class="string">"ThreadID"</span>, <span class="string">"visitWebBtn onClick: "</span> + Thread.currentThread().getId());</div><div class="line">                showImageView.setVisibility(View.GONE);</div><div class="line">                showTextView.setVisibility(View.VISIBLE);</div><div class="line">                Thread visitBaiduThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> VisitWebRunnable());</div><div class="line">                visitBaiduThread.start();</div><div class="line">                <span class="comment">/*以下为通过等待子线程结束后获取网络请求返回的值，若用这种方式则需要在VisitWebRunnable的run中将resultStr赋值</span></div><div class="line">                  不推荐用这种方式，因为这样主线程需要等待子线程结果，结果出来之前会卡住</div><div class="line">                try &#123;</div><div class="line">                    Log.d("ThreadID","brfore join: "+Thread.currentThread().getId());</div><div class="line">                    visitBaiduThread.join();//等待更新resultStr参数</div><div class="line">                    Log.d("ThreadID", "after join: " + Thread.currentThread().getId());</div><div class="line">                    if(!resultStr.equals(""))&#123;</div><div class="line">                        showTextView.setText(resultStr);</div><div class="line">                    &#125;</div><div class="line">                &#125; catch (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">                */</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        downImgBtn.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">                Log.d(<span class="string">"ThreadID"</span>, <span class="string">"downImgBtn onClick: "</span> + Thread.currentThread().getId());</div><div class="line">                showImageView.setVisibility(View.VISIBLE);</div><div class="line">                showTextView.setVisibility(View.GONE);</div><div class="line">                String imgUrl = <span class="string">"http://hiphotos.baidu.com/%CD%ED%C9%CF%B3%AA%B8%E8%CF%C2%D3%EA/pic/item/e3afd71367a912155baf5330.jpg"</span>;</div><div class="line">                <span class="keyword">new</span> DownImgAsyncTask().execute(imgUrl);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initUI</span><span class="params">()</span></span>&#123;</div><div class="line">        showTextView = (TextView)findViewById(R.id.textview_show);</div><div class="line">        showImageView = (ImageView)findViewById(R.id.imagview_show);</div><div class="line">        downImgBtn = (Button)findViewById(R.id.btn_download_img);</div><div class="line">        visitWebBtn = (Button)findViewById(R.id.btn_visit_web);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getURLResponse</span><span class="params">(String urlString)</span></span>&#123;</div><div class="line">        HttpURLConnection conn = <span class="keyword">null</span>;</div><div class="line">        InputStream is = <span class="keyword">null</span>;</div><div class="line">        String resultData = <span class="string">""</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Log.d(<span class="string">"ThreadID"</span>, <span class="string">"getURLResponse : "</span> + Thread.currentThread().getId());</div><div class="line">            URL url = <span class="keyword">new</span> URL(urlString); <span class="comment">//URL对象</span></div><div class="line">            conn = (HttpURLConnection)url.openConnection(); <span class="comment">//使用URL打开一个链接</span></div><div class="line">            conn.setDoInput(<span class="keyword">true</span>); <span class="comment">//允许输入流，即允许下载</span></div><div class="line">            conn.setDoOutput(<span class="keyword">true</span>); <span class="comment">//允许输出流，即允许上传</span></div><div class="line">            conn.setUseCaches(<span class="keyword">false</span>); <span class="comment">//不使用缓冲</span></div><div class="line">            conn.setRequestMethod(<span class="string">"GET"</span>); <span class="comment">//使用get请求</span></div><div class="line">            is = conn.getInputStream();   <span class="comment">//获取输入流，此时才真正建立链接</span></div><div class="line">            Log.d(<span class="string">"ThreadID"</span>, <span class="string">"getURLResponse getInputStream: "</span> + Thread.currentThread().getId());</div><div class="line">            InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(is);</div><div class="line">            BufferedReader bufferReader = <span class="keyword">new</span> BufferedReader(isr);</div><div class="line">            String inputLine  = <span class="string">""</span>;</div><div class="line">            <span class="keyword">while</span>((inputLine = bufferReader.readLine()) != <span class="keyword">null</span>) &#123;</div><div class="line">                resultData += inputLine + <span class="string">"\n"</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;<span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;<span class="keyword">finally</span>&#123;</div><div class="line">            <span class="keyword">if</span>(is != <span class="keyword">null</span>)&#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    is.close();</div><div class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(conn != <span class="keyword">null</span>)&#123;</div><div class="line">                conn.disconnect();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> resultData;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> Bitmap <span class="title">getImageBitmap</span><span class="params">(String url)</span></span>&#123;</div><div class="line">        URL imgUrl;</div><div class="line">        Bitmap bitmap = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            imgUrl = <span class="keyword">new</span> URL(url);</div><div class="line">            HttpURLConnection conn = (HttpURLConnection)imgUrl.openConnection();</div><div class="line">            conn.setDoInput(<span class="keyword">true</span>);</div><div class="line">            conn.connect();</div><div class="line">            InputStream is = conn.getInputStream();</div><div class="line">            Log.d(<span class="string">"ThreadID"</span>, <span class="string">"doInbackground getInputStream: "</span> + Thread.currentThread().getId());</div><div class="line">            bitmap = BitmapFactory.decodeStream(is);</div><div class="line">            is.close();</div><div class="line">        &#125;<span class="keyword">catch</span>(IOException e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> bitmap;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">VisitWebRunnable</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            Log.d(<span class="string">"ThreadID"</span>,<span class="string">" VisitWebRunnable run: "</span>+Thread.currentThread().getId());</div><div class="line">            String data = getURLResponse(<span class="string">"http://www.baidu.com/"</span>);</div><div class="line">            Message message = <span class="keyword">new</span> Message();</div><div class="line">            Bundle bundle = <span class="keyword">new</span> Bundle();</div><div class="line">            bundle.putString(<span class="string">"data"</span>,data);</div><div class="line">            message.setData(bundle);</div><div class="line">            handle.sendMessage(message);</div><div class="line">            <span class="comment">//resultStr = data;</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">DownImgAsyncTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">String</span>, <span class="title">Void</span>, <span class="title">Bitmap</span>&gt;</span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPreExecute</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.onPreExecute();</div><div class="line">            showImageView.setImageBitmap(<span class="keyword">null</span>);</div><div class="line">            Log.d(<span class="string">"ThreadID"</span>, <span class="string">"onPreExecute: "</span> + Thread.currentThread().getId());</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> Bitmap <span class="title">doInBackground</span><span class="params">(String... params)</span> </span>&#123;</div><div class="line">            Bitmap b = getImageBitmap(params[<span class="number">0</span>]);</div><div class="line">            Log.d(<span class="string">"ThreadID"</span>,<span class="string">"doInBackground: "</span>+Thread.currentThread().getId());</div><div class="line">            <span class="keyword">return</span> b;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(Bitmap result)</span> </span>&#123;</div><div class="line">            Log.d(<span class="string">"ThreadID"</span>,<span class="string">"onPostExecute: "</span>+Thread.currentThread().getId());</div><div class="line">            <span class="keyword">super</span>.onPostExecute(result);</div><div class="line">            <span class="keyword">if</span>(result!=<span class="keyword">null</span>)&#123;</div><div class="line">                showImageView.setImageBitmap(result);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>源代码下载地址：<a href="https://github.com/Ryanst/HttpUrlConnection" target="_blank" rel="external">https://github.com/Ryanst/HttpUrlConnection</a></p>
 
           
         

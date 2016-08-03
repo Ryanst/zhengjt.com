@@ -104,7 +104,7 @@
 
 启动service
   Intent intent = new Intent(this,MyService.class);  StartService(indent);">
-<meta property="og:updated_time" content="2016-08-02T11:25:28.000Z">
+<meta property="og:updated_time" content="2016-08-03T02:37:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android Service使用总结">
 <meta name="twitter:description" content="###最普通的后台service写法:
@@ -357,9 +357,9 @@
 <p>  unbindService(connection);</p>
 </li>
 </ol>
-<p>###IntentService<br>IntentService继承自Service，是一种特殊的Service，它提供了一个创建异步的，自动停止的服务的简单的方法：<br>继承自IntentService后，重写onHandleIntent方法，在方法内写子线程需要执行的操作，并且操作结束后服务自动停止，调用服务的onDestory.</p>
+<h3 id="IntentService"><a href="#IntentService" class="headerlink" title="IntentService"></a>IntentService</h3><p>IntentService继承自Service，是一种特殊的Service，它提供了一个创建异步的，自动停止的服务的简单的方法：<br>继承自IntentService后，重写onHandleIntent方法，在方法内写子线程需要执行的操作，并且操作结束后服务自动停止，调用服务的onDestory.</p>
 <p>可以使用线程完成IntentService完成的任务，在服务的onBind方法中return null，然后在startCommand中开启线程，当子线程代码最后调用stopSelf()</p>
-<p>###前台服务<br>与notification相关，初始化一个notification，调用startForeground(1,notification)即可让服务成为前台服务</p>
+<h3 id="前台服务"><a href="#前台服务" class="headerlink" title="前台服务"></a>前台服务</h3><p>与notification相关，初始化一个notification，调用startForeground(1,notification)即可让服务成为前台服务</p>
 <p>优先级：</p>
 <ul>
 <li>前台服务：会同时在状态栏加以提示，优先级高，但服务终止的时候状态栏也会消失。</li>
@@ -376,13 +376,12 @@
 <li>启用两个服务互相调用</li>
 <li>AlarmManger定时广播检查</li>
 </ul>
-<p>###Service和Activity通信机制：</p>
-<ol>
+<h3 id="Service和Activity通信机制："><a href="#Service和Activity通信机制：" class="headerlink" title="Service和Activity通信机制："></a>Service和Activity通信机制：</h3><ol>
 <li>通过在onServiceConnected中获取Binder对象来实现在Activity中调用Service类的方法</li>
 <li>通过广播，在Service方法中发送特定广播，在特定Activity中监听注册广播接收器，在广播类的onReceive中写接收到广播的逻辑——可通过intent传递数据</li>
 </ol>
-<p>###远程服务<br>在注册Service的时候将它的android:process属性指定成:remote，服务是运行在主线程上的，如果需要在服务中完成耗时的操作，需要在onStartCommand中new thread，远程服务是运行在子线程中的。</p>
-<p>###AIDL<br>AIDL（Android Interface Definition Language）是Android接口定义语言的意思，它可以用于让某个Service与多个应用程序组件之间进行跨进程通信，从而可以实现多个应用程序共享同一个Service的功能。以下是基本的AIDL实现：</p>
+<h3 id="远程服务"><a href="#远程服务" class="headerlink" title="远程服务"></a>远程服务</h3><p>在注册Service的时候将它的android:process属性指定成:remote，服务是运行在主线程上的，如果需要在服务中完成耗时的操作，需要在onStartCommand中new thread，远程服务是运行在子线程中的。</p>
+<h3 id="AIDL"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL</h3><p>AIDL（Android Interface Definition Language）是Android接口定义语言的意思，它可以用于让某个Service与多个应用程序组件之间进行跨进程通信，从而可以实现多个应用程序共享同一个Service的功能。以下是基本的AIDL实现：</p>
 <ol>
 <li><p>新建MyAIDLService.aidl文件</p>
 <p>  //aidl对应的接口的方法前面不能加访问权限修饰符<br>  interface MyAIDLService {</p>
@@ -541,7 +540,7 @@ String toUpperCase(String str);
               
             
             
-              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#IntentService"><span class="nav-number">1.</span> <span class="nav-text">IntentService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前台服务"><span class="nav-number">2.</span> <span class="nav-text">前台服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service和Activity通信机制："><span class="nav-number">3.</span> <span class="nav-text">Service和Activity通信机制：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程服务"><span class="nav-number">4.</span> <span class="nav-text">远程服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AIDL"><span class="nav-number">5.</span> <span class="nav-text">AIDL</span></a></li></ol></div>
             
           </div>
         </section>

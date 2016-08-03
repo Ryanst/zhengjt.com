@@ -136,7 +136,7 @@ GB2312
 汉字编码
 2
 一个小于127的字符的意义与原来相同，但两个大于127的字符连在一起时，就表示一个汉字。因此小于1">
-<meta property="og:updated_time" content="2016-08-02T11:25:28.000Z">
+<meta property="og:updated_time" content="2016-08-03T02:36:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编码技术总结">
 <meta name="twitter:description" content="名称
@@ -429,7 +429,7 @@ GB2312
 </tr>
 </tbody>
 </table>
-<p>###关于Unicode<br>存储器容量发展，产生了Unicode，目的是试图将所有语言字符编码。它废弃了以往的其他编码方式重新编码，只是一个符号集。unicode把所有语言字符全对应成两个字节的二进制数字表示，但是它没有实现编码。若字节按unicode的方式，英文字符的编码将造成极大空间浪费。</p>
+<h3 id="关于Unicode"><a href="#关于Unicode" class="headerlink" title="关于Unicode"></a>关于Unicode</h3><p>存储器容量发展，产生了Unicode，目的是试图将所有语言字符编码。它废弃了以往的其他编码方式重新编码，只是一个符号集。unicode把所有语言字符全对应成两个字节的二进制数字表示，但是它没有实现编码。若字节按unicode的方式，英文字符的编码将造成极大空间浪费。</p>
 <p>Unicode只是一个符号集，它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储，UTF-8是Unicode常见的编码方式。</p>
 <p>Unicode实现的几种方式：</p>
 <ul>
@@ -437,9 +437,8 @@ GB2312
 <li>UTF-16：一个字符可以用2个或4个字节表示，每次传输2或4个字节数据</li>
 <li>UTF-32：一个字符可以用4个字节表示，每次传输4个字节数据</li>
 </ul>
-<p>###关于UTF-8 BOM头<br>实际上，不含 BOM 的 UTF-8 才是标准形式。<br>不同的文本编辑器对于有无BOM的称呼也略有不同，比如EditPlus，有BOM的称为UTF-8+，无BOM的称为UTF-8，而在Notepad++中，有BOM的被称为标准UTF-8，而无BOM则被称为UTF-8无BOM。</p>
-<p>###在 Windows 记事本的语境中</p>
-<ul>
+<h3 id="关于UTF-8-BOM头"><a href="#关于UTF-8-BOM头" class="headerlink" title="关于UTF-8 BOM头"></a>关于UTF-8 BOM头</h3><p>实际上，不含 BOM 的 UTF-8 才是标准形式。<br>不同的文本编辑器对于有无BOM的称呼也略有不同，比如EditPlus，有BOM的称为UTF-8+，无BOM的称为UTF-8，而在Notepad++中，有BOM的被称为标准UTF-8，而无BOM则被称为UTF-8无BOM。</p>
+<h3 id="在-Windows-记事本的语境中"><a href="#在-Windows-记事本的语境中" class="headerlink" title="在 Windows 记事本的语境中"></a>在 Windows 记事本的语境中</h3><ul>
 <li>所谓的「ANSI」指的是对应当前系统 locale 的遗留（legacy）编码，即默认编码方式的意思。对于英文文件是ASCII编码，对于简体中文文件是GB2312编码，对于繁体中文版会采用Big5码。</li>
 <li>所谓的「Unicode」指的是带有 BOM 的小端序 UTF-16。(UTF-8 不需要 BOM，尽管 Unicode 标准允许在 UTF-8 中使用 BOM,在网页上使用BOM是个错误)</li>
 <li>所谓的「UTF-8」指的是带 BOM 的 UTF-8。</li>
@@ -588,7 +587,7 @@ GB2312
               
             
             
-              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于Unicode"><span class="nav-number">1.</span> <span class="nav-text">关于Unicode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于UTF-8-BOM头"><span class="nav-number">2.</span> <span class="nav-text">关于UTF-8 BOM头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-Windows-记事本的语境中"><span class="nav-number">3.</span> <span class="nav-text">在 Windows 记事本的语境中</span></a></li></ol></div>
             
           </div>
         </section>

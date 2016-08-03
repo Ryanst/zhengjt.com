@@ -431,79 +431,23 @@
 <p>synchronized修饰方法时获得的是方法对象的锁，若方法是static则得到的是class的锁，synchronized容易造成程序效率低下，导致同一时间只有一个线程可以调用该方法</p>
 <p>synchronized(){}修饰代码块时锁住的是()中的对象</p>
 <p>当synchronized锁住对象时，这个对象的其他非synchronized模块可以被线程调用，这个对象的其他synchronized也被同步，不能被其他线程同时调用</p>
-<pre><code>public class testSynchronized extends Thread {
-    private final int threadNo;
-    public testSynchronized(int threadNo) {
-        this.threadNo = threadNo;
-    }
-    @Override
-    public void run() {
-        synchronized (this) {
-            for (int i = 1; i &lt; 10; i++) {
-                System.out.println(&quot;No.&quot; + threadNo + &quot;:&quot; + i);
-            }
-        }
-    }
-    private static class Thread1 extends Thread {
-        private final int threadNo;
-        public Thread1(int threadNo) {
-            this.threadNo = threadNo;
-        }
-        @Override
-        public synchronized void run() {
-            for (int i = 1; i &lt; 10; i++) {
-                System.out.println(&quot;No.&quot; + threadNo + &quot;:&quot; + i);
-            }
-        }
-    }
-    private static class Thread2 extends Thread {
-        private final int threadNo;
-        public Thread2(int threadNo) {
-            this.threadNo = threadNo;
-        }
-        @Override
-        public void run() {
-            //若()中为this则无法线程同步
-            synchronized (testSynchronized.class) {
-                for (int i = 1; i &lt; 10; i++) {
-                    System.out.println(&quot;No.&quot; + threadNo + &quot;:&quot; + i);
-                }
-            }
-        }
-    }
-    private static class Thread3 extends Thread {
-        private final int threadNo;
-        public Thread3(int threadNo) {
-            this.threadNo = threadNo;
-        }
-        @Override
-        public void run() {
-            runPlus();
-        }
-        public static synchronized void runPlus() {
-            for (int i = 1; i &lt; 10; i++) {
-                System.out.println(&quot;No.&quot; + Thread.currentThread().getId() + &quot;:&quot; + i);
-            }
-        }
-    }
-    public static void main(String[] args) throws Exception {
-        // 结果是3、4可以实现线程同步，而1、2不行
-
-/*        for (int i = 1; i &lt; 10; i++) {
+<p>```<br>    public class testSynchronized extends Thread {<br>        private final int threadNo;<br>        public testSynchronized(int threadNo) {<br>            this.threadNo = threadNo;<br>        }<br>        @Override<br>        public void run() {<br>            synchronized (this) {<br>                for (int i = 1; i &lt; 10; i++) {<br>                    System.out.println(“No.” + threadNo + “:” + i);<br>                }<br>            }<br>        }<br>        private static class Thread1 extends Thread {<br>            private final int threadNo;<br>            public Thread1(int threadNo) {<br>                this.threadNo = threadNo;<br>            }<br>            @Override<br>            public synchronized void run() {<br>                for (int i = 1; i &lt; 10; i++) {<br>                    System.out.println(“No.” + threadNo + “:” + i);<br>                }<br>            }<br>        }<br>        private static class Thread2 extends Thread {<br>            private final int threadNo;<br>            public Thread2(int threadNo) {<br>                this.threadNo = threadNo;<br>            }<br>            @Override<br>            public void run() {<br>                //若()中为this则无法线程同步<br>                synchronized (testSynchronized.class) {<br>                    for (int i = 1; i &lt; 10; i++) {<br>                        System.out.println(“No.” + threadNo + “:” + i);<br>                    }<br>                }<br>            }<br>        }<br>        private static class Thread3 extends Thread {<br>            private final int threadNo;<br>            public Thread3(int threadNo) {<br>                this.threadNo = threadNo;<br>            }<br>            @Override<br>            public void run() {<br>                runPlus();<br>            }<br>            public static synchronized void runPlus() {<br>                for (int i = 1; i &lt; 10; i++) {<br>                    System.out.println(“No.” + Thread.currentThread().getId() + “:” + i);<br>                }<br>            }<br>        }<br>        public static void main(String[] args) throws Exception {<br>            // 结果是3、4可以实现线程同步，而1、2不行</p>
+<pre><code>/*      for (int i = 1; i &lt; 10; i++) {
             new testSynchronized(i).start();
         }*/
-/*        for (int i = 1; i &lt; 10; i++) {
+/*      for (int i = 1; i &lt; 10; i++) {
             new Thread1(i).start();
         }*/
-/*        for (int i = 1; i &lt; 10; i++) {
+/*      for (int i = 1; i &lt; 10; i++) {
             new Thread2(i).start();
         }*/
-/*        for (int i = 1; i &lt; 10; i++) {
+/*      for (int i = 1; i &lt; 10; i++) {
             new Thread3(i).start();
         }*/
     }
 }
-</code></pre>
+</code></pre><p>```</p>
+
           
         
       
@@ -606,11 +550,8 @@
             <p>强引用： Car car = new Car(22000);</p>
 <p>弱引用： WeakReference<car> weakCar = new WeakReference<car>(car);</car></car></p>
 <p>一段测试代码：</p>
-<pre><code>//设置-Xmx1M,即JVM堆内存最大为1M的环境运行
-import java.lang.ref.WeakReference;
-import java.util.WeakHashMap;
-
-public class Car {
+<p>```<br>    //设置-Xmx1M,即JVM堆内存最大为1M的环境运行<br>    import java.lang.ref.WeakReference;<br>    import java.util.WeakHashMap;</p>
+<pre><code>public class Car {
     private double price;
 
     public Car(double price) {
@@ -659,17 +600,17 @@ public class Car {
         }
     }
 }
-</code></pre><p>总结：一旦系统内存回收，无论内存是否紧张，弱引用指向的对象都会被回收<br>soft reference和weak reference一样, 但被GC回收的时候需要多一个条件: 当系统内存不足时(Heap 内存是否临近阈值)，因此soft reference适合做cache object</p>
+</code></pre><p>```</p>
+<p>总结：一旦系统内存回收，无论内存是否紧张，弱引用指向的对象都会被回收<br>soft reference和weak reference一样, 但被GC回收的时候需要多一个条件: 当系统内存不足时(Heap 内存是否临近阈值)，因此soft reference适合做cache object</p>
 <p>WeakHashMap：hashmap的weak版，不保证map中的键值对的存在时间，在没有调用任何赋值方法(set相关)的情况下，在一段时间后 size 方法也可能返回较小的值，对于 isEmpty 方法，返回 false，然后返回 true，对于给定的键，containsKey 方法返回 true 然后返回 false，对于给定的键，get 方法返回一个值，但接着返回 null，对于以前出现在映射中的键，put 方法返回 null，而 remove 方法返回 false，对于键集、值集、项集进行的检查，生成的元素数量越来越少。总的来说就是map中的键值对会在GC回收的时候被回收</p>
 <p>在WeakHashMap的get(),put()函数中的getTable()方法会调用expungeStateEntries方法，以清理持有弱引用的key的表项</p>
-<p>###JVM虚拟机运行配置</p>
-<p>-Xms128m JVM初始分配的堆内存</p>
+<h3 id="JVM虚拟机运行配置"><a href="#JVM虚拟机运行配置" class="headerlink" title="JVM虚拟机运行配置"></a>JVM虚拟机运行配置</h3><p>-Xms128m JVM初始分配的堆内存</p>
 <p>-Xmx512m JVM最大允许分配的堆内存，按需分配</p>
 <p>-XX:PermSize=64M JVM初始分配的非堆内存</p>
 <p>-XX:MaxPermSize=128M JVM最大允许分配的非堆内存，按需分配</p>
 <p>eclipse设置自定内存运行</p>
-<pre><code>Run &gt; Run Configurations&gt; Java Application &gt; (project name)&gt; Arguments Sheet&gt; VM Arguments 
-</code></pre><p>比如设置堆内存为1M，可以在 VM Arguments 中填写-Xmx1M</p>
+<p>```<br>    Run &gt; Run Configurations&gt; Java Application &gt; (project name)&gt; Arguments Sheet&gt; VM Arguments<br> ```</p>
+<p>比如设置堆内存为1M，可以在 VM Arguments 中填写-Xmx1M</p>
 
           
         
@@ -770,87 +711,57 @@ public class Car {
       
         
           
-            <p>##基本用法</p>
-<pre><code>RequestQueue mQueue = Volley.newRequestQueue(context);
-//默认GET方式，是json的话可以用JsonObjectRequest，返回jsonString
-StringRequest stringRequest = new StringRequest(Method.POST,&quot;http://www.baidu.com&quot;,
-                    new Response.Listener&lt;String&gt;() {
-                        @Override
-                        public void onResponse(String response) {
-                            Log.d(&quot;TAG&quot;, response);
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.e(&quot;TAG&quot;, error.getMessage(), error);
-                        }
-                    }){  
-     //重写 getParams()方法设置POST参数，如果是GET方法无需重写
-    @Override
-    protected Map&lt;String, String&gt; getParams() throws AuthFailureError {
-    Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
-    map.put(&quot;params1&quot;, &quot;value1&quot;);
-    map.put(&quot;params2&quot;, &quot;value2&quot;);
-    return map;
-}};
-mQueue.add(stringRequest);
-
-//在AndroidManifest.xml中加入网络请求权限
+            <h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p>```<br>    RequestQueue mQueue = Volley.newRequestQueue(context);<br>    //默认GET方式，是json的话可以用JsonObjectRequest，返回jsonString<br>    StringRequest stringRequest = new StringRequest(Method.POST,”<a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a>“,<br>                        new Response.Listener<string>() {<br>                            @Override<br>                            public void onResponse(String response) {<br>                                Log.d(“TAG”, response);<br>                            }<br>                        }, new Response.ErrorListener() {<br>                            @Override<br>                            public void onErrorResponse(VolleyError error) {<br>                                Log.e(“TAG”, error.getMessage(), error);<br>                            }<br>                        }){<br>         //重写 getParams()方法设置POST参数，如果是GET方法无需重写<br>        @Override<br>        protected Map<string, string=""> getParams() throws AuthFailureError {<br>        Map<string, string=""> map = new HashMap<string, string="">();<br>        map.put(“params1”, “value1”);<br>        map.put(“params2”, “value2”);<br>        return map;<br>    }};<br>    mQueue.add(stringRequest);</string,></string,></string,></string></p>
+<pre><code>//在AndroidManifest.xml中加入网络请求权限
 &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
-</code></pre><p>##加载图片</p>
+</code></pre><p>```</p>
+<h2 id="加载图片"><a href="#加载图片" class="headerlink" title="加载图片"></a>加载图片</h2><ol>
+<li>ImageRequest的用法</li>
+</ol>
+<p>```<br>    RequestQueue mQueue = Volley.newRequestQueue(context);<br>    ImageRequest imageRequest = new ImageRequest(<br>    “<a href="http://developer.android.com/images/home/aw_dac.png" target="_blank" rel="external">http://developer.android.com/images/home/aw_dac.png</a>“,<br>    new Response.Listener<bitmap>() {<br>        @Override<br>        public void onResponse(Bitmap response) {<br>            imageView.setImageBitmap(response);<br>        }<br>    }, 0, 0, Config.RGB_565, new Response.ErrorListener() {//第三第四个参数分别用于指定允许图片最大的宽度和高度<br>        @Override<br>        public void onErrorResponse(VolleyError error) {<br>            imageView.setImageResource(R.drawable.default_image);<br>        }<br>    });<br>    mQueue.add(imageRequest);<br>```</bitmap></p>
 <ol>
-<li><p>ImageRequest的用法</p>
-<p>  RequestQueue mQueue = Volley.newRequestQueue(context);<br>  ImageRequest imageRequest = new ImageRequest(<br>  “<a href="http://developer.android.com/images/home/aw_dac.png" target="_blank" rel="external">http://developer.android.com/images/home/aw_dac.png</a>“,<br>  new Response.Listener<bitmap>() {</bitmap></p>
-<pre><code>@Override
-public void onResponse(Bitmap response) {
-    imageView.setImageBitmap(response);
+<li>ImageLoader方法</li>
+</ol>
+<p>```<br>    RequestQueue mQueue = Volley.newRequestQueue(context);<br>    ImageLoader imageLoader = new ImageLoader(new BitmapCache());</p>
+<pre><code>//使用LruCache
+public class BitmapCache implements ImageCache {
+    private LruCache&lt;String, Bitmap&gt; mCache;
+    public BitmapCache() {
+    int maxSize = 10 * 1024 * 1024;
+    mCache = new LruCache&lt;String, Bitmap&gt;(maxSize) {
+        @Override
+        protected int sizeOf(String key, Bitmap bitmap) {
+            return bitmap.getRowBytes() * bitmap.getHeight();
+        }
+    };
 }
-</code></pre><p>  }, 0, 0, Config.RGB_565, new Response.ErrorListener() {//第三第四个参数分别用于指定允许图片最大的宽度和高度</p>
-<pre><code>@Override
-public void onErrorResponse(VolleyError error) {
-    imageView.setImageResource(R.drawable.default_image);
-}
-</code></pre><p>  });<br>  mQueue.add(imageRequest);</p>
-</li>
-<li><p>ImageLoader方法</p>
-<p>  RequestQueue mQueue = Volley.newRequestQueue(context);<br>  ImageLoader imageLoader = new ImageLoader(new BitmapCache());</p>
-<p>  //使用LruCache<br>  public class BitmapCache implements ImageCache {</p>
-<pre><code>private LruCache&lt;String, Bitmap&gt; mCache;
-public BitmapCache() {
-int maxSize = 10 * 1024 * 1024;
-mCache = new LruCache&lt;String, Bitmap&gt;(maxSize) {
     @Override
-    protected int sizeOf(String key, Bitmap bitmap) {
-        return bitmap.getRowBytes() * bitmap.getHeight();
+    public Bitmap getBitmap(String url) {
+        return mCache.get(url);
     }
-};
-</code></pre><p>  }</p>
-<pre><code>@Override
-public Bitmap getBitmap(String url) {
-    return mCache.get(url);
+    @Override
+    public void putBitmap(String url, Bitmap bitmap) {
+        mCache.put(url, bitmap);
+    }
 }
-@Override
-public void putBitmap(String url, Bitmap bitmap) {
-    mCache.put(url, bitmap);
-}
-</code></pre><p>  }</p>
-<p>  //第一个参数指定用于显示图片的ImageView控件，第二个参数指定加载图片的过程中显示的图片，第三个参数指定加载图片失败的情况下显示的图片<br>  ImageListener listener = ImageLoader.getImageListener(imageView,R.drawable.default_image, R.drawable.failed_image);</p>
-<p>  //图片大小限制<br>  imageLoader.get(“<a href="http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,listener" target="_blank" rel="external">http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,listener</a>, 200, 200);</p>
-</li>
-<li><p>NetworkImageView的用法</p>
-<p>  //限定图片的尺寸</p>
-<pre><code>&lt;com.android.volley.toolbox.NetworkImageView 
+
+//第一个参数指定用于显示图片的ImageView控件，第二个参数指定加载图片的过程中显示的图片，第三个参数指定加载图片失败的情况下显示的图片
+ImageListener listener = ImageLoader.getImageListener(imageView,R.drawable.default_image, R.drawable.failed_image);
+
+//图片大小限制
+imageLoader.get(&quot;http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,listener, 200, 200);
+</code></pre><p>```</p>
+<ol>
+<li>NetworkImageView的用法<br>```<br>//限定图片的尺寸<pre><code>&lt;com.android.volley.toolbox.NetworkImageView 
     android:id=&quot;@+id/network_image_view&quot;
     android:layout_width=&quot;200dp&quot;
     android:layout_height=&quot;200dp&quot;
     android:layout_gravity=&quot;center_horizontal&quot;
     /&gt;
-</code></pre><p>  networkImageView = (NetworkImageView) findViewById(R.id.network_image_view);<br>  networkImageView.setDefaultImageResId(R.drawable.default_image);<br>  networkImageView.setErrorImageResId(R.drawable.failed_image);<br>  networkImageView.setImageUrl(“<a href="http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,imageLoader" target="_blank" rel="external">http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,imageLoader</a>);</p>
-</li>
+</code></pre>networkImageView = (NetworkImageView) findViewById(R.id.network_image_view);<br>networkImageView.setDefaultImageResId(R.drawable.default_image);<br>networkImageView.setErrorImageResId(R.drawable.failed_image);<br>networkImageView.setImageUrl(“<a href="http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,imageLoader" target="_blank" rel="external">http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,imageLoader</a>);<br>```</li>
 </ol>
-<p>##自定义Request<br><a href="http://blog.csdn.net/guolin_blog/article/details/17612763" target="_blank" rel="external">http://blog.csdn.net/guolin_blog/article/details/17612763</a></p>
-<p>##Volley内部解析<br><a href="http://blog.csdn.net/guolin_blog/article/details/17656437" target="_blank" rel="external">http://blog.csdn.net/guolin_blog/article/details/17656437</a></p>
-<p>判断如果手机系统版本号是大于9的，则创建一个HurlStack的实例，否则就创建一个HttpClientStack的实例。实际上HurlStack的内部就是使用HttpURLConnection进行网络通讯的，而HttpClientStack的内部则是使用HttpClient进行网络通讯的</p>
+<h2 id="自定义Request"><a href="#自定义Request" class="headerlink" title="自定义Request"></a>自定义Request</h2><p>```<br><a href="http://blog.csdn.net/guolin\_blog/article/details/17612763" target="_blank" rel="external">http://blog.csdn.net/guolin\_blog/article/details/17612763</a><br>```</p>
+<h2 id="Volley内部解析"><a href="#Volley内部解析" class="headerlink" title="Volley内部解析"></a>Volley内部解析</h2><p>```<br><a href="http://blog.csdn.net/guolin\_blog/article/details/17656437" target="_blank" rel="external">http://blog.csdn.net/guolin\_blog/article/details/17656437</a><br>```<br>判断如果手机系统版本号是大于9的，则创建一个HurlStack的实例，否则就创建一个HttpClientStack的实例。实际上HurlStack的内部就是使用HttpURLConnection进行网络通讯的，而HttpClientStack的内部则是使用HttpClient进行网络通讯的</p>
 
           
         

@@ -87,11 +87,7 @@
 <meta name="description" content="强引用： Car car = new Car(22000);
 弱引用： WeakReference weakCar = new WeakReference(car);
 一段测试代码：
-//设置-Xmx1M,即JVM堆内存最大为1M的环境运行
-import java.lang.ref.WeakReference;
-import java.util.WeakHashMap;
-
-public class">
+```    //设置-Xmx1M,即JVM堆内存最大为1M的环境运行    import java.lang.ref.WeakReference;    import java.util.WeakHashMap;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java的WeakReference相关">
 <meta property="og:url" content="http://zhengjt.com/2015/09/13/Java的WeakReference相关/index.html">
@@ -99,22 +95,14 @@ public class">
 <meta property="og:description" content="强引用： Car car = new Car(22000);
 弱引用： WeakReference weakCar = new WeakReference(car);
 一段测试代码：
-//设置-Xmx1M,即JVM堆内存最大为1M的环境运行
-import java.lang.ref.WeakReference;
-import java.util.WeakHashMap;
-
-public class">
-<meta property="og:updated_time" content="2016-08-02T11:25:28.000Z">
+```    //设置-Xmx1M,即JVM堆内存最大为1M的环境运行    import java.lang.ref.WeakReference;    import java.util.WeakHashMap;">
+<meta property="og:updated_time" content="2016-08-03T01:56:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的WeakReference相关">
 <meta name="twitter:description" content="强引用： Car car = new Car(22000);
 弱引用： WeakReference weakCar = new WeakReference(car);
 一段测试代码：
-//设置-Xmx1M,即JVM堆内存最大为1M的环境运行
-import java.lang.ref.WeakReference;
-import java.util.WeakHashMap;
-
-public class">
+```    //设置-Xmx1M,即JVM堆内存最大为1M的环境运行    import java.lang.ref.WeakReference;    import java.util.WeakHashMap;">
 
 
 
@@ -336,11 +324,8 @@ public class">
         <p>强引用： Car car = new Car(22000);</p>
 <p>弱引用： WeakReference<car> weakCar = new WeakReference<car>(car);</car></car></p>
 <p>一段测试代码：</p>
-<pre><code>//设置-Xmx1M,即JVM堆内存最大为1M的环境运行
-import java.lang.ref.WeakReference;
-import java.util.WeakHashMap;
-
-public class Car {
+<p>```<br>    //设置-Xmx1M,即JVM堆内存最大为1M的环境运行<br>    import java.lang.ref.WeakReference;<br>    import java.util.WeakHashMap;</p>
+<pre><code>public class Car {
     private double price;
 
     public Car(double price) {
@@ -389,17 +374,17 @@ public class Car {
         }
     }
 }
-</code></pre><p>总结：一旦系统内存回收，无论内存是否紧张，弱引用指向的对象都会被回收<br>soft reference和weak reference一样, 但被GC回收的时候需要多一个条件: 当系统内存不足时(Heap 内存是否临近阈值)，因此soft reference适合做cache object</p>
+</code></pre><p>```</p>
+<p>总结：一旦系统内存回收，无论内存是否紧张，弱引用指向的对象都会被回收<br>soft reference和weak reference一样, 但被GC回收的时候需要多一个条件: 当系统内存不足时(Heap 内存是否临近阈值)，因此soft reference适合做cache object</p>
 <p>WeakHashMap：hashmap的weak版，不保证map中的键值对的存在时间，在没有调用任何赋值方法(set相关)的情况下，在一段时间后 size 方法也可能返回较小的值，对于 isEmpty 方法，返回 false，然后返回 true，对于给定的键，containsKey 方法返回 true 然后返回 false，对于给定的键，get 方法返回一个值，但接着返回 null，对于以前出现在映射中的键，put 方法返回 null，而 remove 方法返回 false，对于键集、值集、项集进行的检查，生成的元素数量越来越少。总的来说就是map中的键值对会在GC回收的时候被回收</p>
 <p>在WeakHashMap的get(),put()函数中的getTable()方法会调用expungeStateEntries方法，以清理持有弱引用的key的表项</p>
-<p>###JVM虚拟机运行配置</p>
-<p>-Xms128m JVM初始分配的堆内存</p>
+<h3 id="JVM虚拟机运行配置"><a href="#JVM虚拟机运行配置" class="headerlink" title="JVM虚拟机运行配置"></a>JVM虚拟机运行配置</h3><p>-Xms128m JVM初始分配的堆内存</p>
 <p>-Xmx512m JVM最大允许分配的堆内存，按需分配</p>
 <p>-XX:PermSize=64M JVM初始分配的非堆内存</p>
 <p>-XX:MaxPermSize=128M JVM最大允许分配的非堆内存，按需分配</p>
 <p>eclipse设置自定内存运行</p>
-<pre><code>Run &gt; Run Configurations&gt; Java Application &gt; (project name)&gt; Arguments Sheet&gt; VM Arguments 
-</code></pre><p>比如设置堆内存为1M，可以在 VM Arguments 中填写-Xmx1M</p>
+<p>```<br>    Run &gt; Run Configurations&gt; Java Application &gt; (project name)&gt; Arguments Sheet&gt; VM Arguments<br> ```</p>
+<p>比如设置堆内存为1M，可以在 VM Arguments 中填写-Xmx1M</p>
 
       
     </div>
@@ -539,7 +524,7 @@ public class Car {
               
             
             
-              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM虚拟机运行配置"><span class="nav-number">1.</span> <span class="nav-text">JVM虚拟机运行配置</span></a></li></ol></div>
             
           </div>
         </section>

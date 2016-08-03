@@ -84,25 +84,16 @@
 
 
 
-<meta name="description" content="##基本用法
-RequestQueue mQueue = Volley.newRequestQueue(context);
-//默认GET方式，是json的话可以用JsonObjectRequest，返回jsonString
-StringRequest stringRequest = new StringRequest(Method.POST,&amp;quot;http://www.baidu.com&amp;">
+<meta name="description" content="基本用法```    RequestQueue mQueue = Volley.newRequestQueue(context);    //默认GET方式，是json的话可以用JsonObjectRequest，返回jsonString    StringRequest stringRequest = new StringRequest(Method.POST,”http://www.baidu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Volley的用法简单总结">
 <meta property="og:url" content="http://zhengjt.com/2015/08/30/Volley的用法简单总结/index.html">
 <meta property="og:site_name" content="Ryanst">
-<meta property="og:description" content="##基本用法
-RequestQueue mQueue = Volley.newRequestQueue(context);
-//默认GET方式，是json的话可以用JsonObjectRequest，返回jsonString
-StringRequest stringRequest = new StringRequest(Method.POST,&amp;quot;http://www.baidu.com&amp;">
-<meta property="og:updated_time" content="2016-08-02T11:25:28.000Z">
+<meta property="og:description" content="基本用法```    RequestQueue mQueue = Volley.newRequestQueue(context);    //默认GET方式，是json的话可以用JsonObjectRequest，返回jsonString    StringRequest stringRequest = new StringRequest(Method.POST,”http://www.baidu">
+<meta property="og:updated_time" content="2016-08-03T01:57:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Volley的用法简单总结">
-<meta name="twitter:description" content="##基本用法
-RequestQueue mQueue = Volley.newRequestQueue(context);
-//默认GET方式，是json的话可以用JsonObjectRequest，返回jsonString
-StringRequest stringRequest = new StringRequest(Method.POST,&amp;quot;http://www.baidu.com&amp;">
+<meta name="twitter:description" content="基本用法```    RequestQueue mQueue = Volley.newRequestQueue(context);    //默认GET方式，是json的话可以用JsonObjectRequest，返回jsonString    StringRequest stringRequest = new StringRequest(Method.POST,”http://www.baidu">
 
 
 
@@ -321,87 +312,57 @@ StringRequest stringRequest = new StringRequest(Method.POST,&amp;quot;http://www
       
 
       
-        <p>##基本用法</p>
-<pre><code>RequestQueue mQueue = Volley.newRequestQueue(context);
-//默认GET方式，是json的话可以用JsonObjectRequest，返回jsonString
-StringRequest stringRequest = new StringRequest(Method.POST,&quot;http://www.baidu.com&quot;,
-                    new Response.Listener&lt;String&gt;() {
-                        @Override
-                        public void onResponse(String response) {
-                            Log.d(&quot;TAG&quot;, response);
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.e(&quot;TAG&quot;, error.getMessage(), error);
-                        }
-                    }){  
-     //重写 getParams()方法设置POST参数，如果是GET方法无需重写
-    @Override
-    protected Map&lt;String, String&gt; getParams() throws AuthFailureError {
-    Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
-    map.put(&quot;params1&quot;, &quot;value1&quot;);
-    map.put(&quot;params2&quot;, &quot;value2&quot;);
-    return map;
-}};
-mQueue.add(stringRequest);
-
-//在AndroidManifest.xml中加入网络请求权限
+        <h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p>```<br>    RequestQueue mQueue = Volley.newRequestQueue(context);<br>    //默认GET方式，是json的话可以用JsonObjectRequest，返回jsonString<br>    StringRequest stringRequest = new StringRequest(Method.POST,”<a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a>“,<br>                        new Response.Listener<string>() {<br>                            @Override<br>                            public void onResponse(String response) {<br>                                Log.d(“TAG”, response);<br>                            }<br>                        }, new Response.ErrorListener() {<br>                            @Override<br>                            public void onErrorResponse(VolleyError error) {<br>                                Log.e(“TAG”, error.getMessage(), error);<br>                            }<br>                        }){<br>         //重写 getParams()方法设置POST参数，如果是GET方法无需重写<br>        @Override<br>        protected Map<string, string=""> getParams() throws AuthFailureError {<br>        Map<string, string=""> map = new HashMap<string, string="">();<br>        map.put(“params1”, “value1”);<br>        map.put(“params2”, “value2”);<br>        return map;<br>    }};<br>    mQueue.add(stringRequest);</string,></string,></string,></string></p>
+<pre><code>//在AndroidManifest.xml中加入网络请求权限
 &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
-</code></pre><p>##加载图片</p>
+</code></pre><p>```</p>
+<h2 id="加载图片"><a href="#加载图片" class="headerlink" title="加载图片"></a>加载图片</h2><ol>
+<li>ImageRequest的用法</li>
+</ol>
+<p>```<br>    RequestQueue mQueue = Volley.newRequestQueue(context);<br>    ImageRequest imageRequest = new ImageRequest(<br>    “<a href="http://developer.android.com/images/home/aw_dac.png" target="_blank" rel="external">http://developer.android.com/images/home/aw_dac.png</a>“,<br>    new Response.Listener<bitmap>() {<br>        @Override<br>        public void onResponse(Bitmap response) {<br>            imageView.setImageBitmap(response);<br>        }<br>    }, 0, 0, Config.RGB_565, new Response.ErrorListener() {//第三第四个参数分别用于指定允许图片最大的宽度和高度<br>        @Override<br>        public void onErrorResponse(VolleyError error) {<br>            imageView.setImageResource(R.drawable.default_image);<br>        }<br>    });<br>    mQueue.add(imageRequest);<br>```</bitmap></p>
 <ol>
-<li><p>ImageRequest的用法</p>
-<p>  RequestQueue mQueue = Volley.newRequestQueue(context);<br>  ImageRequest imageRequest = new ImageRequest(<br>  “<a href="http://developer.android.com/images/home/aw_dac.png" target="_blank" rel="external">http://developer.android.com/images/home/aw_dac.png</a>“,<br>  new Response.Listener<bitmap>() {</bitmap></p>
-<pre><code>@Override
-public void onResponse(Bitmap response) {
-    imageView.setImageBitmap(response);
+<li>ImageLoader方法</li>
+</ol>
+<p>```<br>    RequestQueue mQueue = Volley.newRequestQueue(context);<br>    ImageLoader imageLoader = new ImageLoader(new BitmapCache());</p>
+<pre><code>//使用LruCache
+public class BitmapCache implements ImageCache {
+    private LruCache&lt;String, Bitmap&gt; mCache;
+    public BitmapCache() {
+    int maxSize = 10 * 1024 * 1024;
+    mCache = new LruCache&lt;String, Bitmap&gt;(maxSize) {
+        @Override
+        protected int sizeOf(String key, Bitmap bitmap) {
+            return bitmap.getRowBytes() * bitmap.getHeight();
+        }
+    };
 }
-</code></pre><p>  }, 0, 0, Config.RGB_565, new Response.ErrorListener() {//第三第四个参数分别用于指定允许图片最大的宽度和高度</p>
-<pre><code>@Override
-public void onErrorResponse(VolleyError error) {
-    imageView.setImageResource(R.drawable.default_image);
-}
-</code></pre><p>  });<br>  mQueue.add(imageRequest);</p>
-</li>
-<li><p>ImageLoader方法</p>
-<p>  RequestQueue mQueue = Volley.newRequestQueue(context);<br>  ImageLoader imageLoader = new ImageLoader(new BitmapCache());</p>
-<p>  //使用LruCache<br>  public class BitmapCache implements ImageCache {</p>
-<pre><code>private LruCache&lt;String, Bitmap&gt; mCache;
-public BitmapCache() {
-int maxSize = 10 * 1024 * 1024;
-mCache = new LruCache&lt;String, Bitmap&gt;(maxSize) {
     @Override
-    protected int sizeOf(String key, Bitmap bitmap) {
-        return bitmap.getRowBytes() * bitmap.getHeight();
+    public Bitmap getBitmap(String url) {
+        return mCache.get(url);
     }
-};
-</code></pre><p>  }</p>
-<pre><code>@Override
-public Bitmap getBitmap(String url) {
-    return mCache.get(url);
+    @Override
+    public void putBitmap(String url, Bitmap bitmap) {
+        mCache.put(url, bitmap);
+    }
 }
-@Override
-public void putBitmap(String url, Bitmap bitmap) {
-    mCache.put(url, bitmap);
-}
-</code></pre><p>  }</p>
-<p>  //第一个参数指定用于显示图片的ImageView控件，第二个参数指定加载图片的过程中显示的图片，第三个参数指定加载图片失败的情况下显示的图片<br>  ImageListener listener = ImageLoader.getImageListener(imageView,R.drawable.default_image, R.drawable.failed_image);</p>
-<p>  //图片大小限制<br>  imageLoader.get(“<a href="http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,listener" target="_blank" rel="external">http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,listener</a>, 200, 200);</p>
-</li>
-<li><p>NetworkImageView的用法</p>
-<p>  //限定图片的尺寸</p>
-<pre><code>&lt;com.android.volley.toolbox.NetworkImageView 
+
+//第一个参数指定用于显示图片的ImageView控件，第二个参数指定加载图片的过程中显示的图片，第三个参数指定加载图片失败的情况下显示的图片
+ImageListener listener = ImageLoader.getImageListener(imageView,R.drawable.default_image, R.drawable.failed_image);
+
+//图片大小限制
+imageLoader.get(&quot;http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,listener, 200, 200);
+</code></pre><p>```</p>
+<ol>
+<li>NetworkImageView的用法<br>```<br>//限定图片的尺寸<pre><code>&lt;com.android.volley.toolbox.NetworkImageView 
     android:id=&quot;@+id/network_image_view&quot;
     android:layout_width=&quot;200dp&quot;
     android:layout_height=&quot;200dp&quot;
     android:layout_gravity=&quot;center_horizontal&quot;
     /&gt;
-</code></pre><p>  networkImageView = (NetworkImageView) findViewById(R.id.network_image_view);<br>  networkImageView.setDefaultImageResId(R.drawable.default_image);<br>  networkImageView.setErrorImageResId(R.drawable.failed_image);<br>  networkImageView.setImageUrl(“<a href="http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,imageLoader" target="_blank" rel="external">http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,imageLoader</a>);</p>
-</li>
+</code></pre>networkImageView = (NetworkImageView) findViewById(R.id.network_image_view);<br>networkImageView.setDefaultImageResId(R.drawable.default_image);<br>networkImageView.setErrorImageResId(R.drawable.failed_image);<br>networkImageView.setImageUrl(“<a href="http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,imageLoader" target="_blank" rel="external">http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg&quot;,imageLoader</a>);<br>```</li>
 </ol>
-<p>##自定义Request<br><a href="http://blog.csdn.net/guolin_blog/article/details/17612763" target="_blank" rel="external">http://blog.csdn.net/guolin_blog/article/details/17612763</a></p>
-<p>##Volley内部解析<br><a href="http://blog.csdn.net/guolin_blog/article/details/17656437" target="_blank" rel="external">http://blog.csdn.net/guolin_blog/article/details/17656437</a></p>
-<p>判断如果手机系统版本号是大于9的，则创建一个HurlStack的实例，否则就创建一个HttpClientStack的实例。实际上HurlStack的内部就是使用HttpURLConnection进行网络通讯的，而HttpClientStack的内部则是使用HttpClient进行网络通讯的</p>
+<h2 id="自定义Request"><a href="#自定义Request" class="headerlink" title="自定义Request"></a>自定义Request</h2><p>```<br><a href="http://blog.csdn.net/guolin\_blog/article/details/17612763" target="_blank" rel="external">http://blog.csdn.net/guolin\_blog/article/details/17612763</a><br>```</p>
+<h2 id="Volley内部解析"><a href="#Volley内部解析" class="headerlink" title="Volley内部解析"></a>Volley内部解析</h2><p>```<br><a href="http://blog.csdn.net/guolin\_blog/article/details/17656437" target="_blank" rel="external">http://blog.csdn.net/guolin\_blog/article/details/17656437</a><br>```<br>判断如果手机系统版本号是大于9的，则创建一个HurlStack的实例，否则就创建一个HttpClientStack的实例。实际上HurlStack的内部就是使用HttpURLConnection进行网络通讯的，而HttpClientStack的内部则是使用HttpClient进行网络通讯的</p>
 
       
     </div>
@@ -541,7 +502,7 @@ public void putBitmap(String url, Bitmap bitmap) {
               
             
             
-              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本用法"><span class="nav-number">1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加载图片"><span class="nav-number">2.</span> <span class="nav-text">加载图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义Request"><span class="nav-number">3.</span> <span class="nav-text">自定义Request</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Volley内部解析"><span class="nav-number">4.</span> <span class="nav-text">Volley内部解析</span></a></li></ol></div>
             
           </div>
         </section>

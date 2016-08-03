@@ -92,7 +92,7 @@ synchronized修饰方法时获得的是方法对象的锁，若方法是static�
 <meta property="og:site_name" content="Ryanst">
 <meta property="og:description" content="无论synchronized关键字加在方法上还是对象上()代码块，它取得的锁都是对象，而不是把一段代码或函数当作锁实际锁的对象一般有两种，一种是testSynchronized.class这种class对象，一种是new出来的对象
 synchronized修饰方法时获得的是方法对象的锁，若方法是static则得到的是class的锁，synchronized容易造成程序效率低下，导致同一时间只有一个">
-<meta property="og:updated_time" content="2016-08-02T11:25:28.000Z">
+<meta property="og:updated_time" content="2016-08-03T01:55:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="synchronized关键字总结">
 <meta name="twitter:description" content="无论synchronized关键字加在方法上还是对象上()代码块，它取得的锁都是对象，而不是把一段代码或函数当作锁实际锁的对象一般有两种，一种是testSynchronized.class这种class对象，一种是new出来的对象
@@ -319,79 +319,23 @@ synchronized修饰方法时获得的是方法对象的锁，若方法是static�
 <p>synchronized修饰方法时获得的是方法对象的锁，若方法是static则得到的是class的锁，synchronized容易造成程序效率低下，导致同一时间只有一个线程可以调用该方法</p>
 <p>synchronized(){}修饰代码块时锁住的是()中的对象</p>
 <p>当synchronized锁住对象时，这个对象的其他非synchronized模块可以被线程调用，这个对象的其他synchronized也被同步，不能被其他线程同时调用</p>
-<pre><code>public class testSynchronized extends Thread {
-    private final int threadNo;
-    public testSynchronized(int threadNo) {
-        this.threadNo = threadNo;
-    }
-    @Override
-    public void run() {
-        synchronized (this) {
-            for (int i = 1; i &lt; 10; i++) {
-                System.out.println(&quot;No.&quot; + threadNo + &quot;:&quot; + i);
-            }
-        }
-    }
-    private static class Thread1 extends Thread {
-        private final int threadNo;
-        public Thread1(int threadNo) {
-            this.threadNo = threadNo;
-        }
-        @Override
-        public synchronized void run() {
-            for (int i = 1; i &lt; 10; i++) {
-                System.out.println(&quot;No.&quot; + threadNo + &quot;:&quot; + i);
-            }
-        }
-    }
-    private static class Thread2 extends Thread {
-        private final int threadNo;
-        public Thread2(int threadNo) {
-            this.threadNo = threadNo;
-        }
-        @Override
-        public void run() {
-            //若()中为this则无法线程同步
-            synchronized (testSynchronized.class) {
-                for (int i = 1; i &lt; 10; i++) {
-                    System.out.println(&quot;No.&quot; + threadNo + &quot;:&quot; + i);
-                }
-            }
-        }
-    }
-    private static class Thread3 extends Thread {
-        private final int threadNo;
-        public Thread3(int threadNo) {
-            this.threadNo = threadNo;
-        }
-        @Override
-        public void run() {
-            runPlus();
-        }
-        public static synchronized void runPlus() {
-            for (int i = 1; i &lt; 10; i++) {
-                System.out.println(&quot;No.&quot; + Thread.currentThread().getId() + &quot;:&quot; + i);
-            }
-        }
-    }
-    public static void main(String[] args) throws Exception {
-        // 结果是3、4可以实现线程同步，而1、2不行
-
-/*        for (int i = 1; i &lt; 10; i++) {
+<p>```<br>    public class testSynchronized extends Thread {<br>        private final int threadNo;<br>        public testSynchronized(int threadNo) {<br>            this.threadNo = threadNo;<br>        }<br>        @Override<br>        public void run() {<br>            synchronized (this) {<br>                for (int i = 1; i &lt; 10; i++) {<br>                    System.out.println(“No.” + threadNo + “:” + i);<br>                }<br>            }<br>        }<br>        private static class Thread1 extends Thread {<br>            private final int threadNo;<br>            public Thread1(int threadNo) {<br>                this.threadNo = threadNo;<br>            }<br>            @Override<br>            public synchronized void run() {<br>                for (int i = 1; i &lt; 10; i++) {<br>                    System.out.println(“No.” + threadNo + “:” + i);<br>                }<br>            }<br>        }<br>        private static class Thread2 extends Thread {<br>            private final int threadNo;<br>            public Thread2(int threadNo) {<br>                this.threadNo = threadNo;<br>            }<br>            @Override<br>            public void run() {<br>                //若()中为this则无法线程同步<br>                synchronized (testSynchronized.class) {<br>                    for (int i = 1; i &lt; 10; i++) {<br>                        System.out.println(“No.” + threadNo + “:” + i);<br>                    }<br>                }<br>            }<br>        }<br>        private static class Thread3 extends Thread {<br>            private final int threadNo;<br>            public Thread3(int threadNo) {<br>                this.threadNo = threadNo;<br>            }<br>            @Override<br>            public void run() {<br>                runPlus();<br>            }<br>            public static synchronized void runPlus() {<br>                for (int i = 1; i &lt; 10; i++) {<br>                    System.out.println(“No.” + Thread.currentThread().getId() + “:” + i);<br>                }<br>            }<br>        }<br>        public static void main(String[] args) throws Exception {<br>            // 结果是3、4可以实现线程同步，而1、2不行</p>
+<pre><code>/*      for (int i = 1; i &lt; 10; i++) {
             new testSynchronized(i).start();
         }*/
-/*        for (int i = 1; i &lt; 10; i++) {
+/*      for (int i = 1; i &lt; 10; i++) {
             new Thread1(i).start();
         }*/
-/*        for (int i = 1; i &lt; 10; i++) {
+/*      for (int i = 1; i &lt; 10; i++) {
             new Thread2(i).start();
         }*/
-/*        for (int i = 1; i &lt; 10; i++) {
+/*      for (int i = 1; i &lt; 10; i++) {
             new Thread3(i).start();
         }*/
     }
 }
-</code></pre>
+</code></pre><p>```</p>
+
       
     </div>
 

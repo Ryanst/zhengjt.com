@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -84,37 +84,37 @@
 
 
 
-<meta name="description" content="###最普通的后台service写法:
-
+<meta name="description" content="最普通的后台service写法:
 写一个MyService类继承自Service，在onStartCommand中写service想要进行的操作
 在AndroidManifest.xml中注册servive
-    
+&amp;lt;service android:name=&amp;quot;.MyService&amp;quot; &amp;gt;
+&amp;lt;/service&amp;gt;
 
 启动service
-  Intent intent = new Intent(this,MyService.class);  StartService(indent);">
+Intent intent =">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android Service使用总结">
 <meta property="og:url" content="http://zhengjt.com/2015/02/10/Android Service使用总结/index.html">
 <meta property="og:site_name" content="Ryanst">
-<meta property="og:description" content="###最普通的后台service写法:
-
+<meta property="og:description" content="最普通的后台service写法:
 写一个MyService类继承自Service，在onStartCommand中写service想要进行的操作
 在AndroidManifest.xml中注册servive
-    
+&amp;lt;service android:name=&amp;quot;.MyService&amp;quot; &amp;gt;
+&amp;lt;/service&amp;gt;
 
 启动service
-  Intent intent = new Intent(this,MyService.class);  StartService(indent);">
-<meta property="og:updated_time" content="2016-08-03T02:37:24.000Z">
+Intent intent =">
+<meta property="og:updated_time" content="2016-08-03T03:31:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android Service使用总结">
-<meta name="twitter:description" content="###最普通的后台service写法:
-
+<meta name="twitter:description" content="最普通的后台service写法:
 写一个MyService类继承自Service，在onStartCommand中写service想要进行的操作
 在AndroidManifest.xml中注册servive
-    
+&amp;lt;service android:name=&amp;quot;.MyService&amp;quot; &amp;gt;
+&amp;lt;/service&amp;gt;
 
 启动service
-  Intent intent = new Intent(this,MyService.class);  StartService(indent);">
+Intent intent =">
 
 
 
@@ -127,7 +127,7 @@
     motion: true,
     duoshuo: {
       userId: 0,
-      author: 'Author'
+      author: '博主'
     }
   };
 </script>
@@ -140,7 +140,7 @@
   <title> Android Service使用总结 | Ryanst </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -212,7 +212,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-            Home
+            首页
           </a>
         </li>
       
@@ -220,7 +220,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-            Archives
+            归档
           </a>
         </li>
       
@@ -228,15 +228,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-            Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-            Tags
+            分类
           </a>
         </li>
       
@@ -244,7 +236,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-            About
+            关于
           </a>
         </li>
       
@@ -297,12 +289,31 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-02-10T05:38:20+08:00" content="2015-02-10">
               2015-02-10
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -333,29 +344,31 @@
       
 
       
-        <p>###最普通的后台service写法:</p>
-<ol>
+        <h3 id="最普通的后台service写法"><a href="#最普通的后台service写法" class="headerlink" title="最普通的后台service写法:"></a>最普通的后台service写法:</h3><ol>
 <li>写一个MyService类继承自Service，在onStartCommand中写service想要进行的操作</li>
 <li><p>在AndroidManifest.xml中注册servive</p>
-  <service android:name=".MyService"><br>  </service>
-</li>
+<pre><code>&lt;service android:name=&quot;.MyService&quot; &gt;
+&lt;/service&gt;
+</code></pre></li>
 <li><p>启动service</p>
-<p>  Intent intent = new Intent(this,MyService.class);<br>  StartService(indent);</p>
-</li>
+<pre><code>Intent intent = new Intent(this,MyService.class);
+StartService(indent);
+</code></pre></li>
 <li><p>停止servive</p>
-<p>  Intent intent = new Intent(this,MyService.class);<br>  StopService(indent);</p>
-</li>
+<pre><code>Intent intent = new Intent(this,MyService.class);
+StopService(indent);
+</code></pre></li>
 </ol>
-<p>###与activity相关service写法</p>
-<ol>
+<h3 id="与activity相关service写法"><a href="#与activity相关service写法" class="headerlink" title="与activity相关service写法"></a>与activity相关service写法</h3><ol>
 <li>写一个MyService类继承自Service，新建一个MyBind类继承自Binder，在MyBinder中写想要在Service中进行的操作多个函数，新建一个MyBind对象，重写onBind方法，返回MyBind对象指针</li>
 <li>在Activity中新建ServiceConnection对象connection，并重写onServiceConnected(ComponentName name，IBinder mBnder),将mbinder指针赋给Activity类的变量myBinder.(这里onServiceConnected的mBinder就是Service类中新建的Binder对象)</li>
 <li><p>启动Service</p>
-<p>  Intent intent = new Intent(this, MyService.class);<br>  bindService(intent,connection,BIND_AUTO_CTRATE);</p>
-</li>
+<pre><code>Intent intent = new Intent(this, MyService.class);
+bindService(intent,connection,BIND_AUTO_CTRATE);
+</code></pre></li>
 <li><p>停止服务</p>
-<p>  unbindService(connection);</p>
-</li>
+<pre><code>unbindService(connection);
+</code></pre></li>
 </ol>
 <h3 id="IntentService"><a href="#IntentService" class="headerlink" title="IntentService"></a>IntentService</h3><p>IntentService继承自Service，是一种特殊的Service，它提供了一个创建异步的，自动停止的服务的简单的方法：<br>继承自IntentService后，重写onHandleIntent方法，在方法内写子线程需要执行的操作，并且操作结束后服务自动停止，调用服务的onDestory.</p>
 <p>可以使用线程完成IntentService完成的任务，在服务的onBind方法中return null，然后在startCommand中开启线程，当子线程代码最后调用stopSelf()</p>
@@ -384,22 +397,28 @@
 <h3 id="AIDL"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL</h3><p>AIDL（Android Interface Definition Language）是Android接口定义语言的意思，它可以用于让某个Service与多个应用程序组件之间进行跨进程通信，从而可以实现多个应用程序共享同一个Service的功能。以下是基本的AIDL实现：</p>
 <ol>
 <li><p>新建MyAIDLService.aidl文件</p>
-<p>  //aidl对应的接口的方法前面不能加访问权限修饰符<br>  interface MyAIDLService {</p>
-<pre><code>int plus(int a, int b);
-String toUpperCase(String str);
-</code></pre><p>  }</p>
-</li>
+<pre><code>//aidl对应的接口的方法前面不能加访问权限修饰符
+interface MyAIDLService {
+    int plus(int a, int b);
+    String toUpperCase(String str);
+}
+</code></pre></li>
 <li><p>用MyAIDLService.Stub mBinder = new Stub() {…}替换原Service中的Binder对象</p>
 </li>
 <li><p>在onServiceConnected中获取myAIDLService对象，就能调用myAIDLService对象的方法了</p>
-<p>  public void onServiceConnected(ComponentName name, IBinder service) {  </p>
-<pre><code>myAIDLService = MyAIDLService.Stub.asInterface(service);
-</code></pre><p>  } </p>
-</li>
+<pre><code>public void onServiceConnected(ComponentName name, IBinder service) {  
+            myAIDLService = MyAIDLService.Stub.asInterface(service);
+} 
+</code></pre></li>
 <li><p>使远程Service能够被其他程序使用，增加intent-filter中的action，然后拷贝MyAIDLService.aidl文件到另一个程序即可</p>
-  <service android:name="com.example.servicetest.MyService" android:process=":remote"><br>      <intent-filter><br>          <action android:name="com.example.servicetest.MyAIDLService"><br>      </action></intent-filter><br>  </service>
-
-</li>
+<pre><code>&lt;service
+    android:name=&quot;com.example.servicetest.MyService&quot;
+    android:process=&quot;:remote&quot; &gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;com.example.servicetest.MyAIDLService&quot;/&gt;
+    &lt;/intent-filter&gt;
+&lt;/service&gt;
+</code></pre></li>
 </ol>
 
       
@@ -420,6 +439,12 @@ String toUpperCase(String str);
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+        </div>
       
 
       
@@ -489,10 +514,10 @@ String toUpperCase(String str);
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+            站点概览
           </li>
         </ul>
       
@@ -509,12 +534,26 @@ String toUpperCase(String str);
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">18</span>
-              <span class="site-state-item-name">posts</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
           
 
         </nav>
@@ -540,7 +579,7 @@ String toUpperCase(String str);
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#IntentService"><span class="nav-number">1.</span> <span class="nav-text">IntentService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前台服务"><span class="nav-number">2.</span> <span class="nav-text">前台服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service和Activity通信机制："><span class="nav-number">3.</span> <span class="nav-text">Service和Activity通信机制：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程服务"><span class="nav-number">4.</span> <span class="nav-text">远程服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AIDL"><span class="nav-number">5.</span> <span class="nav-text">AIDL</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#最普通的后台service写法"><span class="nav-number">1.</span> <span class="nav-text">最普通的后台service写法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与activity相关service写法"><span class="nav-number">2.</span> <span class="nav-text">与activity相关service写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IntentService"><span class="nav-number">3.</span> <span class="nav-text">IntentService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前台服务"><span class="nav-number">4.</span> <span class="nav-text">前台服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service和Activity通信机制："><span class="nav-number">5.</span> <span class="nav-text">Service和Activity通信机制：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程服务"><span class="nav-number">6.</span> <span class="nav-text">远程服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AIDL"><span class="nav-number">7.</span> <span class="nav-text">AIDL</span></a></li></ol></div>
             
           </div>
         </section>
@@ -567,11 +606,11 @@ String toUpperCase(String str);
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>

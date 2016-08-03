@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Git," />
 
 
 
@@ -85,39 +85,27 @@
 
 
 <meta name="description" content="版本回退:
-回退到上num版本bash
-git reset --hard HEAD~num
-回退到上一个版本，zsh中^需要转义，需要使用bash
-git reset --hard HEAD^
-回退到特定的版本bash
-git reset --hard commitIdcommitId可以通过git log来得到，可以写版本号前几个字符
-
-如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版本的">
+回退到上num版本` bashgit reset –hard HEAD~num`
+回退到上一个版本，zsh中^需要转义，需要使用` bashgit reset –hard HEAD^`
+回退到特定的版本` bashgit reset –hard commitId`commitId可以通过git log来得到，可以写版本号前几个字符
+如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git 使用总结">
 <meta property="og:url" content="http://zhengjt.com/2014/12/05/Git 使用总结/index.html">
 <meta property="og:site_name" content="Ryanst">
 <meta property="og:description" content="版本回退:
-回退到上num版本bash
-git reset --hard HEAD~num
-回退到上一个版本，zsh中^需要转义，需要使用bash
-git reset --hard HEAD^
-回退到特定的版本bash
-git reset --hard commitIdcommitId可以通过git log来得到，可以写版本号前几个字符
-
-如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版本的">
-<meta property="og:updated_time" content="2016-08-03T02:42:15.000Z">
+回退到上num版本` bashgit reset –hard HEAD~num`
+回退到上一个版本，zsh中^需要转义，需要使用` bashgit reset –hard HEAD^`
+回退到特定的版本` bashgit reset –hard commitId`commitId可以通过git log来得到，可以写版本号前几个字符
+如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版">
+<meta property="og:updated_time" content="2016-08-03T03:31:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git 使用总结">
 <meta name="twitter:description" content="版本回退:
-回退到上num版本bash
-git reset --hard HEAD~num
-回退到上一个版本，zsh中^需要转义，需要使用bash
-git reset --hard HEAD^
-回退到特定的版本bash
-git reset --hard commitIdcommitId可以通过git log来得到，可以写版本号前几个字符
-
-如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版本的">
+回退到上num版本` bashgit reset –hard HEAD~num`
+回退到上一个版本，zsh中^需要转义，需要使用` bashgit reset –hard HEAD^`
+回退到特定的版本` bashgit reset –hard commitId`commitId可以通过git log来得到，可以写版本号前几个字符
+如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版">
 
 
 
@@ -130,7 +118,7 @@ git reset --hard commitIdcommitId可以通过git log来得到，可以写版本�
     motion: true,
     duoshuo: {
       userId: 0,
-      author: 'Author'
+      author: '博主'
     }
   };
 </script>
@@ -143,7 +131,7 @@ git reset --hard commitIdcommitId可以通过git log来得到，可以写版本�
   <title> Git 使用总结 | Ryanst </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -215,7 +203,7 @@ git reset --hard commitIdcommitId可以通过git log来得到，可以写版本�
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-            Home
+            首页
           </a>
         </li>
       
@@ -223,7 +211,7 @@ git reset --hard commitIdcommitId可以通过git log来得到，可以写版本�
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-            Archives
+            归档
           </a>
         </li>
       
@@ -231,15 +219,7 @@ git reset --hard commitIdcommitId可以通过git log来得到，可以写版本�
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-            Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-            Tags
+            分类
           </a>
         </li>
       
@@ -247,7 +227,7 @@ git reset --hard commitIdcommitId可以通过git log来得到，可以写版本�
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-            About
+            关于
           </a>
         </li>
       
@@ -300,12 +280,31 @@ git reset --hard commitIdcommitId可以通过git log来得到，可以写版本�
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-12-05T03:25:59+08:00" content="2014-12-05">
               2014-12-05
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -337,25 +336,16 @@ git reset --hard commitIdcommitId可以通过git log来得到，可以写版本�
 
       
         <h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退:"></a>版本回退:</h2><ul>
-<li>回退到上num版本<br><code>bash
-git reset --hard HEAD~num</code></li>
-<li>回退到上一个版本，zsh中^需要转义，需要使用<br><code>bash
-git reset --hard HEAD^</code></li>
-<li><p>回退到特定的版本<br><code>bash
-git reset --hard commitId</code><br>commitId可以通过git log来得到，可以写版本号前几个字符</p>
-</li>
-<li><p>如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版本的版本号，可以<br><code>bash
-git reflog</code><br>这个命令记录了你的每一次命令</p>
-</li>
+<li>回退到上num版本<br>` bash<br>git reset –hard HEAD~num<br>`</li>
+<li>回退到上一个版本，zsh中^需要转义，需要使用<br>` bash<br>git reset –hard HEAD^<br>`</li>
+<li>回退到特定的版本<br>` bash<br>git reset –hard commitId<br>`<br>commitId可以通过git log来得到，可以写版本号前几个字符</li>
+<li>如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版本的版本号，可以<br>` bash<br>git reflog<br>`<br>这个命令记录了你的每一次命令</li>
 </ul>
 <h2 id="操作回退："><a href="#操作回退：" class="headerlink" title="操作回退："></a>操作回退：</h2><ul>
-<li>放弃当前修改，回到上一次git 命令后的初始状态(这里—符号后一定要有一个空格)<br><code>bash
-git checkout — filename</code></li>
-<li>把当前add到暂存区的file回退到工作区(相当于取消add这个file的操作)<br><code>bash    
-git reset HEAD filename</code></li>
+<li>放弃当前修改，回到上一次git 命令后的初始状态(这里—符号后一定要有一个空格)<br>` bash<br>git checkout — filename<br>`</li>
+<li>把当前add到暂存区的file回退到工作区(相当于取消add这个file的操作)<br>` bash<br>git reset HEAD filename<br>`</li>
 </ul>
-<h2 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作:"></a>远程操作:</h2><p><code>bash
-git remote add origin git@github.com:Ryanst/test.git</code><br>在本地目录下键入这个命令，将远程库与本地该目录关联</p>
+<h2 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作:"></a>远程操作:</h2><p>` bash<br>git remote add origin git@github.com:Ryanst/test.git<br>`<br>在本地目录下键入这个命令，将远程库与本地该目录关联</p>
 <p>关联后，使用命令git push -u origin master第一次推送master分支的所有内容</p>
 <h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><ul>
 <li>常用命令</li>
@@ -369,26 +359,17 @@ git remote add origin git@github.com:Ryanst/test.git</code><br>在本地目录�
 <ul>
 <li>git解决冲突的一般方法：</li>
 </ul>
-<p><code>bash
-git merge mybranch
-//然后修改冲突文件
-git add filename
-git commit -m “解决冲突&quot;
-git branch -d mybranch</code></p>
+<p>` bash<br>git merge mybranch<br>//然后修改冲突文件<br>git add filename<br>git commit -m “解决冲突”<br>git branch -d mybranch<br>`</p>
 <p>使用用git log –graph命令可以看到分支合并图可以看到分支合并图</p>
 <p>储存为commit的当前工作区现场：<br>当手头工作没有完成时，先把工作现场git stash一下，然后去修复bug，修复后，再git stash pop，回到工作现场。</p>
 <h2 id="多人协作"><a href="#多人协作" class="headerlink" title="多人协作"></a>多人协作</h2><ul>
-<li><p>查看远程库信息<br><code>bash
-git remote -v；</code><br>本地新建的分支如果不推送到远程，对其他人就是不可见的；</p>
+<li><p>查看远程库信息<br>` bash<br>git remote -v；<br>`<br>本地新建的分支如果不推送到远程，对其他人就是不可见的；</p>
 </li>
-<li><p>从本地推送分支<br><code>bash    
-git push origin branch-name</code><br>如果推送失败，先用git pull抓取远程的新提交；</p>
+<li><p>从本地推送分支<br>` bash<br>git push origin branch-name<br>`<br>如果推送失败，先用git pull抓取远程的新提交；</p>
 </li>
-<li><p>在本地创建和远程分支对应的分支<br><code>bash
-git checkout -b branch-name origin/branch-name</code></p>
+<li><p>在本地创建和远程分支对应的分支<br>` bash<br>git checkout -b branch-name origin/branch-name<br>`</p>
 </li>
-<li>建立本地分支和远程分支的关联<br><code>bash
-git branch --set-upstream branch-name origin/branch-name；</code></li>
+<li>建立本地分支和远程分支的关联<br>` bash<br>git branch –set-upstream branch-name origin/branch-name；<br>`</li>
 </ul>
 <p>从远程抓取分支，使用git pull，如果有冲突，要先处理冲突</p>
 <p>参考资料：<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a> </p>
@@ -411,6 +392,12 @@ git branch --set-upstream branch-name origin/branch-name；</code></li>
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag">#Git</a>
+          
+        </div>
       
 
       
@@ -480,10 +467,10 @@ git branch --set-upstream branch-name origin/branch-name；</code></li>
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+            站点概览
           </li>
         </ul>
       
@@ -500,12 +487,26 @@ git branch --set-upstream branch-name origin/branch-name；</code></li>
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">18</span>
-              <span class="site-state-item-name">posts</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
           
 
         </nav>
@@ -558,11 +559,11 @@ git branch --set-upstream branch-name origin/branch-name；</code></li>
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>

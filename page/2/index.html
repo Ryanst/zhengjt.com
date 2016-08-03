@@ -105,7 +105,7 @@
     motion: true,
     duoshuo: {
       userId: 0,
-      author: 'Author'
+      author: '博主'
     }
   };
 </script>
@@ -118,7 +118,7 @@
   <title> Ryanst </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -192,7 +192,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-            Home
+            首页
           </a>
         </li>
       
@@ -200,7 +200,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-            Archives
+            归档
           </a>
         </li>
       
@@ -208,15 +208,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-            Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-            Tags
+            分类
           </a>
         </li>
       
@@ -224,7 +216,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-            About
+            关于
           </a>
         </li>
       
@@ -280,7 +272,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-05-10T02:38:10+08:00" content="2015-05-10">
               2015-05-10
             </time>
@@ -386,7 +378,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-04-03T02:44:30+08:00" content="2015-04-03">
               2015-04-03
             </time>
@@ -526,7 +518,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-04-01T02:16:11+08:00" content="2015-04-01">
               2015-04-01
             </time>
@@ -721,7 +713,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-03-01T08:43:54+08:00" content="2015-03-01">
               2015-03-01
             </time>
@@ -888,12 +880,31 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-02-10T05:38:20+08:00" content="2015-02-10">
               2015-02-10
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -926,29 +937,31 @@
       
         
           
-            <p>###最普通的后台service写法:</p>
-<ol>
+            <h3 id="最普通的后台service写法"><a href="#最普通的后台service写法" class="headerlink" title="最普通的后台service写法:"></a>最普通的后台service写法:</h3><ol>
 <li>写一个MyService类继承自Service，在onStartCommand中写service想要进行的操作</li>
 <li><p>在AndroidManifest.xml中注册servive</p>
-  <service android:name=".MyService"><br>  </service>
-</li>
+<pre><code>&lt;service android:name=&quot;.MyService&quot; &gt;
+&lt;/service&gt;
+</code></pre></li>
 <li><p>启动service</p>
-<p>  Intent intent = new Intent(this,MyService.class);<br>  StartService(indent);</p>
-</li>
+<pre><code>Intent intent = new Intent(this,MyService.class);
+StartService(indent);
+</code></pre></li>
 <li><p>停止servive</p>
-<p>  Intent intent = new Intent(this,MyService.class);<br>  StopService(indent);</p>
-</li>
+<pre><code>Intent intent = new Intent(this,MyService.class);
+StopService(indent);
+</code></pre></li>
 </ol>
-<p>###与activity相关service写法</p>
-<ol>
+<h3 id="与activity相关service写法"><a href="#与activity相关service写法" class="headerlink" title="与activity相关service写法"></a>与activity相关service写法</h3><ol>
 <li>写一个MyService类继承自Service，新建一个MyBind类继承自Binder，在MyBinder中写想要在Service中进行的操作多个函数，新建一个MyBind对象，重写onBind方法，返回MyBind对象指针</li>
 <li>在Activity中新建ServiceConnection对象connection，并重写onServiceConnected(ComponentName name，IBinder mBnder),将mbinder指针赋给Activity类的变量myBinder.(这里onServiceConnected的mBinder就是Service类中新建的Binder对象)</li>
 <li><p>启动Service</p>
-<p>  Intent intent = new Intent(this, MyService.class);<br>  bindService(intent,connection,BIND_AUTO_CTRATE);</p>
-</li>
+<pre><code>Intent intent = new Intent(this, MyService.class);
+bindService(intent,connection,BIND_AUTO_CTRATE);
+</code></pre></li>
 <li><p>停止服务</p>
-<p>  unbindService(connection);</p>
-</li>
+<pre><code>unbindService(connection);
+</code></pre></li>
 </ol>
 <h3 id="IntentService"><a href="#IntentService" class="headerlink" title="IntentService"></a>IntentService</h3><p>IntentService继承自Service，是一种特殊的Service，它提供了一个创建异步的，自动停止的服务的简单的方法：<br>继承自IntentService后，重写onHandleIntent方法，在方法内写子线程需要执行的操作，并且操作结束后服务自动停止，调用服务的onDestory.</p>
 <p>可以使用线程完成IntentService完成的任务，在服务的onBind方法中return null，然后在startCommand中开启线程，当子线程代码最后调用stopSelf()</p>
@@ -977,22 +990,28 @@
 <h3 id="AIDL"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL</h3><p>AIDL（Android Interface Definition Language）是Android接口定义语言的意思，它可以用于让某个Service与多个应用程序组件之间进行跨进程通信，从而可以实现多个应用程序共享同一个Service的功能。以下是基本的AIDL实现：</p>
 <ol>
 <li><p>新建MyAIDLService.aidl文件</p>
-<p>  //aidl对应的接口的方法前面不能加访问权限修饰符<br>  interface MyAIDLService {</p>
-<pre><code>int plus(int a, int b);
-String toUpperCase(String str);
-</code></pre><p>  }</p>
-</li>
+<pre><code>//aidl对应的接口的方法前面不能加访问权限修饰符
+interface MyAIDLService {
+    int plus(int a, int b);
+    String toUpperCase(String str);
+}
+</code></pre></li>
 <li><p>用MyAIDLService.Stub mBinder = new Stub() {…}替换原Service中的Binder对象</p>
 </li>
 <li><p>在onServiceConnected中获取myAIDLService对象，就能调用myAIDLService对象的方法了</p>
-<p>  public void onServiceConnected(ComponentName name, IBinder service) {  </p>
-<pre><code>myAIDLService = MyAIDLService.Stub.asInterface(service);
-</code></pre><p>  } </p>
-</li>
+<pre><code>public void onServiceConnected(ComponentName name, IBinder service) {  
+            myAIDLService = MyAIDLService.Stub.asInterface(service);
+} 
+</code></pre></li>
 <li><p>使远程Service能够被其他程序使用，增加intent-filter中的action，然后拷贝MyAIDLService.aidl文件到另一个程序即可</p>
-  <service android:name="com.example.servicetest.MyService" android:process=":remote"><br>      <intent-filter><br>          <action android:name="com.example.servicetest.MyAIDLService"><br>      </action></intent-filter><br>  </service>
-
-</li>
+<pre><code>&lt;service
+    android:name=&quot;com.example.servicetest.MyService&quot;
+    android:process=&quot;:remote&quot; &gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;com.example.servicetest.MyAIDLService&quot;/&gt;
+    &lt;/intent-filter&gt;
+&lt;/service&gt;
+</code></pre></li>
 </ol>
 
           
@@ -1056,12 +1075,31 @@ String toUpperCase(String str);
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-01-25T05:08:12+08:00" content="2015-01-25">
               2015-01-25
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -1100,13 +1138,75 @@ String toUpperCase(String str);
 <li><p>设置 <code>android:configChanges=&quot;orientation|keyboardHidden&quot;</code>，在2.3上表现为不重新创建activity，5.1如下</p>
 </li>
 </ol>
-<p><code>android:targetSdkVersion&lt;=“12”//生命周期表现为不重新创建activity
-    android:targetSdkVersion&gt;”12”//表现为重新创建activity</code></p>
+<p>`<br>    android:targetSdkVersion&lt;=“12”//生命周期表现为不重新创建activity<br>    android:targetSdkVersion&gt;”12”//表现为重新创建activity<br>`</p>
 <ol>
 <li>设置 <code>android:configChanges=&quot;orientation|keyboardHidden|screenSize&quot;</code>，在2.3和5.1上都表现为不重新创建，在屏幕旋转时，只会调用<code>onConfigurationChanged</code>方法</li>
 </ol>
 <p>测试代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.relative_center_2);</div><div class="line">        Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onCreate方法"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onStart</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onStart();</div><div class="line">        Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onStart方法"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onResume();</div><div class="line">        Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onResume方法"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onPause();</div><div class="line">        Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onPause方法"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onStop</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onStop();</div><div class="line">        Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onStop方法"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDestroy();</div><div class="line">        Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onDestroy方法"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onConfigurationChanged</span><span class="params">(Configuration newConfig)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onConfigurationChanged(newConfig);</div><div class="line">        Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onConfigurationChanged方法"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onRestart</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onRestart();</div><div class="line">        Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onRestart方法"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSaveInstanceState</span><span class="params">(Bundle outState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onSaveInstanceState(outState);</div><div class="line">        Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onSaveInstanceState方法"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onRestoreInstanceState</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onRestoreInstanceState(savedInstanceState);</div><div class="line">        Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onRestoreInstanceState方法"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>``` java</p>
+<p>public class MainActivity extends Activity {</p>
+<pre><code>@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.relative_center_2);
+    Log.i(&quot;MainActivity&quot;, &quot;执行onCreate方法&quot;);
+}
+
+@Override
+protected void onStart() {
+    super.onStart();
+    Log.i(&quot;MainActivity&quot;, &quot;执行onStart方法&quot;);
+}
+
+@Override
+protected void onResume() {
+    super.onResume();
+    Log.i(&quot;MainActivity&quot;, &quot;执行onResume方法&quot;);
+}
+
+@Override
+protected void onPause() {
+    super.onPause();
+    Log.i(&quot;MainActivity&quot;, &quot;执行onPause方法&quot;);
+}
+
+@Override
+protected void onStop() {
+    super.onStop();
+    Log.i(&quot;MainActivity&quot;, &quot;执行onStop方法&quot;);
+}
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    Log.i(&quot;MainActivity&quot;, &quot;执行onDestroy方法&quot;);
+}
+
+@Override
+public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    Log.i(&quot;MainActivity&quot;, &quot;执行onConfigurationChanged方法&quot;);
+}
+
+@Override
+protected void onRestart() {
+    super.onRestart();
+    Log.i(&quot;MainActivity&quot;, &quot;执行onRestart方法&quot;);
+}
+
+@Override
+protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    Log.i(&quot;MainActivity&quot;, &quot;执行onSaveInstanceState方法&quot;);
+}
+
+@Override
+protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    super.onRestoreInstanceState(savedInstanceState);
+    Log.i(&quot;MainActivity&quot;, &quot;执行onRestoreInstanceState方法&quot;);
+}
+</code></pre><p>}<br>```</p>
+
           
         
       
@@ -1168,12 +1268,31 @@ String toUpperCase(String str);
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-12-05T03:25:59+08:00" content="2014-12-05">
               2014-12-05
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -1207,25 +1326,16 @@ String toUpperCase(String str);
         
           
             <h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退:"></a>版本回退:</h2><ul>
-<li>回退到上num版本<br><code>bash
-git reset --hard HEAD~num</code></li>
-<li>回退到上一个版本，zsh中^需要转义，需要使用<br><code>bash
-git reset --hard HEAD^</code></li>
-<li><p>回退到特定的版本<br><code>bash
-git reset --hard commitId</code><br>commitId可以通过git log来得到，可以写版本号前几个字符</p>
-</li>
-<li><p>如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版本的版本号，可以<br><code>bash
-git reflog</code><br>这个命令记录了你的每一次命令</p>
-</li>
+<li>回退到上num版本<br>` bash<br>git reset –hard HEAD~num<br>`</li>
+<li>回退到上一个版本，zsh中^需要转义，需要使用<br>` bash<br>git reset –hard HEAD^<br>`</li>
+<li>回退到特定的版本<br>` bash<br>git reset –hard commitId<br>`<br>commitId可以通过git log来得到，可以写版本号前几个字符</li>
+<li>如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版本的版本号，可以<br>` bash<br>git reflog<br>`<br>这个命令记录了你的每一次命令</li>
 </ul>
 <h2 id="操作回退："><a href="#操作回退：" class="headerlink" title="操作回退："></a>操作回退：</h2><ul>
-<li>放弃当前修改，回到上一次git 命令后的初始状态(这里—符号后一定要有一个空格)<br><code>bash
-git checkout — filename</code></li>
-<li>把当前add到暂存区的file回退到工作区(相当于取消add这个file的操作)<br><code>bash    
-git reset HEAD filename</code></li>
+<li>放弃当前修改，回到上一次git 命令后的初始状态(这里—符号后一定要有一个空格)<br>` bash<br>git checkout — filename<br>`</li>
+<li>把当前add到暂存区的file回退到工作区(相当于取消add这个file的操作)<br>` bash<br>git reset HEAD filename<br>`</li>
 </ul>
-<h2 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作:"></a>远程操作:</h2><p><code>bash
-git remote add origin git@github.com:Ryanst/test.git</code><br>在本地目录下键入这个命令，将远程库与本地该目录关联</p>
+<h2 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作:"></a>远程操作:</h2><p>` bash<br>git remote add origin git@github.com:Ryanst/test.git<br>`<br>在本地目录下键入这个命令，将远程库与本地该目录关联</p>
 <p>关联后，使用命令git push -u origin master第一次推送master分支的所有内容</p>
 <h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><ul>
 <li>常用命令</li>
@@ -1239,26 +1349,17 @@ git remote add origin git@github.com:Ryanst/test.git</code><br>在本地目录�
 <ul>
 <li>git解决冲突的一般方法：</li>
 </ul>
-<p><code>bash
-git merge mybranch
-//然后修改冲突文件
-git add filename
-git commit -m “解决冲突&quot;
-git branch -d mybranch</code></p>
+<p>` bash<br>git merge mybranch<br>//然后修改冲突文件<br>git add filename<br>git commit -m “解决冲突”<br>git branch -d mybranch<br>`</p>
 <p>使用用git log –graph命令可以看到分支合并图可以看到分支合并图</p>
 <p>储存为commit的当前工作区现场：<br>当手头工作没有完成时，先把工作现场git stash一下，然后去修复bug，修复后，再git stash pop，回到工作现场。</p>
 <h2 id="多人协作"><a href="#多人协作" class="headerlink" title="多人协作"></a>多人协作</h2><ul>
-<li><p>查看远程库信息<br><code>bash
-git remote -v；</code><br>本地新建的分支如果不推送到远程，对其他人就是不可见的；</p>
+<li><p>查看远程库信息<br>` bash<br>git remote -v；<br>`<br>本地新建的分支如果不推送到远程，对其他人就是不可见的；</p>
 </li>
-<li><p>从本地推送分支<br><code>bash    
-git push origin branch-name</code><br>如果推送失败，先用git pull抓取远程的新提交；</p>
+<li><p>从本地推送分支<br>` bash<br>git push origin branch-name<br>`<br>如果推送失败，先用git pull抓取远程的新提交；</p>
 </li>
-<li><p>在本地创建和远程分支对应的分支<br><code>bash
-git checkout -b branch-name origin/branch-name</code></p>
+<li><p>在本地创建和远程分支对应的分支<br>` bash<br>git checkout -b branch-name origin/branch-name<br>`</p>
 </li>
-<li>建立本地分支和远程分支的关联<br><code>bash
-git branch --set-upstream branch-name origin/branch-name；</code></li>
+<li>建立本地分支和远程分支的关联<br>` bash<br>git branch –set-upstream branch-name origin/branch-name；<br>`</li>
 </ul>
 <p>从远程抓取分支，使用git pull，如果有冲突，要先处理冲突</p>
 <p>参考资料：<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a> </p>
@@ -1324,12 +1425,31 @@ git branch --set-upstream branch-name origin/branch-name；</code></li>
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-09-29T10:23:04+08:00" content="2014-09-29">
               2014-09-29
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -1366,34 +1486,8 @@ git branch --set-upstream branch-name origin/branch-name；</code></li>
 <p><img src="../images/java-collection-tree.png" alt="java-collection-tree"></p>
 <p>Collection接口的类实现了单元素存储、Map接口实现了键/值的映射表(键唯一)<br>Collection添加用add,设置值用set(index),获取值需要有序用get(index)<br>Map添加用put(key,value),设置值依然用put(key,value)覆盖原值,获取值用get(key)</p>
 <p>队列：LinkedList实现了Queue<e>接口，因此要使用队列的时候使用LinkedList即可</e></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Queue&lt;Integer&gt; queue = <span class="keyword">new</span> LinkedList&lt;Integer&gt;();</div></pre></td></tr></table></figure>
-<p>Queue接口：</p>
-<table>
-<thead>
-<tr>
-<th>\</th>
-<th>抛出异常</th>
-<th>返回特殊值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>插入</td>
-<td>add(e)</td>
-<td>offer(e)</td>
-</tr>
-<tr>
-<td>移除</td>
-<td>remove()</td>
-<td>poll()</td>
-</tr>
-<tr>
-<td>检查</td>
-<td>element()</td>
-<td>peek()</td>
-</tr>
-</tbody>
-</table>
+<p>``` java<br>Queue<integer> queue = new LinkedList<integer>();<br>```<br>Queue接口：</integer></integer></p>
+<p>   \  |  抛出异常  |  返回特殊值<br>-—-|—–|—–<br>插入  |  add(e)  |  offer(e)<br>移除  |  remove()  |  poll()<br>检查  |  element()  |  peek()</p>
 <p>add:添加到队尾</p>
 <p>remove:移除队头元素//与一般的认知有些不同</p>
 <p>element:返回队头元素</p>
@@ -1416,7 +1510,7 @@ git branch --set-upstream branch-name origin/branch-name；</code></li>
 <li>TreeMap：有序key/value集合</li>
 </ul>
 <p>数组转换成集合比较方便,使用Array.asList的包装器即可</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">String []values;</div><div class="line">HashSet &lt;String&gt; hashSet = <span class="keyword">new</span> HashSet&lt;&gt;(Array.asList(values));</div></pre></td></tr></table></figure>
+<p>``` java<br>String []values;<br>HashSet <string> hashSet = new HashSet\&lt;>(Array.asList(values));<br>```</string></p>
 <p>集合转换成数组——手动转</p>
 <p>Vector、Stack、HashTable都是JAVA集合的基础版本，目前已经被上述集合框架代替</p>
 <p>队列还有一个实现是ArrayDeque，可以实现双向队列</p>
@@ -1494,12 +1588,26 @@ git branch --set-upstream branch-name origin/branch-name；</code></li>
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">18</span>
-              <span class="site-state-item-name">posts</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
           
 
         </nav>
@@ -1541,11 +1649,11 @@ git branch --set-upstream branch-name origin/branch-name；</code></li>
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>

@@ -84,15 +84,39 @@
 
 
 
-<meta name="description" content="Yet another android developer">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zhengjt's Home">
-<meta property="og:url" content="http://zhengjt.com/tags/Git/index.html">
+<meta name="description" content="###Fragment一般用于大屏设备
+
+问：如何写一份代码多个设备使用且根据设备尺寸来展示不同的界面？
+答：新建layout-large或者layout-sw600dp文件夹表示在大屏设备或者在dp大于600的设备的时候会使用这个文件夹中的.xml布局
+
+问：一个fragemnt需要什么？
+
+答：一个fragment.xml+一个fragment.java extends Fragment(通过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Andorid Fragment总结">
+<meta property="og:url" content="http://zhengjt.com/2015/06/03/2015-06-02-Andorid Fragment总结/index.html">
 <meta property="og:site_name" content="Zhengjt's Home">
-<meta property="og:description" content="Yet another android developer">
+<meta property="og:description" content="###Fragment一般用于大屏设备
+
+问：如何写一份代码多个设备使用且根据设备尺寸来展示不同的界面？
+答：新建layout-large或者layout-sw600dp文件夹表示在大屏设备或者在dp大于600的设备的时候会使用这个文件夹中的.xml布局
+
+问：一个fragemnt需要什么？
+
+答：一个fragment.xml+一个fragment.java extends Fragment(通过">
+<meta property="og:image" content="http://zhengjt.com/images/fragment-life-circle.jpg">
+<meta property="og:updated_time" content="2016-08-02T11:25:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zhengjt's Home">
-<meta name="twitter:description" content="Yet another android developer">
+<meta name="twitter:title" content="Andorid Fragment总结">
+<meta name="twitter:description" content="###Fragment一般用于大屏设备
+
+问：如何写一份代码多个设备使用且根据设备尺寸来展示不同的界面？
+答：新建layout-large或者layout-sw600dp文件夹表示在大屏设备或者在dp大于600的设备的时候会使用这个文件夹中的.xml布局
+
+问：一个fragemnt需要什么？
+
+答：一个fragment.xml+一个fragment.java extends Fragment(通过">
+<meta name="twitter:image" content="http://zhengjt.com/images/fragment-life-circle.jpg">
 
 
 
@@ -113,9 +137,9 @@
 
 
 
-  <link rel="canonical" href="http://zhengjt.com/tags/Git/"/>
+  <link rel="canonical" href="http://zhengjt.com/2015/06/03/2015-06-02-Andorid Fragment总结/"/>
 
-  <title> Tag: Git | Zhengjt's Home </title>
+  <title> Andorid Fragment总结 | Zhengjt's Home </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -155,7 +179,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -271,46 +295,177 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Git
-        <small>Tag</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Andorid Fragment总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-06-03T10:23:14+08:00" content="2015-06-03">
+              2015-06-03
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/06/03/2015-06-02-Andorid Fragment总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/03/2015-06-02-Andorid Fragment总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>###Fragment一般用于大屏设备</p>
+<ul>
+<li>问：如何写一份代码多个设备使用且根据设备尺寸来展示不同的界面？</li>
+<li><p>答：新建layout-large或者layout-sw600dp文件夹表示在大屏设备或者在dp大于600的设备的时候会使用这个文件夹中的.xml布局</p>
+</li>
+<li><p>问：一个fragemnt需要什么？</p>
+</li>
+<li><p>答：一个fragment.xml+一个fragment.java extends Fragment<br>(通过View view =inflater.inflate(R.layout.fragment,container,false)；来实现与.xml文件的关联)</p>
+</li>
+<li><p>问：在activity中如何使用？</p>
+</li>
+<li><p>答：在.xml中代码，例如以下：</p>
+<pre><code>&lt;fragment
+    android:id=&quot;@+id/news_title_fragment&quot;
+    android:name=&quot;com.example.fragmentbestpractice.NewsTitleFragment&quot;
+    android:layout_width=&quot;0dp&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_weight=&quot;1&quot; /&gt;
+</code></pre></li>
+<li><p>问：如何动态改变fragment？</p>
+</li>
+<li>答：运用fragmentManager</li>
+</ul>
+<pre><code>FragmentManager fragmentManager = getFragmentManager();
+FragmentTransaction transaction = fragmentManager.beginTransaction();
+transaction.replace(R.id.right_layout, fragment);
+transaction.addToBackStack(null);//将事务添加到返回栈中
+transaction.commit();
+</code></pre><ul>
+<li>问：activity和fragment间如何通信</li>
+<li><p>答：</p>
+<p>1、在activity的.java文件中可以通过findFragmentById来获得特定fragment类的当前对象</p>
+<p>   MyFragment frag = (MyFragment);<br>   getFragmentManager().findFragmentById(R.id.my_fragment);</p>
+<p>2、在fragment的.java文件中可以通过getActivity()来获取当前活动</p>
+<p>   MyActivity myActivity = (MyActivity) getActivity();//Activity继承自Context</p>
+</li>
+<li><p>问：碎片的生命周期</p>
+</li>
+<li>答：Fragment必须是依存与Activity而存在的，因此Activity的生命周期会直接影响到Fragment的生命周期。</li>
+</ul>
+<p><img src="/images/fragment-life-circle.jpg" alt="Fragment生命周期"></p>
+<p><em>需要注意的是</em>：</p>
+<ol>
+<li>是否有调用addToBackStack()决定fragment是否在返回栈中</li>
+<li>由停止状态返回运行状态时，不会调用onCreate()和onCreateView，而是从onActivityCreate()调用起</li>
+<li>为了避免运行时配置发生变化，最常见的就是屏幕发生旋转后重复绘制fragment，可以在绘制fragment的代码外面加上条件if(savedInstanceState == null) </li>
+</ol>
+<p>补充fragment知识:</p>
+<p><a href="http://blog.csdn.net/lmj623565791/article/details/37970961" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/37970961</a></p>
+<p><a href="http://blog.csdn.net/lmj623565791/article/details/37992017" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/37992017</a></p>
+<p><a href="http://blog.csdn.net/lmj623565791/article/details/42628537" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/42628537</a></p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2014/12/05/2014-12-04-Git 使用总结/" itemprop="url">
-              
-                <span itemprop="name">Git 使用总结</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2014-12-05T03:25:59+08:00"
-              content="2014-12-05" >
-          12-05
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/10/2015-05-09-JAVA对象初始化/" rel="next" title="JAVA对象初始化时构造器的调用顺序">
+                <i class="fa fa-chevron-left"></i> JAVA对象初始化时构造器的调用顺序
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/09/2015-07-08-QWSDK整理-Android网络优化/" rel="prev" title="QWSDK整理-Android网络优化">
+                QWSDK整理-Android网络优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -318,6 +473,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/06/03/2015-06-02-Andorid Fragment总结/"
+           data-title="Andorid Fragment总结" data-url="http://zhengjt.com/2015/06/03/2015-06-02-Andorid Fragment总结/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -337,8 +500,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -417,6 +589,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -513,6 +696,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

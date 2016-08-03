@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Git," />
 
 
 
@@ -84,15 +84,28 @@
 
 
 
-<meta name="description" content="Yet another android developer">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zhengjt's Home">
-<meta property="og:url" content="http://zhengjt.com/tags/Git/index.html">
+<meta name="description" content="版本回退:
+回退到上num版本` bashgit reset –hard HEAD~num`
+回退到上一个版本，zsh中^需要转义，需要使用` bashgit reset –hard HEAD^`
+回退到特定的版本` bashgit reset –hard commitId`commitId可以通过git log来得到，可以写版本号前几个字符
+如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git 使用总结">
+<meta property="og:url" content="http://zhengjt.com/2014/12/05/2014-12-04-Git 使用总结/index.html">
 <meta property="og:site_name" content="Zhengjt's Home">
-<meta property="og:description" content="Yet another android developer">
+<meta property="og:description" content="版本回退:
+回退到上num版本` bashgit reset –hard HEAD~num`
+回退到上一个版本，zsh中^需要转义，需要使用` bashgit reset –hard HEAD^`
+回退到特定的版本` bashgit reset –hard commitId`commitId可以通过git log来得到，可以写版本号前几个字符
+如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版">
+<meta property="og:updated_time" content="2016-08-03T03:31:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zhengjt's Home">
-<meta name="twitter:description" content="Yet another android developer">
+<meta name="twitter:title" content="Git 使用总结">
+<meta name="twitter:description" content="版本回退:
+回退到上num版本` bashgit reset –hard HEAD~num`
+回退到上一个版本，zsh中^需要转义，需要使用` bashgit reset –hard HEAD^`
+回退到特定的版本` bashgit reset –hard commitId`commitId可以通过git log来得到，可以写版本号前几个字符
+如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版">
 
 
 
@@ -113,9 +126,9 @@
 
 
 
-  <link rel="canonical" href="http://zhengjt.com/tags/Git/"/>
+  <link rel="canonical" href="http://zhengjt.com/2014/12/05/2014-12-04-Git 使用总结/"/>
 
-  <title> Tag: Git | Zhengjt's Home </title>
+  <title> Git 使用总结 | Zhengjt's Home </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -155,7 +168,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -271,46 +284,189 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Git
-        <small>Tag</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Git 使用总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-12-05T03:25:59+08:00" content="2014-12-05">
+              2014-12-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/12/05/2014-12-04-Git 使用总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/05/2014-12-04-Git 使用总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退:"></a>版本回退:</h2><ul>
+<li>回退到上num版本<br>` bash<br>git reset –hard HEAD~num<br>`</li>
+<li>回退到上一个版本，zsh中^需要转义，需要使用<br>` bash<br>git reset –hard HEAD^<br>`</li>
+<li>回退到特定的版本<br>` bash<br>git reset –hard commitId<br>`<br>commitId可以通过git log来得到，可以写版本号前几个字符</li>
+<li>如果回滚版本后反悔了，又想恢复到新版本，但是找不到新版本的版本号，可以<br>` bash<br>git reflog<br>`<br>这个命令记录了你的每一次命令</li>
+</ul>
+<h2 id="操作回退："><a href="#操作回退：" class="headerlink" title="操作回退："></a>操作回退：</h2><ul>
+<li>放弃当前修改，回到上一次git 命令后的初始状态(这里—符号后一定要有一个空格)<br>` bash<br>git checkout — filename<br>`</li>
+<li>把当前add到暂存区的file回退到工作区(相当于取消add这个file的操作)<br>` bash<br>git reset HEAD filename<br>`</li>
+</ul>
+<h2 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作:"></a>远程操作:</h2><p>` bash<br>git remote add origin git@github.com:Ryanst/test.git<br>`<br>在本地目录下键入这个命令，将远程库与本地该目录关联</p>
+<p>关联后，使用命令git push -u origin master第一次推送master分支的所有内容</p>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><ul>
+<li>常用命令</li>
+</ul>
+<p>查看分支：git branch</p>
+<p>创建分支：git branch <name></name></p>
+<p>切换分支：git checkout <name></name></p>
+<p>创建+切换分支：git checkout -b <name></name></p>
+<p>合并某分支到当前分支：git merge <name></name></p>
+<p>删除分支：git branch -d <name></name></p>
+<ul>
+<li>git解决冲突的一般方法：</li>
+</ul>
+<p>` bash<br>git merge mybranch<br>//然后修改冲突文件<br>git add filename<br>git commit -m “解决冲突”<br>git branch -d mybranch<br>`</p>
+<p>使用用git log –graph命令可以看到分支合并图可以看到分支合并图</p>
+<p>储存为commit的当前工作区现场：<br>当手头工作没有完成时，先把工作现场git stash一下，然后去修复bug，修复后，再git stash pop，回到工作现场。</p>
+<h2 id="多人协作"><a href="#多人协作" class="headerlink" title="多人协作"></a>多人协作</h2><ul>
+<li><p>查看远程库信息<br>` bash<br>git remote -v；<br>`<br>本地新建的分支如果不推送到远程，对其他人就是不可见的；</p>
+</li>
+<li><p>从本地推送分支<br>` bash<br>git push origin branch-name<br>`<br>如果推送失败，先用git pull抓取远程的新提交；</p>
+</li>
+<li><p>在本地创建和远程分支对应的分支<br>` bash<br>git checkout -b branch-name origin/branch-name<br>`</p>
+</li>
+<li>建立本地分支和远程分支的关联<br>` bash<br>git branch –set-upstream branch-name origin/branch-name；<br>`</li>
+</ul>
+<p>从远程抓取分支，使用git pull，如果有冲突，要先处理冲突</p>
+<p>参考资料：<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a> </p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2014/12/05/2014-12-04-Git 使用总结/" itemprop="url">
-              
-                <span itemprop="name">Git 使用总结</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2014-12-05T03:25:59+08:00"
-              content="2014-12-05" >
-          12-05
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag">#Git</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/09/29/2014-09-28-Java集合框架总结/" rel="next" title="Java集合框架总结">
+                <i class="fa fa-chevron-left"></i> Java集合框架总结
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/01/25/2015-01-24-Android屏幕旋转与acticity生命周期/" rel="prev" title="Android屏幕旋转与acticity生命周期">
+                Android屏幕旋转与acticity生命周期 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -318,6 +474,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2014/12/05/2014-12-04-Git 使用总结/"
+           data-title="Git 使用总结" data-url="http://zhengjt.com/2014/12/05/2014-12-04-Git 使用总结/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -337,8 +501,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -417,6 +590,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本回退"><span class="nav-number">1.</span> <span class="nav-text">版本回退:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作回退："><span class="nav-number">2.</span> <span class="nav-text">操作回退：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程操作"><span class="nav-number">3.</span> <span class="nav-text">远程操作:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支管理"><span class="nav-number">4.</span> <span class="nav-text">分支管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多人协作"><span class="nav-number">5.</span> <span class="nav-text">多人协作</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -513,6 +697,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

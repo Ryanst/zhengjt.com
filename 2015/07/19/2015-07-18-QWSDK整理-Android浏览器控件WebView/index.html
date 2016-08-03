@@ -84,15 +84,28 @@
 
 
 
-<meta name="description" content="Yet another android developer">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zhengjt's Home">
-<meta property="og:url" content="http://zhengjt.com/tags/Git/index.html">
+<meta name="description" content="QWSDK本身通过加载本地html来实现SDK界面显示，SDK内部加载html代码比较复杂，是前上司王辉所写，这里总结一下webview的基本的要点
+##WebView基本实现
+//需要为webview设置 WebViewClient
+//setWebChromeClient,设置Chrome处理
+WebView myWebView = (WebView) findViewById(R.id.we">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QWSDK整理-Android浏览器控件WebView">
+<meta property="og:url" content="http://zhengjt.com/2015/07/19/2015-07-18-QWSDK整理-Android浏览器控件WebView/index.html">
 <meta property="og:site_name" content="Zhengjt's Home">
-<meta property="og:description" content="Yet another android developer">
+<meta property="og:description" content="QWSDK本身通过加载本地html来实现SDK界面显示，SDK内部加载html代码比较复杂，是前上司王辉所写，这里总结一下webview的基本的要点
+##WebView基本实现
+//需要为webview设置 WebViewClient
+//setWebChromeClient,设置Chrome处理
+WebView myWebView = (WebView) findViewById(R.id.we">
+<meta property="og:updated_time" content="2016-08-02T11:25:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zhengjt's Home">
-<meta name="twitter:description" content="Yet another android developer">
+<meta name="twitter:title" content="QWSDK整理-Android浏览器控件WebView">
+<meta name="twitter:description" content="QWSDK本身通过加载本地html来实现SDK界面显示，SDK内部加载html代码比较复杂，是前上司王辉所写，这里总结一下webview的基本的要点
+##WebView基本实现
+//需要为webview设置 WebViewClient
+//setWebChromeClient,设置Chrome处理
+WebView myWebView = (WebView) findViewById(R.id.we">
 
 
 
@@ -113,9 +126,9 @@
 
 
 
-  <link rel="canonical" href="http://zhengjt.com/tags/Git/"/>
+  <link rel="canonical" href="http://zhengjt.com/2015/07/19/2015-07-18-QWSDK整理-Android浏览器控件WebView/"/>
 
-  <title> Tag: Git | Zhengjt's Home </title>
+  <title> QWSDK整理-Android浏览器控件WebView | Zhengjt's Home </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -155,7 +168,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -271,46 +284,156 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Git
-        <small>Tag</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                QWSDK整理-Android浏览器控件WebView
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-07-19T13:42:14+08:00" content="2015-07-19">
+              2015-07-19
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/19/2015-07-18-QWSDK整理-Android浏览器控件WebView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/19/2015-07-18-QWSDK整理-Android浏览器控件WebView/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>QWSDK本身通过加载本地html来实现SDK界面显示，SDK内部加载html代码比较复杂，是前上司王辉所写，这里总结一下webview的基本的要点</p>
+<p>##WebView基本实现</p>
+<p>//需要为webview设置 WebViewClient</p>
+<p>//setWebChromeClient,设置Chrome处理</p>
+<pre><code>WebView myWebView = (WebView) findViewById(R.id.webview); 
+webview.setWebViewClient(new WebViewClient(){
+//一般WebViewClient需要重载的方法，使得打开新网页时在webview中打开而不是在系统浏览器中打开
+@Override
+public boolean shouldOverrideUrlLoading(WebView view, String url) {
+       view.loadUrl(url);//webview打开网页的方法
+       //QWSDK中使用loadDataWithBaseURL方法加载本地html内容
+       //view.loadDataWithBaseURL(&quot;&quot;, htmlString, &quot;text/html&quot;, &quot;utf-8&quot;, &quot;&quot;);
+        return true;
+ }
+ //可根据需要重载onPageStarted、 onPageFinished等方法
+});
+</code></pre><p>##Android方法与js的互相调用<br>首先设置webview为允许js</p>
+<pre><code>webview.getSettings().setJavaScriptEnabled(true);
+</code></pre><ul>
+<li><p>js调用Android方法：</p>
+<p>   webview.addJavascriptInterface(new MyJavaScriptInterface(param..),”js2java”);<br>   //Android方法写在QWJavaScriptInterface类中，如:<br>   public void myClose(String colseString){…}<br>这样在js中，可以使用windows.js2java.myClose(“colseString”);来调用myClose方法</p>
+</li>
+<li><p>Android方法调用js</p>
+<p>   view.loadUrl(url);//载入html</p>
+</li>
+</ul>
+<p>然后可通过点击html控件调用js，或者可以使用以下方式直接调用html中的js:</p>
+<pre><code>webview.loadUrl(&quot;javascript:js_fun()&quot;);
+</code></pre><p>若程序采用proguard混淆，还需要注意在混淆配置文件中加入<br>-keep public class com.example.zhengjt.MyJavaScriptInterface{<br>    public <methods>;<br>}<br>来防止java的js接口类被混淆，避免js找不到java方法</methods></p>
+<p>另外SDK中更新html界面的方式是使用runOnUiThread，如果当前线程是UI线程,那么行动是立即执行。如果当前线程不是UI线程,操作是发布到事件队列的UI线程。</p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2014/12/05/2014-12-04-Git 使用总结/" itemprop="url">
-              
-                <span itemprop="name">Git 使用总结</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2014-12-05T03:25:59+08:00"
-              content="2014-12-05" >
-          12-05
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/09/2015-07-08-QWSDK整理-Android网络优化/" rel="next" title="QWSDK整理-Android网络优化">
+                <i class="fa fa-chevron-left"></i> QWSDK整理-Android网络优化
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/21/2015-07-20-QWSDK整理-Android存储方案/" rel="prev" title="QWSDK整理-Android存储方案">
+                QWSDK整理-Android存储方案 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -318,6 +441,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/07/19/2015-07-18-QWSDK整理-Android浏览器控件WebView/"
+           data-title="QWSDK整理-Android浏览器控件WebView" data-url="http://zhengjt.com/2015/07/19/2015-07-18-QWSDK整理-Android浏览器控件WebView/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -337,8 +468,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -417,6 +557,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -513,6 +664,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

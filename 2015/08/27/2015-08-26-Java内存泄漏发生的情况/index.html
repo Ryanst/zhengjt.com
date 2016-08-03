@@ -1,0 +1,715 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="在Java 语言中，内存在以下情况下被回收：
+1、没有任何引用指向它。
+2、GC被运行。
+而判断一块内存空间是否符合垃圾收集器收集标准，即没有任何引用指向它的情况有三种：
+1、new了对象但是从未引用过，那么这个对象马上就会被回收。
+2、给对象赋予了空值null，以下再没有调用过。
+3、给对象赋予了新值，即重新分配了内存空间。
+如果一块没有用的内存没有把它赋予上面2、3两种状态，那么就会造成内存泄">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java内存泄漏发生的情况">
+<meta property="og:url" content="http://zhengjt.com/2015/08/27/2015-08-26-Java内存泄漏发生的情况/index.html">
+<meta property="og:site_name" content="Zhengjt's Home">
+<meta property="og:description" content="在Java 语言中，内存在以下情况下被回收：
+1、没有任何引用指向它。
+2、GC被运行。
+而判断一块内存空间是否符合垃圾收集器收集标准，即没有任何引用指向它的情况有三种：
+1、new了对象但是从未引用过，那么这个对象马上就会被回收。
+2、给对象赋予了空值null，以下再没有调用过。
+3、给对象赋予了新值，即重新分配了内存空间。
+如果一块没有用的内存没有把它赋予上面2、3两种状态，那么就会造成内存泄">
+<meta property="og:updated_time" content="2016-08-03T02:35:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java内存泄漏发生的情况">
+<meta name="twitter:description" content="在Java 语言中，内存在以下情况下被回收：
+1、没有任何引用指向它。
+2、GC被运行。
+而判断一块内存空间是否符合垃圾收集器收集标准，即没有任何引用指向它的情况有三种：
+1、new了对象但是从未引用过，那么这个对象马上就会被回收。
+2、给对象赋予了空值null，以下再没有调用过。
+3、给对象赋予了新值，即重新分配了内存空间。
+如果一块没有用的内存没有把它赋予上面2、3两种状态，那么就会造成内存泄">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://zhengjt.com/2015/08/27/2015-08-26-Java内存泄漏发生的情况/"/>
+
+  <title> Java内存泄漏发生的情况 | Zhengjt's Home </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-27089368-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?9e857ebb3403566275eaa8d834959e12";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Zhengjt's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'dZxcQQCKYeN6t1QfAAZx','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java内存泄漏发生的情况
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-08-27T10:11:41+08:00" content="2015-08-27">
+              2015-08-27
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/27/2015-08-26-Java内存泄漏发生的情况/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/27/2015-08-26-Java内存泄漏发生的情况/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在Java 语言中，内存在以下情况下被回收：</p>
+<p>1、没有任何引用指向它。</p>
+<p>2、GC被运行。</p>
+<p>而判断一块内存空间是否符合垃圾收集器收集标准，即没有任何引用指向它的情况有三种：</p>
+<p>1、new了对象但是从未引用过，那么这个对象马上就会被回收。</p>
+<p>2、给对象赋予了空值null，以下再没有调用过。</p>
+<p>3、给对象赋予了新值，即重新分配了内存空间。</p>
+<p>如果一块没有用的内存没有把它赋予上面2、3两种状态，那么就会造成内存泄露(无用的应该被回收的内存没有被回收)。实际编程中造成内存泄露的情况主要有以下几种：</p>
+<h3 id="静态集合类"><a href="#静态集合类" class="headerlink" title="静态集合类"></a>静态集合类</h3><p>在使用Set、Vector、HashMap等集合类的时候需要特别注意，有可能会发生内存泄漏。当这些集合被定义成静态的时候，由于它们的生命周期跟应用程序一样长，这时候，就有可能会发生内存泄漏</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticTest</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Vector v = <span class="keyword">new</span> Vector(<span class="number">10</span>);</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">100</span>; i++)&#123;</div><div class="line">            Object object = <span class="keyword">new</span> Object();</div><div class="line">            v.add(object);</div><div class="line">            object = <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在上面的代码中，循环申请了Object对象，并添加到Vector中，然后将对象设置为null，可是这些对象因为被Vector引用着，因此并不能被GC回收，因此造成了内存泄漏。因此，要释放这些对象，还需要被它们从Vector删除，最简单的方法就是将Vector设置为null。</p>
+<h3 id="集合里的对象属性值被改变"><a href="#集合里的对象属性值被改变" class="headerlink" title="集合里的对象属性值被改变"></a>集合里的对象属性值被改变</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">    Set&lt;Student&gt; set = <span class="keyword">new</span> HashSet&lt;Student&gt;();</div><div class="line">    Student s1 = <span class="keyword">new</span> Student(<span class="string">"Jack"</span>);</div><div class="line">    Student s2 = <span class="keyword">new</span> Student(<span class="string">"Mary"</span>);</div><div class="line">    Student s3 = <span class="keyword">new</span> Student(<span class="string">"Eason"</span>);</div><div class="line"></div><div class="line">    set.add(s1);</div><div class="line">    set.add(s2);</div><div class="line">    set.add(s3);</div><div class="line"></div><div class="line">    System.out.println(set.size());<span class="comment">//3</span></div><div class="line">    s2.setName(<span class="string">"Jackson"</span>); <span class="comment">//修改属性，此时s2元素对应的hashcode值发生改变</span></div><div class="line">    set.remove(s2);        <span class="comment">// remove不掉，造成内存泄漏</span></div><div class="line">    set.add(s2);           <span class="comment">// 添加成功</span></div><div class="line"></div><div class="line">    System.out.println(set.size());<span class="comment">//4</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由于对象s2的属性值被改变了，因此不能从set中删除，所以set中会一直保持着s2的引用，不能被回收，造成了内存泄漏。</p>
+<h3 id="监听器"><a href="#监听器" class="headerlink" title="监听器"></a>监听器</h3><p>在Java中，我们经常会使用到监听器，如对某个控件添加单击监听器<code>addOnClickListener()</code>，但往往释放对象的时候会忘记删除监听器，这就有可能造成内存泄漏。好的方法就是，在释放对象的时候，应该记住释放所有监听器，这就能避免了因为监听器而导致的内存泄漏。<br>在Android中使用<code>setOnClickListener(null)</code>来实现内存回收。</p>
+<h3 id="各种连接"><a href="#各种连接" class="headerlink" title="各种连接"></a>各种连接</h3><p>Java中的连接包括数据库连接、网络连接和io连接，如果没有显式调用其<code>close()</code>方法，是不会自动关闭的，这些连接就不能被GC回收而导致内存泄漏。一般情况下，在try代码块里创建连接，在finally里释放连接，就能够避免此类内存泄漏。</p>
+<h3 id="外部模块的引用"><a href="#外部模块的引用" class="headerlink" title="外部模块的引用"></a>外部模块的引用</h3><p>调用外部模块的时候，也应该注意防止内存泄漏。如模块A调用了外部模块B的一个方法，如：<br><code>public void register(Object o)</code><br>这个方法有可能就使得A模块持有传入对象的引用，这时候需要查看B模块是否提供了去除引用的方法，如<code>unregister()</code>。这种情况容易忽略，而且发生了内存泄漏的话，比较难察觉，应该在编写代码过程中就应该注意此类问题。</p>
+<h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p>使用单例模式的时候也有可能导致内存泄漏。因为单例对象初始化后将在JVM的整个生命周期内存在，如果它持有一个外部对象（生命周期比较短）的引用，那么这个外部对象就不能被回收，而导致内存泄漏。如果这个外部对象还持有其它对象的引用，那么内存泄漏会更严重，因此需要特别注意此类情况。这种情况就需要考虑下单例模式的设计会不会有问题，应该怎样保证不会产生内存泄漏问题。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/30/2015-07-29-Android使用UrlConnection异步网络编程/" rel="next" title="Android使用UrlConnection异步网络编程">
+                <i class="fa fa-chevron-left"></i> Android使用UrlConnection异步网络编程
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/28/2015-08-27-Java垃圾回收器工作机制/" rel="prev" title="Java垃圾回收器工作机制">
+                Java垃圾回收器工作机制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/08/27/2015-08-26-Java内存泄漏发生的情况/"
+           data-title="Java内存泄漏发生的情况" data-url="http://zhengjt.com/2015/08/27/2015-08-26-Java内存泄漏发生的情况/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Zhengjt" />
+          <p class="site-author-name" itemprop="name">Zhengjt</p>
+          <p class="site-description motion-element" itemprop="description">Yet another android developer</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Ryanst" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/319906999" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/zhengjuntong" target="_blank" title="Douban">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Douban
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态集合类"><span class="nav-number">1.</span> <span class="nav-text">静态集合类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合里的对象属性值被改变"><span class="nav-number">2.</span> <span class="nav-text">集合里的对象属性值被改变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#监听器"><span class="nav-number">3.</span> <span class="nav-text">监听器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各种连接"><span class="nav-number">4.</span> <span class="nav-text">各种连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外部模块的引用"><span class="nav-number">5.</span> <span class="nav-text">外部模块的引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式"><span class="nav-number">6.</span> <span class="nav-text">单例模式</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhengjt</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhengjt"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

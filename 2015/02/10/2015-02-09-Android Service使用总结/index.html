@@ -1,0 +1,799 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="最普通的后台service写法:
+写一个MyService类继承自Service，在onStartCommand中写service想要进行的操作
+在AndroidManifest.xml中注册servive
+&amp;lt;service android:name=&amp;quot;.MyService&amp;quot; &amp;gt;
+&amp;lt;/service&amp;gt;
+
+启动service
+Intent intent =">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Service使用总结">
+<meta property="og:url" content="http://zhengjt.com/2015/02/10/2015-02-09-Android Service使用总结/index.html">
+<meta property="og:site_name" content="Zhengjt's Home">
+<meta property="og:description" content="最普通的后台service写法:
+写一个MyService类继承自Service，在onStartCommand中写service想要进行的操作
+在AndroidManifest.xml中注册servive
+&amp;lt;service android:name=&amp;quot;.MyService&amp;quot; &amp;gt;
+&amp;lt;/service&amp;gt;
+
+启动service
+Intent intent =">
+<meta property="og:updated_time" content="2016-08-03T03:31:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Service使用总结">
+<meta name="twitter:description" content="最普通的后台service写法:
+写一个MyService类继承自Service，在onStartCommand中写service想要进行的操作
+在AndroidManifest.xml中注册servive
+&amp;lt;service android:name=&amp;quot;.MyService&amp;quot; &amp;gt;
+&amp;lt;/service&amp;gt;
+
+启动service
+Intent intent =">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://zhengjt.com/2015/02/10/2015-02-09-Android Service使用总结/"/>
+
+  <title> Android Service使用总结 | Zhengjt's Home </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-27089368-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?9e857ebb3403566275eaa8d834959e12";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Zhengjt's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'dZxcQQCKYeN6t1QfAAZx','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android Service使用总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-02-10T05:38:20+08:00" content="2015-02-10">
+              2015-02-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/02/10/2015-02-09-Android Service使用总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/10/2015-02-09-Android Service使用总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="最普通的后台service写法"><a href="#最普通的后台service写法" class="headerlink" title="最普通的后台service写法:"></a>最普通的后台service写法:</h3><ol>
+<li>写一个MyService类继承自Service，在onStartCommand中写service想要进行的操作</li>
+<li><p>在AndroidManifest.xml中注册servive</p>
+<pre><code>&lt;service android:name=&quot;.MyService&quot; &gt;
+&lt;/service&gt;
+</code></pre></li>
+<li><p>启动service</p>
+<pre><code>Intent intent = new Intent(this,MyService.class);
+StartService(indent);
+</code></pre></li>
+<li><p>停止servive</p>
+<pre><code>Intent intent = new Intent(this,MyService.class);
+StopService(indent);
+</code></pre></li>
+</ol>
+<h3 id="与activity相关service写法"><a href="#与activity相关service写法" class="headerlink" title="与activity相关service写法"></a>与activity相关service写法</h3><ol>
+<li>写一个MyService类继承自Service，新建一个MyBind类继承自Binder，在MyBinder中写想要在Service中进行的操作多个函数，新建一个MyBind对象，重写onBind方法，返回MyBind对象指针</li>
+<li>在Activity中新建ServiceConnection对象connection，并重写onServiceConnected(ComponentName name，IBinder mBnder),将mbinder指针赋给Activity类的变量myBinder.(这里onServiceConnected的mBinder就是Service类中新建的Binder对象)</li>
+<li><p>启动Service</p>
+<pre><code>Intent intent = new Intent(this, MyService.class);
+bindService(intent,connection,BIND_AUTO_CTRATE);
+</code></pre></li>
+<li><p>停止服务</p>
+<pre><code>unbindService(connection);
+</code></pre></li>
+</ol>
+<h3 id="IntentService"><a href="#IntentService" class="headerlink" title="IntentService"></a>IntentService</h3><p>IntentService继承自Service，是一种特殊的Service，它提供了一个创建异步的，自动停止的服务的简单的方法：<br>继承自IntentService后，重写onHandleIntent方法，在方法内写子线程需要执行的操作，并且操作结束后服务自动停止，调用服务的onDestory.</p>
+<p>可以使用线程完成IntentService完成的任务，在服务的onBind方法中return null，然后在startCommand中开启线程，当子线程代码最后调用stopSelf()</p>
+<h3 id="前台服务"><a href="#前台服务" class="headerlink" title="前台服务"></a>前台服务</h3><p>与notification相关，初始化一个notification，调用startForeground(1,notification)即可让服务成为前台服务</p>
+<p>优先级：</p>
+<ul>
+<li>前台服务：会同时在状态栏加以提示，优先级高，但服务终止的时候状态栏也会消失。</li>
+<li>后台服务：默认状态，优先级低于前台服务，GC时相比更容易被干掉。<br>几个注意事项：</li>
+</ul>
+<hr>
+<p>注意：</p>
+<p>bindService()+unbindService()应该成对出现</p>
+<p>startService()+stopService()应该成对出现</p>
+<p>屏幕旋转时，Activity是重新创建的，因此Service也是同样，重新创建之后，与之前的Service连接就会断开。</p>
+<p>如何实现常驻服务？</p>
+<ul>
+<li>onDestory中重启服务</li>
+<li>启用两个服务互相调用</li>
+<li>AlarmManger定时广播检查</li>
+</ul>
+<h3 id="Service和Activity通信机制："><a href="#Service和Activity通信机制：" class="headerlink" title="Service和Activity通信机制："></a>Service和Activity通信机制：</h3><ol>
+<li>通过在onServiceConnected中获取Binder对象来实现在Activity中调用Service类的方法</li>
+<li>通过广播，在Service方法中发送特定广播，在特定Activity中监听注册广播接收器，在广播类的onReceive中写接收到广播的逻辑——可通过intent传递数据</li>
+</ol>
+<h3 id="远程服务"><a href="#远程服务" class="headerlink" title="远程服务"></a>远程服务</h3><p>在注册Service的时候将它的android:process属性指定成:remote，服务是运行在主线程上的，如果需要在服务中完成耗时的操作，需要在onStartCommand中new thread，远程服务是运行在子线程中的。</p>
+<h3 id="AIDL"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL</h3><p>AIDL（Android Interface Definition Language）是Android接口定义语言的意思，它可以用于让某个Service与多个应用程序组件之间进行跨进程通信，从而可以实现多个应用程序共享同一个Service的功能。以下是基本的AIDL实现：</p>
+<ol>
+<li><p>新建MyAIDLService.aidl文件</p>
+<pre><code>//aidl对应的接口的方法前面不能加访问权限修饰符
+interface MyAIDLService {
+    int plus(int a, int b);
+    String toUpperCase(String str);
+}
+</code></pre></li>
+<li><p>用MyAIDLService.Stub mBinder = new Stub() {…}替换原Service中的Binder对象</p>
+</li>
+<li><p>在onServiceConnected中获取myAIDLService对象，就能调用myAIDLService对象的方法了</p>
+<pre><code>public void onServiceConnected(ComponentName name, IBinder service) {  
+            myAIDLService = MyAIDLService.Stub.asInterface(service);
+} 
+</code></pre></li>
+<li><p>使远程Service能够被其他程序使用，增加intent-filter中的action，然后拷贝MyAIDLService.aidl文件到另一个程序即可</p>
+<pre><code>&lt;service
+    android:name=&quot;com.example.servicetest.MyService&quot;
+    android:process=&quot;:remote&quot; &gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;com.example.servicetest.MyAIDLService&quot;/&gt;
+    &lt;/intent-filter&gt;
+&lt;/service&gt;
+</code></pre></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/01/25/2015-01-24-Android屏幕旋转与acticity生命周期/" rel="next" title="Android屏幕旋转与acticity生命周期">
+                <i class="fa fa-chevron-left"></i> Android屏幕旋转与acticity生命周期
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/03/01/2015-02-28-编码技术总结/" rel="prev" title="编码技术总结">
+                编码技术总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/02/10/2015-02-09-Android Service使用总结/"
+           data-title="Android Service使用总结" data-url="http://zhengjt.com/2015/02/10/2015-02-09-Android Service使用总结/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Zhengjt" />
+          <p class="site-author-name" itemprop="name">Zhengjt</p>
+          <p class="site-description motion-element" itemprop="description">Yet another android developer</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Ryanst" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/319906999" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/zhengjuntong" target="_blank" title="Douban">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Douban
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#最普通的后台service写法"><span class="nav-number">1.</span> <span class="nav-text">最普通的后台service写法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与activity相关service写法"><span class="nav-number">2.</span> <span class="nav-text">与activity相关service写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IntentService"><span class="nav-number">3.</span> <span class="nav-text">IntentService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前台服务"><span class="nav-number">4.</span> <span class="nav-text">前台服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service和Activity通信机制："><span class="nav-number">5.</span> <span class="nav-text">Service和Activity通信机制：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程服务"><span class="nav-number">6.</span> <span class="nav-text">远程服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AIDL"><span class="nav-number">7.</span> <span class="nav-text">AIDL</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhengjt</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhengjt"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

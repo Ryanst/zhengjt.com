@@ -295,8 +295,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/09/14/2015-09-13-synchronized关键字总结/" itemprop="url">
-                  synchronized关键字总结
+                <a class="post-title-link" href="/2015/09/14/synchronized关键字总结/" itemprop="url">
+                  Synchronized关键字总结
                 </a>
               
             
@@ -320,8 +320,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/09/14/2015-09-13-synchronized关键字总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/14/2015-09-13-synchronized关键字总结/" itemprop="commentsCount"></span>
+                <a href="/2015/09/14/synchronized关键字总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/14/synchronized关键字总结/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -346,11 +346,19 @@
       
         
           
-            <p>无论synchronized关键字加在方法上还是对象上()代码块，它取得的锁都是对象，而不是把一段代码或函数当作锁<br>实际锁的对象一般有两种，一种是testSynchronized.class这种class对象，一种是new出来的对象</p>
-<p>synchronized修饰方法时获得的是方法对象的锁，若方法是static则得到的是class的锁，synchronized容易造成程序效率低下，导致同一时间只有一个线程可以调用该方法</p>
-<p>synchronized(){}修饰代码块时锁住的是()中的对象</p>
-<p>当synchronized锁住对象时，这个对象的其他非synchronized模块可以被线程调用，这个对象的其他synchronized也被同步，不能被其他线程同时调用</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">testSynchronized</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> threadNo;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">testSynchronized</span><span class="params">(<span class="keyword">int</span> threadNo)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.threadNo = threadNo;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">                System.out.println(<span class="string">"No."</span> + threadNo + <span class="string">":"</span> + i);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> threadNo;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Thread1</span><span class="params">(<span class="keyword">int</span> threadNo)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.threadNo = threadNo;</div><div class="line">        &#125;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">                System.out.println(<span class="string">"No."</span> + threadNo + <span class="string">":"</span> + i);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread2</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> threadNo;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Thread2</span><span class="params">(<span class="keyword">int</span> threadNo)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.threadNo = threadNo;</div><div class="line">        &#125;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">//若()中为this则无法线程同步</span></div><div class="line">            <span class="keyword">synchronized</span> (testSynchronized.class) &#123;</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">                    System.out.println(<span class="string">"No."</span> + threadNo + <span class="string">":"</span> + i);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread3</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> threadNo;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Thread3</span><span class="params">(<span class="keyword">int</span> threadNo)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.threadNo = threadNo;</div><div class="line">        &#125;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            runPlus();</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">runPlus</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">                System.out.println(<span class="string">"No."</span> + Thread.currentThread().getId() + <span class="string">":"</span> + i);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">// 结果是3、4可以实现线程同步，而1、2不行</span></div><div class="line">	</div><div class="line"><span class="comment">/*      for (int i = 1; i &lt; 10; i++) &#123;</span></div><div class="line">            new testSynchronized(i).start();</div><div class="line">        &#125;*/</div><div class="line"><span class="comment">/*      for (int i = 1; i &lt; 10; i++) &#123;</span></div><div class="line">            new Thread1(i).start();</div><div class="line">        &#125;*/</div><div class="line"><span class="comment">/*      for (int i = 1; i &lt; 10; i++) &#123;</span></div><div class="line">            new Thread2(i).start();</div><div class="line">        &#125;*/</div><div class="line"><span class="comment">/*      for (int i = 1; i &lt; 10; i++) &#123;</span></div><div class="line">            new Thread3(i).start();</div><div class="line">        &#125;*/</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+            <p>Synchronized关键字的作用：当一个线程访问object的一个取得对象同步锁如synchronized(this)同步代码块时，它就获得了这个object的对象锁。这时，其它线程对该object对象所有同步代码部分的访问都被暂时阻塞。类同步锁类似。</p>
+<p>Synchronized获得的锁分两种：</p>
+<ul>
+<li><code>对象</code>的锁</li>
+<li><code>类</code>的锁</li>
+</ul>
+<p>Synchronized获得的锁的方式分两种：</p>
+<ul>
+<li>修饰<code>方法</code></li>
+<li>修饰<code>代码块</code></li>
+</ul>
+<p>测试代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">norFun</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"norFun"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//修饰非静态方法,取得对象锁</span></div><div class="line">    <span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">syncFun</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"syncFun before"</span>);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Thread.sleep(<span class="number">3000</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="string">"syncFun after"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//修饰代码块,取得对象锁</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">syncBlock</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"syncBlock before"</span>);</div><div class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                Thread.sleep(<span class="number">3000</span>);</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="string">"syncBlock after"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//修饰静态方法,取得类锁</span></div><div class="line">    <span class="function"><span class="keyword">synchronized</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">staticFun</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"staticFun before"</span>);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Thread.sleep(<span class="number">3000</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="string">"staticFun after"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//修饰代码块,取得类锁</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">staticBlock</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"static before"</span>);</div><div class="line">        <span class="keyword">synchronized</span> (SynchronizedTest.class) &#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                Thread.sleep(<span class="number">3000</span>);</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="string">"static after"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        SynchronizedTest object = <span class="keyword">new</span> SynchronizedTest();</div><div class="line"></div><div class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                object.syncFun();</div><div class="line">            &#125;</div><div class="line">        &#125;).start();</div><div class="line"></div><div class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                object.syncBlock();</div><div class="line">            &#125;</div><div class="line">        &#125;).start();</div><div class="line"></div><div class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                SynchronizedTest.staticFun();</div><div class="line">            &#125;</div><div class="line">        &#125;).start();</div><div class="line"></div><div class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                object.staticBlock();</div><div class="line">            &#125;</div><div class="line">        &#125;).start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
           
         
@@ -400,7 +408,7 @@
             
               
                 
-                <a class="post-title-link" href="/2015/09/13/2015-09-13-Java的WeakReference相关/" itemprop="url">
+                <a class="post-title-link" href="/2015/09/13/Java的WeakReference相关/" itemprop="url">
                   Java的WeakReference相关
                 </a>
               
@@ -425,8 +433,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/09/13/2015-09-13-Java的WeakReference相关/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/13/2015-09-13-Java的WeakReference相关/" itemprop="commentsCount"></span>
+                <a href="/2015/09/13/Java的WeakReference相关/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/13/Java的WeakReference相关/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -511,7 +519,7 @@
             
               
                 
-                <a class="post-title-link" href="/2015/08/30/2015-08-29-Volley的用法简单总结/" itemprop="url">
+                <a class="post-title-link" href="/2015/08/30/Volley的用法简单总结/" itemprop="url">
                   Volley的用法简单总结
                 </a>
               
@@ -536,8 +544,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/08/30/2015-08-29-Volley的用法简单总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/30/2015-08-29-Volley的用法简单总结/" itemprop="commentsCount"></span>
+                <a href="/2015/08/30/Volley的用法简单总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/30/Volley的用法简单总结/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -627,7 +635,7 @@
             
               
                 
-                <a class="post-title-link" href="/2015/08/28/2015-08-27-Java垃圾回收器工作机制/" itemprop="url">
+                <a class="post-title-link" href="/2015/08/28/Java垃圾回收器工作机制/" itemprop="url">
                   Java垃圾回收器工作机制
                 </a>
               
@@ -652,8 +660,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/08/28/2015-08-27-Java垃圾回收器工作机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/28/2015-08-27-Java垃圾回收器工作机制/" itemprop="commentsCount"></span>
+                <a href="/2015/08/28/Java垃圾回收器工作机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/28/Java垃圾回收器工作机制/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -794,7 +802,7 @@
             
               
                 
-                <a class="post-title-link" href="/2015/08/27/2015-08-26-Java内存泄漏发生的情况/" itemprop="url">
+                <a class="post-title-link" href="/2015/08/27/Java内存泄漏发生的情况/" itemprop="url">
                   Java内存泄漏发生的情况
                 </a>
               
@@ -819,8 +827,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/08/27/2015-08-26-Java内存泄漏发生的情况/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/27/2015-08-26-Java内存泄漏发生的情况/" itemprop="commentsCount"></span>
+                <a href="/2015/08/27/Java内存泄漏发生的情况/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/27/Java内存泄漏发生的情况/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -911,7 +919,7 @@
             
               
                 
-                <a class="post-title-link" href="/2015/07/30/2015-07-29-Android使用UrlConnection异步网络编程/" itemprop="url">
+                <a class="post-title-link" href="/2015/07/30/Android使用UrlConnection异步网络编程/" itemprop="url">
                   Android使用UrlConnection异步网络编程
                 </a>
               
@@ -936,8 +944,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/30/2015-07-29-Android使用UrlConnection异步网络编程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/30/2015-07-29-Android使用UrlConnection异步网络编程/" itemprop="commentsCount"></span>
+                <a href="/2015/07/30/Android使用UrlConnection异步网络编程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/30/Android使用UrlConnection异步网络编程/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1022,7 +1030,7 @@
             
               
                 
-                <a class="post-title-link" href="/2015/07/21/2015-07-20-QWSDK整理-Android存储方案/" itemprop="url">
+                <a class="post-title-link" href="/2015/07/21/QWSDK整理-Android存储方案/" itemprop="url">
                   QWSDK整理-Android存储方案
                 </a>
               
@@ -1047,8 +1055,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/21/2015-07-20-QWSDK整理-Android存储方案/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/21/2015-07-20-QWSDK整理-Android存储方案/" itemprop="commentsCount"></span>
+                <a href="/2015/07/21/QWSDK整理-Android存储方案/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/21/QWSDK整理-Android存储方案/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1134,7 +1142,7 @@
             
               
                 
-                <a class="post-title-link" href="/2015/07/19/2015-07-18-QWSDK整理-Android浏览器控件WebView/" itemprop="url">
+                <a class="post-title-link" href="/2015/07/19/QWSDK整理-Android浏览器控件WebView/" itemprop="url">
                   QWSDK整理-Android浏览器控件WebView
                 </a>
               
@@ -1159,8 +1167,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/19/2015-07-18-QWSDK整理-Android浏览器控件WebView/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/19/2015-07-18-QWSDK整理-Android浏览器控件WebView/" itemprop="commentsCount"></span>
+                <a href="/2015/07/19/QWSDK整理-Android浏览器控件WebView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/19/QWSDK整理-Android浏览器控件WebView/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1264,7 +1272,7 @@ public boolean shouldOverrideUrlLoading(WebView view, String url) {
             
               
                 
-                <a class="post-title-link" href="/2015/07/09/2015-07-08-QWSDK整理-Android网络优化/" itemprop="url">
+                <a class="post-title-link" href="/2015/07/09/QWSDK整理-Android网络优化/" itemprop="url">
                   QWSDK整理-Android网络优化
                 </a>
               
@@ -1289,8 +1297,8 @@ public boolean shouldOverrideUrlLoading(WebView view, String url) {
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/09/2015-07-08-QWSDK整理-Android网络优化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/09/2015-07-08-QWSDK整理-Android网络优化/" itemprop="commentsCount"></span>
+                <a href="/2015/07/09/QWSDK整理-Android网络优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/09/QWSDK整理-Android网络优化/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1410,7 +1418,7 @@ double d = jobject.getDouble(key);
             
               
                 
-                <a class="post-title-link" href="/2015/06/03/2015-06-02-Andorid Fragment总结/" itemprop="url">
+                <a class="post-title-link" href="/2015/06/03/Andorid Fragment总结/" itemprop="url">
                   Andorid Fragment总结
                 </a>
               
@@ -1435,8 +1443,8 @@ double d = jobject.getDouble(key);
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/06/03/2015-06-02-Andorid Fragment总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/03/2015-06-02-Andorid Fragment总结/" itemprop="commentsCount"></span>
+                <a href="/2015/06/03/Andorid Fragment总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/03/Andorid Fragment总结/" itemprop="commentsCount"></span>
                 </a>
               </span>
             

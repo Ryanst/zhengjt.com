@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -89,7 +89,7 @@
 设置 android:configChanges=&amp;quot;orientation|keyboardHidden&amp;quot;，在2.3上表现为不重新创建activity，5.1如下
 
 
-`    android:targetSdkVersi">
+12android:targetSdkVersion&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android屏幕旋转与acticity生命周期">
 <meta property="og:url" content="http://zhengjt.com/2015/01/25/Android屏幕旋转与acticity生命周期/index.html">
@@ -99,8 +99,8 @@
 设置 android:configChanges=&amp;quot;orientation|keyboardHidden&amp;quot;，在2.3上表现为不重新创建activity，5.1如下
 
 
-`    android:targetSdkVersi">
-<meta property="og:updated_time" content="2016-08-03T03:31:49.000Z">
+12android:targetSdkVersion&amp;">
+<meta property="og:updated_time" content="2016-09-08T12:05:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android屏幕旋转与acticity生命周期">
 <meta name="twitter:description" content="设置 android:configChanges=&amp;quot;orientation&amp;quot;和不设置这个属性，生命周期表现为重新创建activity
@@ -108,7 +108,7 @@
 设置 android:configChanges=&amp;quot;orientation|keyboardHidden&amp;quot;，在2.3上表现为不重新创建activity，5.1如下
 
 
-`    android:targetSdkVersi">
+12android:targetSdkVersion&amp;">
 
 
 
@@ -352,75 +352,12 @@
 <li><p>设置 <code>android:configChanges=&quot;orientation|keyboardHidden&quot;</code>，在2.3上表现为不重新创建activity，5.1如下</p>
 </li>
 </ol>
-<p>`<br>    android:targetSdkVersion&lt;=“12”//生命周期表现为不重新创建activity<br>    android:targetSdkVersion&gt;”12”//表现为重新创建activity<br>`</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">android:targetSdkVersion&lt;=“<span class="number">12</span>”<span class="comment">//生命周期表现为不重新创建activity</span></div><div class="line">android:targetSdkVersion&gt;”<span class="number">12</span>”<span class="comment">//表现为重新创建activity</span></div></pre></td></tr></table></figure>
 <ol>
 <li>设置 <code>android:configChanges=&quot;orientation|keyboardHidden|screenSize&quot;</code>，在2.3和5.1上都表现为不重新创建，在屏幕旋转时，只会调用<code>onConfigurationChanged</code>方法</li>
 </ol>
 <p>测试代码：</p>
-<p>``` java</p>
-<p>public class MainActivity extends Activity {</p>
-<pre><code>@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.relative_center_2);
-    Log.i(&quot;MainActivity&quot;, &quot;执行onCreate方法&quot;);
-}
-
-@Override
-protected void onStart() {
-    super.onStart();
-    Log.i(&quot;MainActivity&quot;, &quot;执行onStart方法&quot;);
-}
-
-@Override
-protected void onResume() {
-    super.onResume();
-    Log.i(&quot;MainActivity&quot;, &quot;执行onResume方法&quot;);
-}
-
-@Override
-protected void onPause() {
-    super.onPause();
-    Log.i(&quot;MainActivity&quot;, &quot;执行onPause方法&quot;);
-}
-
-@Override
-protected void onStop() {
-    super.onStop();
-    Log.i(&quot;MainActivity&quot;, &quot;执行onStop方法&quot;);
-}
-
-@Override
-protected void onDestroy() {
-    super.onDestroy();
-    Log.i(&quot;MainActivity&quot;, &quot;执行onDestroy方法&quot;);
-}
-
-@Override
-public void onConfigurationChanged(Configuration newConfig) {
-    super.onConfigurationChanged(newConfig);
-    Log.i(&quot;MainActivity&quot;, &quot;执行onConfigurationChanged方法&quot;);
-}
-
-@Override
-protected void onRestart() {
-    super.onRestart();
-    Log.i(&quot;MainActivity&quot;, &quot;执行onRestart方法&quot;);
-}
-
-@Override
-protected void onSaveInstanceState(Bundle outState) {
-    super.onSaveInstanceState(outState);
-    Log.i(&quot;MainActivity&quot;, &quot;执行onSaveInstanceState方法&quot;);
-}
-
-@Override
-protected void onRestoreInstanceState(Bundle savedInstanceState) {
-    super.onRestoreInstanceState(savedInstanceState);
-    Log.i(&quot;MainActivity&quot;, &quot;执行onRestoreInstanceState方法&quot;);
-}
-</code></pre><p>}<br>```</p>
-
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">	    setContentView(R.layout.relative_center_2);</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onCreate方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onStart</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onStart();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onStart方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onResume();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onResume方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onPause();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onPause方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onStop</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onStop();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onStop方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onDestroy();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onDestroy方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onConfigurationChanged</span><span class="params">(Configuration newConfig)</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onConfigurationChanged(newConfig);</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onConfigurationChanged方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onRestart</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onRestart();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onRestart方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSaveInstanceState</span><span class="params">(Bundle outState)</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onSaveInstanceState(outState);</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onSaveInstanceState方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onRestoreInstanceState</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onRestoreInstanceState(savedInstanceState);</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onRestoreInstanceState方法"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -440,12 +377,6 @@ protected void onRestoreInstanceState(Bundle savedInstanceState) {
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag">#Android</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
@@ -459,8 +390,8 @@ protected void onRestoreInstanceState(Bundle savedInstanceState) {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/02/03/Android-Service使用总结/" rel="prev" title="Android Service使用总结">
-                Android Service使用总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/03/01/编码技术总结/" rel="prev" title="编码技术总结">
+                编码技术总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -533,7 +464,7 @@ protected void onRestoreInstanceState(Bundle savedInstanceState) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

@@ -519,122 +519,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/08/30/Volley的用法简单总结/" itemprop="url">
-                  Volley的用法简单总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-08-30T04:43:54+08:00" content="2015-08-30">
-              2015-08-30
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/30/Volley的用法简单总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/30/Volley的用法简单总结/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">RequestQueue mQueue = Volley.newRequestQueue(context);</div><div class="line"><span class="comment">//默认GET方式，是json的话可以用JsonObjectRequest，返回jsonString</span></div><div class="line">StringRequest stringRequest = <span class="keyword">new</span> StringRequest(Method.POST,<span class="string">"http://www.baidu.com"</span>,</div><div class="line">                    <span class="keyword">new</span> Response.Listener&lt;String&gt;() &#123;</div><div class="line">                        <span class="meta">@Override</span></div><div class="line">                        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(String response)</span> </span>&#123;</div><div class="line">                            Log.d(<span class="string">"TAG"</span>, response);</div><div class="line">                        &#125;</div><div class="line">                    &#125;, <span class="keyword">new</span> Response.ErrorListener() &#123;</div><div class="line">                        <span class="meta">@Override</span></div><div class="line">                        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onErrorResponse</span><span class="params">(VolleyError error)</span> </span>&#123;</div><div class="line">                            Log.e(<span class="string">"TAG"</span>, error.getMessage(), error);</div><div class="line">                        &#125;</div><div class="line">                    &#125;)&#123;  </div><div class="line">     <span class="comment">//重写 getParams()方法设置POST参数，如果是GET方法无需重写</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> Map&lt;String, String&gt; <span class="title">getParams</span><span class="params">()</span> <span class="keyword">throws</span> AuthFailureError </span>&#123;</div><div class="line">    Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</div><div class="line">    map.put(<span class="string">"params1"</span>, <span class="string">"value1"</span>);</div><div class="line">    map.put(<span class="string">"params2"</span>, <span class="string">"value2"</span>);</div><div class="line">    <span class="keyword">return</span> map;</div><div class="line">&#125;&#125;;</div><div class="line">mQueue.add(stringRequest);</div><div class="line">	</div><div class="line"><span class="comment">//在AndroidManifest.xml中加入网络请求权限</span></div><div class="line">&lt;uses-permission android:name=<span class="string">"android.permission.INTERNET"</span> /&gt;</div></pre></td></tr></table></figure>
-<h2 id="加载图片"><a href="#加载图片" class="headerlink" title="加载图片"></a>加载图片</h2><ol>
-<li>ImageRequest的用法</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">RequestQueue mQueue = Volley.newRequestQueue(context);</div><div class="line">ImageRequest imageRequest = <span class="keyword">new</span> ImageRequest(</div><div class="line"><span class="string">"http://developer.android.com/images/home/aw_dac.png"</span>,</div><div class="line"><span class="keyword">new</span> Response.Listener&lt;Bitmap&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Bitmap response)</span> </span>&#123;</div><div class="line">        imageView.setImageBitmap(response);</div><div class="line">    &#125;</div><div class="line">&#125;, <span class="number">0</span>, <span class="number">0</span>, Config.RGB_565, <span class="keyword">new</span> Response.ErrorListener() &#123;<span class="comment">//第三第四个参数分别用于指定允许图片最大的宽度和高度</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onErrorResponse</span><span class="params">(VolleyError error)</span> </span>&#123;</div><div class="line">        imageView.setImageResource(R.drawable.default_image);</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">mQueue.add(imageRequest);</div></pre></td></tr></table></figure>
-<ol>
-<li>ImageLoader方法</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">RequestQueue mQueue = Volley.newRequestQueue(context);</div><div class="line">ImageLoader imageLoader = <span class="keyword">new</span> ImageLoader(<span class="keyword">new</span> BitmapCache());</div><div class="line">	</div><div class="line"><span class="comment">//使用LruCache</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BitmapCache</span> <span class="keyword">implements</span> <span class="title">ImageCache</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> LruCache&lt;String, Bitmap&gt; mCache;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BitmapCache</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> maxSize = <span class="number">10</span> * <span class="number">1024</span> * <span class="number">1024</span>;</div><div class="line">    mCache = <span class="keyword">new</span> LruCache&lt;String, Bitmap&gt;(maxSize) &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">sizeOf</span><span class="params">(String key, Bitmap bitmap)</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> bitmap.getRowBytes() * bitmap.getHeight();</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Bitmap <span class="title">getBitmap</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mCache.get(url);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">putBitmap</span><span class="params">(String url, Bitmap bitmap)</span> </span>&#123;</div><div class="line">        mCache.put(url, bitmap);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">	</div><div class="line"><span class="comment">//第一个参数指定用于显示图片的ImageView控件，第二个参数指定加载图片的过程中显示的图片，第三个参数指定加载图片失败的情况下显示的图片</span></div><div class="line">ImageListener listener = ImageLoader.getImageListener(imageView,R.drawable.default_image, R.drawable.failed_image);</div><div class="line">	</div><div class="line"><span class="comment">//图片大小限制</span></div><div class="line">imageLoader.get(<span class="string">"http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg"</span>,listener, <span class="number">200</span>, <span class="number">200</span>);</div></pre></td></tr></table></figure>
-<ol>
-<li>NetworkImageView的用法</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//限定图片的尺寸</span></div><div class="line">    &lt;com.android.volley.toolbox.NetworkImageView </div><div class="line">        android:id=<span class="string">"@+id/network_image_view"</span></div><div class="line">        android:layout_width=<span class="string">"200dp"</span></div><div class="line">        android:layout_height=<span class="string">"200dp"</span></div><div class="line">        android:layout_gravity=<span class="string">"center_horizontal"</span></div><div class="line">        /&gt;</div><div class="line">networkImageView = (NetworkImageView) findViewById(R.id.network_image_view);</div><div class="line">networkImageView.setDefaultImageResId(R.drawable.default_image);</div><div class="line">networkImageView.setErrorImageResId(R.drawable.failed_image);</div><div class="line">networkImageView.setImageUrl(<span class="string">"http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg"</span>,imageLoader);</div></pre></td></tr></table></figure>
-<h2 id="自定义Request"><a href="#自定义Request" class="headerlink" title="自定义Request"></a>自定义Request</h2><p><code>http://blog.csdn.net/guolin\_blog/article/details/17612763</code></p>
-<h2 id="Volley内部解析"><a href="#Volley内部解析" class="headerlink" title="Volley内部解析"></a>Volley内部解析</h2><p><code>http://blog.csdn.net/guolin\_blog/article/details/17656437</code></p>
-<p>判断如果手机系统版本号是大于9的，则创建一个HurlStack的实例，否则就创建一个HttpClientStack的实例。实际上HurlStack的内部就是使用HttpURLConnection进行网络通讯的，而HttpClientStack的内部则是使用HttpClient进行网络通讯的</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/08/28/Java垃圾回收器工作机制/" itemprop="url">
                   Java垃圾回收器工作机制
                 </a>
@@ -919,505 +803,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/07/30/Android使用UrlConnection异步网络编程/" itemprop="url">
-                  Android使用UrlConnection异步网络编程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-07-30T10:37:50+08:00" content="2015-07-30">
-              2015-07-30
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/07/30/Android使用UrlConnection异步网络编程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/30/Android使用UrlConnection异步网络编程/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Android实现Http请求的方式一般分为</p>
-<ol>
-<li>Java接口(java.net)–HttpURLConnection，可以实现简单的基于URL请求、响应功能；</li>
-<li>Apache接口(org.appache.http)–HttpClient，使用起来更方面更强大。</li>
-</ol>
-<p>QWSDK使用较为原始的HttpURLConnection，以下介绍HttpURLConnection实现异步网络请求的两种方式，整体的流程都是在子线程中处理网络操作(必须)，得到返回结果后交由主线程处理</p>
-<p>一、使用线程+Android消息管理机制</p>
-<p>二、使用AsyncTask</p>
-<p>JAVA代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line">    Button visitWebBtn = <span class="keyword">null</span>;</div><div class="line">    Button downImgBtn = <span class="keyword">null</span>;</div><div class="line">    TextView showTextView = <span class="keyword">null</span>;</div><div class="line">    ImageView showImageView = <span class="keyword">null</span>;</div><div class="line">    String resultStr = <span class="string">""</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Handler handle = <span class="keyword">new</span> Handler()&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span></span>&#123;</div><div class="line">            resultStr = msg.getData().getString(<span class="string">"data"</span>);</div><div class="line">            showTextView.setText(resultStr);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        Log.d(<span class="string">"ThreadID"</span>, <span class="string">"onCreate: "</span> + Thread.currentThread().getId());</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        initUI();</div><div class="line">        visitWebBtn.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">                Log.d(<span class="string">"ThreadID"</span>, <span class="string">"visitWebBtn onClick: "</span> + Thread.currentThread().getId());</div><div class="line">                showImageView.setVisibility(View.GONE);</div><div class="line">                showTextView.setVisibility(View.VISIBLE);</div><div class="line">                Thread visitBaiduThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> VisitWebRunnable());</div><div class="line">                visitBaiduThread.start();</div><div class="line">                <span class="comment">/*以下为通过等待子线程结束后获取网络请求返回的值，若用这种方式则需要在VisitWebRunnable的run中将resultStr赋值</span></div><div class="line">                  不推荐用这种方式，因为这样主线程需要等待子线程结果，结果出来之前会卡住</div><div class="line">                try &#123;</div><div class="line">                    Log.d("ThreadID","brfore join: "+Thread.currentThread().getId());</div><div class="line">                    visitBaiduThread.join();//等待更新resultStr参数</div><div class="line">                    Log.d("ThreadID", "after join: " + Thread.currentThread().getId());</div><div class="line">                    if(!resultStr.equals(""))&#123;</div><div class="line">                        showTextView.setText(resultStr);</div><div class="line">                    &#125;</div><div class="line">                &#125; catch (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">                */</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        downImgBtn.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">                Log.d(<span class="string">"ThreadID"</span>, <span class="string">"downImgBtn onClick: "</span> + Thread.currentThread().getId());</div><div class="line">                showImageView.setVisibility(View.VISIBLE);</div><div class="line">                showTextView.setVisibility(View.GONE);</div><div class="line">                String imgUrl = <span class="string">"http://hiphotos.baidu.com/%CD%ED%C9%CF%B3%AA%B8%E8%CF%C2%D3%EA/pic/item/e3afd71367a912155baf5330.jpg"</span>;</div><div class="line">                <span class="keyword">new</span> DownImgAsyncTask().execute(imgUrl);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initUI</span><span class="params">()</span></span>&#123;</div><div class="line">        showTextView = (TextView)findViewById(R.id.textview_show);</div><div class="line">        showImageView = (ImageView)findViewById(R.id.imagview_show);</div><div class="line">        downImgBtn = (Button)findViewById(R.id.btn_download_img);</div><div class="line">        visitWebBtn = (Button)findViewById(R.id.btn_visit_web);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getURLResponse</span><span class="params">(String urlString)</span></span>&#123;</div><div class="line">        HttpURLConnection conn = <span class="keyword">null</span>;</div><div class="line">        InputStream is = <span class="keyword">null</span>;</div><div class="line">        String resultData = <span class="string">""</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Log.d(<span class="string">"ThreadID"</span>, <span class="string">"getURLResponse : "</span> + Thread.currentThread().getId());</div><div class="line">            URL url = <span class="keyword">new</span> URL(urlString); <span class="comment">//URL对象</span></div><div class="line">            conn = (HttpURLConnection)url.openConnection(); <span class="comment">//使用URL打开一个链接</span></div><div class="line">            conn.setDoInput(<span class="keyword">true</span>); <span class="comment">//允许输入流，即允许下载</span></div><div class="line">            conn.setDoOutput(<span class="keyword">true</span>); <span class="comment">//允许输出流，即允许上传</span></div><div class="line">            conn.setUseCaches(<span class="keyword">false</span>); <span class="comment">//不使用缓冲</span></div><div class="line">            conn.setRequestMethod(<span class="string">"GET"</span>); <span class="comment">//使用get请求</span></div><div class="line">            is = conn.getInputStream();   <span class="comment">//获取输入流，此时才真正建立链接</span></div><div class="line">            Log.d(<span class="string">"ThreadID"</span>, <span class="string">"getURLResponse getInputStream: "</span> + Thread.currentThread().getId());</div><div class="line">            InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(is);</div><div class="line">            BufferedReader bufferReader = <span class="keyword">new</span> BufferedReader(isr);</div><div class="line">            String inputLine  = <span class="string">""</span>;</div><div class="line">            <span class="keyword">while</span>((inputLine = bufferReader.readLine()) != <span class="keyword">null</span>) &#123;</div><div class="line">                resultData += inputLine + <span class="string">"\n"</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;<span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;<span class="keyword">finally</span>&#123;</div><div class="line">            <span class="keyword">if</span>(is != <span class="keyword">null</span>)&#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    is.close();</div><div class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(conn != <span class="keyword">null</span>)&#123;</div><div class="line">                conn.disconnect();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> resultData;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> Bitmap <span class="title">getImageBitmap</span><span class="params">(String url)</span></span>&#123;</div><div class="line">        URL imgUrl;</div><div class="line">        Bitmap bitmap = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            imgUrl = <span class="keyword">new</span> URL(url);</div><div class="line">            HttpURLConnection conn = (HttpURLConnection)imgUrl.openConnection();</div><div class="line">            conn.setDoInput(<span class="keyword">true</span>);</div><div class="line">            conn.connect();</div><div class="line">            InputStream is = conn.getInputStream();</div><div class="line">            Log.d(<span class="string">"ThreadID"</span>, <span class="string">"doInbackground getInputStream: "</span> + Thread.currentThread().getId());</div><div class="line">            bitmap = BitmapFactory.decodeStream(is);</div><div class="line">            is.close();</div><div class="line">        &#125;<span class="keyword">catch</span>(IOException e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> bitmap;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">VisitWebRunnable</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            Log.d(<span class="string">"ThreadID"</span>,<span class="string">" VisitWebRunnable run: "</span>+Thread.currentThread().getId());</div><div class="line">            String data = getURLResponse(<span class="string">"http://www.baidu.com/"</span>);</div><div class="line">            Message message = <span class="keyword">new</span> Message();</div><div class="line">            Bundle bundle = <span class="keyword">new</span> Bundle();</div><div class="line">            bundle.putString(<span class="string">"data"</span>,data);</div><div class="line">            message.setData(bundle);</div><div class="line">            handle.sendMessage(message);</div><div class="line">            <span class="comment">//resultStr = data;</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">DownImgAsyncTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">String</span>, <span class="title">Void</span>, <span class="title">Bitmap</span>&gt;</span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPreExecute</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.onPreExecute();</div><div class="line">            showImageView.setImageBitmap(<span class="keyword">null</span>);</div><div class="line">            Log.d(<span class="string">"ThreadID"</span>, <span class="string">"onPreExecute: "</span> + Thread.currentThread().getId());</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> Bitmap <span class="title">doInBackground</span><span class="params">(String... params)</span> </span>&#123;</div><div class="line">            Bitmap b = getImageBitmap(params[<span class="number">0</span>]);</div><div class="line">            Log.d(<span class="string">"ThreadID"</span>,<span class="string">"doInBackground: "</span>+Thread.currentThread().getId());</div><div class="line">            <span class="keyword">return</span> b;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(Bitmap result)</span> </span>&#123;</div><div class="line">            Log.d(<span class="string">"ThreadID"</span>,<span class="string">"onPostExecute: "</span>+Thread.currentThread().getId());</div><div class="line">            <span class="keyword">super</span>.onPostExecute(result);</div><div class="line">            <span class="keyword">if</span>(result!=<span class="keyword">null</span>)&#123;</div><div class="line">                showImageView.setImageBitmap(result);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>源代码下载地址：<a href="https://github.com/Ryanst/HttpUrlConnection" target="_blank" rel="external">https://github.com/Ryanst/HttpUrlConnection</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/21/QWSDK整理-Android存储方案/" itemprop="url">
-                  QWSDK整理-Android存储方案
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-07-21T14:39:04+08:00" content="2015-07-21">
-              2015-07-21
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/07/21/QWSDK整理-Android存储方案/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/21/QWSDK整理-Android存储方案/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>文件存储，使用JAVA接口，适合存储简单的文本数据或者二进制数据</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">FileInputStream in = <span class="keyword">null</span>;</div><div class="line">BufferedReader reader;</div><div class="line">StringBuffer content = <span class="keyword">new</span> StringBuffer();</div><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">  in = openFileInput(“filename”);</div><div class="line">  reader = <span class="keyword">new</span> BufferReader(<span class="keyword">new</span> InputStreamReader(in);</div><div class="line">  String line = <span class="string">""</span>;</div><div class="line">  <span class="keyword">while</span>(line = (reader.ReadLIne() != <span class="keyword">null</span>)&#123;</div><div class="line">      content.append(line);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">catch</span>(IOException e)&#123;</div><div class="line">  e.printStackTrace();</div><div class="line">&#125;</div><div class="line"><span class="keyword">finally</span>&#123;</div><div class="line">  <span class="keyword">if</span>(reader != <span class="keyword">null</span>)&#123;</div><div class="line">      <span class="keyword">try</span>&#123;</div><div class="line">          reader.close();</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">catch</span>(IOException e)&#123;</div><div class="line">          e.printStackTrace();</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>SharePreferences存储(key/value存储，key是String，value可以是各种类型）</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SharePreference.Editor editor = getSharepreferences(“data”,MODE_PRIVATE).edit();</div><div class="line">editor.putInt(“age”,<span class="number">25</span>);</div><div class="line">editor.commit();</div><div class="line">SharePreference pref = getSharepreferences(“data”,MODE_PRIVATE);</div><div class="line"><span class="keyword">int</span> age = pref.getInt(“age”);</div></pre></td></tr></table></figure>
-<p>3、SQLite</p>
-<p>以下是QWSDK数据库操作的最简形式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//需要一个DBHelper类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDBHelper</span> <span class="keyword">extends</span> <span class="title">SQLiteOpenHelper</span> </span>&#123;</div><div class="line">    SQLiteDatabase mDataBase = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyDBHelper</span><span class="params">(Context context, String databaseName, <span class="keyword">int</span> version)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context.getApplicationContext(), databaseName, <span class="keyword">null</span>, version);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            mDataBase = getWritableDatabase();</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            mDataBase = getReadableDatabase();</div><div class="line">        &#125;</div><div class="line">        mContext = context.getApplicationContext();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(SQLiteDatabase db)</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase db, <span class="keyword">int</span> oldVersion, <span class="keyword">int</span> newVersion)</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//当MyDBHelper构造时传入的version大于原来的版本号时onUpgrade会调用</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//自定义一个数据库类，然后自定义add/query/delete等函数来操作数据库，提供友好接口</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDBManagerAccount</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyDBManagerAccount</span><span class="params">(MyDBHelper helper)</span> </span>&#123;</div><div class="line">        SQLiteDatabase db = helper.mDataBase;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>至于具体的数据库操作，可以调用SQLiteDatabase的CURD函数，也可以自己手写sql然后execSQL(QWSDK中采用的方式)，使用MyDBManagerAccount类的意义在于封装接口，只提供给用户我们想让他进行的操作</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/19/QWSDK整理-Android浏览器控件WebView/" itemprop="url">
-                  QWSDK整理-Android浏览器控件WebView
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-07-19T13:42:14+08:00" content="2015-07-19">
-              2015-07-19
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/07/19/QWSDK整理-Android浏览器控件WebView/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/19/QWSDK整理-Android浏览器控件WebView/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>QWSDK本身通过加载本地html来实现SDK界面显示，SDK内部加载html代码比较复杂，是前上司王辉所写，这里总结一下webview的基本的要点</p>
-<p>##WebView基本实现</p>
-<p>//需要为webview设置 WebViewClient</p>
-<p>//setWebChromeClient,设置Chrome处理</p>
-<pre><code>WebView myWebView = (WebView) findViewById(R.id.webview); 
-webview.setWebViewClient(new WebViewClient(){
-//一般WebViewClient需要重载的方法，使得打开新网页时在webview中打开而不是在系统浏览器中打开
-@Override
-public boolean shouldOverrideUrlLoading(WebView view, String url) {
-       view.loadUrl(url);//webview打开网页的方法
-       //QWSDK中使用loadDataWithBaseURL方法加载本地html内容
-       //view.loadDataWithBaseURL(&quot;&quot;, htmlString, &quot;text/html&quot;, &quot;utf-8&quot;, &quot;&quot;);
-        return true;
- }
- //可根据需要重载onPageStarted、 onPageFinished等方法
-});
-</code></pre><p>##Android方法与js的互相调用<br>首先设置webview为允许js</p>
-<pre><code>webview.getSettings().setJavaScriptEnabled(true);
-</code></pre><ul>
-<li><p>js调用Android方法：</p>
-<p>   webview.addJavascriptInterface(new MyJavaScriptInterface(param..),”js2java”);<br>   //Android方法写在QWJavaScriptInterface类中，如:<br>   public void myClose(String colseString){…}<br>这样在js中，可以使用windows.js2java.myClose(“colseString”);来调用myClose方法</p>
-</li>
-<li><p>Android方法调用js</p>
-<p>   view.loadUrl(url);//载入html</p>
-</li>
-</ul>
-<p>然后可通过点击html控件调用js，或者可以使用以下方式直接调用html中的js:</p>
-<pre><code>webview.loadUrl(&quot;javascript:js_fun()&quot;);
-</code></pre><p>若程序采用proguard混淆，还需要注意在混淆配置文件中加入<br>-keep public class com.example.zhengjt.MyJavaScriptInterface{<br>    public <methods>;<br>}<br>来防止java的js接口类被混淆，避免js找不到java方法</methods></p>
-<p>另外SDK中更新html界面的方式是使用runOnUiThread，如果当前线程是UI线程,那么行动是立即执行。如果当前线程不是UI线程,操作是发布到事件队列的UI线程。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/09/QWSDK整理-Android网络优化/" itemprop="url">
-                  QWSDK整理-Android网络优化
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-07-09T11:03:24+08:00" content="2015-07-09">
-              2015-07-09
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/07/09/QWSDK整理-Android网络优化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/09/QWSDK整理-Android网络优化/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>QWSDK采取的网络优化策略：</p>
-<ol>
-<li><p>在网络请求操作前检查是否有网络连接：</p>
-<p>  private boolean isConnected(){</p>
-<pre><code>   ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-   NetworkInfo info = connectivityManager.getActiveNetworkInfo(); 
-   if(info != null &amp;&amp; info.isAvailable()) {
-return true;
-    /*        
-    也可判断网络连接类型进行特定操作，以下分别为wifi或3G网络
-       int netType = info.getType();
-       int netSubtype = info.getSubtype();
-       if (netType == ConnectivityManager.TYPE_WIFI) {
-           return info.isConnected();//wifi网络
-       } else if (netType == ConnectivityManager.TYPE_MOBILE
-               &amp;&amp; netSubtype == TelephonyManager.NETWORK_TYPE_UMTS) {
-           return info.isConnected();//
-       } 
-    */
-    }else {
-         return false;
-    }
-</code></pre><p>  }</p>
-</li>
-<li>使用轻量级数据格式json而不是xml</li>
-<li>在单次请求数据量并不大的前提下，考虑合并网络请求，减少网络请求次数</li>
-<li><p>节省连接建立时间，开启 keep-alive</p>
-<p>   conn.setRequestProperty(“Connection”, “Keep-Alive”);</p>
-</li>
-<li><p>增量更新，服务端在单一功能接口外层设置针对用户功能性接口，考虑在特定条件下无需返回所有信息，仅返回当前没有而且需要的信息</p>
-</li>
-</ol>
-<p>其他可采用但未采用方式：</p>
-<ol>
-<li>使用IP而非域名，这么做可以省去DNS首次域名解析的时间，但是考虑到IP可能改变，需要一个IP列表，而可行的方式是将DNS和IP的映射写死在SDK中，形成一个本地的域名-IP映射，但是这样做当IP更新时SDK版本也需更新</li>
-<li>图片以及其他缓存，SDK仅设计为json数据传输</li>
-<li>对于不同的设备不同网络返回不同的内容 ，同2</li>
-</ol>
-<p>另外QWSDK使用json格式传输文件，Android有两种方式处理：java的org.json、Android开源库GSON，我们使用前者，基本的处理方式如下:</p>
-<pre><code>import org.json.*;
-
-JSONTokener jsonParser = new JSONTokener(jsonstring);
-jsonObject = (JSONObject) jsonParser.nextValue();
-//得到jsonObject后可通过接口来获取json中相应的值
-JSONArray  jr= jobject.getJSONArray(key);
-double d = jobject.getDouble(key);
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/06/03/Andorid Fragment总结/" itemprop="url">
                   Andorid Fragment总结
                 </a>
@@ -1548,6 +933,809 @@ transaction.commit();
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/05/10/JAVA对象初始化/" itemprop="url">
+                  JAVA对象初始化时构造器的调用顺序
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-05-10T02:38:10+08:00" content="2015-05-10">
+              2015-05-10
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/10/JAVA对象初始化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/10/JAVA对象初始化/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本文讨论JAVA中对象初始化时父类子类的static构造域，常量构造域以及构造函数的调用顺序问题，通过如下实例来说明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConstructorTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Employee e = <span class="keyword">new</span> Teacher();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Employee</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Employee construction"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"Employee initail"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.out.println(<span class="string">"Employee static initail"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">extends</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Teacher</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Teacher construction"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"Teacher initail"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.out.println(<span class="string">"Teacher static initail"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Employee <span class="keyword">static</span> initial</div><div class="line">Teacher <span class="keyword">static</span> initial</div><div class="line">Employee initial</div><div class="line">Employee construction</div><div class="line">Teacher initial</div><div class="line">Teacher construction</div></pre></td></tr></table></figure>
+<p>上面的例子说明，在初始化类的对象的时候，构造器的调用顺序：</p>
+<p>父类的static构造域-&gt;类的static域-&gt;父类的常量域-&gt;父类的构造函数-&gt;类的常量域-&gt;类的构造函数</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/04/03/vim学习笔记(2)——vim配置/" itemprop="url">
+                  vim学习笔记(2)——vim配置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-04-03T02:44:30+08:00" content="2015-04-03">
+              2015-04-03
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/04/03/vim学习笔记(2)——vim配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/03/vim学习笔记(2)——vim配置/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><em>记录vim的配置，随时更新</em></p>
+<p>##MacVim</p>
+<p>安装：</p>
+<ol>
+<li><code>homebrew</code>，安装位置：<code>/usr/local/Cellar</code></li>
+<li><code>brew linkapps macvim</code>——将<code>macvim.app</code>加入到Application下</li>
+<li><code>alias vim=&quot;/Applications/MacVim.app/Contents/MacOS/Vim&quot;</code>——设置别名，默认在终端中使用<code>macvim</code>的命令行版（关闭终端后会失效，在<code>~/.zshrc</code>中设置才行）</li>
+</ol>
+<p>##插件</p>
+<p>###vundle</p>
+<ul>
+<li>说明：vim下安装其他插件的插件</li>
+<li>安装：<code>git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle</code><br>在./vimrc中添加配置：<code>Bundle &#39;gmarik/vundle&#39;</code>。(<code>/.vim/bunle</code>为vim的插件目录)</li>
+<li>使用：<ul>
+<li>Bundleinstall:安装插件，BundleIstall ‘author/projectname’</li>
+<li>BundleList:列出当前安装的插件</li>
+<li>BundleUpdate:更新插件</li>
+<li>BundleSearch：搜索插件</li>
+<li>BUndleClean：清除插件</li>
+</ul>
+</li>
+</ul>
+<p>###NERDTree </p>
+<ul>
+<li>说明：树形结构目录</li>
+<li>安装：使用vundle安装</li>
+<li>配置：在.vimrc中设置快捷键：nmap <f2> :NERDTreeToggle <cr>,可用<f2>切换</f2></cr></f2></li>
+</ul>
+<p>###YouCompleteMe</p>
+<ul>
+<li>说明：自动补全多种程序语言</li>
+<li>安装：使用vundle安装</li>
+</ul>
+<p>###supertab</p>
+<ul>
+<li>说明：使用tab补全，代替ctrl+p,ctrl+n</li>
+<li>安装：使用vundle安装</li>
+</ul>
+<p>##.vimrc配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">filetype off                    <span class="string">" required!</span></div><div class="line">filetype plugin indent on</div><div class="line">colorscheme molokai</div><div class="line"></div><div class="line">"Vundle<span class="string">"</span></div><div class="line">call vundle#rc()</div><div class="line">" <span class="built_in">let</span> Vundle manage Vundle</div><div class="line">Bundle <span class="string">'gmarik/vundle'</span></div><div class="line">Bundle <span class="string">'scrooloose/nerdtree'</span></div><div class="line">nmap &lt;F2&gt; :NERDTreeToggle &lt;CR&gt;</div><div class="line">Bundle <span class="string">'Valloric/YouCompleteMe'</span></div><div class="line">Bundle <span class="string">'ervandew/supertab'</span></div><div class="line"></div><div class="line"><span class="built_in">set</span> nocompatible                <span class="string">" be iMproved</span></div><div class="line">set rtp+=~/.vim/bundle/vundle/</div><div class="line">set fencs=utf-8,chinese</div><div class="line">syntax on "打开语法高亮 </div><div class="line"><span class="built_in">set</span> showmatch</div><div class="line"><span class="built_in">set</span> autoindent</div><div class="line"><span class="built_in">set</span> smartindent</div><div class="line"><span class="built_in">set</span> tabstop=4</div><div class="line"><span class="built_in">set</span> shiftwidth=4</div><div class="line"><span class="built_in">set</span> nu <span class="string">"显示行号</span></div><div class="line">set mouse=a "设置鼠标定位光标<span class="string">"</span></div><div class="line">set pastetoggle=&lt;F10&gt; "设置粘贴模式快捷键<span class="string">"</span></div><div class="line">set clipboard=unnamed "vim剪贴板与系统剪贴板适配<span class="string">"</span></div><div class="line"></div><div class="line">"括号自动补全<span class="string">"</span></div><div class="line">inoremap ( ()&lt;ESC&gt;i</div><div class="line">inoremap [ []&lt;ESC&gt;i</div><div class="line">inoremap &#123; &#123;&#125;&lt;ESC&gt;i</div><div class="line">inoremap " <span class="string">""</span>&lt;ESC&gt;i</div><div class="line">inoremap <span class="string">' '</span><span class="string">'&lt;ESC&gt;i</span></div><div class="line"></div><div class="line">"Youcompleteme config"</div><div class="line">let g:ycm_global_ycm_extra_conf = '/Users/zhengjt/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py<span class="string">'</span></div><div class="line"></div><div class="line">"python F5 to run"</div><div class="line">au BufRead *.py map &lt;buffer&gt; &lt;F5&gt; :w&lt;CR&gt;:!/usr/bin/env python % &lt;CR&gt;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/04/01/vim学习笔记(1)——vim操作/" itemprop="url">
+                  vim学习笔记(1)——vim操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-04-01T02:16:11+08:00" content="2015-04-01">
+              2015-04-01
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/04/01/vim学习笔记(1)——vim操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/01/vim学习笔记(1)——vim操作/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><em>仅记录一些自己最常用的vim操作，随时更新</em></p>
+<p>##文本操作</p>
+<ul>
+<li>d    剪切，双击剪切一行</li>
+<li>y    复制，双击复制一行</li>
+<li><p>p    粘贴</p>
+</li>
+<li><p>x    删除当前光标下字符</p>
+</li>
+<li><p>r    替换当前光标字符，后面接替换的字符</p>
+</li>
+<li><p>:s/old/new/g    全局替换old为new</p>
+</li>
+</ul>
+<p>##移动</p>
+<ul>
+<li>0    移动到开头</li>
+<li>$    移动到结尾</li>
+<li>w    移动到下一个单词开头</li>
+<li><p>e    移动到下一个单词结尾</p>
+</li>
+<li><p>fx    移动到本行之后第一个出现x字母的位置</p>
+</li>
+<li><p>tx    移动到本行之后第一个出现x字母的前一个位置</p>
+</li>
+<li><p>gg    跳到文件首</p>
+</li>
+<li>G    跳到文件尾</li>
+<li><p>NG    移动到第N行，或者用:N也可</p>
+</li>
+<li><p>{    上一段，}下一段</p>
+</li>
+<li><p>%    跳到匹配的括号处</p>
+</li>
+<li><p>ctrl+o    上一个位置</p>
+</li>
+<li>ctrl+i    下一个位置</li>
+</ul>
+<p>文本移动和操作相互配合使用，比如d$+enter删除到行末，dw删除至下一个单词，2dd删除接下来两行</p>
+<p>也可以和数字相互使用，比如y+enter5,复制以下5行，:1,20d+enter删除1~20行</p>
+<p>##模式切换</p>
+<p>###插入模式</p>
+<ul>
+<li>i    进入插入模式，当前插入光标位置插入</li>
+<li>a    进入插入模式，下一个光标位置插入</li>
+<li>o    进入插入模式，在当前行下一行插入</li>
+<li>O    进入插入模式，在当前行上一行插入</li>
+</ul>
+<p><em>可配置vim成鼠标光标定位模式</em></p>
+<p>###可视化模式</p>
+<ul>
+<li>:v    进入可视化模式</li>
+</ul>
+<p>###替换模式</p>
+<ul>
+<li>:R    进入替换模式</li>
+</ul>
+<p>###使用外部命令</p>
+<ul>
+<li>:!    在!后添加外部命令</li>
+</ul>
+<p>###查找</p>
+<ul>
+<li>:/    在/后添加要查找的内容</li>
+</ul>
+<p><em>进入查找时，按n查找下一个，N查找上一个</em></p>
+<p>##文件操作</p>
+<p>###保存文件</p>
+<ul>
+<li>:w    保存</li>
+<li>:saveas filename    另存为</li>
+</ul>
+<p>###退出</p>
+<ul>
+<li>:q</li>
+</ul>
+<p>###保存退出vim</p>
+<p>vim中保存退出:x和:wq的区别，如下：<br>:wq和ZZ 强制性写入文件并退出（存盘并退出 write%quite）。即使文件没有被修改也强制写入，并更新文件的修改时间。<br>:x 写入文件并退出。仅当文件被修改时才写入，并更新文件修改时间；否则不会更新文件修改时间。</p>
+<p>这两者一般情况下没什么不一样，但是在编程方面，对编辑源文件可能会产生重要影响。因为文件即使没有修改，”:wq”强制更新文件的修改时间，这样会让make编译整个项目时以为文件被修改过了，然后就得重新编译链接生成可执行文件。这可能会产生让人误解的后果，当然也产生了不必要的系统资源花销。</p>
+<p>###操作回退和重做</p>
+<ul>
+<li>u    撤销上一个改动</li>
+<li>U    撤销本行所做的改动过</li>
+<li>ctrl+r    重做操作</li>
+</ul>
+<p>##其他</p>
+<ul>
+<li>ctrl+g    显示当前文件信息</li>
+<li>ctrl+d 补全命令</li>
+</ul>
+<p>参考资料：</p>
+<ul>
+<li>vmtutor</li>
+<li><a href="http://coolshell.cn/articles/5426.html" target="_blank" rel="external">http://coolshell.cn/articles/5426.html</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/03/01/编码技术总结/" itemprop="url">
+                  编码技术总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-03-01T08:43:54+08:00" content="2015-03-01">
+              2015-03-01
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/03/01/编码技术总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/01/编码技术总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <table>
+<thead>
+<tr>
+<th>名称</th>
+<th>产生原因</th>
+<th>字节数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ASCII</td>
+<td>初始编码，匹配英文字符</td>
+<td>1</td>
+<td>一共规定了127个字符的编码,32以下的被作为控制字符</td>
+</tr>
+<tr>
+<td>扩展ASCII</td>
+<td>加入符号字符编码</td>
+<td>1</td>
+<td>加入新的字母符号，还加入了很多画表格时需要用下到的横线、竖线、交叉等形状，编码到255</td>
+</tr>
+<tr>
+<td>GB2312</td>
+<td>汉字编码</td>
+<td>2</td>
+<td>一个小于127的字符的意义与原来相同，但两个大于127的字符连在一起时，就表示一个汉字。因此小于127的编码与ascii相同，一共能编码7000多个简体汉字，是最常见的汉字编码方式</td>
+</tr>
+<tr>
+<td>GBK</td>
+<td>扩展GB2312汉字编码容量</td>
+<td>2</td>
+<td>只要第一个字节是大于127就固定表示这是一个汉字的开始，不管后面跟的是不是扩展字符集里的内容(能编码20000多汉字)。向下兼容GB2312</td>
+</tr>
+<tr>
+<td>GB18030</td>
+<td>扩展GBK汉字编码容量，加入少数名族语言</td>
+<td>1、2、4变长编码</td>
+<td>单字节与 ASCII 编码兼容，双字节兼容GBK，共收录汉字70244个，还加入了少数名族语言，中国非手持和嵌入式设备的强制编码需支持标准。向下兼容GBK</td>
+</tr>
+<tr>
+<td>UTF-8</td>
+<td>unicode的最通用的编码实现方式</td>
+<td>1~4</td>
+<td>根据不同的符号而变化字节长度。英文字母1个字符一个字节，汉字1个字符三个字节，从而降低了储存空间</td>
+</tr>
+</tbody>
+</table>
+<h3 id="关于Unicode"><a href="#关于Unicode" class="headerlink" title="关于Unicode"></a>关于Unicode</h3><p>存储器容量发展，产生了Unicode，目的是试图将所有语言字符编码。它废弃了以往的其他编码方式重新编码，只是一个符号集。unicode把所有语言字符全对应成两个字节的二进制数字表示，但是它没有实现编码。若字节按unicode的方式，英文字符的编码将造成极大空间浪费。</p>
+<p>Unicode只是一个符号集，它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储，UTF-8是Unicode常见的编码方式。</p>
+<p>Unicode实现的几种方式：</p>
+<ul>
+<li>UTF-8：一个字符可以用1~4个字节表示，每次传输1个字节数据</li>
+<li>UTF-16：一个字符可以用2个或4个字节表示，每次传输2或4个字节数据</li>
+<li>UTF-32：一个字符可以用4个字节表示，每次传输4个字节数据</li>
+</ul>
+<h3 id="关于UTF-8-BOM头"><a href="#关于UTF-8-BOM头" class="headerlink" title="关于UTF-8 BOM头"></a>关于UTF-8 BOM头</h3><p>实际上，不含 BOM 的 UTF-8 才是标准形式。<br>不同的文本编辑器对于有无BOM的称呼也略有不同，比如EditPlus，有BOM的称为UTF-8+，无BOM的称为UTF-8，而在Notepad++中，有BOM的被称为标准UTF-8，而无BOM则被称为UTF-8无BOM。</p>
+<h3 id="在-Windows-记事本的语境中"><a href="#在-Windows-记事本的语境中" class="headerlink" title="在 Windows 记事本的语境中"></a>在 Windows 记事本的语境中</h3><ul>
+<li>所谓的「ANSI」指的是对应当前系统 locale 的遗留（legacy）编码，即默认编码方式的意思。对于英文文件是ASCII编码，对于简体中文文件是GB2312编码，对于繁体中文版会采用Big5码。</li>
+<li>所谓的「Unicode」指的是带有 BOM 的小端序 UTF-16。(UTF-8 不需要 BOM，尽管 Unicode 标准允许在 UTF-8 中使用 BOM,在网页上使用BOM是个错误)</li>
+<li>所谓的「UTF-8」指的是带 BOM 的 UTF-8。</li>
+</ul>
+<p>参考资料：</p>
+<ul>
+<li><a href="http://www.zhihu.com/question/20650946" target="_blank" rel="external">http://www.zhihu.com/question/20650946</a></li>
+<li><a href="http://dengo.org/archives/901" target="_blank" rel="external">http://dengo.org/archives/901</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/02/10/Android Service使用总结/" itemprop="url">
+                  Android Service使用总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-02-10T05:38:20+08:00" content="2015-02-10">
+              2015-02-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/02/10/Android Service使用总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/10/Android Service使用总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="最普通的后台service写法"><a href="#最普通的后台service写法" class="headerlink" title="最普通的后台service写法:"></a>最普通的后台service写法:</h3><ol>
+<li>写一个MyService类继承自Service，在onStartCommand中写service想要进行的操作</li>
+<li><p>在AndroidManifest.xml中注册servive</p>
+<pre><code>&lt;service android:name=&quot;.MyService&quot; &gt;
+&lt;/service&gt;
+</code></pre></li>
+<li><p>启动service</p>
+<pre><code>Intent intent = new Intent(this,MyService.class);
+StartService(indent);
+</code></pre></li>
+<li><p>停止servive</p>
+<pre><code>Intent intent = new Intent(this,MyService.class);
+StopService(indent);
+</code></pre></li>
+</ol>
+<h3 id="与activity相关service写法"><a href="#与activity相关service写法" class="headerlink" title="与activity相关service写法"></a>与activity相关service写法</h3><ol>
+<li>写一个MyService类继承自Service，新建一个MyBind类继承自Binder，在MyBinder中写想要在Service中进行的操作多个函数，新建一个MyBind对象，重写onBind方法，返回MyBind对象指针</li>
+<li>在Activity中新建ServiceConnection对象connection，并重写onServiceConnected(ComponentName name，IBinder mBnder),将mbinder指针赋给Activity类的变量myBinder.(这里onServiceConnected的mBinder就是Service类中新建的Binder对象)</li>
+<li><p>启动Service</p>
+<pre><code>Intent intent = new Intent(this, MyService.class);
+bindService(intent,connection,BIND_AUTO_CTRATE);
+</code></pre></li>
+<li><p>停止服务</p>
+<pre><code>unbindService(connection);
+</code></pre></li>
+</ol>
+<h3 id="IntentService"><a href="#IntentService" class="headerlink" title="IntentService"></a>IntentService</h3><p>IntentService继承自Service，是一种特殊的Service，它提供了一个创建异步的，自动停止的服务的简单的方法：<br>继承自IntentService后，重写onHandleIntent方法，在方法内写子线程需要执行的操作，并且操作结束后服务自动停止，调用服务的onDestory.</p>
+<p>可以使用线程完成IntentService完成的任务，在服务的onBind方法中return null，然后在startCommand中开启线程，当子线程代码最后调用stopSelf()</p>
+<h3 id="前台服务"><a href="#前台服务" class="headerlink" title="前台服务"></a>前台服务</h3><p>与notification相关，初始化一个notification，调用startForeground(1,notification)即可让服务成为前台服务</p>
+<p>优先级：</p>
+<ul>
+<li>前台服务：会同时在状态栏加以提示，优先级高，但服务终止的时候状态栏也会消失。</li>
+<li>后台服务：默认状态，优先级低于前台服务，GC时相比更容易被干掉。<br>几个注意事项：</li>
+</ul>
+<hr>
+<p>注意：</p>
+<p>bindService()+unbindService()应该成对出现</p>
+<p>startService()+stopService()应该成对出现</p>
+<p>屏幕旋转时，Activity是重新创建的，因此Service也是同样，重新创建之后，与之前的Service连接就会断开。</p>
+<p>如何实现常驻服务？</p>
+<ul>
+<li>onDestory中重启服务</li>
+<li>启用两个服务互相调用</li>
+<li>AlarmManger定时广播检查</li>
+</ul>
+<h3 id="Service和Activity通信机制："><a href="#Service和Activity通信机制：" class="headerlink" title="Service和Activity通信机制："></a>Service和Activity通信机制：</h3><ol>
+<li>通过在onServiceConnected中获取Binder对象来实现在Activity中调用Service类的方法</li>
+<li>通过广播，在Service方法中发送特定广播，在特定Activity中监听注册广播接收器，在广播类的onReceive中写接收到广播的逻辑——可通过intent传递数据</li>
+</ol>
+<h3 id="远程服务"><a href="#远程服务" class="headerlink" title="远程服务"></a>远程服务</h3><p>在注册Service的时候将它的android:process属性指定成:remote，服务是运行在主线程上的，如果需要在服务中完成耗时的操作，需要在onStartCommand中new thread，远程服务是运行在子线程中的。</p>
+<h3 id="AIDL"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL</h3><p>AIDL（Android Interface Definition Language）是Android接口定义语言的意思，它可以用于让某个Service与多个应用程序组件之间进行跨进程通信，从而可以实现多个应用程序共享同一个Service的功能。以下是基本的AIDL实现：</p>
+<ol>
+<li><p>新建MyAIDLService.aidl文件</p>
+<pre><code>//aidl对应的接口的方法前面不能加访问权限修饰符
+interface MyAIDLService {
+    int plus(int a, int b);
+    String toUpperCase(String str);
+}
+</code></pre></li>
+<li><p>用MyAIDLService.Stub mBinder = new Stub() {…}替换原Service中的Binder对象</p>
+</li>
+<li><p>在onServiceConnected中获取myAIDLService对象，就能调用myAIDLService对象的方法了</p>
+<pre><code>public void onServiceConnected(ComponentName name, IBinder service) {  
+            myAIDLService = MyAIDLService.Stub.asInterface(service);
+} 
+</code></pre></li>
+<li><p>使远程Service能够被其他程序使用，增加intent-filter中的action，然后拷贝MyAIDLService.aidl文件到另一个程序即可</p>
+<pre><code>&lt;service
+    android:name=&quot;com.example.servicetest.MyService&quot;
+    android:process=&quot;:remote&quot; &gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;com.example.servicetest.MyAIDLService&quot;/&gt;
+    &lt;/intent-filter&gt;
+&lt;/service&gt;
+</code></pre></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1593,7 +1781,7 @@ transaction.commit();
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

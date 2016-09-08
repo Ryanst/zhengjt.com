@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,37 +84,19 @@
 
 
 
-<meta name="description" content="最普通的后台service写法:
-写一个MyService类继承自Service，在onStartCommand中写service想要进行的操作
-在AndroidManifest.xml中注册servive
-&amp;lt;service android:name=&amp;quot;.MyService&amp;quot; &amp;gt;
-&amp;lt;/service&amp;gt;
-
-启动service
-Intent intent =">
+<meta name="description" content="本文讨论JAVA中对象初始化时父类子类的static构造域，常量构造域以及构造函数的调用顺序问题，通过如下实例来说明：
+12345678910111213141516171819202122232425262728293031323334public class MyConstructorTest &amp;#123;    public static void main(String[] args) &amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android Service使用总结">
-<meta property="og:url" content="http://zhengjt.com/2015/02/10/Android Service使用总结/index.html">
+<meta property="og:title" content="JAVA对象初始化时构造器的调用顺序">
+<meta property="og:url" content="http://zhengjt.com/2015/05/10/JAVA对象初始化时构造器的调用顺序/index.html">
 <meta property="og:site_name" content="Zhengjt's Home">
-<meta property="og:description" content="最普通的后台service写法:
-写一个MyService类继承自Service，在onStartCommand中写service想要进行的操作
-在AndroidManifest.xml中注册servive
-&amp;lt;service android:name=&amp;quot;.MyService&amp;quot; &amp;gt;
-&amp;lt;/service&amp;gt;
-
-启动service
-Intent intent =">
-<meta property="og:updated_time" content="2016-08-03T03:31:56.000Z">
+<meta property="og:description" content="本文讨论JAVA中对象初始化时父类子类的static构造域，常量构造域以及构造函数的调用顺序问题，通过如下实例来说明：
+12345678910111213141516171819202122232425262728293031323334public class MyConstructorTest &amp;#123;    public static void main(String[] args) &amp;">
+<meta property="og:updated_time" content="2016-08-03T02:29:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android Service使用总结">
-<meta name="twitter:description" content="最普通的后台service写法:
-写一个MyService类继承自Service，在onStartCommand中写service想要进行的操作
-在AndroidManifest.xml中注册servive
-&amp;lt;service android:name=&amp;quot;.MyService&amp;quot; &amp;gt;
-&amp;lt;/service&amp;gt;
-
-启动service
-Intent intent =">
+<meta name="twitter:title" content="JAVA对象初始化时构造器的调用顺序">
+<meta name="twitter:description" content="本文讨论JAVA中对象初始化时父类子类的static构造域，常量构造域以及构造函数的调用顺序问题，通过如下实例来说明：
+12345678910111213141516171819202122232425262728293031323334public class MyConstructorTest &amp;#123;    public static void main(String[] args) &amp;">
 
 
 
@@ -135,9 +117,9 @@ Intent intent =">
 
 
 
-  <link rel="canonical" href="http://zhengjt.com/2015/02/10/Android Service使用总结/"/>
+  <link rel="canonical" href="http://zhengjt.com/2015/05/10/JAVA对象初始化时构造器的调用顺序/"/>
 
-  <title> Android Service使用总结 | Zhengjt's Home </title>
+  <title> JAVA对象初始化时构造器的调用顺序 | Zhengjt's Home </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -212,6 +194,8 @@ Intent intent =">
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
             Home
           </a>
         </li>
@@ -219,6 +203,8 @@ Intent intent =">
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             Archives
           </a>
@@ -228,15 +214,9 @@ Intent intent =">
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-            Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Tags
+            Categories
           </a>
         </li>
       
@@ -244,43 +224,17 @@ Intent intent =">
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
             About
           </a>
         </li>
       
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="st-search-show-outputs">
-          
-            
-            Search
-          </a>
-        </li>
-      
     </ul>
   
 
-  
-    <div class="site-search">
-      
-  <form class="site-search-form">
-  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-</form>
-
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install', 'dZxcQQCKYeN6t1QfAAZx','2.0.0');
-</script>
-
-
-
-    </div>
   
 </nav>
 
@@ -314,7 +268,7 @@ Intent intent =">
             
             
               
-                Android Service使用总结
+                JAVA对象初始化时构造器的调用顺序
               
             
           </h1>
@@ -326,38 +280,19 @@ Intent intent =">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-02-10T05:38:20+08:00" content="2015-02-10">
-              2015-02-10
+            <time itemprop="dateCreated" datetime="2015-05-10T02:38:10+08:00" content="2015-05-10">
+              2015-05-10
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/02/10/Android Service使用总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/10/Android Service使用总结/" itemprop="commentsCount"></span>
+                <a href="/2015/05/10/JAVA对象初始化时构造器的调用顺序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/10/JAVA对象初始化时构造器的调用顺序/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -380,82 +315,12 @@ Intent intent =">
       
 
       
-        <h3 id="最普通的后台service写法"><a href="#最普通的后台service写法" class="headerlink" title="最普通的后台service写法:"></a>最普通的后台service写法:</h3><ol>
-<li>写一个MyService类继承自Service，在onStartCommand中写service想要进行的操作</li>
-<li><p>在AndroidManifest.xml中注册servive</p>
-<pre><code>&lt;service android:name=&quot;.MyService&quot; &gt;
-&lt;/service&gt;
-</code></pre></li>
-<li><p>启动service</p>
-<pre><code>Intent intent = new Intent(this,MyService.class);
-StartService(indent);
-</code></pre></li>
-<li><p>停止servive</p>
-<pre><code>Intent intent = new Intent(this,MyService.class);
-StopService(indent);
-</code></pre></li>
-</ol>
-<h3 id="与activity相关service写法"><a href="#与activity相关service写法" class="headerlink" title="与activity相关service写法"></a>与activity相关service写法</h3><ol>
-<li>写一个MyService类继承自Service，新建一个MyBind类继承自Binder，在MyBinder中写想要在Service中进行的操作多个函数，新建一个MyBind对象，重写onBind方法，返回MyBind对象指针</li>
-<li>在Activity中新建ServiceConnection对象connection，并重写onServiceConnected(ComponentName name，IBinder mBnder),将mbinder指针赋给Activity类的变量myBinder.(这里onServiceConnected的mBinder就是Service类中新建的Binder对象)</li>
-<li><p>启动Service</p>
-<pre><code>Intent intent = new Intent(this, MyService.class);
-bindService(intent,connection,BIND_AUTO_CTRATE);
-</code></pre></li>
-<li><p>停止服务</p>
-<pre><code>unbindService(connection);
-</code></pre></li>
-</ol>
-<h3 id="IntentService"><a href="#IntentService" class="headerlink" title="IntentService"></a>IntentService</h3><p>IntentService继承自Service，是一种特殊的Service，它提供了一个创建异步的，自动停止的服务的简单的方法：<br>继承自IntentService后，重写onHandleIntent方法，在方法内写子线程需要执行的操作，并且操作结束后服务自动停止，调用服务的onDestory.</p>
-<p>可以使用线程完成IntentService完成的任务，在服务的onBind方法中return null，然后在startCommand中开启线程，当子线程代码最后调用stopSelf()</p>
-<h3 id="前台服务"><a href="#前台服务" class="headerlink" title="前台服务"></a>前台服务</h3><p>与notification相关，初始化一个notification，调用startForeground(1,notification)即可让服务成为前台服务</p>
-<p>优先级：</p>
-<ul>
-<li>前台服务：会同时在状态栏加以提示，优先级高，但服务终止的时候状态栏也会消失。</li>
-<li>后台服务：默认状态，优先级低于前台服务，GC时相比更容易被干掉。<br>几个注意事项：</li>
-</ul>
-<hr>
-<p>注意：</p>
-<p>bindService()+unbindService()应该成对出现</p>
-<p>startService()+stopService()应该成对出现</p>
-<p>屏幕旋转时，Activity是重新创建的，因此Service也是同样，重新创建之后，与之前的Service连接就会断开。</p>
-<p>如何实现常驻服务？</p>
-<ul>
-<li>onDestory中重启服务</li>
-<li>启用两个服务互相调用</li>
-<li>AlarmManger定时广播检查</li>
-</ul>
-<h3 id="Service和Activity通信机制："><a href="#Service和Activity通信机制：" class="headerlink" title="Service和Activity通信机制："></a>Service和Activity通信机制：</h3><ol>
-<li>通过在onServiceConnected中获取Binder对象来实现在Activity中调用Service类的方法</li>
-<li>通过广播，在Service方法中发送特定广播，在特定Activity中监听注册广播接收器，在广播类的onReceive中写接收到广播的逻辑——可通过intent传递数据</li>
-</ol>
-<h3 id="远程服务"><a href="#远程服务" class="headerlink" title="远程服务"></a>远程服务</h3><p>在注册Service的时候将它的android:process属性指定成:remote，服务是运行在主线程上的，如果需要在服务中完成耗时的操作，需要在onStartCommand中new thread，远程服务是运行在子线程中的。</p>
-<h3 id="AIDL"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL</h3><p>AIDL（Android Interface Definition Language）是Android接口定义语言的意思，它可以用于让某个Service与多个应用程序组件之间进行跨进程通信，从而可以实现多个应用程序共享同一个Service的功能。以下是基本的AIDL实现：</p>
-<ol>
-<li><p>新建MyAIDLService.aidl文件</p>
-<pre><code>//aidl对应的接口的方法前面不能加访问权限修饰符
-interface MyAIDLService {
-    int plus(int a, int b);
-    String toUpperCase(String str);
-}
-</code></pre></li>
-<li><p>用MyAIDLService.Stub mBinder = new Stub() {…}替换原Service中的Binder对象</p>
-</li>
-<li><p>在onServiceConnected中获取myAIDLService对象，就能调用myAIDLService对象的方法了</p>
-<pre><code>public void onServiceConnected(ComponentName name, IBinder service) {  
-            myAIDLService = MyAIDLService.Stub.asInterface(service);
-} 
-</code></pre></li>
-<li><p>使远程Service能够被其他程序使用，增加intent-filter中的action，然后拷贝MyAIDLService.aidl文件到另一个程序即可</p>
-<pre><code>&lt;service
-    android:name=&quot;com.example.servicetest.MyService&quot;
-    android:process=&quot;:remote&quot; &gt;
-    &lt;intent-filter&gt;
-        &lt;action android:name=&quot;com.example.servicetest.MyAIDLService&quot;/&gt;
-    &lt;/intent-filter&gt;
-&lt;/service&gt;
-</code></pre></li>
-</ol>
+        <p>本文讨论JAVA中对象初始化时父类子类的static构造域，常量构造域以及构造函数的调用顺序问题，通过如下实例来说明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConstructorTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Employee e = <span class="keyword">new</span> Teacher();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Employee</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Employee construction"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"Employee initail"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.out.println(<span class="string">"Employee static initail"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">extends</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Teacher</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Teacher construction"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"Teacher initail"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.out.println(<span class="string">"Teacher static initail"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Employee <span class="keyword">static</span> initial</div><div class="line">Teacher <span class="keyword">static</span> initial</div><div class="line">Employee initial</div><div class="line">Employee construction</div><div class="line">Teacher initial</div><div class="line">Teacher construction</div></pre></td></tr></table></figure>
+<p>上面的例子说明，在初始化类的对象的时候，构造器的调用顺序：</p>
+<p>父类的static构造域-&gt;类的static域-&gt;父类的常量域-&gt;父类的构造函数-&gt;类的常量域-&gt;类的构造函数</p>
 
       
     </div>
@@ -476,27 +341,21 @@ interface MyAIDLService {
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag">#Android</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/01/25/Android屏幕旋转与acticity生命周期/" rel="next" title="Android屏幕旋转与acticity生命周期">
-                <i class="fa fa-chevron-left"></i> Android屏幕旋转与acticity生命周期
+              <a href="/2015/03/01/编码技术总结/" rel="next" title="编码技术总结">
+                <i class="fa fa-chevron-left"></i> 编码技术总结
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/03/01/编码技术总结/" rel="prev" title="编码技术总结">
-                编码技术总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/08/27/Java内存泄漏发生的情况/" rel="prev" title="Java内存泄漏发生的情况">
+                Java内存泄漏发生的情况 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -523,8 +382,8 @@ interface MyAIDLService {
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/02/10/Android Service使用总结/"
-           data-title="Android Service使用总结" data-url="http://zhengjt.com/2015/02/10/Android Service使用总结/">
+      <div class="ds-thread" data-thread-key="2015/05/10/JAVA对象初始化时构造器的调用顺序/"
+           data-title="JAVA对象初始化时构造器的调用顺序" data-url="http://zhengjt.com/2015/05/10/JAVA对象初始化时构造器的调用顺序/">
       </div>
     
   </div>
@@ -569,7 +428,7 @@ interface MyAIDLService {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -585,10 +444,10 @@ interface MyAIDLService {
 
           
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              
                 <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">tags</span>
-              </a>
+              
             </div>
           
 
@@ -644,7 +503,7 @@ interface MyAIDLService {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#最普通的后台service写法"><span class="nav-number">1.</span> <span class="nav-text">最普通的后台service写法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与activity相关service写法"><span class="nav-number">2.</span> <span class="nav-text">与activity相关service写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IntentService"><span class="nav-number">3.</span> <span class="nav-text">IntentService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前台服务"><span class="nav-number">4.</span> <span class="nav-text">前台服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service和Activity通信机制："><span class="nav-number">5.</span> <span class="nav-text">Service和Activity通信机制：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程服务"><span class="nav-number">6.</span> <span class="nav-text">远程服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AIDL"><span class="nav-number">7.</span> <span class="nav-text">AIDL</span></a></li></ol></div>
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
             
           </div>
         </section>

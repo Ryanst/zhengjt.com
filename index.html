@@ -192,6 +192,8 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
             Home
           </a>
         </li>
@@ -199,6 +201,8 @@
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             Archives
           </a>
@@ -208,15 +212,9 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-            Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Tags
+            Categories
           </a>
         </li>
       
@@ -224,43 +222,17 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
             About
           </a>
         </li>
       
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="st-search-show-outputs">
-          
-            
-            Search
-          </a>
-        </li>
-      
     </ul>
   
 
-  
-    <div class="site-search">
-      
-  <form class="site-search-form">
-  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-</form>
-
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install', 'dZxcQQCKYeN6t1QfAAZx','2.0.0');
-</script>
-
-
-
-    </div>
   
 </nav>
 
@@ -296,7 +268,7 @@
               
                 
                 <a class="post-title-link" href="/2015/09/14/synchronized关键字总结/" itemprop="url">
-                  Synchronized关键字总结
+                  synchronized关键字总结
                 </a>
               
             
@@ -803,158 +775,7 @@
             
               
                 
-                <a class="post-title-link" href="/2015/06/03/Andorid Fragment总结/" itemprop="url">
-                  Andorid Fragment总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-06-03T10:23:14+08:00" content="2015-06-03">
-              2015-06-03
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/06/03/Andorid Fragment总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/03/Andorid Fragment总结/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>###Fragment一般用于大屏设备</p>
-<ul>
-<li>问：如何写一份代码多个设备使用且根据设备尺寸来展示不同的界面？</li>
-<li><p>答：新建layout-large或者layout-sw600dp文件夹表示在大屏设备或者在dp大于600的设备的时候会使用这个文件夹中的.xml布局</p>
-</li>
-<li><p>问：一个fragemnt需要什么？</p>
-</li>
-<li><p>答：一个fragment.xml+一个fragment.java extends Fragment<br>(通过View view =inflater.inflate(R.layout.fragment,container,false)；来实现与.xml文件的关联)</p>
-</li>
-<li><p>问：在activity中如何使用？</p>
-</li>
-<li><p>答：在.xml中代码，例如以下：</p>
-<pre><code>&lt;fragment
-    android:id=&quot;@+id/news_title_fragment&quot;
-    android:name=&quot;com.example.fragmentbestpractice.NewsTitleFragment&quot;
-    android:layout_width=&quot;0dp&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:layout_weight=&quot;1&quot; /&gt;
-</code></pre></li>
-<li><p>问：如何动态改变fragment？</p>
-</li>
-<li>答：运用fragmentManager</li>
-</ul>
-<pre><code>FragmentManager fragmentManager = getFragmentManager();
-FragmentTransaction transaction = fragmentManager.beginTransaction();
-transaction.replace(R.id.right_layout, fragment);
-transaction.addToBackStack(null);//将事务添加到返回栈中
-transaction.commit();
-</code></pre><ul>
-<li>问：activity和fragment间如何通信</li>
-<li><p>答：</p>
-<p>1、在activity的.java文件中可以通过findFragmentById来获得特定fragment类的当前对象</p>
-<p>   MyFragment frag = (MyFragment);<br>   getFragmentManager().findFragmentById(R.id.my_fragment);</p>
-<p>2、在fragment的.java文件中可以通过getActivity()来获取当前活动</p>
-<p>   MyActivity myActivity = (MyActivity) getActivity();//Activity继承自Context</p>
-</li>
-<li><p>问：碎片的生命周期</p>
-</li>
-<li>答：Fragment必须是依存与Activity而存在的，因此Activity的生命周期会直接影响到Fragment的生命周期。</li>
-</ul>
-<p><img src="/images/fragment-life-circle.jpg" alt="Fragment生命周期"></p>
-<p><em>需要注意的是</em>：</p>
-<ol>
-<li>是否有调用addToBackStack()决定fragment是否在返回栈中</li>
-<li>由停止状态返回运行状态时，不会调用onCreate()和onCreateView，而是从onActivityCreate()调用起</li>
-<li>为了避免运行时配置发生变化，最常见的就是屏幕发生旋转后重复绘制fragment，可以在绘制fragment的代码外面加上条件if(savedInstanceState == null) </li>
-</ol>
-<p>补充fragment知识:</p>
-<p><a href="http://blog.csdn.net/lmj623565791/article/details/37970961" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/37970961</a></p>
-<p><a href="http://blog.csdn.net/lmj623565791/article/details/37992017" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/37992017</a></p>
-<p><a href="http://blog.csdn.net/lmj623565791/article/details/42628537" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/42628537</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/05/10/JAVA对象初始化/" itemprop="url">
+                <a class="post-title-link" href="/2015/05/10/JAVA对象初始化时构造器的调用顺序/" itemprop="url">
                   JAVA对象初始化时构造器的调用顺序
                 </a>
               
@@ -979,8 +800,8 @@ transaction.commit();
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/05/10/JAVA对象初始化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/10/JAVA对象初始化/" itemprop="commentsCount"></span>
+                <a href="/2015/05/10/JAVA对象初始化时构造器的调用顺序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/10/JAVA对象初始化时构造器的调用顺序/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1011,341 +832,6 @@ transaction.commit();
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Employee <span class="keyword">static</span> initial</div><div class="line">Teacher <span class="keyword">static</span> initial</div><div class="line">Employee initial</div><div class="line">Employee construction</div><div class="line">Teacher initial</div><div class="line">Teacher construction</div></pre></td></tr></table></figure>
 <p>上面的例子说明，在初始化类的对象的时候，构造器的调用顺序：</p>
 <p>父类的static构造域-&gt;类的static域-&gt;父类的常量域-&gt;父类的构造函数-&gt;类的常量域-&gt;类的构造函数</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/04/03/vim学习笔记(2)——vim配置/" itemprop="url">
-                  vim学习笔记(2)——vim配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-04-03T02:44:30+08:00" content="2015-04-03">
-              2015-04-03
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/04/03/vim学习笔记(2)——vim配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/03/vim学习笔记(2)——vim配置/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><em>记录vim的配置，随时更新</em></p>
-<p>##MacVim</p>
-<p>安装：</p>
-<ol>
-<li><code>homebrew</code>，安装位置：<code>/usr/local/Cellar</code></li>
-<li><code>brew linkapps macvim</code>——将<code>macvim.app</code>加入到Application下</li>
-<li><code>alias vim=&quot;/Applications/MacVim.app/Contents/MacOS/Vim&quot;</code>——设置别名，默认在终端中使用<code>macvim</code>的命令行版（关闭终端后会失效，在<code>~/.zshrc</code>中设置才行）</li>
-</ol>
-<p>##插件</p>
-<p>###vundle</p>
-<ul>
-<li>说明：vim下安装其他插件的插件</li>
-<li>安装：<code>git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle</code><br>在./vimrc中添加配置：<code>Bundle &#39;gmarik/vundle&#39;</code>。(<code>/.vim/bunle</code>为vim的插件目录)</li>
-<li>使用：<ul>
-<li>Bundleinstall:安装插件，BundleIstall ‘author/projectname’</li>
-<li>BundleList:列出当前安装的插件</li>
-<li>BundleUpdate:更新插件</li>
-<li>BundleSearch：搜索插件</li>
-<li>BUndleClean：清除插件</li>
-</ul>
-</li>
-</ul>
-<p>###NERDTree </p>
-<ul>
-<li>说明：树形结构目录</li>
-<li>安装：使用vundle安装</li>
-<li>配置：在.vimrc中设置快捷键：nmap <f2> :NERDTreeToggle <cr>,可用<f2>切换</f2></cr></f2></li>
-</ul>
-<p>###YouCompleteMe</p>
-<ul>
-<li>说明：自动补全多种程序语言</li>
-<li>安装：使用vundle安装</li>
-</ul>
-<p>###supertab</p>
-<ul>
-<li>说明：使用tab补全，代替ctrl+p,ctrl+n</li>
-<li>安装：使用vundle安装</li>
-</ul>
-<p>##.vimrc配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">filetype off                    <span class="string">" required!</span></div><div class="line">filetype plugin indent on</div><div class="line">colorscheme molokai</div><div class="line"></div><div class="line">"Vundle<span class="string">"</span></div><div class="line">call vundle#rc()</div><div class="line">" <span class="built_in">let</span> Vundle manage Vundle</div><div class="line">Bundle <span class="string">'gmarik/vundle'</span></div><div class="line">Bundle <span class="string">'scrooloose/nerdtree'</span></div><div class="line">nmap &lt;F2&gt; :NERDTreeToggle &lt;CR&gt;</div><div class="line">Bundle <span class="string">'Valloric/YouCompleteMe'</span></div><div class="line">Bundle <span class="string">'ervandew/supertab'</span></div><div class="line"></div><div class="line"><span class="built_in">set</span> nocompatible                <span class="string">" be iMproved</span></div><div class="line">set rtp+=~/.vim/bundle/vundle/</div><div class="line">set fencs=utf-8,chinese</div><div class="line">syntax on "打开语法高亮 </div><div class="line"><span class="built_in">set</span> showmatch</div><div class="line"><span class="built_in">set</span> autoindent</div><div class="line"><span class="built_in">set</span> smartindent</div><div class="line"><span class="built_in">set</span> tabstop=4</div><div class="line"><span class="built_in">set</span> shiftwidth=4</div><div class="line"><span class="built_in">set</span> nu <span class="string">"显示行号</span></div><div class="line">set mouse=a "设置鼠标定位光标<span class="string">"</span></div><div class="line">set pastetoggle=&lt;F10&gt; "设置粘贴模式快捷键<span class="string">"</span></div><div class="line">set clipboard=unnamed "vim剪贴板与系统剪贴板适配<span class="string">"</span></div><div class="line"></div><div class="line">"括号自动补全<span class="string">"</span></div><div class="line">inoremap ( ()&lt;ESC&gt;i</div><div class="line">inoremap [ []&lt;ESC&gt;i</div><div class="line">inoremap &#123; &#123;&#125;&lt;ESC&gt;i</div><div class="line">inoremap " <span class="string">""</span>&lt;ESC&gt;i</div><div class="line">inoremap <span class="string">' '</span><span class="string">'&lt;ESC&gt;i</span></div><div class="line"></div><div class="line">"Youcompleteme config"</div><div class="line">let g:ycm_global_ycm_extra_conf = '/Users/zhengjt/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py<span class="string">'</span></div><div class="line"></div><div class="line">"python F5 to run"</div><div class="line">au BufRead *.py map &lt;buffer&gt; &lt;F5&gt; :w&lt;CR&gt;:!/usr/bin/env python % &lt;CR&gt;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/04/01/vim学习笔记(1)——vim操作/" itemprop="url">
-                  vim学习笔记(1)——vim操作
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-04-01T02:16:11+08:00" content="2015-04-01">
-              2015-04-01
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/04/01/vim学习笔记(1)——vim操作/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/01/vim学习笔记(1)——vim操作/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><em>仅记录一些自己最常用的vim操作，随时更新</em></p>
-<p>##文本操作</p>
-<ul>
-<li>d    剪切，双击剪切一行</li>
-<li>y    复制，双击复制一行</li>
-<li><p>p    粘贴</p>
-</li>
-<li><p>x    删除当前光标下字符</p>
-</li>
-<li><p>r    替换当前光标字符，后面接替换的字符</p>
-</li>
-<li><p>:s/old/new/g    全局替换old为new</p>
-</li>
-</ul>
-<p>##移动</p>
-<ul>
-<li>0    移动到开头</li>
-<li>$    移动到结尾</li>
-<li>w    移动到下一个单词开头</li>
-<li><p>e    移动到下一个单词结尾</p>
-</li>
-<li><p>fx    移动到本行之后第一个出现x字母的位置</p>
-</li>
-<li><p>tx    移动到本行之后第一个出现x字母的前一个位置</p>
-</li>
-<li><p>gg    跳到文件首</p>
-</li>
-<li>G    跳到文件尾</li>
-<li><p>NG    移动到第N行，或者用:N也可</p>
-</li>
-<li><p>{    上一段，}下一段</p>
-</li>
-<li><p>%    跳到匹配的括号处</p>
-</li>
-<li><p>ctrl+o    上一个位置</p>
-</li>
-<li>ctrl+i    下一个位置</li>
-</ul>
-<p>文本移动和操作相互配合使用，比如d$+enter删除到行末，dw删除至下一个单词，2dd删除接下来两行</p>
-<p>也可以和数字相互使用，比如y+enter5,复制以下5行，:1,20d+enter删除1~20行</p>
-<p>##模式切换</p>
-<p>###插入模式</p>
-<ul>
-<li>i    进入插入模式，当前插入光标位置插入</li>
-<li>a    进入插入模式，下一个光标位置插入</li>
-<li>o    进入插入模式，在当前行下一行插入</li>
-<li>O    进入插入模式，在当前行上一行插入</li>
-</ul>
-<p><em>可配置vim成鼠标光标定位模式</em></p>
-<p>###可视化模式</p>
-<ul>
-<li>:v    进入可视化模式</li>
-</ul>
-<p>###替换模式</p>
-<ul>
-<li>:R    进入替换模式</li>
-</ul>
-<p>###使用外部命令</p>
-<ul>
-<li>:!    在!后添加外部命令</li>
-</ul>
-<p>###查找</p>
-<ul>
-<li>:/    在/后添加要查找的内容</li>
-</ul>
-<p><em>进入查找时，按n查找下一个，N查找上一个</em></p>
-<p>##文件操作</p>
-<p>###保存文件</p>
-<ul>
-<li>:w    保存</li>
-<li>:saveas filename    另存为</li>
-</ul>
-<p>###退出</p>
-<ul>
-<li>:q</li>
-</ul>
-<p>###保存退出vim</p>
-<p>vim中保存退出:x和:wq的区别，如下：<br>:wq和ZZ 强制性写入文件并退出（存盘并退出 write%quite）。即使文件没有被修改也强制写入，并更新文件的修改时间。<br>:x 写入文件并退出。仅当文件被修改时才写入，并更新文件修改时间；否则不会更新文件修改时间。</p>
-<p>这两者一般情况下没什么不一样，但是在编程方面，对编辑源文件可能会产生重要影响。因为文件即使没有修改，”:wq”强制更新文件的修改时间，这样会让make编译整个项目时以为文件被修改过了，然后就得重新编译链接生成可执行文件。这可能会产生让人误解的后果，当然也产生了不必要的系统资源花销。</p>
-<p>###操作回退和重做</p>
-<ul>
-<li>u    撤销上一个改动</li>
-<li>U    撤销本行所做的改动过</li>
-<li>ctrl+r    重做操作</li>
-</ul>
-<p>##其他</p>
-<ul>
-<li>ctrl+g    显示当前文件信息</li>
-<li>ctrl+d 补全命令</li>
-</ul>
-<p>参考资料：</p>
-<ul>
-<li>vmtutor</li>
-<li><a href="http://coolshell.cn/articles/5426.html" target="_blank" rel="external">http://coolshell.cn/articles/5426.html</a></li>
-</ul>
 
           
         
@@ -1562,7 +1048,7 @@ transaction.commit();
             
               
                 
-                <a class="post-title-link" href="/2015/02/10/Android Service使用总结/" itemprop="url">
+                <a class="post-title-link" href="/2015/02/03/Android-Service使用总结/" itemprop="url">
                   Android Service使用总结
                 </a>
               
@@ -1576,8 +1062,8 @@ transaction.commit();
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-02-10T05:38:20+08:00" content="2015-02-10">
-              2015-02-10
+            <time itemprop="dateCreated" datetime="2015-02-03T05:38:20+08:00" content="2015-02-03">
+              2015-02-03
             </time>
           </span>
 
@@ -1606,8 +1092,8 @@ transaction.commit();
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/02/10/Android Service使用总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/10/Android Service使用总结/" itemprop="commentsCount"></span>
+                <a href="/2015/02/03/Android-Service使用总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/03/Android-Service使用总结/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1736,13 +1222,353 @@ interface MyAIDLService {
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/01/25/Android屏幕旋转与acticity生命周期/" itemprop="url">
+                  Android屏幕旋转与acticity生命周期
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-01-25T05:08:12+08:00" content="2015-01-25">
+              2015-01-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/01/25/Android屏幕旋转与acticity生命周期/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/25/Android屏幕旋转与acticity生命周期/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>设置 <code>android:configChanges=&quot;orientation&quot;</code>和不设置这个属性，生命周期表现为重新创建activity</p>
+</li>
+<li><p>设置 <code>android:configChanges=&quot;orientation|keyboardHidden&quot;</code>，在2.3上表现为不重新创建activity，5.1如下</p>
+</li>
+</ol>
+<p>`<br>    android:targetSdkVersion&lt;=“12”//生命周期表现为不重新创建activity<br>    android:targetSdkVersion&gt;”12”//表现为重新创建activity<br>`</p>
+<ol>
+<li>设置 <code>android:configChanges=&quot;orientation|keyboardHidden|screenSize&quot;</code>，在2.3和5.1上都表现为不重新创建，在屏幕旋转时，只会调用<code>onConfigurationChanged</code>方法</li>
+</ol>
+<p>测试代码：</p>
+<p>``` java</p>
+<p>public class MainActivity extends Activity {</p>
+<pre><code>@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.relative_center_2);
+    Log.i(&quot;MainActivity&quot;, &quot;执行onCreate方法&quot;);
+}
+
+@Override
+protected void onStart() {
+    super.onStart();
+    Log.i(&quot;MainActivity&quot;, &quot;执行onStart方法&quot;);
+}
+
+@Override
+protected void onResume() {
+    super.onResume();
+    Log.i(&quot;MainActivity&quot;, &quot;执行onResume方法&quot;);
+}
+
+@Override
+protected void onPause() {
+    super.onPause();
+    Log.i(&quot;MainActivity&quot;, &quot;执行onPause方法&quot;);
+}
+
+@Override
+protected void onStop() {
+    super.onStop();
+    Log.i(&quot;MainActivity&quot;, &quot;执行onStop方法&quot;);
+}
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    Log.i(&quot;MainActivity&quot;, &quot;执行onDestroy方法&quot;);
+}
+
+@Override
+public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    Log.i(&quot;MainActivity&quot;, &quot;执行onConfigurationChanged方法&quot;);
+}
+
+@Override
+protected void onRestart() {
+    super.onRestart();
+    Log.i(&quot;MainActivity&quot;, &quot;执行onRestart方法&quot;);
+}
+
+@Override
+protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    Log.i(&quot;MainActivity&quot;, &quot;执行onSaveInstanceState方法&quot;);
+}
+
+@Override
+protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    super.onRestoreInstanceState(savedInstanceState);
+    Log.i(&quot;MainActivity&quot;, &quot;执行onRestoreInstanceState方法&quot;);
+}
+</code></pre><p>}<br>```</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/29/Java集合框架总结/" itemprop="url">
+                  Java集合框架总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-09-29T10:23:04+08:00" content="2014-09-29">
+              2014-09-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/09/29/Java集合框架总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/29/Java集合框架总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>JAVA集合的接口和实现分离</p>
+<p><img src="../images/java-collection-tree.png" alt="java-collection-tree"></p>
+<p>Collection接口的类实现了单元素存储、Map接口实现了键/值的映射表(键唯一)<br>Collection添加用add,设置值用set(index),获取值需要有序用get(index)<br>Map添加用put(key,value),设置值依然用put(key,value)覆盖原值,获取值用get(key)</p>
+<p>队列：LinkedList实现了Queue<e>接口，因此要使用队列的时候使用LinkedList即可</e></p>
+<p>``` java<br>Queue<integer> queue = new LinkedList<integer>();<br>```<br>Queue接口：</integer></integer></p>
+<p>   \  |  抛出异常  |  返回特殊值<br>-—-|—–|—–<br>插入  |  add(e)  |  offer(e)<br>移除  |  remove()  |  poll()<br>检查  |  element()  |  peek()</p>
+<p>add:添加到队尾</p>
+<p>remove:移除队头元素//与一般的认知有些不同</p>
+<p>element:返回队头元素</p>
+<p>两列的功能相同，区别在于当队列为空的时候第一列抛出异常，第二列一般只返回null</p>
+<hr>
+<p>总结：</p>
+<ul>
+<li>List：index类型集合，可以用之实现栈、队列等数据结构</li>
+<li>LinkedList：链表结构</li>
+<li><p>ArrayList：有序数组结构</p>
+</li>
+<li><p>Set：无index，储存值类型集合，不能有相同的值</p>
+</li>
+<li>HashSet：无序值集合，散列算法，当散列值不同时才加入新值</li>
+<li><p>TreeSet：有序值集合，红黑树</p>
+</li>
+<li><p>Map：key/value类型集合，不能有相同的Key</p>
+</li>
+<li>HashMap：无序key/value集合</li>
+<li>TreeMap：有序key/value集合</li>
+</ul>
+<p>数组转换成集合比较方便,使用Array.asList的包装器即可</p>
+<p>``` java<br>String []values;<br>HashSet <string> hashSet = new HashSet\&lt;>(Array.asList(values));<br>```</string></p>
+<p>集合转换成数组——手动转</p>
+<p>Vector、Stack、HashTable都是JAVA集合的基础版本，目前已经被上述集合框架代替</p>
+<p>队列还有一个实现是ArrayDeque，可以实现双向队列</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
 
 
           </div>
@@ -1781,7 +1607,7 @@ interface MyAIDLService {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1797,10 +1623,10 @@ interface MyAIDLService {
 
           
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              
                 <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">tags</span>
-              </a>
+              
             </div>
           
 

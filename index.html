@@ -1157,157 +1157,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/29/Java集合框架总结/" itemprop="url">
-                  Java集合框架总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2014-09-29T10:23:04+08:00" content="2014-09-29">
-              2014-09-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/09/29/Java集合框架总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/29/Java集合框架总结/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>JAVA集合的接口和实现分离</p>
-<p><img src="../images/java-collection-tree.png" alt="Java集合框架继承结构图"></p>
-<p>Collection接口的类实现了单元素存储、Map接口实现了键/值的映射表(键唯一)<br>Collection添加用add,设置值用set(index),获取值需要有序用get(index)<br>Map添加用put(key,value),设置值依然用put(key,value)覆盖原值,获取值用get(key)</p>
-<p>队列：LinkedList实现了Queue<e>接口，因此要使用队列的时候使用LinkedList即可</e></p>
-<p>``` java<br>Queue<integer> queue = new LinkedList<integer>();<br>```<br>Queue接口：</integer></integer></p>
-<p>   \  |  抛出异常  |  返回特殊值<br>-—-|—–|—–<br>插入  |  add(e)  |  offer(e)<br>移除  |  remove()  |  poll()<br>检查  |  element()  |  peek()</p>
-<p>add:添加到队尾</p>
-<p>remove:移除队头元素//与一般的认知有些不同</p>
-<p>element:返回队头元素</p>
-<p>两列的功能相同，区别在于当队列为空的时候第一列抛出异常，第二列一般只返回null</p>
-<hr>
-<p>总结：</p>
-<ul>
-<li>List：index类型集合，可以用之实现栈、队列等数据结构</li>
-<li>LinkedList：链表结构</li>
-<li><p>ArrayList：有序数组结构</p>
-</li>
-<li><p>Set：无index，储存值类型集合，不能有相同的值</p>
-</li>
-<li>HashSet：无序值集合，散列算法，当散列值不同时才加入新值</li>
-<li><p>TreeSet：有序值集合，红黑树</p>
-</li>
-<li><p>Map：key/value类型集合，不能有相同的Key</p>
-</li>
-<li>HashMap：无序key/value集合</li>
-<li>TreeMap：有序key/value集合</li>
-</ul>
-<p>数组转换成集合比较方便,使用Array.asList的包装器即可</p>
-<p>``` java<br>String []values;<br>HashSet <string> hashSet = new HashSet\&lt;>(Array.asList(values));<br>```</string></p>
-<p>集合转换成数组——手动转</p>
-<p>Vector、Stack、HashTable都是JAVA集合的基础版本，目前已经被上述集合框架代替</p>
-<p>队列还有一个实现是ArrayDeque，可以实现双向队列</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1349,7 +1198,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1357,19 +1206,12 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
           
 
-          
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">tags</span>
-              
-            </div>
           
 
         </nav>

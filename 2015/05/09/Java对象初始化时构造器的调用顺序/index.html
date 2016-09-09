@@ -84,31 +84,19 @@
 
 
 
-<meta name="description" content="设置 android:configChanges=&amp;quot;orientation&amp;quot;和不设置这个属性，生命周期表现为重新创建activity
-
-设置 android:configChanges=&amp;quot;orientation|keyboardHidden&amp;quot;，在2.3上表现为不重新创建activity，5.1如下
-
-
-12android:targetSdkVersion&amp;">
+<meta name="description" content="本文讨论JAVA中对象初始化时父类子类的static构造域，常量构造域以及构造函数的调用顺序问题，通过如下实例来说明：
+12345678910111213141516171819202122232425262728293031323334public class MyConstructorTest &amp;#123;    public static void main(String[] args) &amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android屏幕旋转与acticity生命周期">
-<meta property="og:url" content="http://zhengjt.com/2015/01/25/Android屏幕旋转与acticity生命周期/index.html">
+<meta property="og:title" content="Java对象初始化时构造器的调用顺序">
+<meta property="og:url" content="http://zhengjt.com/2015/05/09/Java对象初始化时构造器的调用顺序/index.html">
 <meta property="og:site_name" content="Zhengjt's Home">
-<meta property="og:description" content="设置 android:configChanges=&amp;quot;orientation&amp;quot;和不设置这个属性，生命周期表现为重新创建activity
-
-设置 android:configChanges=&amp;quot;orientation|keyboardHidden&amp;quot;，在2.3上表现为不重新创建activity，5.1如下
-
-
-12android:targetSdkVersion&amp;">
-<meta property="og:updated_time" content="2016-09-08T12:05:11.000Z">
+<meta property="og:description" content="本文讨论JAVA中对象初始化时父类子类的static构造域，常量构造域以及构造函数的调用顺序问题，通过如下实例来说明：
+12345678910111213141516171819202122232425262728293031323334public class MyConstructorTest &amp;#123;    public static void main(String[] args) &amp;">
+<meta property="og:updated_time" content="2016-09-09T02:36:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android屏幕旋转与acticity生命周期">
-<meta name="twitter:description" content="设置 android:configChanges=&amp;quot;orientation&amp;quot;和不设置这个属性，生命周期表现为重新创建activity
-
-设置 android:configChanges=&amp;quot;orientation|keyboardHidden&amp;quot;，在2.3上表现为不重新创建activity，5.1如下
-
-
-12android:targetSdkVersion&amp;">
+<meta name="twitter:title" content="Java对象初始化时构造器的调用顺序">
+<meta name="twitter:description" content="本文讨论JAVA中对象初始化时父类子类的static构造域，常量构造域以及构造函数的调用顺序问题，通过如下实例来说明：
+12345678910111213141516171819202122232425262728293031323334public class MyConstructorTest &amp;#123;    public static void main(String[] args) &amp;">
 
 
 
@@ -129,9 +117,9 @@
 
 
 
-  <link rel="canonical" href="http://zhengjt.com/2015/01/25/Android屏幕旋转与acticity生命周期/"/>
+  <link rel="canonical" href="http://zhengjt.com/2015/05/09/Java对象初始化时构造器的调用顺序/"/>
 
-  <title> Android屏幕旋转与acticity生命周期 | Zhengjt's Home </title>
+  <title> Java对象初始化时构造器的调用顺序 | Zhengjt's Home </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -280,7 +268,7 @@
             
             
               
-                Android屏幕旋转与acticity生命周期
+                Java对象初始化时构造器的调用顺序
               
             
           </h1>
@@ -292,38 +280,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-01-25T05:08:12+08:00" content="2015-01-25">
-              2015-01-25
+            <time itemprop="dateCreated" datetime="2015-05-09T11:38:10+08:00" content="2015-05-09">
+              2015-05-09
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/01/25/Android屏幕旋转与acticity生命周期/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/25/Android屏幕旋转与acticity生命周期/" itemprop="commentsCount"></span>
+                <a href="/2015/05/09/Java对象初始化时构造器的调用顺序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/09/Java对象初始化时构造器的调用顺序/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -346,18 +315,13 @@
       
 
       
-        <ol>
-<li><p>设置 <code>android:configChanges=&quot;orientation&quot;</code>和不设置这个属性，生命周期表现为重新创建activity</p>
-</li>
-<li><p>设置 <code>android:configChanges=&quot;orientation|keyboardHidden&quot;</code>，在2.3上表现为不重新创建activity，5.1如下</p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">android:targetSdkVersion&lt;=“<span class="number">12</span>”<span class="comment">//生命周期表现为不重新创建activity</span></div><div class="line">android:targetSdkVersion&gt;”<span class="number">12</span>”<span class="comment">//表现为重新创建activity</span></div></pre></td></tr></table></figure>
-<ol>
-<li>设置 <code>android:configChanges=&quot;orientation|keyboardHidden|screenSize&quot;</code>，在2.3和5.1上都表现为不重新创建，在屏幕旋转时，只会调用<code>onConfigurationChanged</code>方法</li>
-</ol>
-<p>测试代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">	    setContentView(R.layout.relative_center_2);</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onCreate方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onStart</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onStart();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onStart方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onResume();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onResume方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onPause();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onPause方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onStop</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onStop();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onStop方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onDestroy();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onDestroy方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onConfigurationChanged</span><span class="params">(Configuration newConfig)</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onConfigurationChanged(newConfig);</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onConfigurationChanged方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onRestart</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onRestart();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onRestart方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSaveInstanceState</span><span class="params">(Bundle outState)</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onSaveInstanceState(outState);</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onSaveInstanceState方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onRestoreInstanceState</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onRestoreInstanceState(savedInstanceState);</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onRestoreInstanceState方法"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <p>本文讨论JAVA中对象初始化时父类子类的static构造域，常量构造域以及构造函数的调用顺序问题，通过如下实例来说明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConstructorTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Employee e = <span class="keyword">new</span> Teacher();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Employee</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Employee construction"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"Employee initail"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.out.println(<span class="string">"Employee static initail"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">extends</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Teacher</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Teacher construction"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"Teacher initail"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.out.println(<span class="string">"Teacher static initail"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Employee <span class="keyword">static</span> initial</div><div class="line">Teacher <span class="keyword">static</span> initial</div><div class="line">Employee initial</div><div class="line">Employee construction</div><div class="line">Teacher initial</div><div class="line">Teacher construction</div></pre></td></tr></table></figure>
+<p>上面的例子说明，在初始化类的对象的时候，构造器的调用顺序：</p>
+<p>父类的static构造域-&gt;类的static域-&gt;父类的常量域-&gt;父类的构造函数-&gt;类的常量域-&gt;类的构造函数</p>
+
       
     </div>
 
@@ -382,12 +346,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2015/02/28/编码技术总结/" rel="next" title="编码技术总结">
+                <i class="fa fa-chevron-left"></i> 编码技术总结
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/02/28/编码技术总结/" rel="prev" title="编码技术总结">
-                编码技术总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/08/27/Java内存泄漏发生的情况/" rel="prev" title="Java内存泄漏发生的情况">
+                Java内存泄漏发生的情况 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -414,8 +382,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/01/25/Android屏幕旋转与acticity生命周期/"
-           data-title="Android屏幕旋转与acticity生命周期" data-url="http://zhengjt.com/2015/01/25/Android屏幕旋转与acticity生命周期/">
+      <div class="ds-thread" data-thread-key="2015/05/09/Java对象初始化时构造器的调用顺序/"
+           data-title="Java对象初始化时构造器的调用顺序" data-url="http://zhengjt.com/2015/05/09/Java对象初始化时构造器的调用顺序/">
       </div>
     
   </div>

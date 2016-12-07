@@ -128,7 +128,7 @@
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-27089368-1', 'auto');
+  ga('create', 'UA-88447338-1', 'auto');
   ga('send', 'pageview');
 </script>
 
@@ -245,6 +245,181 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/05/HashSet、HashMap、HashTable总结/" itemprop="url">
+                  HashSet、HashMap、HashTable总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-12-05T17:23:09+08:00" content="2016-12-05">
+              2016-12-05
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/05/HashSet、HashMap、HashTable总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/05/HashSet、HashMap、HashTable总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><code>本文基于Android6.0源码分析</code></p>
+<p>##HashSet</p>
+<p>HashSet常用于存储无重复的值。</p>
+<p>HashSet内部实现：</p>
+<pre><code>public HashSet() {
+    this(new HashMap&lt;E, HashSet&lt;E&gt;&gt;());
+}
+</code></pre><p>说明HashSet内部实际上是key为自身的value，而value为自身的hashmap来实现存储的，HashSet能够实现非重复存储的功能是通过HashMap来实现的，所以直接看HashMap。</p>
+<p>##HsahMap</p>
+<p>HashMap是key-&gt;value字典格式的数据结构</p>
+<p>先来看看HashMap的构造函数：</p>
+<pre><code>transient HashMapEntry&lt;K, V&gt;[] table;
+
+public HashMap() {
+        table = (HashMapEntry&lt;K, V&gt;[]) EMPTY_TABLE;
+        threshold = -1; // Forces first put invocation to replace EMPTY_TABLE
+    }
+</code></pre><p>从HashMap的构造函数可以看到，HashMap内部实际上是通过table来存储数据的，而table是一个HashMapEntry数组。</p>
+<p>看看HashMap最重要的函数put</p>
+<pre><code>@Override public V put(K key, V value) {
+        if (key == null) {
+            return putValueForNullKey(value);
+        }
+
+    //根据key获取hash
+    int hash = Collections.secondaryHash(key);
+    HashMapEntry&lt;K, V&gt;[] tab = table;
+    //根据hash找到数据的index
+    int index = hash &amp; (tab.length - 1);
+    //遍历这个index下的链表
+    for (HashMapEntry&lt;K, V&gt; e = tab[index]; e != null; e = e.next) {
+        if (e.hash == hash &amp;&amp; key.equals(e.key)) {
+            preModify(e);
+            V oldValue = e.value;
+            e.value = value;
+            return oldValue;
+        }
+    }
+
+    //没有key，存新的值
+    modCount++;
+    if (size++ &gt; threshold) {
+        tab = doubleCapacity();
+        index = hash &amp; (tab.length - 1);
+    }
+    addNewEntry(key, value, hash, index);
+    return null;
+}
+
+//可以看到hashmap存新值就是往table中插入一个新的值
+void addNewEntry(K key, V value, int hash, int index) {
+    table[index] = new HashMapEntry&lt;K, V&gt;(key, value, hash, table[index]);
+}
+</code></pre><p>从上面的代码也可以看出HashMap在内存中的<code>数组-链表式</code>的存储结构，如下：</p>
+<p><img src="../images/hashmap-structure.png" alt="hashmap-structure"></p>
+<p>根据key由hash函数算出hashcode值，根据hashcode值找到HashMapEntry数组对应的index，若该index下没有值，则调用addNewEntry插入新值，否则( 发生hashcode冲突)在该index下链表尾添加新节点。</p>
+<p>hashmap的存储结构也解释了一个问题：为什么HashSet和HashMap读取数据的复杂度数O(1),因为他是数据存储的，数组在内存中是连续的，可以根据index快速定位内存位置，HashMap的键冲突情况出现较少，链表的查找复杂度也在O(1)。</p>
+<p>HashMap源码其他细节：</p>
+<pre><code>//数组的大小是4
+private static final int MINIMUM_CAPACITY = 4;
+
+static final float DEFAULT_LOAD_FACTOR = .75F;
+
+//默认大小2
+private static final Entry[] EMPTY_TABLE
+            = new HashMapEntry[MINIMUM_CAPACITY &gt;&gt;&gt; 1];
+
+//threshold表示一个当前容量临界值，当当前hashmap大小超过threshold时，hashmap的capacity扩容(翻倍扩容)
+//threshold = capacity * DEFAULT_LOAD_FACTOR;
+private transient int threshold;
+</code></pre><p>HashMap中常用的几个成员变量</p>
+<pre><code>private transient Set&lt;K&gt; keySet;//hashmap的key构成的set，可实现key遍历
+private transient Set&lt;Entry&lt;K, V&gt;&gt; entrySet;//hashmap键值对构成的set,可实现hashmap遍历 
+private transient Collection&lt;V&gt; values;//hashmap的value构成的set，可实现value遍历
+</code></pre><p>##HashTable<br>HashTable的源码和HashMap很类似，只是几乎在所有函数前都加了synchronized关键字，HashTable和HashMap在使用上并没有什么不同，只是hashtable是线程安全的。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1198,7 +1373,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

@@ -319,15 +319,13 @@
         
           
             <p><code>本文基于Android6.0源码分析</code></p>
-<p>##HashSet</p>
-<p>HashSet常用于存储无重复的值。</p>
+<h2 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h2><p>HashSet常用于存储无重复的值。</p>
 <p>HashSet内部实现：</p>
 <pre><code>public HashSet() {
     this(new HashMap&lt;E, HashSet&lt;E&gt;&gt;());
 }
 </code></pre><p>说明HashSet内部实际上是key为自身的value，而value为自身的hashmap来实现存储的，HashSet能够实现非重复存储的功能是通过HashMap来实现的，所以直接看HashMap。</p>
-<p>##HsahMap</p>
-<p>HashMap是key-&gt;value字典格式的数据结构</p>
+<h2 id="HsahMap"><a href="#HsahMap" class="headerlink" title="HsahMap"></a>HsahMap</h2><p>HashMap是key-&gt;value字典格式的数据结构</p>
 <p>先来看看HashMap的构造函数：</p>
 <pre><code>transient HashMapEntry&lt;K, V&gt;[] table;
 
@@ -372,7 +370,7 @@ void addNewEntry(K key, V value, int hash, int index) {
     table[index] = new HashMapEntry&lt;K, V&gt;(key, value, hash, table[index]);
 }
 </code></pre><p>从上面的代码也可以看出HashMap在内存中的<code>数组-链表式</code>的存储结构，如下：</p>
-<p><img src="../images/hashmap-structure.png" alt="hashmap-structure"></p>
+<p><img src="/images/hashmap-structure.png" alt="hashmap-structure"></p>
 <p>根据key由hash函数算出hashcode值，根据hashcode值找到HashMapEntry数组对应的index，若该index下没有值，则调用addNewEntry插入新值，否则( 发生hashcode冲突)在该index下链表尾添加新节点。</p>
 <p>hashmap的存储结构也解释了一个问题：为什么HashSet和HashMap读取数据的复杂度数O(1),因为他是数据存储的，数组在内存中是连续的，可以根据index快速定位内存位置，HashMap的键冲突情况出现较少，链表的查找复杂度也在O(1)。</p>
 <p>HashMap源码其他细节：</p>
@@ -392,7 +390,7 @@ private transient int threshold;
 <pre><code>private transient Set&lt;K&gt; keySet;//hashmap的key构成的set，可实现key遍历
 private transient Set&lt;Entry&lt;K, V&gt;&gt; entrySet;//hashmap键值对构成的set,可实现hashmap遍历 
 private transient Collection&lt;V&gt; values;//hashmap的value构成的set，可实现value遍历
-</code></pre><p>##HashTable<br>HashTable的源码和HashMap很类似，只是几乎在所有函数前都加了synchronized关键字，HashTable和HashMap在使用上并没有什么不同，只是hashtable是线程安全的。</p>
+</code></pre><h2 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h2><p>HashTable的源码和HashMap很类似，只是几乎在所有函数前都加了synchronized关键字，HashTable和HashMap在使用上并没有什么不同，只是hashtable是线程安全的。</p>
 
           
         
@@ -737,7 +735,7 @@ private transient Collection&lt;V&gt; values;//hashmap的value构成的set，可
 </li>
 <li><p>分代</p>
 <p>年轻代-年老代-持久代</p>
-<p><img src="../images/java_gc_generation.png" alt="java_gc"><br><img src="../images/java_gc.png" alt="java_gc"></p>
+<p><img src="/images/java_gc_generation.png" alt="java_gc"><br><img src="/images/java_gc.png" alt="java_gc"></p>
 <ul>
 <li><p>年轻代：</p>
 <ul>

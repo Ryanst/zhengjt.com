@@ -87,10 +87,8 @@
 <meta name="description" content="本文基于Android6.0源码分析
 HashSetHashSet常用于存储无重复的值。
 HashSet内部实现：
-public HashSet() {
-    this(new HashMap&amp;lt;E, HashSet&amp;lt;E&amp;gt;&amp;gt;());
-}
-说明HashSet内部实际上是key为自身的value，而value为自身的hashmap来实现存储的，HashSet能够实现非重复存储的">
+123public HashSet() &amp;#123;    this(new HashMap&amp;lt;E, HashSet&amp;lt;E&amp;gt;&amp;gt;());&amp;#125;
+说明HashSet内部实际上是key为自身的value，而value为自身的hashmap来实现存储的，HashSe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HashSet、HashMap、HashTable总结">
 <meta property="og:url" content="http://zhengjt.com/2016/12/05/HashSet、HashMap、HashTable总结/index.html">
@@ -98,21 +96,17 @@ public HashSet() {
 <meta property="og:description" content="本文基于Android6.0源码分析
 HashSetHashSet常用于存储无重复的值。
 HashSet内部实现：
-public HashSet() {
-    this(new HashMap&amp;lt;E, HashSet&amp;lt;E&amp;gt;&amp;gt;());
-}
-说明HashSet内部实际上是key为自身的value，而value为自身的hashmap来实现存储的，HashSet能够实现非重复存储的">
+123public HashSet() &amp;#123;    this(new HashMap&amp;lt;E, HashSet&amp;lt;E&amp;gt;&amp;gt;());&amp;#125;
+说明HashSet内部实际上是key为自身的value，而value为自身的hashmap来实现存储的，HashSe">
 <meta property="og:image" content="http://zhengjt.com/images/hashmap-structure.png">
-<meta property="og:updated_time" content="2016-12-07T07:46:53.000Z">
+<meta property="og:updated_time" content="2016-12-07T09:29:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashSet、HashMap、HashTable总结">
 <meta name="twitter:description" content="本文基于Android6.0源码分析
 HashSetHashSet常用于存储无重复的值。
 HashSet内部实现：
-public HashSet() {
-    this(new HashMap&amp;lt;E, HashSet&amp;lt;E&amp;gt;&amp;gt;());
-}
-说明HashSet内部实际上是key为自身的value，而value为自身的hashmap来实现存储的，HashSet能够实现非重复存储的">
+123public HashSet() &amp;#123;    this(new HashMap&amp;lt;E, HashSet&amp;lt;E&amp;gt;&amp;gt;());&amp;#125;
+说明HashSet内部实际上是key为自身的value，而value为自身的hashmap来实现存储的，HashSe">
 <meta name="twitter:image" content="http://zhengjt.com/images/hashmap-structure.png">
 
 
@@ -354,76 +348,23 @@ public HashSet() {
         <p><code>本文基于Android6.0源码分析</code></p>
 <h2 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h2><p>HashSet常用于存储无重复的值。</p>
 <p>HashSet内部实现：</p>
-<pre><code>public HashSet() {
-    this(new HashMap&lt;E, HashSet&lt;E&gt;&gt;());
-}
-</code></pre><p>说明HashSet内部实际上是key为自身的value，而value为自身的hashmap来实现存储的，HashSet能够实现非重复存储的功能是通过HashMap来实现的，所以直接看HashMap。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>(<span class="keyword">new</span> HashMap&lt;E, HashSet&lt;E&gt;&gt;());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>说明HashSet内部实际上是key为自身的value，而value为自身的hashmap来实现存储的，HashSet能够实现非重复存储的功能是通过HashMap来实现的，所以直接看HashMap。</p>
 <h2 id="HsahMap"><a href="#HsahMap" class="headerlink" title="HsahMap"></a>HsahMap</h2><p>HashMap是key-&gt;value字典格式的数据结构</p>
 <p>先来看看HashMap的构造函数：</p>
-<pre><code>transient HashMapEntry&lt;K, V&gt;[] table;
-
-public HashMap() {
-        table = (HashMapEntry&lt;K, V&gt;[]) EMPTY_TABLE;
-        threshold = -1; // Forces first put invocation to replace EMPTY_TABLE
-    }
-</code></pre><p>从HashMap的构造函数可以看到，HashMap内部实际上是通过table来存储数据的，而table是一个HashMapEntry数组。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">transient</span> HashMapEntry&lt;K, V&gt;[] table;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">()</span> </span>&#123;</div><div class="line">        table = (HashMapEntry&lt;K, V&gt;[]) EMPTY_TABLE;</div><div class="line">        threshold = -<span class="number">1</span>; <span class="comment">// Forces first put invocation to replace EMPTY_TABLE</span></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>从HashMap的构造函数可以看到，HashMap内部实际上是通过table来存储数据的，而table是一个HashMapEntry数组。</p>
 <p>看看HashMap最重要的函数put</p>
-<pre><code>@Override public V put(K key, V value) {
-        if (key == null) {
-            return putValueForNullKey(value);
-        }
-
-    //根据key获取hash
-    int hash = Collections.secondaryHash(key);
-    HashMapEntry&lt;K, V&gt;[] tab = table;
-    //根据hash找到数据的index
-    int index = hash &amp; (tab.length - 1);
-    //遍历这个index下的链表
-    for (HashMapEntry&lt;K, V&gt; e = tab[index]; e != null; e = e.next) {
-        if (e.hash == hash &amp;&amp; key.equals(e.key)) {
-            preModify(e);
-            V oldValue = e.value;
-            e.value = value;
-            return oldValue;
-        }
-    }
-
-    //没有key，存新的值
-    modCount++;
-    if (size++ &gt; threshold) {
-        tab = doubleCapacity();
-        index = hash &amp; (tab.length - 1);
-    }
-    addNewEntry(key, value, hash, index);
-    return null;
-}
-
-//可以看到hashmap存新值就是往table中插入一个新的值
-void addNewEntry(K key, V value, int hash, int index) {
-    table[index] = new HashMapEntry&lt;K, V&gt;(key, value, hash, table[index]);
-}
-</code></pre><p>从上面的代码也可以看出HashMap在内存中的<code>数组-链表式</code>的存储结构，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> putValueForNullKey(value);</div><div class="line">        &#125;</div><div class="line">   </div><div class="line">   <span class="comment">//根据key获取hash</span></div><div class="line">   <span class="keyword">int</span> hash = Collections.secondaryHash(key);</div><div class="line">   HashMapEntry&lt;K, V&gt;[] tab = table;</div><div class="line">   <span class="comment">//根据hash找到数据的index</span></div><div class="line">   <span class="keyword">int</span> index = hash &amp; (tab.length - <span class="number">1</span>);</div><div class="line">   <span class="comment">//遍历这个index下的链表</span></div><div class="line">   <span class="keyword">for</span> (HashMapEntry&lt;K, V&gt; e = tab[index]; e != <span class="keyword">null</span>; e = e.next) &#123;</div><div class="line">       <span class="keyword">if</span> (e.hash == hash &amp;&amp; key.equals(e.key)) &#123;</div><div class="line">           preModify(e);</div><div class="line">           V oldValue = e.value;</div><div class="line">           e.value = value;</div><div class="line">           <span class="keyword">return</span> oldValue;</div><div class="line">       &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="comment">//没有key，存新的值</span></div><div class="line">   modCount++;</div><div class="line">   <span class="keyword">if</span> (size++ &gt; threshold) &#123;</div><div class="line">       tab = doubleCapacity();</div><div class="line">       index = hash &amp; (tab.length - <span class="number">1</span>);</div><div class="line">   &#125;</div><div class="line">   addNewEntry(key, value, hash, index);</div><div class="line">   <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div><div class="line">    </div><div class="line"><span class="comment">//可以看到hashmap存新值就是往table中插入一个新的值</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addNewEntry</span><span class="params">(K key, V value, <span class="keyword">int</span> hash, <span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">   table[index] = <span class="keyword">new</span> HashMapEntry&lt;K, V&gt;(key, value, hash, table[index]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从上面的代码也可以看出HashMap在内存中的<code>数组-链表式</code>的存储结构，如下：</p>
 <p><img src="/images/hashmap-structure.png" alt="hashmap-structure"></p>
 <p>根据key由hash函数算出hashcode值，根据hashcode值找到HashMapEntry数组对应的index，若该index下没有值，则调用addNewEntry插入新值，否则( 发生hashcode冲突)在该index下链表尾添加新节点。</p>
 <p>hashmap的存储结构也解释了一个问题：为什么HashSet和HashMap读取数据的复杂度数O(1),因为他是数据存储的，数组在内存中是连续的，可以根据index快速定位内存位置，HashMap的键冲突情况出现较少，链表的查找复杂度也在O(1)。</p>
 <p>HashMap源码其他细节：</p>
-<pre><code>//数组的大小是4
-private static final int MINIMUM_CAPACITY = 4;
-
-static final float DEFAULT_LOAD_FACTOR = .75F;
-
-//默认大小2
-private static final Entry[] EMPTY_TABLE
-            = new HashMapEntry[MINIMUM_CAPACITY &gt;&gt;&gt; 1];
-
-//threshold表示一个当前容量临界值，当当前hashmap大小超过threshold时，hashmap的capacity扩容(翻倍扩容)
-//threshold = capacity * DEFAULT_LOAD_FACTOR;
-private transient int threshold;
-</code></pre><p>HashMap中常用的几个成员变量</p>
-<pre><code>private transient Set&lt;K&gt; keySet;//hashmap的key构成的set，可实现key遍历
-private transient Set&lt;Entry&lt;K, V&gt;&gt; entrySet;//hashmap键值对构成的set,可实现hashmap遍历 
-private transient Collection&lt;V&gt; values;//hashmap的value构成的set，可实现value遍历
-</code></pre><h2 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h2><p>HashTable的源码和HashMap很类似，只是几乎在所有函数前都加了synchronized关键字，HashTable和HashMap在使用上并没有什么不同，只是hashtable是线程安全的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//数组的大小是4</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MINIMUM_CAPACITY = <span class="number">4</span>;</div><div class="line">	</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = .<span class="number">75F</span>;</div><div class="line"></div><div class="line"><span class="comment">//默认大小2</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Entry[] EMPTY_TABLE</div><div class="line">            = <span class="keyword">new</span> HashMapEntry[MINIMUM_CAPACITY &gt;&gt;&gt; <span class="number">1</span>];</div><div class="line">	</div><div class="line"><span class="comment">//threshold表示一个当前容量临界值，当当前hashmap大小超过threshold时，hashmap的capacity扩容(翻倍扩容)</span></div><div class="line"><span class="comment">//threshold = capacity * DEFAULT_LOAD_FACTOR;</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">int</span> threshold;</div></pre></td></tr></table></figure>
+<p>HashMap中常用的几个成员变量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> Set&lt;K&gt; keySet;<span class="comment">//hashmap的key构成的set，可实现key遍历</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> Set&lt;Entry&lt;K, V&gt;&gt; entrySet;<span class="comment">//hashmap键值对构成的set,可实现hashmap遍历 </span></div><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> Collection&lt;V&gt; values;<span class="comment">//hashmap的value构成的set，可实现value遍历</span></div></pre></td></tr></table></figure>
+<h2 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h2><p>HashTable的源码和HashMap很类似，只是几乎在所有函数前都加了synchronized关键字，HashTable和HashMap在使用上并没有什么不同，只是hashtable是线程安全的。</p>
 
       
     </div>

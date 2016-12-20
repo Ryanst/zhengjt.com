@@ -84,35 +84,47 @@
 
 
 
-<meta name="description" content="最近看了一篇文章：http://nvie.com/posts/a-successful-git-branching-model ,讲到如何构建一个成功的git分支模型的，说说我对这个模型的理解。
+<meta name="description" content="最近看了一篇文章,讲到如何构建一个成功的git分支模型，说说我对git分支模型的理解。
 分支策略
 master
 单个分支。
 线上代码分支，不进行直接开发。
 代码的改变来源于release分支和hotfixes分支的merge。
-每次merge产生一个Tag并发布线上版本，每个Tag表示每一个">
+每次merge产生一个Tag并发布线上版本，每个Tag表示每一个线上运行的app版本的真实完全代码。
+
+develop分支
+单个分支。
+主要开发分支，代码提交最多的分支。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="成功的git分支模型">
 <meta property="og:url" content="http://zhengjt.com/2016/12/20/成功的git分支模型/index.html">
 <meta property="og:site_name" content="Zhengjt's Home">
-<meta property="og:description" content="最近看了一篇文章：http://nvie.com/posts/a-successful-git-branching-model ,讲到如何构建一个成功的git分支模型的，说说我对这个模型的理解。
+<meta property="og:description" content="最近看了一篇文章,讲到如何构建一个成功的git分支模型，说说我对git分支模型的理解。
 分支策略
 master
 单个分支。
 线上代码分支，不进行直接开发。
 代码的改变来源于release分支和hotfixes分支的merge。
-每次merge产生一个Tag并发布线上版本，每个Tag表示每一个">
+每次merge产生一个Tag并发布线上版本，每个Tag表示每一个线上运行的app版本的真实完全代码。
+
+develop分支
+单个分支。
+主要开发分支，代码提交最多的分支。">
 <meta property="og:image" content="http://zhengjt.com/images/git_branch_flow.png">
-<meta property="og:updated_time" content="2016-12-20T07:03:25.000Z">
+<meta property="og:updated_time" content="2016-12-20T07:18:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="成功的git分支模型">
-<meta name="twitter:description" content="最近看了一篇文章：http://nvie.com/posts/a-successful-git-branching-model ,讲到如何构建一个成功的git分支模型的，说说我对这个模型的理解。
+<meta name="twitter:description" content="最近看了一篇文章,讲到如何构建一个成功的git分支模型，说说我对git分支模型的理解。
 分支策略
 master
 单个分支。
 线上代码分支，不进行直接开发。
 代码的改变来源于release分支和hotfixes分支的merge。
-每次merge产生一个Tag并发布线上版本，每个Tag表示每一个">
+每次merge产生一个Tag并发布线上版本，每个Tag表示每一个线上运行的app版本的真实完全代码。
+
+develop分支
+单个分支。
+主要开发分支，代码提交最多的分支。">
 <meta name="twitter:image" content="http://zhengjt.com/images/git_branch_flow.png">
 
 
@@ -351,7 +363,7 @@ master
       
 
       
-        <p>最近看了一篇文章：<a href="http://nvie.com/posts/a-successful-git-branching-model" target="_blank" rel="external">http://nvie.com/posts/a-successful-git-branching-model</a> ,讲到如何构建一个成功的git分支模型的，说说我对这个模型的理解。</p>
+        <p>最近看了一篇<a href="http://nvie.com/posts/a-successful-git-branching-model" target="_blank" rel="external">文章</a>,讲到如何构建一个成功的git分支模型，说说我对git分支模型的理解。</p>
 <h2 id="分支策略"><a href="#分支策略" class="headerlink" title="分支策略"></a>分支策略</h2><p><img src="/images/git_branch_flow.png" alt="git分支图"></p>
 <h3 id="master"><a href="#master" class="headerlink" title="master"></a>master</h3><ul>
 <li>单个分支。</li>

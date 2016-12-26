@@ -277,6 +277,164 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/20/成功的git分支模型/" itemprop="url">
+                  成功的git分支模型
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-12-20T14:06:45+08:00" content="2016-12-20">
+              2016-12-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/20/成功的git分支模型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/20/成功的git分支模型/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近看了一篇<a href="http://nvie.com/posts/a-successful-git-branching-model" target="_blank" rel="external">文章</a>，讲到如何构建一个成功的git分支模型，下面说说我对git分支模型的理解。</p>
+<h2 id="分支策略"><a href="#分支策略" class="headerlink" title="分支策略"></a>分支策略</h2><p><img src="/images/git_branch_flow.png" alt="git分支图"></p>
+<h3 id="master"><a href="#master" class="headerlink" title="master"></a>master</h3><ul>
+<li>单个分支。</li>
+<li>线上代码分支，不进行直接开发。</li>
+<li>代码的改变来源于<code>release</code>分支和<code>hotfixes</code>分支的<strong>merge</strong>。</li>
+<li>每次<strong>merge</strong>产生一个<code>Tag</code>并发布线上版本，每个<code>Tag</code>表示每一个线上运行的app版本的真实完全代码。</li>
+</ul>
+<h3 id="develop分支"><a href="#develop分支" class="headerlink" title="develop分支"></a>develop分支</h3><ul>
+<li>单个分支。</li>
+<li>主要开发分支，代码提交最多的分支。</li>
+<li>若<code>release</code>的代码需要功能性的修改，则将<code>release</code>的代码<strong>merge</strong>到<code>develop</code>重新开始开发。</li>
+<li>若开发时需要并行开始一个耗时较长的功能开发，根据需要，可将<code>develop</code>分支<strong>check out</strong>到特定新功能分支<code>feature</code>来进行开发，当<code>feature</code>开发完成，再<strong>merge</strong>到<code>develop</code>中。</li>
+</ul>
+<h3 id="feature分支"><a href="#feature分支" class="headerlink" title="feature分支"></a>feature分支</h3><ul>
+<li>多个分支，命名<code>feature_some_function</code>。</li>
+<li>每次需要新的花时较长且和原<code>develop</code>代码耦合较低的功能并行开发时，可开启一个新的<code>feature</code>分支。</li>
+<li><code>feature</code>分支同样应具有<code>feature master</code>和<code>feature develop</code>。</li>
+<li><code>feature</code>分支开发完成后<strong>merge</strong>到<code>develop</code>分支。</li>
+</ul>
+<h3 id="release分支"><a href="#release分支" class="headerlink" title="release分支"></a>release分支</h3><ul>
+<li>多个分支，命名<code>release_version_code</code>。</li>
+<li>开发版本分支，当<code>develop</code>的功能开发完成，从<code>develop</code>分支<strong>check out</strong>一个新的<code>release_version_code</code>分支。</li>
+<li><code>release</code>只能有<strong>bug fix</strong>的代码提交，而不能有功能性需求的代码提交。</li>
+<li>在<code>release</code>上时，若有<strong>bug fix</strong>之外的需求，则<strong>merge</strong>代码到<code>develop</code>重新开始开发，待开发完毕，<code>merge</code>回<code>release</code>。</li>
+<li>若<code>release</code>代码开发完毕，<strong>merge</strong>到<code>master</code>上，打<code>Tag</code>，发布新版app，并且<strong>merge</strong>到<code>develop</code>,保证已修复的bug在开发分支也生效。</li>
+</ul>
+<h3 id="hotfixes分支"><a href="#hotfixes分支" class="headerlink" title="hotfixes分支"></a>hotfixes分支</h3><ul>
+<li>根据需要决定是单个还是每次热修复开新的分支。</li>
+<li>当线上版本发生问题，需要紧急解决时，从<code>master</code>分支<strong>check out</strong>一个新分支，开始热修复。</li>
+<li>若紧急修复成功，则修复完成<strong>merge</strong>到<code>master</code>分支，打<code>Tag</code>，发布新版本。</li>
+<li>若未能热修复成功，则将代码<strong>merge</strong>到<code>develop</code>中，此时相当于开始一个新版本的开发流程。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这种分支模型总结了我们原本常用的分支策略，各分支功能划分清晰，利于代码和版本管理，提高了分工合作的效率。实际开发中，最好在每次<strong>check out</strong>新的<code>release</code>以及在<code>master</code>上打<code>Tag</code>时，告知每个开发人员。另外，配合上每个分支的持续集成，可将每次<strong>merge</strong>的出错率降低。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<blockquote>
+<p><a href="http://nvie.com/posts/a-successful-git-branching-model" target="_blank" rel="external">http://nvie.com/posts/a-successful-git-branching-model</a></p>
+</blockquote>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/05/HashSet、HashMap、HashTable总结/" itemprop="url">
                   HashSet、HashMap、HashTable总结
                 </a>
@@ -1316,7 +1474,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1324,7 +1482,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1333,7 +1491,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

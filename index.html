@@ -355,7 +355,7 @@
 <li><code>迪米特法则</code>：高内聚，低耦合；</li>
 <li><code>开闭原则</code>：要对扩展开放，对修改关闭。</li>
 </ul>
-<h2 id="单一职责原则（Single-Responsibility-Principle，简称SRP-）"><a href="#单一职责原则（Single-Responsibility-Principle，简称SRP-）" class="headerlink" title="单一职责原则（Single Responsibility Principle，简称SRP ）"></a>单一职责原则（Single Responsibility Principle，简称SRP ）</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
+<h2 id="单一职责原则（Single-Responsibility-Principle）"><a href="#单一职责原则（Single-Responsibility-Principle）" class="headerlink" title="单一职责原则（Single Responsibility Principle）"></a>单一职责原则（Single Responsibility Principle）</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
 <li>一个类只负责一项职责，不要存在多于一个导致类变更的原因。</li>
 </ul>
 <h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
@@ -369,7 +369,7 @@
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
 <li>实际开发中，遵守每个包，类，方法都有单一的职能归属的原则。</li>
 </ul>
-<h2 id="里氏替换原则（Liskov-Substitution-Principle-简称LSP）"><a href="#里氏替换原则（Liskov-Substitution-Principle-简称LSP）" class="headerlink" title="里氏替换原则（Liskov Substitution Principle,简称LSP）"></a>里氏替换原则（Liskov Substitution Principle,简称LSP）</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><ul>
+<h2 id="里氏替换原则（Liskov-Substitution-Principle）"><a href="#里氏替换原则（Liskov-Substitution-Principle）" class="headerlink" title="里氏替换原则（Liskov Substitution Principle）"></a>里氏替换原则（Liskov Substitution Principle）</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><ul>
 <li>在使用基类的的地方可以任意使用其子类，能保证子类完美替换基类。</li>
 <li>如果在使用A的地方都可以使用B，那么B是A的子类型。</li>
 </ul>
@@ -387,7 +387,7 @@
 <li>当子类的方法重载父类的方法时，方法的形参要比父类方法的输入参数更宽松。</li>
 <li>当子类的方法实现父类的抽象方法时，方法的返回值要比父类更严格。</li>
 </ul>
-<h2 id="依赖倒置原则（Dependence-Inversion-Principle-简称DIP）"><a href="#依赖倒置原则（Dependence-Inversion-Principle-简称DIP）" class="headerlink" title="依赖倒置原则（Dependence Inversion Principle,简称DIP）"></a>依赖倒置原则（Dependence Inversion Principle,简称DIP）</h2><h3 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h3><ul>
+<h2 id="依赖倒置原则（Dependence-Inversion-Principle）"><a href="#依赖倒置原则（Dependence-Inversion-Principle）" class="headerlink" title="依赖倒置原则（Dependence Inversion Principle）"></a>依赖倒置原则（Dependence Inversion Principle）</h2><h3 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h3><ul>
 <li>高层模块不应该依赖底层模块，二者都该依赖其抽象。</li>
 <li>抽象不应该依赖细节；细节应该依赖抽象。</li>
 </ul>
@@ -405,32 +405,42 @@
 <li>变量的声明类型尽量是抽象类或接口。</li>
 <li>使用继承时遵循里氏替换原则。</li>
 </ul>
-<h2 id="接口隔离原则（Interface-Segregation-Principle-简称ISP）"><a href="#接口隔离原则（Interface-Segregation-Principle-简称ISP）" class="headerlink" title="接口隔离原则（Interface Segregation Principle,简称ISP）"></a>接口隔离原则（Interface Segregation Principle,简称ISP）</h2><h3 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h3><ul>
+<h2 id="接口隔离原则（Interface-Segregation-Principle）"><a href="#接口隔离原则（Interface-Segregation-Principle）" class="headerlink" title="接口隔离原则（Interface Segregation Principle）"></a>接口隔离原则（Interface Segregation Principle）</h2><h3 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h3><ul>
 <li>类间的依赖关系应该建立在最小的接口上，调用方不应该依赖和实现它不需要的接口。</li>
 </ul>
 <h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><ul>
 <li>类的功能更清晰，且减少冗余</li>
 <li>接口设计更灵活，易于拓展和修改</li>
 </ul>
+<h3 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>建立单一接口，不要建立庞大臃肿的接口，尽量细化接口，接口中的方法尽量少。为各个类建立专用的接口，而不要试图去建立一个很庞大的接口供所有依赖它的类去调用。</li>
+<li>接口尽量小，但是要有限度。对接口进行细化可以提高程序设计灵活性，但是如果过小，则会造成接口数量过多，使设计复杂化。</li>
+<li>为依赖接口的类定制服务。只暴露给调用的类它需要的方法，它不需要的方法则隐藏起来。只有专注地为一个模块提供定制服务，才能建立最小的依赖关系。</li>
+</ul>
+<h2 id="迪米特法则（Law-of-Demeter）"><a href="#迪米特法则（Law-of-Demeter）" class="headerlink" title="迪米特法则（Law of Demeter）"></a>迪米特法则（Law of Demeter）</h2><h3 id="定义-4"><a href="#定义-4" class="headerlink" title="定义"></a>定义</h3><p>一个类对自己依赖的类知道的越少越好。也就是低耦合，高内聚。</p>
+<h3 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>单个模块的职责分明。</li>
+<li>利于并行开发，各模块间不互相影响。</li>
+</ul>
 <h3 id="说明-3"><a href="#说明-3" class="headerlink" title="说明"></a>说明</h3><blockquote>
-<p>建立单一接口，不要建立庞大臃肿的接口，尽量细化接口，接口中的方法尽量少。为各个类建立专用的接口，而不要试图去建立一个很庞大的接口供所有依赖它的类去调用。</p>
-<p>接口尽量小，但是要有限度。对接口进行细化可以提高程序设计灵活性，但是如果过小，则会造成接口数量过多，使设计复杂化。</p>
-<p>为依赖接口的类定制服务。只暴露给调用的类它需要的方法，它不需要的方法则隐藏起来。只有专注地为一个模块提供定制服务，才能建立最小的依赖关系。</p>
-</blockquote>
-<h2 id="迪米特法则（Law-of-Demeter-简称LoD）"><a href="#迪米特法则（Law-of-Demeter-简称LoD）" class="headerlink" title="迪米特法则（Law of Demeter,简称LoD）"></a>迪米特法则（Law of Demeter,简称LoD）</h2><h3 id="定义-4"><a href="#定义-4" class="headerlink" title="定义"></a>定义</h3><p>一个类对自己依赖的类知道的越少越好。也就是低耦合，高内聚。无论是面向过程编程还是面向对象编程，只有使各个模块之间的耦合尽量的低，才能提高代码的复用率。</p>
+<p>无论是面向过程编程还是面向对象编程，只有使各个模块之间的耦合尽量的低，才能提高代码的复用率。</p>
 <p>应该明确每个类的职责，不应该把”多余”的任务交给负责其他职责的类。将职责划分清楚后，由不同的模块和类来实现。</p>
-<h2 id="开放封闭原则（Open-Close-Principle-简称OCP）"><a href="#开放封闭原则（Open-Close-Principle-简称OCP）" class="headerlink" title="开放封闭原则（Open Close Principle,简称OCP）"></a>开放封闭原则（Open Close Principle,简称OCP）</h2><h3 id="定义-5"><a href="#定义-5" class="headerlink" title="定义"></a>定义</h3><ul>
+</blockquote>
+<h3 id="实现-4"><a href="#实现-4" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>明确每个类的职责，实现良好的任务分配。</li>
+</ul>
+<h2 id="开放封闭原则（Open-Close-Principle）"><a href="#开放封闭原则（Open-Close-Principle）" class="headerlink" title="开放封闭原则（Open Close Principle）"></a>开放封闭原则（Open Close Principle）</h2><h3 id="定义-5"><a href="#定义-5" class="headerlink" title="定义"></a>定义</h3><ul>
 <li>一个软件实体如类、模块和函数应该对扩展开放，对修改关闭。</li>
 <li>当软件需要变化时，尽量通过扩展软件实体的行为来实现变化，而不是通过修改已有的代码来实现变化。</li>
 </ul>
-<h3 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h3><ul>
+<h3 id="优点-5"><a href="#优点-5" class="headerlink" title="优点"></a>优点</h3><ul>
 <li>对扩展开放意味着要编写可扩展的代码，适应需求变化。</li>
 <li>对修改关闭的好处是不修改原有代码的逻辑，不容易通过修改代码使原有业务逻辑发生变化。</li>
 </ul>
 <h3 id="说明-4"><a href="#说明-4" class="headerlink" title="说明"></a>说明</h3><blockquote>
 <p>开放封闭原则是对设计的一个很高的要求，既要可扩展，易扩展，又要对修改封闭，扩展时不影响原有代码和逻辑。这实际上是我们设计的目标。</p>
 </blockquote>
-<h3 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h3><ul>
+<h3 id="实现-5"><a href="#实现-5" class="headerlink" title="实现"></a>实现</h3><ul>
 <li>遵循以上5个原则。</li>
 <li>充分理解需求，考虑业务逻辑将来可能会发生的变动和拓展。</li>
 </ul>

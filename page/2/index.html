@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="gc," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,64 +84,15 @@
 
 
 
-<meta name="description" content="垃圾回收机制中的算法
-引用计数法无法解决循环引用，已被gc放弃
-标记-清除法
-由gc root往下寻找引用，将无引用的内存回收。java中可作为GC Root的对象有
-
-虚拟机栈中引用的对象（本地变量表）
-方法区中静态属性引用的对象
-方法区中常量引用的对象
-本地方法栈中引用的对象（Native对象）
-
-
-标记-整理(压缩)
-在标记清除后整理内存
-
-复制
-将活动对象复制到另一块内存中，清空这块内存">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java垃圾回收器工作机制">
-<meta property="og:url" content="http://zhengjt.com/2015/08/27/Java垃圾回收器工作机制/index.html">
+<meta name="description" content="Yet another android developer">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Zhengjt's Home">
+<meta property="og:url" content="http://zhengjt.com/page/2/index.html">
 <meta property="og:site_name" content="Zhengjt's Home">
-<meta property="og:description" content="垃圾回收机制中的算法
-引用计数法无法解决循环引用，已被gc放弃
-标记-清除法
-由gc root往下寻找引用，将无引用的内存回收。java中可作为GC Root的对象有
-
-虚拟机栈中引用的对象（本地变量表）
-方法区中静态属性引用的对象
-方法区中常量引用的对象
-本地方法栈中引用的对象（Native对象）
-
-
-标记-整理(压缩)
-在标记清除后整理内存
-
-复制
-将活动对象复制到另一块内存中，清空这块内存">
-<meta property="og:image" content="http://zhengjt.com/images/java_gc_generation.png">
-<meta property="og:image" content="http://zhengjt.com/images/java_gc.png">
-<meta property="og:updated_time" content="2016-12-22T09:23:21.000Z">
+<meta property="og:description" content="Yet another android developer">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java垃圾回收器工作机制">
-<meta name="twitter:description" content="垃圾回收机制中的算法
-引用计数法无法解决循环引用，已被gc放弃
-标记-清除法
-由gc root往下寻找引用，将无引用的内存回收。java中可作为GC Root的对象有
-
-虚拟机栈中引用的对象（本地变量表）
-方法区中静态属性引用的对象
-方法区中常量引用的对象
-本地方法栈中引用的对象（Native对象）
-
-
-标记-整理(压缩)
-在标记清除后整理内存
-
-复制
-将活动对象复制到另一块内存中，清空这块内存">
-<meta name="twitter:image" content="http://zhengjt.com/images/java_gc_generation.png">
+<meta name="twitter:title" content="Zhengjt's Home">
+<meta name="twitter:description" content="Yet another android developer">
 
 
 
@@ -162,9 +113,9 @@
 
 
 
-  <link rel="canonical" href="http://zhengjt.com/2015/08/27/Java垃圾回收器工作机制/"/>
+  <link rel="canonical" href="http://zhengjt.com/page/2/"/>
 
-  <title> Java垃圾回收器工作机制 | Zhengjt's Home </title>
+  <title> Zhengjt's Home </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -204,7 +155,9 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -301,9 +254,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
   
@@ -323,7 +276,10 @@
             
             
               
-                Java垃圾回收器工作机制
+                
+                <a class="post-title-link" href="/2015/01/25/Android屏幕旋转与acticity生命周期/" itemprop="url">
+                  Android屏幕旋转与acticity生命周期
+                </a>
               
             
           </h1>
@@ -335,8 +291,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-08-27T13:17:31+08:00" content="2015-08-27">
-              2015-08-27
+            <time itemprop="dateCreated" datetime="2015-01-25T05:08:12+08:00" content="2015-01-25">
+              2015-01-25
             </time>
           </span>
 
@@ -349,8 +305,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -365,8 +321,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/08/27/Java垃圾回收器工作机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/27/Java垃圾回收器工作机制/" itemprop="commentsCount"></span>
+                <a href="/2015/01/25/Android屏幕旋转与acticity生命周期/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/25/Android屏幕旋转与acticity生命周期/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -389,131 +345,54 @@
       
 
       
-        <h2 id="垃圾回收机制中的算法"><a href="#垃圾回收机制中的算法" class="headerlink" title="垃圾回收机制中的算法"></a>垃圾回收机制中的算法</h2><ol>
-<li>引用计数法<br>无法解决循环引用，已被gc放弃</li>
-<li><p>标记-清除法</p>
-<p>由gc root往下寻找引用，将无引用的内存回收。java中可作为GC Root的对象有</p>
+        
+          
+            <ol>
+<li><p>设置 <code>android:configChanges=&quot;orientation&quot;</code>和不设置这个属性，生命周期表现为重新创建activity</p>
+</li>
+<li><p>设置 <code>android:configChanges=&quot;orientation|keyboardHidden&quot;</code>，在2.3上表现为不重新创建activity，5.1如下</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">android:targetSdkVersion&lt;=“<span class="number">12</span>”<span class="comment">//生命周期表现为不重新创建activity</span></div><div class="line">android:targetSdkVersion&gt;”<span class="number">12</span>”<span class="comment">//表现为重新创建activity</span></div></pre></td></tr></table></figure>
 <ol>
-<li>虚拟机栈中引用的对象（本地变量表）</li>
-<li>方法区中静态属性引用的对象</li>
-<li>方法区中常量引用的对象</li>
-<li>本地方法栈中引用的对象（Native对象）</li>
+<li>设置 <code>android:configChanges=&quot;orientation|keyboardHidden|screenSize&quot;</code>，在2.3和5.1上都表现为不重新创建，在屏幕旋转时，只会调用<code>onConfigurationChanged</code>方法</li>
 </ol>
-</li>
-<li><p>标记-整理(压缩)</p>
-<p>在标记清除后整理内存</p>
-</li>
-<li><p>复制</p>
-<p>将活动对象复制到另一块内存中，清空这块内存</p>
-<p>eden-&gt;Survivor0-&gt;Survivor1</p>
-</li>
-<li><p>分代</p>
-<p>年轻代-年老代-持久代</p>
-<p><img src="/images/java_gc_generation.png" alt="java_gc"><br><img src="/images/java_gc.png" alt="java_gc"></p>
-<ul>
-<li><p>年轻代：</p>
-<ul>
-<li><p>Serial收集器（复制算法)</p>
-<p>新生代单线程收集器，标记和清理都是单线程，优点是简单高效。</p>
-</li>
-<li><p>ParNew收集器(停止-复制算法) </p>
-<p>新生代收集器，可以认为是Serial收集器的多线程版本,在多核CPU环境下有着比Serial更好的表现。</p>
-</li>
-<li><p>Parallel Scavenge收集器(停止-复制算法)</p>
-<p>并行收集器，追求高吞吐量，高效利用CPU。吞吐量一般为99%， 吞吐量= 用户线程时间/(用户线程时间+GC线程时间)。适合后台应用等对交互相应要求不高的场景。</p>
-</li>
-</ul>
-</li>
-<li><p>年老代：</p>
-<ul>
-<li><p>Serial Old收集器(标记-整理算法)</p>
-<p>单线程收集器，Serial收集器的老年代版本。</p>
-</li>
-<li><p>Parallel Old收集器(停止-复制算法)</p>
-<p>Parallel Scavenge收集器的老年代版本，并行收集器，吞吐量优先</p>
-</li>
-<li><p>CMS(Concurrent Mark Sweep)收集器（标记-清理算法）</p>
-<p>高并发、低停顿，追求最短GC回收停顿时间，cpu占用比较高，响应时间快，停顿时间短，多核cpu 追求高响应时间的选择</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="GC的执行机制"><a href="#GC的执行机制" class="headerlink" title="GC的执行机制"></a>GC的执行机制</h2><p>  由于对象进行了分代处理，因此垃圾回收区域、时间也不一样。GC有两种类型：Scavenge GC和Full GC。</p>
-<ul>
-<li><p>Scavenge GC</p>
-<p>一般情况下，当新对象生成，并且在Eden申请空间失败时，就会触发Scavenge GC，对Eden区域进行GC，清除非存活对象，并且把尚且存活的对象移动到Survivor区。然后整理Survivor的两个区。这种方式的GC是对年轻代的Eden区进行，不会影响到年老代。因为大部分对象都是从Eden区开始的，同时Eden区不会分配的很大，所以Eden区的GC会频繁进行。因而，一般在这里需要使用速度快、效率高的算法，使Eden去能尽快空闲出来。</p>
-</li>
-<li><p>Full GC</p>
-<p>对整个堆进行整理，包括Young、Tenured和Perm。Full GC因为需要对整个堆进行回收，所以比Scavenge GC要慢，因此应该尽可能减少Full GC的次数。在对JVM调优的过程中，很大一部分工作就是对于FullGC的调节。</p>
-<p>有如下原因可能导致Full GC：</p>
-<ol>
-<li>年老代（Tenured）被写满</li>
-<li>持久代（Perm）被写满 </li>
-<li>System.gc()被显示调用 </li>
-<li>上一次GC之后Heap的各域分配策略动态变化</li>
-</ol>
-</li>
-</ul>
-
+<p>测试代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">	    setContentView(R.layout.relative_center_2);</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onCreate方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onStart</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onStart();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onStart方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onResume();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onResume方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onPause();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onPause方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onStop</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onStop();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onStop方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onDestroy();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onDestroy方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onConfigurationChanged</span><span class="params">(Configuration newConfig)</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onConfigurationChanged(newConfig);</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onConfigurationChanged方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onRestart</span><span class="params">()</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onRestart();</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onRestart方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSaveInstanceState</span><span class="params">(Bundle outState)</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onSaveInstanceState(outState);</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onSaveInstanceState方法"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onRestoreInstanceState</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">	    <span class="keyword">super</span>.onRestoreInstanceState(savedInstanceState);</div><div class="line">	    Log.i(<span class="string">"MainActivity"</span>, <span class="string">"执行onRestoreInstanceState方法"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
       
     </div>
 
     <div>
       
-        
-
-      
     </div>
 
     <div>
-      
-        
-
       
     </div>
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/gc/" rel="tag">#gc</a>
-          
-        </div>
+
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2015/08/26/Java内存泄漏发生的情况/" rel="next" title="Java内存泄漏发生的情况">
-                <i class="fa fa-chevron-left"></i> Java内存泄漏发生的情况
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/09/13/Java的WeakReference相关/" rel="prev" title="Java的WeakReference相关">
-                Java的WeakReference相关 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
 
 
           </div>
@@ -521,14 +400,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2015/08/27/Java垃圾回收器工作机制/"
-           data-title="Java垃圾回收器工作机制" data-url="http://zhengjt.com/2015/08/27/Java垃圾回收器工作机制/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -548,17 +419,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -637,17 +499,6 @@
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾回收机制中的算法"><span class="nav-number">1.</span> <span class="nav-text">垃圾回收机制中的算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GC的执行机制"><span class="nav-number">2.</span> <span class="nav-text">GC的执行机制</span></a></li></ol></div>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -745,10 +596,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
 
   
 

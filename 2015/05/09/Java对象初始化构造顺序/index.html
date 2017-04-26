@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="编码," />
+  <meta name="keywords" content="构造器," />
 
 
 
@@ -84,85 +84,19 @@
 
 
 
-<meta name="description" content="名称
-产生原因
-字节数
-说明
-
-
-
-
-ASCII
-初始编码，匹配英文字符
-1
-一共规定了127个字符的编码,32以下的被作为控制字符
-
-
-扩展ASCII
-加入符号字符编码
-1
-加入新的字母符号，还加入了很多画表格时需要用下到的横线、竖线、交叉等形状，编码到255
-
-
-GB2312
-汉字编码
-2
-一个小于127的字符的意义与原来相同，但两个大于127的字符连在一起时，就表示一个汉字。因此小于1">
+<meta name="description" content="本文讨论JAVA中对象初始化时基类子类的static field，field ，static initial block，field initial block以及Constructor的调用顺序问题，通过如下实例来说明：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484">
 <meta property="og:type" content="article">
-<meta property="og:title" content="编码技术总结">
-<meta property="og:url" content="http://zhengjt.com/2015/02/28/编码技术总结/index.html">
+<meta property="og:title" content="Java对象初始化构造顺序">
+<meta property="og:url" content="http://zhengjt.com/2015/05/09/Java对象初始化构造顺序/index.html">
 <meta property="og:site_name" content="Zhengjt's Home">
-<meta property="og:description" content="名称
-产生原因
-字节数
-说明
-
-
-
-
-ASCII
-初始编码，匹配英文字符
-1
-一共规定了127个字符的编码,32以下的被作为控制字符
-
-
-扩展ASCII
-加入符号字符编码
-1
-加入新的字母符号，还加入了很多画表格时需要用下到的横线、竖线、交叉等形状，编码到255
-
-
-GB2312
-汉字编码
-2
-一个小于127的字符的意义与原来相同，但两个大于127的字符连在一起时，就表示一个汉字。因此小于1">
-<meta property="og:updated_time" content="2017-04-05T11:39:20.000Z">
+<meta property="og:description" content="本文讨论JAVA中对象初始化时基类子类的static field，field ，static initial block，field initial block以及Constructor的调用顺序问题，通过如下实例来说明：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484">
+<meta property="og:updated_time" content="2017-04-26T09:08:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="编码技术总结">
-<meta name="twitter:description" content="名称
-产生原因
-字节数
-说明
-
-
-
-
-ASCII
-初始编码，匹配英文字符
-1
-一共规定了127个字符的编码,32以下的被作为控制字符
-
-
-扩展ASCII
-加入符号字符编码
-1
-加入新的字母符号，还加入了很多画表格时需要用下到的横线、竖线、交叉等形状，编码到255
-
-
-GB2312
-汉字编码
-2
-一个小于127的字符的意义与原来相同，但两个大于127的字符连在一起时，就表示一个汉字。因此小于1">
+<meta name="twitter:title" content="Java对象初始化构造顺序">
+<meta name="twitter:description" content="本文讨论JAVA中对象初始化时基类子类的static field，field ，static initial block，field initial block以及Constructor的调用顺序问题，通过如下实例来说明：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484">
 
 
 
@@ -183,9 +117,9 @@ GB2312
 
 
 
-  <link rel="canonical" href="http://zhengjt.com/2015/02/28/编码技术总结/"/>
+  <link rel="canonical" href="http://zhengjt.com/2015/05/09/Java对象初始化构造顺序/"/>
 
-  <title> 编码技术总结 | Zhengjt's Home </title>
+  <title> Java对象初始化构造顺序 | Zhengjt's Home </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -367,7 +301,7 @@ GB2312
             
             
               
-                编码技术总结
+                Java对象初始化构造顺序
               
             
           </h1>
@@ -379,11 +313,30 @@ GB2312
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-02-28T17:43:54+08:00" content="2015-02-28">
-              2015-02-28
+            <time itemprop="dateCreated" datetime="2015-05-09T11:38:10+08:00" content="2015-05-09">
+              2015-05-09
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -405,73 +358,22 @@ GB2312
       
 
       
-        <table>
-<thead>
-<tr>
-<th>名称</th>
-<th>产生原因</th>
-<th>字节数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ASCII</td>
-<td>初始编码，匹配英文字符</td>
-<td>1</td>
-<td>一共规定了127个字符的编码,32以下的被作为控制字符</td>
-</tr>
-<tr>
-<td>扩展ASCII</td>
-<td>加入符号字符编码</td>
-<td>1</td>
-<td>加入新的字母符号，还加入了很多画表格时需要用下到的横线、竖线、交叉等形状，编码到255</td>
-</tr>
-<tr>
-<td>GB2312</td>
-<td>汉字编码</td>
-<td>2</td>
-<td>一个小于127的字符的意义与原来相同，但两个大于127的字符连在一起时，就表示一个汉字。因此小于127的编码与ascii相同，一共能编码7000多个简体汉字，是最常见的汉字编码方式</td>
-</tr>
-<tr>
-<td>GBK</td>
-<td>扩展GB2312汉字编码容量</td>
-<td>2</td>
-<td>只要第一个字节是大于127就固定表示这是一个汉字的开始，不管后面跟的是不是扩展字符集里的内容(能编码20000多汉字)。向下兼容GB2312</td>
-</tr>
-<tr>
-<td>GB18030</td>
-<td>扩展GBK汉字编码容量，加入少数名族语言</td>
-<td>1、2、4变长编码</td>
-<td>单字节与 ASCII 编码兼容，双字节兼容GBK，共收录汉字70244个，还加入了少数名族语言，中国非手持和嵌入式设备的强制编码需支持标准。向下兼容GBK</td>
-</tr>
-<tr>
-<td>UTF-8</td>
-<td>unicode的最通用的编码实现方式</td>
-<td>1~4</td>
-<td>根据不同的符号而变化字节长度。英文字母1个字符一个字节，汉字1个字符三个字节，从而降低了储存空间</td>
-</tr>
-</tbody>
-</table>
-<h3 id="关于Unicode"><a href="#关于Unicode" class="headerlink" title="关于Unicode"></a>关于Unicode</h3><p>存储器容量发展，产生了Unicode，目的是试图将所有语言字符编码。它废弃了以往的其他编码方式重新编码，只是一个符号集。unicode把所有语言字符全对应成两个字节的二进制数字表示，但是它没有实现编码。若字节按unicode的方式，英文字符的编码将造成极大空间浪费。</p>
-<p>Unicode只是一个符号集，它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储，UTF-8是Unicode常见的编码方式。</p>
-<p>Unicode实现的几种方式：</p>
-<ul>
-<li>UTF-8：一个字符可以用1~4个字节表示，每次传输1个字节数据</li>
-<li>UTF-16：一个字符可以用2个或4个字节表示，每次传输2或4个字节数据</li>
-<li>UTF-32：一个字符可以用4个字节表示，每次传输4个字节数据</li>
-</ul>
-<h3 id="关于UTF-8-BOM头"><a href="#关于UTF-8-BOM头" class="headerlink" title="关于UTF-8 BOM头"></a>关于UTF-8 BOM头</h3><p>实际上，不含 BOM 的 UTF-8 才是标准形式。<br>不同的文本编辑器对于有无BOM的称呼也略有不同，比如EditPlus，有BOM的称为UTF-8+，无BOM的称为UTF-8，而在Notepad++中，有BOM的被称为标准UTF-8，而无BOM则被称为UTF-8无BOM。</p>
-<h3 id="在-Windows-记事本的语境中"><a href="#在-Windows-记事本的语境中" class="headerlink" title="在 Windows 记事本的语境中"></a>在 Windows 记事本的语境中</h3><ul>
-<li>所谓的「ANSI」指的是对应当前系统 locale 的遗留（legacy）编码，即默认编码方式的意思。对于英文文件是ASCII编码，对于简体中文文件是GB2312编码，对于繁体中文版会采用Big5码。</li>
-<li>所谓的「Unicode」指的是带有 BOM 的小端序 UTF-16。(UTF-8 不需要 BOM，尽管 Unicode 标准允许在 UTF-8 中使用 BOM,在网页上使用BOM是个错误)</li>
-<li>所谓的「UTF-8」指的是带 BOM 的 UTF-8。</li>
-</ul>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><blockquote>
-<blockquote>
-<p><a href="http://www.zhihu.com/question/20650946" target="_blank" rel="external">http://www.zhihu.com/question/20650946</a><br><a href="http://dengo.org/archives/901" target="_blank" rel="external">http://dengo.org/archives/901</a></p>
-</blockquote>
-</blockquote>
+        <p>本文讨论JAVA中对象初始化时基类子类的static field，field ，static initial block，field initial block以及Constructor的调用顺序问题，通过如下实例来说明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    	Teacher teacher = <span class="keyword">new</span> Teacher();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String staticField = staticField();</div><div class="line">    <span class="keyword">private</span> String field = print();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Employee</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Employee constructor"</span>);</div><div class="line">    &#125;</div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"Employee block"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.out.println(<span class="string">"Employee static block"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">staticField</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Employee static field"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="string">"Employee staticField"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">print</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Employee field"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="string">"Employee field"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">extends</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String staticField = staticField();</div><div class="line">    <span class="keyword">private</span> String field = print();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Teacher</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Teacher constructor"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"Teacher block"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.out.println(<span class="string">"Teacher static block"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">staticField</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Teacher static field"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="string">"Teacher staticField"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">print</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Teacher field"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="string">"Teacher field"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Employee <span class="keyword">static</span> field</div><div class="line">Employee <span class="keyword">static</span> initial block</div><div class="line">Teacher <span class="keyword">static</span> field</div><div class="line">Teacher <span class="keyword">static</span> initial block</div><div class="line">Employee field</div><div class="line">Employee initial block</div><div class="line">Employee constructor</div><div class="line">Teacher field</div><div class="line">Teacher initial block</div><div class="line">Teacher constructor</div></pre></td></tr></table></figure>
+<p>上面的例子说明，在初始化类的对象的时候，构造器的调用顺序：</p>
+<pre><code>基类的 static field
+基类的 static initial block
+子类的 static field
+子类的 static initial block
+基类的 field
+基类的 initial block
+基类的 constructor
+子类的 field
+子类的 initial block
+子类的 constructor
+</code></pre><p>将上述声明顺序调换，初始化的顺序依旧不变</p>
 
       
     </div>
@@ -494,7 +396,7 @@ GB2312
       
         <div class="post-tags">
           
-            <a href="/tags/编码/" rel="tag">#编码</a>
+            <a href="/tags/构造器/" rel="tag">#构造器</a>
           
         </div>
       
@@ -503,16 +405,16 @@ GB2312
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/01/25/Android屏幕旋转与acticity生命周期/" rel="next" title="Android屏幕旋转与acticity生命周期">
-                <i class="fa fa-chevron-left"></i> Android屏幕旋转与acticity生命周期
+              <a href="/2015/02/28/编码技术总结/" rel="next" title="编码技术总结">
+                <i class="fa fa-chevron-left"></i> 编码技术总结
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/05/09/Java对象初始化构造顺序/" rel="prev" title="Java对象初始化构造顺序">
-                Java对象初始化构造顺序 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/08/26/Java内存泄漏发生的情况/" rel="prev" title="Java内存泄漏发生的情况">
+                Java内存泄漏发生的情况 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -652,7 +554,7 @@ GB2312
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于Unicode"><span class="nav-number">1.</span> <span class="nav-text">关于Unicode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于UTF-8-BOM头"><span class="nav-number">2.</span> <span class="nav-text">关于UTF-8 BOM头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-Windows-记事本的语境中"><span class="nav-number">3.</span> <span class="nav-text">在 Windows 记事本的语境中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
             
           </div>
         </section>

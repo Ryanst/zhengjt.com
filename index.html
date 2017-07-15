@@ -387,7 +387,7 @@
 </li>
 </ul>
 <p>一般来说，要尽量避免创建短期的临时变量，这样能够减少影响用户体验的垃圾收集器的GC的频率。</p>
-<h1 id="使用Static替代Virtual"><a href="#使用Static替代Virtual" class="headerlink" title="使用Static替代Virtual"></a>使用Static替代Virtual</h1><p>如果你的方法不需要访问对象的成员字段，那将其设置为static，这样的话方法的调用速度会提升15%~20%。同时这也是良好的代码实践，因为你能够通过static修饰符知道这个方法不会改变对象的状态。</p>
+<h1 id="使用Static修饰符"><a href="#使用Static修饰符" class="headerlink" title="使用Static修饰符"></a>使用Static修饰符</h1><p>如果你的方法不需要访问对象的成员字段，那将其设置为static，这样的话方法的调用速度会提升15%~20%。同时这也是良好的代码实践，因为你能够通过static修饰符知道这个方法不会改变对象的状态。</p>
 <h1 id="使用Static-Final修饰常量"><a href="#使用Static-Final修饰常量" class="headerlink" title="使用Static Final修饰常量"></a>使用Static Final修饰常量</h1><p>考虑如下在一个类的顶部的两个声明：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">int</span> intVal = <span class="number">42</span>;</div><div class="line"><span class="keyword">static</span> String strVal = <span class="string">"Hello, world!"</span>;</div></pre></td></tr></table></figure>
 <p>编译器生成了一个初始化方法叫<code>&lt;clinit&gt;</code>，当变量第一次被引用的时候会调用这个方法。这个方法存储了intVal和42、strVal和”Hello, world!”的对应关系。当这两个变量被引用的时候，系统通过成员字段域查找来得到这两个变量的值。</p>
